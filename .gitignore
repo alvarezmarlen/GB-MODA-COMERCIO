@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+backend_gb_moda/app.db
+.env
+
+# Node / Vue
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Docker
+.docker/
+
+# OS
+.DS_Store

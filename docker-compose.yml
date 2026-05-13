@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+
+  # ── BACKEND Flask ──────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: moda_backend
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=development
+      - JWT_SECRET_KEY=cambia_esta_clave_en_produccion
+      - DATABASE_URL=sqlite:///moda.db
+    volumes:
+      - ./backend:/app
+    networks:
+      - moda_network
+    restart: unless-stopped
+
+  # ── FRONTEND Vue 3 ─────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: moda_frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - moda_network
+    restart: unless-stopped
+
+networks:
+  moda_network:
+    driver: bridge
