@@ -12,7 +12,11 @@ dist-ssr/
 *.local
 
 # Docker
-.docker/
+node_modules
+dist
+.git
+.gitignore
+*.log
 
 # OS
 .DS_Store
