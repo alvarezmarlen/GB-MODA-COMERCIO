@@ -1,0 +1,44 @@
+<template>
+  <form @submit.prevent="onFormSubmit" class="login-form">
+    <FormField
+      label="Nombre de usuario"
+      v-model="formData.username"
+      placeholder="Tu nombre de usuario"
+    />
+    <FormField
+      label="Contraseña"
+      type="password"
+      v-model="formData.password"
+      placeholder="********"
+    />
+    <BaseButton type="submit" :disabled="!isFormValid">Iniciar sesión</BaseButton>
+  </form>
+</template>
+
+<script setup>
+import { computed } from 'vue'
+import FormField from '../molecules/FormField.vue'
+import BaseButton from '../atoms/BaseButton.vue'
+import { useForm } from '../../composables/useForm'
+
+const { formData, handleSubmit } = useForm({
+  username: '',
+  password: ''
+})
+
+// Validation for login: fields must not be empty (or just spaces)
+const isFormValid = computed(() => {
+  return formData.username.trim().length > 0 && 
+         formData.password.length > 0
+})
+
+const onFormSubmit = () => {
+  handleSubmit((data) => {
+    console.log('Login attempt with clean data:', {
+      ...data,
+      username: data.username.trim()
+    })
+    alert('Sesión iniciada con éxito')
+  })
+}
+</script>
