@@ -31,13 +31,14 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 import FormField from '../molecules/FormField.vue'
 import BaseButton from '../atoms/BaseButton.vue'
 import BaseCheckbox from '../atoms/BaseCheckbox.vue'
 import BaseLabel from '../atoms/BaseLabel.vue'
 import { useForm } from '../../composables/useForm'
 
+const router = useRouter()
 const { formData, handleSubmit, isValidEmail } = useForm({
   username: '',
   email: '',
@@ -65,9 +66,11 @@ const onFormSubmit = () => {
     }
     console.log('Sending clean data to backend:', cleanData)
     alert('Usuario registrado con éxito')
+    router.push('/login')
   })
 }
 </script>
+
 
 <style scoped>
 .checkbox-container {

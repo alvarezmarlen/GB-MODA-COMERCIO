@@ -17,10 +17,12 @@
 
 <script setup>
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 import FormField from '../molecules/FormField.vue'
 import BaseButton from '../atoms/BaseButton.vue'
 import { useForm } from '../../composables/useForm'
 
+const router = useRouter()
 const { formData, handleSubmit } = useForm({
   username: '',
   password: ''
@@ -39,6 +41,8 @@ const onFormSubmit = () => {
       username: data.username.trim()
     })
     alert('Sesión iniciada con éxito')
+    router.push('/create-story')
   })
 }
 </script>
+

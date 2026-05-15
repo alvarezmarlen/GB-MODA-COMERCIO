@@ -1,16 +1,11 @@
 <template>
   <div id="app">
-    <LoginPage v-if="currentPage === 'login'" @switch="currentPage = $event" />
-    <RegisterPage v-else @switch="currentPage = $event" />
+    <router-view />
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import LoginPage from './views/LoginPage.vue'
-import RegisterPage from './views/RegisterPage.vue'
-
-const currentPage = ref('login')
+// App content managed by router
 </script>
 
 <style>
