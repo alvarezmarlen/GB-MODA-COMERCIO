@@ -17,5 +17,5 @@ COPY . .
 # Puerto que usa Flask
 EXPOSE 5000
 
-# Comando de arranque
-CMD ["python", "app/app.py"]
+# Comando de arranque con Gunicorn (producción)
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app.app:create_app()"]
