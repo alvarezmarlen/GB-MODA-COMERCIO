@@ -1,7 +1,9 @@
 """Route definitions for the stories API blueprint."""
 
 from flask import Blueprint, request, jsonify
+from marshmallow import ValidationError
 from ..services.stories_service import create_story, update_story, delete_story, get_all_stories, get_story_by_id, get_stories_filtered
+from ..schemas.story_schema import StorySchema, StoryUpdateSchema, StoryFilterSchema
 
 stories_bp = Blueprint('stories', __name__)
 
@@ -20,9 +22,19 @@ def create_story_route():
 
     Returns:
         201: The created story as JSON.
+        422: If validation fails.
     """
-    data = request.get_json()
-    new_story = create_story(data)
+    data = request.get_json(silent=True)
+    if data is None:
+        return jsonify({'errors': {'_schema': 'No input data provided'}}), 422
+
+    schema = StorySchema()
+    try:
+        validated = schema.load(data)
+    except ValidationError as err:
+        return jsonify({'errors': err.messages}), 422
+
+    new_story = create_story(validated)
     return jsonify(new_story), 201
 
 
@@ -33,13 +45,23 @@ def update_story_route(story_id):
     Returns:
         200: The updated story as JSON.
         404: If the story does not exist.
+        422: If validation fails.
     """
-    data = request.get_json()
-    updated_story = update_story(story_id, data)
+    data = request.get_json(silent=True)
+    if data is None:
+        return jsonify({'errors': {'_schema': 'No input data provided'}}), 422
+
+    schema = StoryUpdateSchema()
+    try:
+        validated = schema.load(data)
+    except ValidationError as err:
+        return jsonify({'errors': err.messages}), 422
+
+    updated_story = update_story(story_id, validated)
     if not updated_story:
         return jsonify({'error': 'Story not found'}), 404
-    else:
-        return jsonify(updated_story), 200
+
+    return jsonify(updated_story), 200
 
 
 @stories_bp.route('/stories/<int:story_id>', methods=['DELETE'])
@@ -71,10 +93,17 @@ def get_all_stories_route():
 
     Returns:
         200: A list of stories as JSON.
+        422: If filter params are invalid.
     """
-    origin_country = request.args.get('origin_country')
-    profession = request.args.get('profession')
-    age_range = request.args.get('age_range')
+    schema = StoryFilterSchema()
+    try:
+        filters = schema.load(request.args.to_dict())
+    except ValidationError as err:
+        return jsonify({'errors': err.messages}), 422
+
+    origin_country = filters.get('origin_country')
+    profession = filters.get('profession')
+    age_range = filters.get('age_range')
 
     if origin_country or profession or age_range:
         stories = get_stories_filtered(
