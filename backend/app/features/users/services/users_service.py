@@ -1,5 +1,5 @@
 from ..models import User
-from ..services import db
+from .... import db
 
 def create_user(data):
     """Crea un nuevo usuario en la base de datos."""
