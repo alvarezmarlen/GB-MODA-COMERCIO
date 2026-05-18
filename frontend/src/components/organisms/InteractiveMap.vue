@@ -7,8 +7,9 @@
       </p>
     </div>
 
+    <!-- 70% / 30% Grid Layout -->
     <div class="map-grid">
-      <!-- Left: Interactive SVG Map -->
+      <!-- Left (70%): Interactive SVG Map -->
       <div class="map-visual-box">
         <svg viewBox="0 0 800 400" class="interactive-world-map" xmlns="http://www.w3.org/2000/svg">
           <!-- Background grids for wireframe style -->
@@ -87,7 +88,7 @@
 
         <!-- Hover visual tooltip inside the map box -->
         <div class="map-tooltip" v-if="hoveredRegion || selectedRegion">
-          <span>Seleccionado: </span>
+          <span>Región: </span>
           <strong>{{ getRegionDisplayName(hoveredRegion || selectedRegion) }}</strong>
         </div>
         <div class="map-tooltip" v-else>
@@ -95,10 +96,10 @@
         </div>
       </div>
 
-      <!-- Right: Detailed Information Panel & Filter options -->
+      <!-- Right (30%): Detailed Information Panel & Filter options -->
       <div class="map-details-box">
         <div class="details-header">
-          <div class="details-title-tag">REGIÓN SELECCIONADA</div>
+          <div class="details-title-tag">REGIÓN DEL MAPA</div>
           <h3 class="details-region-name">{{ getRegionDisplayName(selectedRegion) }}</h3>
         </div>
 
@@ -107,9 +108,9 @@
             {{ getRegionDescription(selectedRegion) }}
           </p>
 
-          <!-- Predefined list of aligned countries/options (considering the dropdown options) -->
+          <!-- Predefined Aligned Selectable Countries (España, Pais Vasco, Marruecos, Africa, America Central, otro) -->
           <div class="associated-countries-section">
-            <span class="associated-label">Territorios vinculados:</span>
+            <span class="associated-label">Seleccionar País / Territorio:</span>
             <div class="countries-tag-list">
               <button
                 v-for="country in getAssociatedCountries(selectedRegion)"
@@ -126,14 +127,14 @@
           <!-- Mapped stories result container (ready to connect to backend) -->
           <div class="stories-indicator-box">
             <div class="stories-count-label">
-              <span>Estado en base de datos: </span>
-              <strong class="ready-badge">Listo para conectar</strong>
+              <span>Crónicas encontradas: </span>
+              <strong class="ready-badge">Listo para BD</strong>
             </div>
             
             <div class="stories-list-placeholder">
               <div v-if="filteredStories.length === 0" class="no-stories-msg">
-                <span>-- Ninguna crónica cargada para esta selección --</span>
-                <p>Las historias creadas con origen en esta región se listarán automáticamente una vez conectado el backend.</p>
+                <span>-- Ninguna crónica cargada --</span>
+                <p>Las historias creadas con origen en esta región se listarán automáticamente aquí al conectar la base de datos.</p>
               </div>
               <div v-else class="stories-wireframe-cards">
                 <div 
@@ -146,7 +147,7 @@
                     <span class="story-age-tag">{{ story.ageRange }}</span>
                   </div>
                   <h4 class="mini-card-title">{{ story.title }}</h4>
-                  <p class="mini-card-excerpt">{{ truncateText(story.description, 100) }}</p>
+                  <p class="mini-card-excerpt">{{ truncateText(story.description, 95) }}</p>
                 </div>
               </div>
             </div>
@@ -164,34 +165,29 @@ const selectedRegion = ref('Europa-Africa')
 const hoveredRegion = ref(null)
 const activeCountryFilter = ref('todos')
 
-// Predefined aligned select country options mapping
+// Exactly the user's requested selectable countries: España, Pais Vasco, Marruecos, Africa, America Central, y Otro.
 const getAssociatedCountries = (region) => {
   switch (region) {
     case 'Europa-Africa':
       return [
         { label: 'Todos', value: 'todos' },
-        { label: 'País Vasco', value: 'pais_vasco' },
-        { label: 'España', value: 'espana' },
-        { label: 'Marruecos', value: 'marruecos' },
-        { label: 'África', value: 'africa' }
+        { label: 'España', value: 'España' },
+        { label: 'Pais Vasco', value: 'Pais Vasco' },
+        { label: 'Marruecos', value: 'Marruecos' },
+        { label: 'Africa', value: 'Africa' },
+        { label: 'Otro', value: 'Otro' }
       ]
     case 'America':
       return [
         { label: 'Todos', value: 'todos' },
-        { label: 'Otro (América)', value: 'otro_america' }
-      ]
-    case 'Oceania':
-      return [
-        { label: 'Todos', value: 'todos' },
-        { label: 'Otro (Oceanía)', value: 'otro_oceania' }
-      ]
-    case 'Groenlandia':
-      return [
-        { label: 'Todos', value: 'todos' },
-        { label: 'Otro (Groenlandia)', value: 'otro_groenlandia' }
+        { label: 'America Central', value: 'America Central' },
+        { label: 'Otro', value: 'Otro' }
       ]
     default:
-      return [{ label: 'Todos', value: 'todos' }]
+      return [
+        { label: 'Todos', value: 'todos' },
+        { label: 'Otro', value: 'Otro' }
+      ]
   }
 }
 
@@ -214,21 +210,21 @@ const getRegionDisplayName = (region) => {
 const getRegionDescription = (region) => {
   switch (region) {
     case 'Europa-Africa':
-      return 'Zona que conecta los territorios históricos de comercio y oficios tradicionales de España, el País Vasco y el continente africano. Alberga un legado inestimable en telares manuales, alfarería artesana y comercio agrícola.'
+      return 'Zona que conecta los territorios históricos de España, el País Vasco y el continente africano. Alberga un legado inestimable en oficios tradicionales.'
     case 'America':
-      return 'Territorio del continente americano. Engloba crónicas del desarrollo comercial americano, desde manufactura textil tradicional andina hasta talleres artesanales modernos.'
+      return 'Territorio del continente americano. Reúne crónicas de América Central y el resto del continente, desde telares tradicionales hasta orfebrería.'
     case 'Oceania':
-      return 'Región de islas y archipiélagos. Representa los saberes autóctonos vinculados a la pesca tradicional, tejidos vegetales y artesanías locales del Pacífico.'
+      return 'Región de islas y archipiélagos. Representa los oficios del Pacífico.'
     case 'Groenlandia':
-      return 'Zona ártica del norte. Reúne los oficios milenarios adaptados a condiciones extremas, técnicas de conservación y caza artesanal ancestral.'
+      return 'Zona ártica del norte. Reúne los oficios milenarios adaptados a climas helados.'
     default:
-      return 'Selecciona una región en el mapa interactivo para ver su descripción y filtrar las crónicas de oficios locales por países.'
+      return 'Haz clic en el mapa interactivo para ver su descripción.'
   }
 }
 
 const selectRegion = (region) => {
   selectedRegion.value = region
-  activeCountryFilter.value = 'todos' // Reset sub filter
+  activeCountryFilter.value = 'todos' // Reset filter
 }
 
 const toggleCountryFilter = (value) => {
@@ -242,34 +238,61 @@ const truncateText = (text, limit) => {
   return text.substring(0, limit) + '...'
 }
 
-// Mock Stories mapped to the country values to display high fidelity "todo listo" data
+// High-fidelity Mock Stories to show everything functioning perfectly
 const mockStories = [
   {
     id: 1,
     title: 'El Telar de Alada y el cáñamo de Guipúzcoa',
     profession: 'Industria',
     ageRange: '46 - 60 años',
-    country: 'pais_vasco',
+    country: 'Pais Vasco',
     region: 'Europa-Africa',
-    description: 'Crónica dedicada a recuperar la hilatura tradicional de fibras vegetales en el País Vasco, un oficio que definió la vestimenta local durante siglos y hoy resiste a pequeña escala.'
+    description: 'Crónica dedicada a recuperar la hilatura tradicional de fibras vegetales en el País Vasco, un oficio que definió la vestimenta local durante siglos.'
   },
   {
     id: 2,
     title: 'La alfarería roja del Rif marroquí',
     profession: 'Campo',
     ageRange: 'Más de 60',
-    country: 'marruecos',
+    country: 'Marruecos',
     region: 'Europa-Africa',
-    description: 'El modelado a mano de arcilla sin torno, cocido al aire libre por mujeres artesanas en aldeas del norte de Marruecos. Un legado vivo transmitido de madres a hijas.'
+    description: 'El modelado a mano de arcilla sin torno, cocido al aire libre por mujeres artesanas en aldeas de Marruecos. Un legado vivo transmitido de madres a hijas.'
   },
   {
     id: 3,
     title: 'Últimos sastres artesanos de Madrid',
     profession: 'Limpieza',
     ageRange: '36 - 45 años',
-    country: 'espana',
+    country: 'España',
     region: 'Europa-Africa',
-    description: 'Sastrería tradicional de corte de patrón en papel y cosido a mano con hilo de seda. El arte del detalle que resiste al fast-fashion industrial.'
+    description: 'Sastrería tradicional de corte de patrón en papel y cosido a mano con hilo de seda. El arte del detalle que resiste al fast-fashion.'
+  },
+  {
+    id: 4,
+    title: 'Curtido tradicional de cuero en Fez',
+    profession: 'Industria',
+    ageRange: '46 - 60 años',
+    country: 'Africa',
+    region: 'Europa-Africa',
+    description: 'El laborioso proceso de curtido y tinte natural de pieles en las famosas cubas de piedra de la medina de Fez.'
+  },
+  {
+    id: 5,
+    title: 'Tejido del Huipil tradicional en Guatemala',
+    profession: 'Casa',
+    ageRange: '26 - 35 años',
+    country: 'America Central',
+    region: 'America',
+    description: 'El arte del telar de cintura usado por mujeres mayas en Guatemala para tejer huipiles con intrincados diseños geométricos.'
+  },
+  {
+    id: 6,
+    title: 'Tallado en piedra volcánica en Antigua',
+    profession: 'Campo',
+    ageRange: '36 - 45 años',
+    country: 'Otro',
+    region: 'America',
+    description: 'Elaboración tradicional de morteros (molcajetes) tallados pacientemente a partir de rocas volcánicas locales.'
   }
 ]
 
@@ -315,9 +338,10 @@ const filteredStories = computed(() => {
   margin-top: 4px;
 }
 
+/* 70% / 30% Screen Grid Layout */
 .map-grid {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 7fr 3fr; /* 70% / 30% Split */
   gap: var(--wf-spacing-lg);
   align-items: stretch;
 }
@@ -326,21 +350,21 @@ const filteredStories = computed(() => {
 .map-visual-box {
   border: 2px solid var(--wf-border);
   background: #fcfcfc;
-  padding: var(--wf-spacing-sm);
+  padding: var(--wf-spacing-md);
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 360px;
+  min-height: 480px; /* Made the map significantly larger visually */
   overflow: hidden;
   transition: all 0.3s ease;
 }
 
 .interactive-world-map {
-  width: 100%;
+  width: 95%;
   height: auto;
-  max-height: 350px;
+  max-height: 440px;
 }
 
 /* Map Paths styling matching the premium wireframe sketch style */
@@ -353,20 +377,20 @@ path {
 path:hover {
   opacity: 1;
   stroke: var(--wf-border) !important;
-  stroke-width: 3 !important;
-  filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.1));
+  stroke-width: 3.5 !important;
+  filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.15));
 }
 
 .active-region {
   opacity: 1 !important;
   stroke: var(--wf-border) !important;
-  stroke-width: 3 !important;
-  fill-opacity: 0.9;
+  stroke-width: 3.5 !important;
+  fill-opacity: 0.95;
 }
 
-/* Special styling highlights per path */
+/* High fidelity region color schemes */
 #Europa-Africa {
-  fill: #80c2f7; /* High-fidelity light blue */
+  fill: #80c2f7;
   stroke: #2563eb;
 }
 #Europa-Africa.active-region, #Europa-Africa:hover {
@@ -399,18 +423,18 @@ path:hover {
 
 .map-tooltip {
   position: absolute;
-  bottom: 12px;
-  left: 12px;
+  bottom: 16px;
+  left: 16px;
   background: var(--wf-bg);
   border: 2px solid var(--wf-border);
-  padding: 4px 10px;
-  font-size: 0.8rem;
+  padding: 6px 12px;
+  font-size: 0.85rem;
   font-family: monospace;
   z-index: 10;
-  box-shadow: 2px 2px 0px var(--wf-border);
+  box-shadow: 3px 3px 0px var(--wf-border);
 }
 
-/* Details Box Panel styling */
+/* Details Box Panel (30% column) styling */
 .map-details-box {
   border: 2px solid var(--wf-border);
   background: var(--wf-bg);
@@ -418,6 +442,7 @@ path:hover {
   flex-direction: column;
   padding: var(--wf-spacing-lg);
   transition: all 0.3s ease;
+  min-height: 480px;
 }
 
 .map-details-box:hover {
@@ -428,7 +453,7 @@ path:hover {
 .details-header {
   border-bottom: 2px solid var(--wf-border);
   padding-bottom: var(--wf-spacing-sm);
-  margin-bottom: var(--wf-spacing-sm);
+  margin-bottom: var(--wf-spacing-md);
 }
 
 .details-title-tag {
@@ -445,10 +470,11 @@ path:hover {
 }
 
 .details-description {
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   line-height: 1.5;
   margin-bottom: var(--wf-spacing-md);
   text-align: justify;
+  color: #333333;
 }
 
 .associated-countries-section {
@@ -457,21 +483,21 @@ path:hover {
 
 .associated-label {
   display: block;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: bold;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   text-transform: uppercase;
 }
 
 .countries-tag-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
 }
 
 .country-filter-btn {
-  font-size: 0.75rem;
-  padding: 4px 8px;
+  font-size: 0.72rem;
+  padding: 4px 6px;
   background: var(--wf-button-bg);
   border: 1px solid var(--wf-border);
 }
@@ -485,13 +511,16 @@ path:hover {
 .stories-indicator-box {
   border-top: 1px dashed var(--wf-border);
   padding-top: var(--wf-spacing-sm);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .stories-count-label {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   margin-bottom: 10px;
 }
 
@@ -499,52 +528,55 @@ path:hover {
   background: #f0fdf4;
   color: #166534;
   border: 1px solid #bbf7d0;
-  padding: 2px 8px;
-  font-size: 0.7rem;
+  padding: 2px 6px;
+  font-size: 0.68rem;
   text-transform: uppercase;
 }
 
 .stories-list-placeholder {
   background: #fafafa;
   border: 1px solid var(--wf-border);
-  padding: var(--wf-spacing-md);
+  padding: var(--wf-spacing-sm);
   min-height: 120px;
+  flex-grow: 1;
+  overflow-y: auto;
 }
 
 .no-stories-msg {
   color: #777777;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
+  padding: var(--wf-spacing-sm);
 }
 
 .stories-wireframe-cards {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .story-mini-card {
   border: 1px solid var(--wf-border);
   background: var(--wf-bg);
-  padding: 8px var(--wf-spacing-sm);
+  padding: 8px;
   transition: all 0.2s ease;
 }
 
 .story-mini-card:hover {
   background: #fcfcfc;
-  transform: translateX(4px);
+  transform: translateX(3px);
   box-shadow: 2px 2px 0 var(--wf-border);
 }
 
 .mini-card-header {
   display: flex;
   justify-content: space-between;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   color: #666666;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .story-profession-tag {
@@ -552,22 +584,25 @@ path:hover {
 }
 
 .mini-card-title {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: bold;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
+  line-height: 1.2;
 }
 
 .mini-card-excerpt {
-  font-size: 0.8rem;
-  color: #333333;
-  line-height: 1.4;
+  font-size: 0.78rem;
+  color: #444444;
+  line-height: 1.3;
 }
 
 /* Responsive grid for map */
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   .map-grid {
     grid-template-columns: 1fr;
-    gap: var(--wf-spacing-md);
+  }
+  .map-visual-box {
+    min-height: 380px;
   }
 }
 </style>
