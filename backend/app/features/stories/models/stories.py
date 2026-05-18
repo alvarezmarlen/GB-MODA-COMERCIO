@@ -1,7 +1,14 @@
 from .... import db
 from .base import BaseMixin, TimestampMixin
 
+
 class Story(db.Model, BaseMixin, TimestampMixin):
+    """Story model representing a user's fashion-related story.
+
+    Each story is linked to a user and includes demographic information
+    such as origin country, profession, and age range.
+    """
+
     __tablename__ = 'stories'
 
     id = db.Column(db.Integer, primary_key=True)

@@ -1,7 +1,7 @@
 import pytest
 from app.features.stories.services.stories_service import (
     create_story, get_all_stories, get_story_by_id,
-    update_story, delete_story
+    update_story, delete_story, get_stories_filtered
 )
 
 VALID_DATA = {
@@ -49,6 +49,34 @@ class TestStoriesService:
         result = get_story_by_id(created['id'])
         assert result['id'] == created['id']
         assert result['title'] == VALID_DATA['title']
+
+    def test_get_stories_filtered_no_filters_returns_all(self, app, test_user):
+        data = {**VALID_DATA, 'user_id': test_user}
+        create_story(data)
+        create_story({**data, 'title': 'Segunda'})
+        stories = get_stories_filtered()
+        assert len(stories) == 2
+
+    def test_get_stories_filtered_by_origin_country(self, app, test_user):
+        data = {**VALID_DATA, 'user_id': test_user}
+        create_story(data)
+        create_story({**data, 'origin_country': 'Argentina', 'title': 'Otra'})
+        stories = get_stories_filtered(origin_country='México')
+        assert len(stories) == 1
+        assert stories[0]['origin_country'] == 'México'
+
+    def test_get_stories_filtered_by_multiple_criteria(self, app, test_user):
+        data = {**VALID_DATA, 'user_id': test_user}
+        create_story(data)
+        create_story({**data, 'profession': 'Diseñador', 'title': 'Otra'})
+        stories = get_stories_filtered(origin_country='México', profession='Ingeniero de Software')
+        assert len(stories) == 1
+        assert stories[0]['profession'] == 'Ingeniero de Software'
+        assert stories[0]['origin_country'] == 'México'
+
+    def test_get_stories_filtered_no_matches(self, app):
+        stories = get_stories_filtered(origin_country='NonExistent')
+        assert stories == []
 
     def test_update_story_returns_none_for_non_existent(self, app):
         assert update_story(999, {'title': 'Nuevo'}) is None
