@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import LoginPage from '../views/LoginPage.vue'
 import RegisterPage from '../views/RegisterPage.vue'
 import CreateStoryView from '../views/CreateStoryView.vue'
+import StoryDetailView from '../views/StoryDetailView.vue'
 
 const routes = [
   {
@@ -22,6 +23,11 @@ const routes = [
     path: '/create-story',
     name: 'create-story',
     component: CreateStoryView
+  },
+  {
+    path: '/story-detail',
+    name: 'story-detail',
+    component: StoryDetailView
   }
 ]
 
