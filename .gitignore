@@ -5,6 +5,7 @@ __pycache__/
 backend_gb_moda/app.db
 .env
 
+
 # Node / Vue
 node_modules/
 dist/
