@@ -7,14 +7,6 @@
       />
     </FormGroup>
 
-    <FormGroup label="País de origen">
-      <BaseSelect
-        v-model="formData.countryOrigin"
-        :options="countryOptions"
-        placeholder="▼ Seleccionar país"
-      />
-    </FormGroup>
-
     <FormGroup label="Profesión">
       <BaseSelect
         v-model="formData.profession"
@@ -71,14 +63,6 @@ const router = useRouter()
 const { setStory } = useStoryStore()
 const uploadedFiles = ref([])
 
-const countryOptions = [
-  { label: 'País Vasco', value: 'pais_vasco' },
-  { label: 'España', value: 'espana' },
-  { label: 'Marruecos', value: 'marruecos' },
-  { label: 'África', value: 'africa' },
-  { label: 'Otro', value: 'otro' }
-]
-
 const professionOptions = [
   { label: 'Casa', value: 'casa' },
   { label: 'Campo', value: 'campo' },
@@ -98,7 +82,6 @@ const ageOptions = [
 
 const { formData, handleSubmit } = useForm({
   title: '',
-  countryOrigin: '',
   profession: '',
   ageRange: '',
   description: '',
@@ -112,7 +95,6 @@ const handleFilesUpdate = (files) => {
 const isFormValid = computed(() => {
   return (
     formData.title.trim().length > 0 &&
-    formData.countryOrigin !== '' &&
     formData.profession !== '' &&
     formData.ageRange !== '' &&
     formData.description.trim().length > 0 &&
@@ -127,7 +109,6 @@ const onFormSubmit = () => {
     
     setStory({
       title: data.title,
-      countryOrigin: data.countryOrigin,
       profession: data.profession,
       ageRange: data.ageRange,
       description: data.description,

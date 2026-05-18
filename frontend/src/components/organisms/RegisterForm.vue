@@ -31,6 +31,7 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import FormField from '../molecules/FormField.vue'
 import BaseButton from '../atoms/BaseButton.vue'
