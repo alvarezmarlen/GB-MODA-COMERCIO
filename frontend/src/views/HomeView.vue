@@ -23,11 +23,14 @@
         </div>
       </div>
     </div>
+
+    <!-- Map Section -->
+    <InteractiveMap />
   </div>
 </template>
 
 <script setup>
-// Simplified Home component without active toggling
+import InteractiveMap from '../components/organisms/InteractiveMap.vue'
 </script>
 
 <style scoped>
