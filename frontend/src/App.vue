@@ -33,9 +33,8 @@ const showNavAndFooter = computed(() => {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: var(--wf-spacing-md);
+  width: 100%;
+  padding: var(--wf-spacing-md) var(--wf-spacing-lg);
 }
 
 .app-main-content {

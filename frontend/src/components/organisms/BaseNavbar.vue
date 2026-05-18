@@ -9,7 +9,7 @@
 
     <!-- Center: Navigation Tabs -->
     <div class="navbar-center">
-      <router-link to="/create-story" class="navbar-tab" active-class="active-tab">
+      <router-link to="/" class="navbar-tab" active-class="active-tab">
         Inicio
       </router-link>
       <router-link to="/create-story" class="navbar-tab" active-class="active-tab">
