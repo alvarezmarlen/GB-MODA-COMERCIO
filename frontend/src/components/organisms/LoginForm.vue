@@ -45,7 +45,7 @@ const onFormSubmit = () => {
     })
     login(cleanUsername)
     alert('Sesión iniciada con éxito')
-    router.push('/create-story')
+    router.push('/')
   })
 }
 </script>

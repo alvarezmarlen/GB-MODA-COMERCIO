@@ -67,7 +67,7 @@ const { currentStory } = useStoryStore()
 const storyToShow = computed(() => currentStory)
 
 const goBack = () => {
-  router.push('/create-story')
+  router.push('/')
 }
 
 // Translations for user-friendly display

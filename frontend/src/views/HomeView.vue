@@ -26,11 +26,15 @@
 
     <!-- Map Section -->
     <InteractiveMap />
+
+    <!-- Chronicles / Filters Section -->
+    <ChronicleList />
   </div>
 </template>
 
 <script setup>
 import InteractiveMap from '../components/organisms/InteractiveMap.vue'
+import ChronicleList from '../components/organisms/ChronicleList.vue'
 </script>
 
 <style scoped>
