@@ -84,3 +84,60 @@ class TestStoriesRoutes:
         response = client.delete('/stories/999')
         assert response.status_code == 404
         assert 'error' in response.get_json()
+
+    def test_get_stories_filter_by_origin_country(self, client, test_user):
+        data = {**VALID_DATA, 'user_id': test_user}
+        client.post('/stories', json=data)
+        data2 = {**VALID_DATA, 'user_id': test_user, 'origin_country': 'Mexico'}
+        client.post('/stories', json=data2)
+        response = client.get('/stories?origin_country=Colombia')
+        assert response.status_code == 200
+        stories = response.get_json()
+        assert all(s['origin_country'] == 'Colombia' for s in stories)
+        assert len(stories) == 1
+
+    def test_get_stories_filter_by_profession(self, client, test_user):
+        data = {**VALID_DATA, 'user_id': test_user}
+        client.post('/stories', json=data)
+        data2 = {**VALID_DATA, 'user_id': test_user, 'profession': 'Ingeniero'}
+        client.post('/stories', json=data2)
+        response = client.get('/stories?profession=Diseñador')
+        assert response.status_code == 200
+        stories = response.get_json()
+        assert all(s['profession'] == 'Diseñador' for s in stories)
+        assert len(stories) == 1
+
+    def test_get_stories_filter_by_age_range(self, client, test_user):
+        data = {**VALID_DATA, 'user_id': test_user}
+        client.post('/stories', json=data)
+        data2 = {**VALID_DATA, 'user_id': test_user, 'age_range': '50-60'}
+        client.post('/stories', json=data2)
+        response = client.get('/stories?age_range=30-40')
+        assert response.status_code == 200
+        stories = response.get_json()
+        assert all(s['age_range'] == '30-40' for s in stories)
+        assert len(stories) == 1
+
+    def test_get_stories_filter_by_multiple_params(self, client, test_user):
+        data = {**VALID_DATA, 'user_id': test_user}
+        client.post('/stories', json=data)
+        data2 = {**VALID_DATA, 'user_id': test_user, 'origin_country': 'Mexico', 'profession': 'Ingeniero'}
+        client.post('/stories', json=data2)
+        response = client.get('/stories?origin_country=Colombia&profession=Diseñador')
+        assert response.status_code == 200
+        stories = response.get_json()
+        assert all(s['origin_country'] == 'Colombia' and s['profession'] == 'Diseñador' for s in stories)
+        assert len(stories) == 1
+
+    def test_get_stories_filter_no_matches_returns_empty_list(self, client):
+        response = client.get('/stories?origin_country=NonExistent')
+        assert response.status_code == 200
+        assert response.get_json() == []
+
+    def test_get_stories_no_filters_returns_all(self, client, test_user):
+        data = {**VALID_DATA, 'user_id': test_user}
+        client.post('/stories', json=data)
+        client.post('/stories', json={**data, 'title': 'Otra'})
+        response = client.get('/stories')
+        assert response.status_code == 200
+        assert len(response.get_json()) == 2

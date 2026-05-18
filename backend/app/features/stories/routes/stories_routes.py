@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from ..services.stories_service import create_story, update_story, delete_story, get_all_stories, get_story_by_id
+from ..services.stories_service import create_story, update_story, delete_story, get_all_stories, get_story_by_id, get_stories_filtered
 
 stories_bp = Blueprint('stories', __name__)
 
@@ -28,7 +28,18 @@ def delete_story_route(story_id):
 
 @stories_bp.route('/stories', methods=['GET'])
 def get_all_stories_route():
-    stories = get_all_stories()
+    origin_country = request.args.get('origin_country')
+    profession = request.args.get('profession')
+    age_range = request.args.get('age_range')
+
+    if origin_country or profession or age_range:
+        stories = get_stories_filtered(
+            origin_country=origin_country,
+            profession=profession,
+            age_range=age_range
+        )
+    else:
+        stories = get_all_stories()
     return jsonify(stories), 200
 
 @stories_bp.route('/stories/<int:story_id>', methods=['GET'])

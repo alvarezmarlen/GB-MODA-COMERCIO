@@ -18,6 +18,17 @@ def get_all_stories():
     stories = Story.query.all()
     return [story.to_dict() for story in stories]
 
+def get_stories_filtered(origin_country=None, profession=None, age_range=None):
+    query = Story.query
+    if origin_country:
+        query = query.filter(Story.origin_country == origin_country)
+    if profession:
+        query = query.filter(Story.profession == profession)
+    if age_range:
+        query = query.filter(Story.age_range == age_range)
+    stories = query.all()
+    return [story.to_dict() for story in stories]
+
 def get_story_by_id(story_id):
     story = Story.query.get(story_id)
     return story.to_dict() if story else None
