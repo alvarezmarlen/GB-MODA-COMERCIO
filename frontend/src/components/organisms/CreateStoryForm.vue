@@ -44,7 +44,7 @@
     </div>
 
     <FormGroup label="Subir fotografía">
-      <BaseFileUpload />
+      <BaseFileUpload :disabled="!formData.acceptedTerms" :max-files="2" />
     </FormGroup>
 
     <div class="actions">
