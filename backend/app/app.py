@@ -1,28 +1,25 @@
-from flask import Flask, jsonify
+from flask import Flask
 from flask_cors import CORS
-from flask_jwt_extended import JWTManager
-from app.core.extensions import db
-from app.features.story_images.routes import story_images_bp
-import os
+from app import db
+from app.features.users.routes.users_routes import users_bp
+from app.features.stories.routes.stories_routes import stories_bp
+
 
 def create_app():
     app = Flask(__name__)
     CORS(app)
-
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(os.path.abspath("instance"), "moda_comercio.db")
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-    app.config["JWT_SECRET_KEY"] = "clave-secreta-temporal"
-
+    app.config.from_object('app.core.config.Config')
     db.init_app(app)
-    JWTManager(app)
 
-    app.register_blueprint(story_images_bp)
+    app.register_blueprint(users_bp)
+    app.register_blueprint(stories_bp)
 
-    @app.route("/api/health")
+    @app.route('/')
+    def home():
+        return 'Bienvenidos'
+
+    @app.route('/api/health')
     def health():
-        return jsonify({"status": "ok", "message": "Backend funcionando"})
-
-    with app.app_context():
-        db.create_all()
+        return {'status': 'ok', 'message': 'Backend funcionando'}
 
     return app
