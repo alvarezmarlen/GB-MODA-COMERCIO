@@ -7,14 +7,6 @@
       />
     </FormGroup>
 
-    <FormGroup label="País de origen">
-      <BaseSelect
-        v-model="formData.countryOrigin"
-        :options="countryOptions"
-        placeholder="▼ Seleccionar país"
-      />
-    </FormGroup>
-
     <FormGroup label="Profesión">
       <BaseSelect
         v-model="formData.profession"
@@ -44,7 +36,7 @@
     </div>
 
     <FormGroup label="Subir fotografía">
-      <BaseFileUpload :disabled="!formData.acceptedTerms" :max-files="2" />
+      <BaseFileUpload :disabled="!formData.acceptedTerms" :max-files="2" @update:files="handleFilesUpdate" />
     </FormGroup>
 
     <div class="actions">
@@ -54,7 +46,8 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import FormGroup from '../molecules/FormGroup.vue'
 import BaseInput from '../atoms/BaseInput.vue'
 import BaseSelect from '../atoms/BaseSelect.vue'
@@ -64,14 +57,11 @@ import BaseLabel from '../atoms/BaseLabel.vue'
 import BaseFileUpload from '../atoms/BaseFileUpload.vue'
 import BaseButton from '../atoms/BaseButton.vue'
 import { useForm } from '../../composables/useForm'
+import { useStoryStore } from '../../composables/useStoryStore'
 
-const countryOptions = [
-  { label: 'País Vasco', value: 'pais_vasco' },
-  { label: 'España', value: 'espana' },
-  { label: 'Marruecos', value: 'marruecos' },
-  { label: 'África', value: 'africa' },
-  { label: 'Otro', value: 'otro' }
-]
+const router = useRouter()
+const { setStory } = useStoryStore()
+const uploadedFiles = ref([])
 
 const professionOptions = [
   { label: 'Casa', value: 'casa' },
@@ -92,17 +82,19 @@ const ageOptions = [
 
 const { formData, handleSubmit } = useForm({
   title: '',
-  countryOrigin: '',
   profession: '',
   ageRange: '',
   description: '',
   acceptedTerms: false
 })
 
+const handleFilesUpdate = (files) => {
+  uploadedFiles.value = files
+}
+
 const isFormValid = computed(() => {
   return (
     formData.title.trim().length > 0 &&
-    formData.countryOrigin !== '' &&
     formData.profession !== '' &&
     formData.ageRange !== '' &&
     formData.description.trim().length > 0 &&
@@ -112,8 +104,20 @@ const isFormValid = computed(() => {
 
 const onFormSubmit = () => {
   handleSubmit((data) => {
+    // Generate object URLs for local image display
+    const imageUrls = uploadedFiles.value.map(file => URL.createObjectURL(file))
+    
+    setStory({
+      title: data.title,
+      profession: data.profession,
+      ageRange: data.ageRange,
+      description: data.description,
+      images: imageUrls
+    })
+
     console.log('Publishing story:', data)
     alert('Historia publicada con éxito')
+    router.push('/story-detail')
   })
 }
 </script>

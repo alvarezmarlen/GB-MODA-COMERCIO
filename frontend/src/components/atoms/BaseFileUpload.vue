@@ -34,6 +34,8 @@ const props = defineProps({
   }
 })
 
+const emit = defineEmits(['update:files'])
+
 const fileInput = ref(null)
 const files = ref([])
 
@@ -54,6 +56,7 @@ const handleFileChange = (event) => {
   } else {
     files.value = selectedFiles
   }
+  emit('update:files', files.value)
 }
 </script>
 

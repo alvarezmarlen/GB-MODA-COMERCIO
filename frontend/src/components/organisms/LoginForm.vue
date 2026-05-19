@@ -21,8 +21,10 @@ import { useRouter } from 'vue-router'
 import FormField from '../molecules/FormField.vue'
 import BaseButton from '../atoms/BaseButton.vue'
 import { useForm } from '../../composables/useForm'
+import { useAuthStore } from '../../composables/useAuthStore'
 
 const router = useRouter()
+const { login } = useAuthStore()
 const { formData, handleSubmit } = useForm({
   username: '',
   password: ''
@@ -36,12 +38,14 @@ const isFormValid = computed(() => {
 
 const onFormSubmit = () => {
   handleSubmit((data) => {
+    const cleanUsername = data.username.trim()
     console.log('Login attempt with clean data:', {
       ...data,
-      username: data.username.trim()
+      username: cleanUsername
     })
+    login(cleanUsername)
     alert('Sesión iniciada con éxito')
-    router.push('/create-story')
+    router.push('/')
   })
 }
 </script>
