@@ -3,11 +3,7 @@ from .base import BaseMixin, TimestampMixin
 
 
 class Story(db.Model, BaseMixin, TimestampMixin):
-    """Story model representing a user's fashion-related story.
-
-    Each story is linked to a user and includes demographic information
-    such as origin country, profession, and age range.
-    """
+    """Story model representing a user's fashion-related story."""
 
     __tablename__ = 'stories'
 
@@ -20,3 +16,9 @@ class Story(db.Model, BaseMixin, TimestampMixin):
     age_range = db.Column(db.String(50), nullable=False)
 
     user = db.relationship('User', backref='stories')
+    images = db.relationship('StoryImage', back_populates='story', cascade='all, delete-orphan')
+
+    def to_dict(self):
+        data = super().to_dict()
+        data['images'] = [img.to_dict() for img in self.images]
+        return data

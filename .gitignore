@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 backend_gb_moda/app.db
 .env
+backend/myenv
 
 
 # Node / Vue

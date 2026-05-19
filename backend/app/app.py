@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, send_from_directory
 from flask_cors import CORS
 from app import db
 from app.features.users.routes.users_routes import users_bp
@@ -21,5 +21,9 @@ def create_app():
     @app.route('/api/health')
     def health():
         return {'status': 'ok', 'message': 'Backend funcionando'}
+
+    @app.route('/uploads/stories/<filename>')
+    def uploaded_story_image(filename):
+        return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
     return app

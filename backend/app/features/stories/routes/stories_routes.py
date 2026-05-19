@@ -3,7 +3,9 @@
 from flask import Blueprint, request, jsonify
 from marshmallow import ValidationError
 from ..services.stories_service import create_story, update_story, delete_story, get_all_stories, get_story_by_id, get_stories_filtered
+from ..services.story_image_service import upload_story_image, delete_story_image, get_story_images
 from ..schemas.story_schema import StorySchema, StoryUpdateSchema, StoryFilterSchema
+from ....core.file_upload import allowed_file
 
 stories_bp = Blueprint('stories', __name__)
 
@@ -129,3 +131,57 @@ def get_story_by_id_route(story_id):
         return jsonify({'error': 'Story not found'}), 404
     else:
         return jsonify(story), 200
+
+
+@stories_bp.route('/stories/<int:story_id>/images', methods=['POST'])
+def upload_story_image_route(story_id):
+    """Upload an image for a story.
+
+    Request: multipart/form-data with field 'image'.
+
+    Returns:
+        201: Image metadata as JSON.
+        400: If no file or invalid file type.
+        404: If the story does not exist.
+    """
+    if 'image' not in request.files:
+        return jsonify({'error': 'No se envió ningún archivo'}), 400
+
+    file = request.files['image']
+    if file.filename == '':
+        return jsonify({'error': 'Nombre de archivo vacío'}), 400
+
+    if not allowed_file(file.filename):
+        return jsonify({'error': 'Tipo de archivo no permitido. Extensiones: png, jpg, jpeg, gif, webp'}), 400
+
+    result = upload_story_image(story_id, file)
+    if result is None:
+        return jsonify({'error': 'Historia no encontrada'}), 404
+
+    return jsonify(result), 201
+
+
+@stories_bp.route('/stories/<int:story_id>/images/<int:image_id>', methods=['DELETE'])
+def delete_story_image_route(story_id, image_id):
+    """Delete an image from a story.
+
+    Returns:
+        200: Confirmation message.
+        404: If the image or story does not exist.
+    """
+    success = delete_story_image(story_id, image_id)
+    if not success:
+        return jsonify({'error': 'Imagen no encontrada'}), 404
+
+    return jsonify({'message': 'Imagen eliminada exitosamente'}), 200
+
+
+@stories_bp.route('/stories/<int:story_id>/images', methods=['GET'])
+def get_story_images_route(story_id):
+    """Retrieve all images for a story.
+
+    Returns:
+        200: A list of image metadata as JSON.
+    """
+    images = get_story_images(story_id)
+    return jsonify(images), 200
