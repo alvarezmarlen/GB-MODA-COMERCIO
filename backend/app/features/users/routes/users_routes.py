@@ -5,13 +5,11 @@ users_bp = Blueprint('users', __name__)
 
 @users_bp.route('/users', methods=['POST'])
 def create_user_route():
-def create_user_route():
     data = request.get_json()
     new_user = svc_create_user(data)
     return jsonify(new_user), 201
 
 @users_bp.route('/users/<int:user_id>', methods=['PUT'])
-def update_user_route(user_id):
 def update_user_route(user_id):
     data = request.get_json()
     updated_user = svc_update_user(user_id, data)
