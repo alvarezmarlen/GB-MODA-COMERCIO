@@ -1,2 +1,26 @@
-# Python
+# Entornos virtuales (No subir librerías locales)
+myEnv/
 myenv/
+venv/
+.venv/
+env/
+
+# Base de datos local (Para no machacar los datos de tus compañeros)
+*
+*
+
+
+# Archivos temporales y cachés de Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Variables de entorno y contraseñas secretas
+.env
+
+# Archivos del sistema operativo o editores
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
