@@ -1,5 +1,5 @@
 from ..models.users import User
-from .... import db
+from app.core.extensions import db 
 
 def create_user(data):
     """Crea un nuevo usuario en la base de datos."""

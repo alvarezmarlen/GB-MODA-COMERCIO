@@ -1,6 +1,6 @@
 from datetime import datetime
 from decimal import Decimal
-from .... import db
+from app.core.extensions import db 
 
 class BaseMixin:
     """Mixin para añadir funcionalidad común a los modelos (como to_dict)."""

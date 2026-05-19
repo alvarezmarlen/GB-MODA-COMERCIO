@@ -1,7 +1,7 @@
 """Service layer for story-related business logic and database operations."""
 
 from ..models.stories import Story
-from .... import db
+from app.core.extensions import db 
 
 
 def create_story(data):

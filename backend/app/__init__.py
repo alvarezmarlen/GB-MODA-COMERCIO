@@ -1,3 +1,2 @@
-from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
+# Vacío o solo esto:
+from app.core.extensions import db

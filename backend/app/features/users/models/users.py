@@ -1,4 +1,4 @@
-from .... import db
+from app.core.extensions import db 
 from .base import BaseMixin
 
 class User(db.Model, BaseMixin):

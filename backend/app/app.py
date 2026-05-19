@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
-from app import db
+
 from app.core.extensions import db
 
 # Importaciones de los Blueprints (Rutas)
