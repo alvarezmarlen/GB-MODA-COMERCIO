@@ -1,7 +1,13 @@
+<template>
+  <div id="app">
+    <router-view />
+  </div>
+</template>
+
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+// App content managed by router
 </script>
 
-<template>
-  <HelloWorld />
-</template>
+<style>
+@import './style.css';
+</style>
