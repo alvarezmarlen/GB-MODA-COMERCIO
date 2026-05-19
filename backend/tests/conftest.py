@@ -1,6 +1,6 @@
 import pytest
 from app import db as _db
-from app.run import create_app
+from app.app import create_app
 from app.features.users.models.users import User
 
 
