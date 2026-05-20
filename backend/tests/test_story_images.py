@@ -14,7 +14,7 @@ class TestStoryImagesRoutes:
         'content': 'Contenido de la historia.',
         'origin_country': 'Colombia',
         'profession': 'Diseñador',
-        'age_range': '30-40',
+        'age': 35,
     }
 
     def _create_story(self, client, test_user):

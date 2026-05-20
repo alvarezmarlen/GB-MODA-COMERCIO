@@ -9,7 +9,7 @@ def create_story(data):
 
     Args:
         data: Dictionary containing user_id, title, content, origin_country,
-              profession, and age_range.
+              profession, and age.
 
     Returns:
         dict: The newly created story serialized via to_dict().
@@ -20,7 +20,7 @@ def create_story(data):
         content=data['content'],
         origin_country=data['origin_country'],
         profession=data['profession'],
-        age_range=data['age_range']
+        age=data['age']
     )
     db.session.add(new_story)
     db.session.commit()
@@ -37,7 +37,7 @@ def get_all_stories():
     return [story.to_dict() for story in stories]
 
 
-def get_stories_filtered(origin_country=None, profession=None, age_range=None):
+def get_stories_filtered(origin_country=None, profession=None, age=None):
     """Retrieve stories filtered by optional demographic criteria.
 
     All filters are optional and combined with AND logic when multiple are provided.
@@ -45,7 +45,7 @@ def get_stories_filtered(origin_country=None, profession=None, age_range=None):
     Args:
         origin_country: Filter by exact origin country match.
         profession: Filter by exact profession match.
-        age_range: Filter by exact age range match.
+        age: Filter by exact age match.
 
     Returns:
         list[dict]: A list of matching stories serialized as dictionaries.
@@ -55,8 +55,8 @@ def get_stories_filtered(origin_country=None, profession=None, age_range=None):
         query = query.filter(Story.origin_country == origin_country)
     if profession:
         query = query.filter(Story.profession == profession)
-    if age_range:
-        query = query.filter(Story.age_range == age_range)
+    if age is not None:
+        query = query.filter(Story.age == age)
     stories = query.all()
     return [story.to_dict() for story in stories]
 
@@ -95,7 +95,7 @@ def update_story(story_id, data):
     story.content = data.get('content', story.content)
     story.origin_country = data.get('origin_country', story.origin_country)
     story.profession = data.get('profession', story.profession)
-    story.age_range = data.get('age_range', story.age_range)
+    story.age = data.get('age', story.age)
 
     db.session.commit()
     return story.to_dict()

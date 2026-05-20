@@ -15,10 +15,12 @@
     </FormGroup>
 
     <FormGroup label="Edad">
-      <BaseSelect
-        v-model="formData.ageRange"
-        :options="ageOptions"
-        placeholder="▼ Seleccionar rango de edad"
+      <BaseInput
+        v-model="formData.age"
+        type="number"
+        min="0"
+        max="150"
+        placeholder="Escribe tu edad..."
       />
     </FormGroup>
 
@@ -78,19 +80,10 @@ const uploadedFiles = ref([])
 const isSubmitting = ref(false)
 const submitError = ref('')
 
-const ageOptions = [
-  { label: 'Menor de 18', value: 'under_18' },
-  { label: '18 - 25 años', value: '18_25' },
-  { label: '26 - 35 años', value: '26_35' },
-  { label: '36 - 45 años', value: '36_45' },
-  { label: '46 - 60 años', value: '46_60' },
-  { label: 'Más de 60', value: 'over_60' }
-]
-
 const { formData } = useForm({
   title: '',
   profession: '',
-  ageRange: '',
+  age: '',
   originCountry: '',
   description: '',
   acceptedTerms: false
@@ -104,7 +97,7 @@ const isFormValid = computed(() => {
   return (
     formData.title.trim().length > 0 &&
     formData.profession !== '' &&
-    formData.ageRange !== '' &&
+    formData.age !== '' && Number.isInteger(Number(formData.age)) && Number(formData.age) >= 0 &&
     formData.originCountry !== '' &&
     formData.description.trim().length > 0 &&
     formData.acceptedTerms
@@ -123,7 +116,7 @@ const onFormSubmit = async () => {
       content: data.description,
       origin_country: data.originCountry,
       profession: data.profession,
-      age_range: data.ageRange
+      age: parseInt(data.age, 10)
     }
 
     const created = await createStory(storyData)
@@ -140,7 +133,7 @@ const onFormSubmit = async () => {
       id: created.id,
       title: created.title,
       profession: created.profession,
-      ageRange: created.age_range,
+      age: created.age,
       description: created.content,
       images: imageUrls.length > 0 ? imageUrls : []
     })

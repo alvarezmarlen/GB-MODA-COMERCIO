@@ -13,7 +13,7 @@ class Story(db.Model, BaseMixin, TimestampMixin):
     content = db.Column(db.Text, nullable=False)
     origin_country = db.Column(db.String(100), nullable=False)
     profession = db.Column(db.String(100), nullable=False)
-    age_range = db.Column(db.String(50), nullable=False)
+    age = db.Column(db.Integer, nullable=False)
 
     user = db.relationship('User', backref='stories')
     images = db.relationship('StoryImage', back_populates='story', cascade='all, delete-orphan')

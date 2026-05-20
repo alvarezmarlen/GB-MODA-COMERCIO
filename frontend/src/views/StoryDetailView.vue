@@ -39,7 +39,7 @@
         <div class="story-meta">
           <span class="meta-item"><strong>Oficio:</strong> {{ professionLabel }}</span>
           <span class="meta-separator">│</span>
-          <span class="meta-item"><strong>Edad:</strong> {{ ageRangeLabel }}</span>
+          <span class="meta-item"><strong>Edad:</strong> {{ storyToShow.age }} años</span>
           <span class="meta-separator">│</span>
           <span class="meta-item"><strong>País:</strong> {{ storyToShow.originCountry || storyToShow.origin_country }}</span>
         </div>
@@ -84,18 +84,6 @@ const professionLabel = computed(() => {
   return mapping[storyToShow.value?.profession] || 'No especificado'
 })
 
-const ageRangeLabel = computed(() => {
-  const mapping = {
-    under_18: 'Menor de 18 años',
-    '18_25': '18 - 25 años',
-    '26_35': '26 - 35 años',
-    '36_45': '36 - 45 años',
-    '46_60': '46 - 60 años',
-    over_60: 'Más de 60 años'
-  }
-  return mapping[storyToShow.value?.ageRange || storyToShow.value?.age_range] || 'No especificada'
-})
-
 const formattedDescription = computed(() => {
   if (!storyToShow.value?.description && !storyToShow.value?.content) return []
   const text = storyToShow.value.description || storyToShow.value.content
@@ -113,7 +101,7 @@ const loadStory = async (id) => {
         id: data.id,
         title: data.title,
         profession: data.profession,
-        ageRange: data.age_range,
+        age: data.age,
         description: data.content,
         images: data.images || []
       })

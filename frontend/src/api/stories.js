@@ -12,7 +12,7 @@ async function parseJson(res) {
 export async function getStories(filters = {}) {
   const params = new URLSearchParams()
   if (filters.profession) params.append('profession', filters.profession)
-  if (filters.age_range) params.append('age_range', filters.age_range)
+  if (filters.age) params.append('age', filters.age)
   if (filters.origin_country) params.append('origin_country', filters.origin_country)
   const query = params.toString()
   const res = await fetch(`/stories${query ? '?' + query : ''}`)

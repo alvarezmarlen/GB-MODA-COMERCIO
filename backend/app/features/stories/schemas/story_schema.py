@@ -11,7 +11,7 @@ class StorySchema(Schema):
     content = fields.String(required=True, validate=validate.Length(min=1))
     origin_country = fields.String(required=True, validate=validate.Length(min=1, max=100))
     profession = fields.String(required=True, validate=validate.Length(min=1, max=100))
-    age_range = fields.String(required=True, validate=validate.Length(min=1, max=50))
+    age = fields.Integer(required=True, validate=validate.Range(min=0, max=150), strict=True)
 
     class Meta:
         unknown = EXCLUDE
@@ -25,7 +25,7 @@ class StoryUpdateSchema(Schema):
     content = fields.String(validate=validate.Length(min=1))
     origin_country = fields.String(validate=validate.Length(min=1, max=100))
     profession = fields.String(validate=validate.Length(min=1, max=100))
-    age_range = fields.String(validate=validate.Length(min=1, max=50))
+    age = fields.Integer(validate=validate.Range(min=0, max=150), strict=True)
 
     class Meta:
         unknown = EXCLUDE
@@ -36,7 +36,7 @@ class StoryFilterSchema(Schema):
 
     origin_country = fields.String(validate=validate.Length(min=1, max=100))
     profession = fields.String(validate=validate.Length(min=1, max=100))
-    age_range = fields.String(validate=validate.Length(min=1, max=50))
+    age = fields.Integer()
 
     class Meta:
         unknown = EXCLUDE

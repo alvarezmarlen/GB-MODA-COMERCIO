@@ -5,7 +5,7 @@ const currentStory = reactive({
   title: '',
   countryOrigin: '',
   profession: '',
-  ageRange: '',
+  age: null,
   description: '',
   images: []
 })
@@ -16,7 +16,7 @@ export function useStoryStore() {
       title: storyData.title || '',
       countryOrigin: storyData.countryOrigin || '',
       profession: storyData.profession || '',
-      ageRange: storyData.ageRange || '',
+      age: storyData.age || null,
       description: storyData.description || '',
       images: storyData.images || []
     })

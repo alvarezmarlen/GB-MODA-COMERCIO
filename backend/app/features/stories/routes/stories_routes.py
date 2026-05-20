@@ -88,7 +88,7 @@ def get_all_stories_route():
     Query params (all optional):
         origin_country (str): Filter by exact origin country.
         profession (str): Filter by exact profession.
-        age_range (str): Filter by exact age range.
+        age (int): Filter by exact age.
 
     Filters are combined with AND logic when multiple are provided.
     If no filters are given, all stories are returned.
@@ -105,13 +105,13 @@ def get_all_stories_route():
 
     origin_country = filters.get('origin_country')
     profession = filters.get('profession')
-    age_range = filters.get('age_range')
+    age = filters.get('age')
 
-    if origin_country or profession or age_range:
+    if origin_country or profession or age is not None:
         stories = get_stories_filtered(
             origin_country=origin_country,
             profession=profession,
-            age_range=age_range
+            age=age
         )
     else:
         stories = get_all_stories()
