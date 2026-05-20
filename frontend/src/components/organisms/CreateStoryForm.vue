@@ -24,10 +24,9 @@
     </FormGroup>
 
     <FormGroup label="País de origen">
-      <BaseSelect
+      <BaseInput
         v-model="formData.originCountry"
-        :options="countryOptions"
-        placeholder="▼ Seleccionar país"
+        placeholder="Escribe el país de origen..."
       />
     </FormGroup>
 
@@ -86,21 +85,6 @@ const professionOptions = [
   { label: 'Industria', value: 'industria' },
   { label: 'Limpieza', value: 'limpieza' },
   { label: 'Otro', value: 'otro' }
-]
-
-const countryOptions = [
-  { label: 'Brasil', value: 'Brasil' },
-  { label: 'Portugal', value: 'Portugal' },
-  { label: 'España', value: 'España' },
-  { label: 'Argentina', value: 'Argentina' },
-  { label: 'México', value: 'México' },
-  { label: 'Colombia', value: 'Colombia' },
-  { label: 'Chile', value: 'Chile' },
-  { label: 'Perú', value: 'Perú' },
-  { label: 'Venezuela', value: 'Venezuela' },
-  { label: 'Uruguay', value: 'Uruguay' },
-  { label: 'Paraguay', value: 'Paraguay' },
-  { label: 'Otro', value: 'Otro' }
 ]
 
 const ageOptions = [

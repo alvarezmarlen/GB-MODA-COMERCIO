@@ -11,6 +11,10 @@
           <option value="">Edad (todas)</option>
           <option v-for="opt in ageOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
         </select>
+        <select v-model="filters.origin_country" class="wireframe-input filter-select" @change="applyFilters">
+          <option value="">País (todos)</option>
+          <option v-for="c in countryOptions" :key="c" :value="c">{{ c }}</option>
+        </select>
       </div>
       <div class="elegant-divider"></div>
     </div>
@@ -68,9 +72,11 @@ const router = useRouter()
 const stories = ref([])
 const loading = ref(true)
 const errorMessage = ref('')
+const countryOptions = ref([])
 const filters = reactive({
   profession: '',
-  age_range: ''
+  age_range: '',
+  origin_country: ''
 })
 
 const professionOptions = [
@@ -122,9 +128,12 @@ const fetchStories = async () => {
     const f = {}
     if (filters.profession) f.profession = filters.profession
     if (filters.age_range) f.age_range = filters.age_range
+    if (filters.origin_country) f.origin_country = filters.origin_country
     stories.value = await getStories(f)
+    countryOptions.value = [...new Set(stories.value.map(s => s.origin_country).filter(Boolean))].sort()
   } catch (err) {
     stories.value = []
+    countryOptions.value = []
     errorMessage.value = err.message
   } finally {
     loading.value = false
