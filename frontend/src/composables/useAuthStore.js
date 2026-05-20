@@ -2,6 +2,7 @@ import { reactive, computed } from 'vue'
 
 const state = reactive({
   user: {
+    id: 1,
     username: 'Juan Pérez',
     email: 'juan.perez@example.com'
   },

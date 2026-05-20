@@ -23,6 +23,14 @@
       />
     </FormGroup>
 
+    <FormGroup label="País de origen">
+      <BaseSelect
+        v-model="formData.originCountry"
+        :options="countryOptions"
+        placeholder="▼ Seleccionar país"
+      />
+    </FormGroup>
+
     <FormGroup label="Descripción de la historia">
       <BaseTextarea
         v-model="formData.description"
@@ -39,8 +47,12 @@
       <BaseFileUpload :disabled="!formData.acceptedTerms" :max-files="2" @update:files="handleFilesUpdate" />
     </FormGroup>
 
+    <div v-if="submitError" class="error-message">{{ submitError }}</div>
+
     <div class="actions">
-      <BaseButton type="submit" :disabled="!isFormValid">PUBLICAR</BaseButton>
+      <BaseButton type="submit" :disabled="!isFormValid || isSubmitting">
+        {{ isSubmitting ? 'PUBLICANDO...' : 'PUBLICAR' }}
+      </BaseButton>
     </div>
   </form>
 </template>
@@ -58,10 +70,15 @@ import BaseFileUpload from '../atoms/BaseFileUpload.vue'
 import BaseButton from '../atoms/BaseButton.vue'
 import { useForm } from '../../composables/useForm'
 import { useStoryStore } from '../../composables/useStoryStore'
+import { useAuthStore } from '../../composables/useAuthStore'
+import { createStory, uploadStoryImage } from '../../api/stories'
 
 const router = useRouter()
 const { setStory } = useStoryStore()
+const { user } = useAuthStore()
 const uploadedFiles = ref([])
+const isSubmitting = ref(false)
+const submitError = ref('')
 
 const professionOptions = [
   { label: 'Casa', value: 'casa' },
@@ -69,6 +86,21 @@ const professionOptions = [
   { label: 'Industria', value: 'industria' },
   { label: 'Limpieza', value: 'limpieza' },
   { label: 'Otro', value: 'otro' }
+]
+
+const countryOptions = [
+  { label: 'Brasil', value: 'Brasil' },
+  { label: 'Portugal', value: 'Portugal' },
+  { label: 'España', value: 'España' },
+  { label: 'Argentina', value: 'Argentina' },
+  { label: 'México', value: 'México' },
+  { label: 'Colombia', value: 'Colombia' },
+  { label: 'Chile', value: 'Chile' },
+  { label: 'Perú', value: 'Perú' },
+  { label: 'Venezuela', value: 'Venezuela' },
+  { label: 'Uruguay', value: 'Uruguay' },
+  { label: 'Paraguay', value: 'Paraguay' },
+  { label: 'Otro', value: 'Otro' }
 ]
 
 const ageOptions = [
@@ -80,10 +112,11 @@ const ageOptions = [
   { label: 'Más de 60', value: 'over_60' }
 ]
 
-const { formData, handleSubmit } = useForm({
+const { formData } = useForm({
   title: '',
   profession: '',
   ageRange: '',
+  originCountry: '',
   description: '',
   acceptedTerms: false
 })
@@ -97,28 +130,52 @@ const isFormValid = computed(() => {
     formData.title.trim().length > 0 &&
     formData.profession !== '' &&
     formData.ageRange !== '' &&
+    formData.originCountry !== '' &&
     formData.description.trim().length > 0 &&
     formData.acceptedTerms
   )
 })
 
-const onFormSubmit = () => {
-  handleSubmit((data) => {
-    // Generate object URLs for local image display
-    const imageUrls = uploadedFiles.value.map(file => URL.createObjectURL(file))
-    
-    setStory({
+const onFormSubmit = async () => {
+  isSubmitting.value = true
+  submitError.value = ''
+
+  try {
+    const data = { ...formData }
+    const storyData = {
+      user_id: user.value?.id || 1,
       title: data.title,
+      content: data.description,
+      origin_country: data.originCountry,
       profession: data.profession,
-      ageRange: data.ageRange,
-      description: data.description,
-      images: imageUrls
+      age_range: data.ageRange
+    }
+
+    const created = await createStory(storyData)
+
+    const imageUrls = []
+    if (uploadedFiles.value.length > 0) {
+      for (const file of uploadedFiles.value) {
+        const img = await uploadStoryImage(created.id, file)
+        imageUrls.push(img.url)
+      }
+    }
+
+    setStory({
+      id: created.id,
+      title: created.title,
+      profession: created.profession,
+      ageRange: created.age_range,
+      description: created.content,
+      images: imageUrls.length > 0 ? imageUrls : []
     })
 
-    console.log('Publishing story:', data)
-    alert('Historia publicada con éxito')
     router.push('/story-detail')
-  })
+  } catch (err) {
+    submitError.value = err.message
+  } finally {
+    isSubmitting.value = false
+  }
 }
 </script>
 
@@ -134,6 +191,16 @@ const onFormSubmit = () => {
   display: flex;
   justify-content: center;
   margin-top: var(--wf-spacing-lg);
+}
+
+.error-message {
+  color: #d32f2f;
+  background: #fce4ec;
+  padding: var(--wf-spacing-sm);
+  border: 1px solid #d32f2f;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: var(--wf-spacing-md);
 }
 
 .create-story-form :deep(.wireframe-button) {

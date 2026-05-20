@@ -13,8 +13,8 @@ export function useForm(initialState) {
     return re.test(email)
   }
 
-  const handleSubmit = (callback) => {
-    callback(formData)
+  const handleSubmit = async (callback) => {
+    await callback(formData)
   }
 
   return {
