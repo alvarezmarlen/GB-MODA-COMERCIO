@@ -4,6 +4,8 @@ import RegisterPage from '../views/RegisterPage.vue'
 import CreateStoryView from '../views/CreateStoryView.vue'
 import StoryDetailView from '../views/StoryDetailView.vue'
 import HomeView from '../views/HomeView.vue'
+import UserDashboardView from '../views/UserDashboardView.vue'
+import AdminDashboardView from '../views/AdminDashboardView.vue'
 
 const routes = [
   {
@@ -30,6 +32,16 @@ const routes = [
     path: '/story-detail',
     name: 'story-detail',
     component: StoryDetailView
+  },
+  {
+    path: '/dashboard',
+    name: 'user-dashboard',
+    component: UserDashboardView
+  },
+  {
+    path: '/admin',
+    name: 'admin-dashboard',
+    component: AdminDashboardView
   }
 ]
 
