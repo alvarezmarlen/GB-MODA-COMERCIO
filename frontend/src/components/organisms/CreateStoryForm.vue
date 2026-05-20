@@ -8,10 +8,9 @@
     </FormGroup>
 
     <FormGroup label="Profesión">
-      <BaseSelect
+      <BaseInput
         v-model="formData.profession"
-        :options="professionOptions"
-        placeholder="▼ Seleccionar profesión"
+        placeholder="Escribe el oficio..."
       />
     </FormGroup>
 
@@ -78,14 +77,6 @@ const { user } = useAuthStore()
 const uploadedFiles = ref([])
 const isSubmitting = ref(false)
 const submitError = ref('')
-
-const professionOptions = [
-  { label: 'Casa', value: 'casa' },
-  { label: 'Campo', value: 'campo' },
-  { label: 'Industria', value: 'industria' },
-  { label: 'Limpieza', value: 'limpieza' },
-  { label: 'Otro', value: 'otro' }
-]
 
 const ageOptions = [
   { label: 'Menor de 18', value: 'under_18' },

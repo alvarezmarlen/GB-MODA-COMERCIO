@@ -5,7 +5,7 @@
       <div class="filters-row">
         <select v-model="filters.profession" class="wireframe-input filter-select" @change="applyFilters">
           <option value="">Oficio (todos)</option>
-          <option v-for="opt in professionOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
+          <option v-for="p in professionOptions" :key="p" :value="p">{{ p }}</option>
         </select>
         <select v-model="filters.age_range" class="wireframe-input filter-select" @change="applyFilters">
           <option value="">Edad (todas)</option>
@@ -72,20 +72,13 @@ const router = useRouter()
 const stories = ref([])
 const loading = ref(true)
 const errorMessage = ref('')
+const professionOptions = ref([])
 const countryOptions = ref([])
 const filters = reactive({
   profession: '',
   age_range: '',
   origin_country: ''
 })
-
-const professionOptions = [
-  { label: 'Casa', value: 'casa' },
-  { label: 'Campo', value: 'campo' },
-  { label: 'Industria', value: 'industria' },
-  { label: 'Limpieza', value: 'limpieza' },
-  { label: 'Otro', value: 'otro' }
-]
 
 const ageOptions = [
   { label: 'Menor de 18', value: 'under_18' },
@@ -130,9 +123,11 @@ const fetchStories = async () => {
     if (filters.age_range) f.age_range = filters.age_range
     if (filters.origin_country) f.origin_country = filters.origin_country
     stories.value = await getStories(f)
+    professionOptions.value = [...new Set(stories.value.map(s => s.profession).filter(Boolean))].sort()
     countryOptions.value = [...new Set(stories.value.map(s => s.origin_country).filter(Boolean))].sort()
   } catch (err) {
     stories.value = []
+    professionOptions.value = []
     countryOptions.value = []
     errorMessage.value = err.message
   } finally {
