@@ -4,15 +4,21 @@ from .... import db
 def create_user(data):
     """Crea un nuevo usuario en la base de datos."""
     new_user = User(
-        username=data['username'],
+        username=data['username'],  
         email=data['email'],
-        password_hash=data['password_hash'],  # Asegúrate de hashear la contraseña antes de guardarla
-        role=data.get('role', 'customer')  # Por defecto, el rol es 'customer'
+        password_hash=data['password_hash'], 
+        role=data.get('role', 'customer')  
     )
     db.session.add(new_user)
     db.session.commit()
-    return new_user.to_dict()
-
+    
+    # En lugar de usar to_dict(), devolvemos un diccionario manual para probar
+    return {
+        "id": new_user.id,
+        "nombre_usuario": new_user.username,
+        "email": new_user.email,
+        "role": new_user.role
+    }
 def update_user(user_id, data):
     """Actualiza un usuario existente."""
     user = User.query.get(user_id)

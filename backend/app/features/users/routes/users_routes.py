@@ -51,3 +51,23 @@ def update_user_route(user_id):
     
     return jsonify(updated_user), 200
 
+@users_bp.route('/users/<int:user_id>', methods=['DELETE'])
+def delete_user_route(user_id):
+    success = service_delete_user(user_id)
+    if not success:
+        return jsonify({'error': 'Usuario no encontrado'}), 404
+    return jsonify({'message': 'Usuario eliminado exitosamente'}), 200
+
+@users_bp.route('/users', methods=['GET'])
+def get_all_users_route():
+    users = service_get_all_users()
+    return jsonify(users), 200
+
+@users_bp.route('/users/<int:user_id>', methods=['GET'])
+def get_user_by_id_route(user_id):
+    user = service_get_user_by_id(user_id)
+    if not user:
+        return jsonify({'error': 'Usuario no encontrado'}), 404
+    return jsonify(user), 200
+
+
