@@ -4,9 +4,9 @@ from .... import db
 def create_user(data):
     """Crea un nuevo usuario en la base de datos."""
     new_user = User(
-        username=data['nombre_usuario'],
+        username=data['username'],
         email=data['email'],
-        password_hash=data['password'],  # Asegúrate de hashear la contraseña antes de guardarla
+        password_hash=data['password_hash'],  # Asegúrate de hashear la contraseña antes de guardarla
         role=data.get('role', 'customer')  # Por defecto, el rol es 'customer'
     )
     db.session.add(new_user)
@@ -19,10 +19,10 @@ def update_user(user_id, data):
     if not user:
         return None
     
-    user.username = data.get('nombre_usuario', user.username)
+    user.username = data.get('username', user.username)
     user.email = data.get('email', user.email)
-    if 'password' in data:
-        user.password_hash = data['password']  # Asegúrate de hashear la contraseña antes de guardarla
+    if 'password_hash' in data:
+        user.password_hash = data['password_hash']  # Asegúrate de hashear la contraseña antes de guardarla
     user.role = data.get('role', user.role)
     
     db.session.commit()
