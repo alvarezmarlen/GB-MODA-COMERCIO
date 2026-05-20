@@ -48,7 +48,7 @@
           <span class="meta-separator">│</span>
           <span class="meta-item"><strong>Edad:</strong> {{ storyToShow.age }} años</span>
           <span class="meta-separator">│</span>
-          <span class="meta-item"><strong>País:</strong> {{ storyToShow.originCountry || storyToShow.origin_country }}</span>
+          <span class="meta-item"><strong>País:</strong> {{ storyToShow.origin_country }}</span>
         </div>
 
         <hr class="wf-divider" />
@@ -66,12 +66,10 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { useStoryStore } from '../composables/useStoryStore'
 import { getStoryById, deleteStory } from '../api/stories'
 
 const router = useRouter()
 const route = useRoute()
-const { currentStory, setStory } = useStoryStore()
 
 const loading = ref(false)
 const storyToShow = ref(null)
@@ -94,40 +92,27 @@ const deleteStoryHandler = async () => {
   }
 }
 
+const professionMap = {
+  casa: 'Casa',
+  campo: 'Campo',
+  industria: 'Industria',
+  limpieza: 'Limpieza',
+  otro: 'Otro'
+}
+
 const professionLabel = computed(() => {
-  const mapping = {
-    casa: 'Casa',
-    campo: 'Campo',
-    industria: 'Industria',
-    limpieza: 'Limpieza',
-    otro: 'Otro'
-  }
-  return mapping[storyToShow.value?.profession] || 'No especificado'
+  return professionMap[storyToShow.value?.profession] || storyToShow.value?.profession || ''
 })
 
 const formattedDescription = computed(() => {
-  if (!storyToShow.value?.description && !storyToShow.value?.content) return []
-  const text = storyToShow.value.description || storyToShow.value.content
-  return text.split('\n\n').filter(p => p.trim() !== '')
+  if (!storyToShow.value?.content) return []
+  return storyToShow.value.content.split('\n\n').filter(p => p.trim() !== '')
 })
 
 const loadStory = async (id) => {
   loading.value = true
   try {
-    if (currentStory.id == id) {
-      storyToShow.value = currentStory
-    } else {
-      const data = await getStoryById(id)
-      setStory({
-        id: data.id,
-        title: data.title,
-        profession: data.profession,
-        age: data.age,
-        description: data.content,
-        images: data.images || []
-      })
-      storyToShow.value = currentStory
-    }
+    storyToShow.value = await getStoryById(id)
   } catch {
     storyToShow.value = null
   } finally {
