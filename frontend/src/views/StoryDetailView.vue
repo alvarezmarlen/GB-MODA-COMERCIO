@@ -1,10 +1,17 @@
 <template>
   <div class="story-detail-template">
-    <header class="template-header">
-      <button class="wireframe-button back-button" @click="goBack">
-        ← Volver
-      </button>
-    </header>
+<header class="template-header">
+  <button class="wireframe-button back-button" @click="goBack">
+    ← Volver
+  </button>
+  <button 
+    class="wireframe-button delete-button" 
+    @click="deleteStoryHandler"
+    :disabled="loading"
+  >
+    Eliminar Historia
+  </button>
+</header>
 
     <main class="template-content">
       <div v-if="loading" class="loading-text">Cargando historia...</div>
@@ -60,7 +67,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useStoryStore } from '../composables/useStoryStore'
-import { getStoryById } from '../api/stories'
+import { getStoryById, deleteStory } from '../api/stories'
 
 const router = useRouter()
 const route = useRoute()
@@ -71,6 +78,20 @@ const storyToShow = ref(null)
 
 const goBack = () => {
   router.push('/')
+}
+
+const deleteStoryHandler = async () => {
+  if (!storyToShow.value) return
+  
+  if (window.confirm('¿Estás seguro de que quieres eliminar esta historia?')) {
+    try {
+      await deleteStory(storyToShow.value.id)
+      // Redirigir a la página principal después de eliminar
+      router.push('/')
+    } catch (error) {
+      alert('Error al eliminar la historia: ' + error.message)
+    }
+  }
 }
 
 const professionLabel = computed(() => {
@@ -136,6 +157,21 @@ onMounted(() => {
 .back-button {
   text-decoration: none;
   font-weight: bold;
+}
+
+.delete-button {
+  background: var(--wf-error-bg);
+  color: var(--wf-text-invert);
+  margin-left: var(--wf-spacing-sm);
+}
+
+.delete-button:hover {
+  background: var(--wf-error-bg-hover);
+}
+
+.delete-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .loading-text {

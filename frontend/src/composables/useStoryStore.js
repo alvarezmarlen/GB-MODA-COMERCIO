@@ -13,6 +13,7 @@ const currentStory = reactive({
 export function useStoryStore() {
   const setStory = (storyData) => {
     Object.assign(currentStory, {
+      id: storyData.id !== undefined ? storyData.id : null,
       title: storyData.title || '',
       countryOrigin: storyData.countryOrigin || '',
       profession: storyData.profession || '',
