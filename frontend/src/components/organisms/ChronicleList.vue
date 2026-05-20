@@ -1,74 +1,55 @@
 <template>
   <div class="chronicles-section">
-    <!-- Filters Header -->
     <div class="filters-header">
       <h3 class="filter-title">FILTRAR POR</h3>
       <div class="filters-row">
-        <select class="wireframe-input filter-select">
-          <option value="">Oficio</option>
+        <select v-model="filters.profession" class="wireframe-input filter-select" @change="applyFilters">
+          <option value="">Oficio (todos)</option>
+          <option v-for="opt in professionOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
         </select>
-        <select class="wireframe-input filter-select">
-          <option value="">Edad</option>
+        <select v-model="filters.age_range" class="wireframe-input filter-select" @change="applyFilters">
+          <option value="">Edad (todas)</option>
+          <option v-for="opt in ageOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
         </select>
       </div>
       <div class="elegant-divider"></div>
     </div>
 
-    <!-- Chronicles List -->
-    <div class="chronicles-list">
-      <!-- Card 1 -->
-      <div class="chronicle-card wireframe-container">
-        <!-- Top Bar (as in the design) -->
-        <div class="card-top-bar">
-          <div class="card-top-bar-inner"></div>
-        </div>
-        
-        <!-- Card Body -->
-        <div class="card-body">
-          <div class="card-image-box">
-            <span>Imagen</span>
-          </div>
-          
-          <div class="card-content">
-            <div class="card-meta">
-              Oficio: Casa &nbsp;|&nbsp; Edad: 45 años
-            </div>
-            <div class="placeholder-lines">
-              <div class="placeholder-line"></div>
-              <div class="placeholder-line"></div>
-              <div class="placeholder-line short"></div>
-            </div>
-            <div class="card-actions">
-              <button class="wireframe-button" @click="goToStoryDetail">Ver más</button>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div v-if="loading" class="loading-text">Cargando historias...</div>
 
-      <!-- Card 2 -->
-      <div class="chronicle-card wireframe-container">
-        <!-- Top Bar (as in the design) -->
+    <div v-else-if="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+    <div v-else-if="stories.length === 0" class="loading-text">
+      No hay historias disponibles.
+    </div>
+
+    <div v-else class="chronicles-list">
+      <div
+        v-for="story in stories"
+        :key="story.id"
+        class="chronicle-card wireframe-container"
+      >
         <div class="card-top-bar">
-          <div class="card-top-bar-inner"></div>
+          <div class="card-top-bar-inner">{{ story.title }}</div>
         </div>
-        
-        <!-- Card Body -->
+
         <div class="card-body">
-          <div class="card-image-box">
-            <span>Imagen</span>
+          <div v-if="story.images && story.images.length > 0" class="card-image-box">
+            <img :src="story.images[0].url" :alt="story.title" class="card-image" />
           </div>
-          
+          <div v-else class="card-image-box">
+            <span>Sin imagen</span>
+          </div>
+
           <div class="card-content">
             <div class="card-meta">
-              Oficio: Campo &nbsp;|&nbsp; Edad: 32 años
+              Oficio: {{ professionLabel(story.profession) }} &nbsp;|&nbsp;
+              Edad: {{ ageLabel(story.age_range) }} &nbsp;|&nbsp;
+              País: {{ story.origin_country }}
             </div>
-            <div class="placeholder-lines">
-              <div class="placeholder-line"></div>
-              <div class="placeholder-line"></div>
-              <div class="placeholder-line short"></div>
-            </div>
+            <p class="card-text">{{ truncate(story.content, 120) }}</p>
             <div class="card-actions">
-              <button class="wireframe-button" @click="goToStoryDetail">Ver más</button>
+              <button class="wireframe-button" @click="goToStoryDetail(story.id)">Ver más</button>
             </div>
           </div>
         </div>
@@ -78,13 +59,87 @@
 </template>
 
 <script setup>
+import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { getStories } from '../../api/stories'
 
 const router = useRouter()
 
-const goToStoryDetail = () => {
-  router.push({ name: 'story-detail' })
+const stories = ref([])
+const loading = ref(true)
+const errorMessage = ref('')
+const filters = reactive({
+  profession: '',
+  age_range: ''
+})
+
+const professionOptions = [
+  { label: 'Casa', value: 'casa' },
+  { label: 'Campo', value: 'campo' },
+  { label: 'Industria', value: 'industria' },
+  { label: 'Limpieza', value: 'limpieza' },
+  { label: 'Otro', value: 'otro' }
+]
+
+const ageOptions = [
+  { label: 'Menor de 18', value: 'under_18' },
+  { label: '18 - 25 años', value: '18_25' },
+  { label: '26 - 35 años', value: '26_35' },
+  { label: '36 - 45 años', value: '36_45' },
+  { label: '46 - 60 años', value: '46_60' },
+  { label: 'Más de 60', value: 'over_60' }
+]
+
+const professionMap = {
+  casa: 'Casa',
+  campo: 'Campo',
+  industria: 'Industria',
+  limpieza: 'Limpieza',
+  otro: 'Otro'
 }
+
+const ageMap = {
+  under_18: 'Menor de 18',
+  '18_25': '18 - 25 años',
+  '26_35': '26 - 35 años',
+  '36_45': '36 - 45 años',
+  '46_60': '46 - 60 años',
+  over_60: 'Más de 60'
+}
+
+const professionLabel = (val) => professionMap[val] || val
+const ageLabel = (val) => ageMap[val] || val
+
+const truncate = (text, max) => {
+  if (!text) return ''
+  return text.length > max ? text.slice(0, max) + '...' : text
+}
+
+const fetchStories = async () => {
+  loading.value = true
+  errorMessage.value = ''
+  try {
+    const f = {}
+    if (filters.profession) f.profession = filters.profession
+    if (filters.age_range) f.age_range = filters.age_range
+    stories.value = await getStories(f)
+  } catch (err) {
+    stories.value = []
+    errorMessage.value = err.message
+  } finally {
+    loading.value = false
+  }
+}
+
+const applyFilters = () => {
+  fetchStories()
+}
+
+const goToStoryDetail = (id) => {
+  router.push({ name: 'story-detail', params: { id } })
+}
+
+onMounted(fetchStories)
 </script>
 
 <style scoped>
@@ -94,7 +149,6 @@ const goToStoryDetail = () => {
   padding: 0;
 }
 
-/* Filters */
 .filters-header {
   margin-bottom: var(--wf-spacing-lg);
 }
@@ -137,14 +191,29 @@ const goToStoryDetail = () => {
   margin-bottom: var(--wf-spacing-lg);
 }
 
-/* Chronicles List */
+.loading-text {
+  text-align: center;
+  padding: var(--wf-spacing-lg);
+  font-weight: bold;
+  color: var(--wf-text);
+  border: 2px dashed var(--wf-border);
+}
+
+.error-message {
+  text-align: center;
+  padding: var(--wf-spacing-lg);
+  font-weight: bold;
+  color: #d32f2f;
+  background: #fce4ec;
+  border: 1px solid #d32f2f;
+}
+
 .chronicles-list {
   display: flex;
   flex-direction: column;
   gap: var(--wf-spacing-lg);
 }
 
-/* Card */
 .chronicle-card {
   padding: 0;
   display: flex;
@@ -159,7 +228,6 @@ const goToStoryDetail = () => {
   transform: translate(-2px, -2px);
 }
 
-/* Top bar of the card */
 .card-top-bar {
   background: var(--wf-button-bg);
   border-bottom: 2px solid var(--wf-border);
@@ -168,12 +236,15 @@ const goToStoryDetail = () => {
 }
 
 .card-top-bar-inner {
-  width: 150px;
-  height: 16px;
-  background: var(--wf-placeholder);
+  font-weight: bold;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-/* Body of the card */
 .card-body {
   display: flex;
   gap: var(--wf-spacing-lg);
@@ -193,6 +264,13 @@ const goToStoryDetail = () => {
   flex-shrink: 0;
   text-transform: uppercase;
   letter-spacing: 2px;
+  overflow: hidden;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .card-content {
@@ -204,40 +282,30 @@ const goToStoryDetail = () => {
 .card-meta {
   font-weight: bold;
   color: var(--wf-text);
-  margin-bottom: var(--wf-spacing-lg);
+  margin-bottom: var(--wf-spacing-md);
   font-size: 1.1rem;
 }
 
-.placeholder-lines {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: auto;
-}
-
-.placeholder-line {
-  height: 12px;
-  background: var(--wf-placeholder);
-  width: 100%;
-}
-
-.placeholder-line.short {
-  width: 85%;
+.card-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--wf-text);
+  margin: 0 0 var(--wf-spacing-md);
+  text-align: justify;
 }
 
 .card-actions {
   display: flex;
   justify-content: flex-end;
-  margin-top: var(--wf-spacing-md);
+  margin-top: auto;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .card-body {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .card-image-box {
     width: 100%;
     max-width: 300px;

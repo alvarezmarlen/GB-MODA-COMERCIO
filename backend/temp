@@ -1,3 +1,15 @@
 /backend$ python -m run
 /backend$ python -m pytest
 /backend$ python -m app.init_db
+
+
+
+ 
+Arranca el backend en una terminal:
+cd backend
+source myenv/bin/activate
+python run.py
+2. 
+Arranca el frontend en otra terminal:
+cd frontend
+npm run dev

@@ -170,7 +170,7 @@ const onFormSubmit = async () => {
       images: imageUrls.length > 0 ? imageUrls : []
     })
 
-    router.push('/story-detail')
+    router.push({ name: 'story-detail', params: { id: created.id } })
   } catch (err) {
     submitError.value = err.message
   } finally {

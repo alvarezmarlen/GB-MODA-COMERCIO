@@ -7,15 +7,17 @@
     </header>
 
     <main class="template-content">
-      <div class="wireframe-container story-card">
-        <!-- Title Box -->
+      <div v-if="loading" class="loading-text">Cargando historia...</div>
+
+      <div v-else-if="!storyToShow" class="loading-text">Historia no encontrada.</div>
+
+      <div v-else class="wireframe-container story-card">
         <div class="story-title-box">
           <h2>{{ storyToShow.title }}</h2>
         </div>
 
         <hr class="wf-divider" />
 
-        <!-- Image Gallery (1 or 2 Images) -->
         <div class="story-images-container" :class="{ 'double-images': storyToShow.images.length === 2 }">
           <template v-if="storyToShow.images.length > 0">
             <div
@@ -23,10 +25,9 @@
               :key="idx"
               class="story-image-wrapper"
             >
-              <img :src="img" alt="Imagen de la historia" class="story-image" />
+              <img :src="img.url || img" :alt="'Imagen de la historia'" class="story-image" />
             </div>
           </template>
-          <!-- Placeholder Wireframe Box if no image is uploaded -->
           <template v-else>
             <div class="story-image-placeholder">
               <span class="placeholder-icon"></span>
@@ -35,16 +36,16 @@
           </template>
         </div>
 
-        <!-- Metadata Section -->
         <div class="story-meta">
           <span class="meta-item"><strong>Oficio:</strong> {{ professionLabel }}</span>
           <span class="meta-separator">│</span>
           <span class="meta-item"><strong>Edad:</strong> {{ ageRangeLabel }}</span>
+          <span class="meta-separator">│</span>
+          <span class="meta-item"><strong>País:</strong> {{ storyToShow.originCountry || storyToShow.origin_country }}</span>
         </div>
 
         <hr class="wf-divider" />
 
-        <!-- Description Paragraphs -->
         <div class="story-description">
           <p v-for="(paragraph, index) in formattedDescription" :key="index">
             {{ paragraph }}
@@ -56,21 +57,22 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, computed, onMounted } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { useStoryStore } from '../composables/useStoryStore'
+import { getStoryById } from '../api/stories'
 
 const router = useRouter()
-const { currentStory } = useStoryStore()
+const route = useRoute()
+const { currentStory, setStory } = useStoryStore()
 
-// We read directly from currentStory, which can be populated by the form or loaded from a database/API.
-const storyToShow = computed(() => currentStory)
+const loading = ref(false)
+const storyToShow = ref(null)
 
 const goBack = () => {
   router.push('/')
 }
 
-// Translations for user-friendly display
 const professionLabel = computed(() => {
   const mapping = {
     casa: 'Casa',
@@ -79,7 +81,7 @@ const professionLabel = computed(() => {
     limpieza: 'Limpieza',
     otro: 'Otro'
   }
-  return mapping[storyToShow.value.profession] || 'No especificado'
+  return mapping[storyToShow.value?.profession] || 'No especificado'
 })
 
 const ageRangeLabel = computed(() => {
@@ -91,12 +93,42 @@ const ageRangeLabel = computed(() => {
     '46_60': '46 - 60 años',
     over_60: 'Más de 60 años'
   }
-  return mapping[storyToShow.value.ageRange] || 'No especificada'
+  return mapping[storyToShow.value?.ageRange || storyToShow.value?.age_range] || 'No especificada'
 })
 
 const formattedDescription = computed(() => {
-  if (!storyToShow.value.description) return []
-  return storyToShow.value.description.split('\n\n').filter(p => p.trim() !== '')
+  if (!storyToShow.value?.description && !storyToShow.value?.content) return []
+  const text = storyToShow.value.description || storyToShow.value.content
+  return text.split('\n\n').filter(p => p.trim() !== '')
+})
+
+const loadStory = async (id) => {
+  loading.value = true
+  try {
+    if (currentStory.id == id) {
+      storyToShow.value = currentStory
+    } else {
+      const data = await getStoryById(id)
+      setStory({
+        id: data.id,
+        title: data.title,
+        profession: data.profession,
+        ageRange: data.age_range,
+        description: data.content,
+        images: data.images || []
+      })
+      storyToShow.value = currentStory
+    }
+  } catch {
+    storyToShow.value = null
+  } finally {
+    loading.value = false
+  }
+}
+
+onMounted(() => {
+  const id = Number(route.params.id)
+  if (id) loadStory(id)
 })
 </script>
 
@@ -116,6 +148,14 @@ const formattedDescription = computed(() => {
 .back-button {
   text-decoration: none;
   font-weight: bold;
+}
+
+.loading-text {
+  text-align: center;
+  padding: var(--wf-spacing-lg);
+  font-weight: bold;
+  color: var(--wf-text);
+  border: 2px dashed var(--wf-border);
 }
 
 .story-card {
@@ -145,7 +185,6 @@ const formattedDescription = computed(() => {
   margin: var(--wf-spacing-sm) 0;
 }
 
-/* Image grid logic for 1 or 2 images */
 .story-images-container {
   display: grid;
   grid-template-columns: 1fr;
@@ -174,7 +213,6 @@ const formattedDescription = computed(() => {
   display: block;
 }
 
-/* Wireframe placeholder styles */
 .story-image-placeholder {
   border: 1px dashed var(--wf-border);
   padding: 4rem 2rem;
@@ -188,7 +226,6 @@ const formattedDescription = computed(() => {
   margin-bottom: var(--wf-spacing-sm);
 }
 
-/* Metadata row styling */
 .story-meta {
   display: flex;
   justify-content: flex-start;
@@ -203,7 +240,6 @@ const formattedDescription = computed(() => {
   font-weight: bold;
 }
 
-/* Description formatting */
 .story-description {
   font-size: 1rem;
   line-height: 1.7;
@@ -214,7 +250,6 @@ const formattedDescription = computed(() => {
   text-align: justify;
 }
 
-/* Responsive adjustments */
 @media (max-width: 600px) {
   .story-images-container.double-images {
     grid-template-columns: 1fr;

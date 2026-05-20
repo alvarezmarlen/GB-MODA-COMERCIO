@@ -27,7 +27,7 @@ const routes = [
     component: CreateStoryView
   },
   {
-    path: '/story-detail',
+    path: '/story-detail/:id',
     name: 'story-detail',
     component: StoryDetailView
   }

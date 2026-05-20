@@ -1,6 +1,7 @@
 import { reactive } from 'vue'
 
 const currentStory = reactive({
+  id: null,
   title: '',
   countryOrigin: '',
   profession: '',
