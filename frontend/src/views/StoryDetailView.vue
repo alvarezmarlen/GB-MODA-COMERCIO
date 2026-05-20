@@ -66,10 +66,12 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { useStoryStore } from '../composables/useStoryStore'
 import { getStoryById, deleteStory } from '../api/stories'
 
 const router = useRouter()
 const route = useRoute()
+const { currentStory, setStory } = useStoryStore()
 
 const loading = ref(false)
 const storyToShow = ref(null)
@@ -112,7 +114,21 @@ const formattedDescription = computed(() => {
 const loadStory = async (id) => {
   loading.value = true
   try {
-    storyToShow.value = await getStoryById(id)
+    if (currentStory.id == id) {
+      storyToShow.value = currentStory
+    } else {
+      const data = await getStoryById(id)
+      setStory({
+        id: data.id,
+        title: data.title,
+        profession: data.profession,
+        age: data.age,
+        origin_country: data.origin_country,
+        content: data.content,
+        images: data.images || []
+      })
+      storyToShow.value = currentStory
+    }
   } catch {
     storyToShow.value = null
   } finally {
