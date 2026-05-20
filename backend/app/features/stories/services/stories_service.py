@@ -28,13 +28,21 @@ def create_story(data):
 
 
 def get_all_stories():
-    """Retrieve all stories from the database.
+    """Retrieve all stories from the database including their images.
 
     Returns:
         list[dict]: A list of all stories serialized as dictionaries.
     """
     stories = Story.query.all()
-    return [story.to_dict() for story in stories]
+    result = []
+    for story in stories:
+        data = story.to_dict()
+        data['images'] = [
+            {"id": img.id, "image_url": img.image_url}
+            for img in story.images
+        ]
+        result.append(data)
+    return result
 
 
 def get_stories_filtered(origin_country=None, profession=None, age_range=None):

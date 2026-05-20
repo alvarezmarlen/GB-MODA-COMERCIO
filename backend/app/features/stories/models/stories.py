@@ -20,3 +20,6 @@ class Story(db.Model, BaseMixin, TimestampMixin):
     age_range = db.Column(db.String(50), nullable=False)
 
     user = db.relationship('User', backref='stories')
+    
+    # AÑADI PARA QUE SE RELACIONEN LAS IMAGENES CON LA STORIE:
+    images = db.relationship('StoryImage', backref='story', lazy=True)

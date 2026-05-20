@@ -6,7 +6,7 @@ from app.core.extensions import db
 # Importaciones de los Blueprints (Rutas)
 from app.features.users.routes.users_routes import users_bp
 from app.features.stories.routes.stories_routes import stories_bp
-from app.features.story_images.routes import story_images_bp
+from app.features.story_images.routes.story_images_routes import story_images_bp
 
 
 def create_app():
