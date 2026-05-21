@@ -38,7 +38,10 @@
         <div v-for="story in userStories" :key="story.id" class="user-story-card">
           <div class="story-card-top-bar"><div class="top-bar-inner"></div></div>
           <div class="story-card-body">
-            <div class="story-card-image-box"><span>Imagen</span></div>
+            <div v-if="story.images && story.images.length > 0" class="story-card-image-box">
+              <img :src="story.images[0].url" :alt="story.title" class="story-card-image" />
+            </div>
+            <div v-else class="story-card-image-box"><span>Sin imagen</span></div>
             <div class="story-card-content">
               <h3 class="story-card-title">{{ story.title }}</h3>
               <div class="story-card-meta">Oficio: {{ getProfLabel(story.profession) }} &nbsp;|&nbsp; Edad: {{ getAgeLabel(story.age_range) }}</div>
@@ -126,7 +129,8 @@ const getAgeLabel = (k) => ({ under_18:'<18', '18_25':'18-25', '26_35':'26-35', 
 .story-card-top-bar { background:var(--wf-button-bg); border-bottom:2px solid var(--wf-border); padding:6px 16px; }
 .top-bar-inner { width:120px; height:12px; background:var(--wf-placeholder); }
 .story-card-body { display:flex; gap:var(--wf-spacing-md); padding:var(--wf-spacing-md); }
-.story-card-image-box { width:120px; height:120px; background:var(--wf-button-bg); display:flex; justify-content:center; align-items:center; font-weight:bold; border:2px solid var(--wf-border); flex-shrink:0; text-transform:uppercase; letter-spacing:1px; font-size:0.8rem; }
+.story-card-image-box { width:120px; height:120px; background:var(--wf-button-bg); display:flex; justify-content:center; align-items:center; font-weight:bold; border:2px solid var(--wf-border); flex-shrink:0; text-transform:uppercase; letter-spacing:1px; font-size:0.8rem; overflow:hidden; }
+.story-card-image { width:100%; height:100%; object-fit:cover; }
 .story-card-content { flex:1; display:flex; flex-direction:column; gap:var(--wf-spacing-sm); }
 .story-card-title { font-size:1rem; text-transform:uppercase; letter-spacing:1px; margin:0; }
 .story-card-meta { font-size:0.85rem; font-weight:bold; }

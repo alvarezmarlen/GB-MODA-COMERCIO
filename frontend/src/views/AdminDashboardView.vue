@@ -25,7 +25,10 @@
             <span class="admin-card-id">#{{ story.id }}</span>
           </div>
           <div class="admin-card-body">
-            <div class="admin-card-image-box"><span>Imagen</span></div>
+            <div v-if="story.images && story.images.length > 0" class="admin-card-image-box">
+              <img :src="story.images[0].url" :alt="story.title" class="admin-card-image" />
+            </div>
+            <div v-else class="admin-card-image-box"><span>Sin imagen</span></div>
             <div class="admin-card-content">
               <h3 class="admin-card-title">{{ story.title }}</h3>
               <div class="admin-card-meta">
@@ -167,7 +170,8 @@ const getAgeLabel = (k) => ({ under_18:'<18', '18_25':'18-25', '26_35':'26-35', 
 .admin-card-id { letter-spacing:1px; }
 .admin-card-author { font-weight:normal; font-style:italic; }
 .admin-card-body { display:flex; gap:var(--wf-spacing-md); padding:var(--wf-spacing-md); }
-.admin-card-image-box { width:120px; height:120px; background:var(--wf-button-bg); display:flex; justify-content:center; align-items:center; font-weight:bold; border:2px solid var(--wf-border); flex-shrink:0; text-transform:uppercase; letter-spacing:1px; font-size:0.8rem; }
+.admin-card-image-box { width:120px; height:120px; background:var(--wf-button-bg); display:flex; justify-content:center; align-items:center; font-weight:bold; border:2px solid var(--wf-border); flex-shrink:0; text-transform:uppercase; letter-spacing:1px; font-size:0.8rem; overflow:hidden; }
+.admin-card-image { width:100%; height:100%; object-fit:cover; }
 .admin-card-content { flex:1; display:flex; flex-direction:column; gap:var(--wf-spacing-sm); }
 .admin-card-title { font-size:1rem; text-transform:uppercase; letter-spacing:1px; margin:0; }
 .admin-card-meta { font-size:0.85rem; font-weight:bold; }
