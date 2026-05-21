@@ -34,7 +34,7 @@ class StoryUpdateSchema(Schema):
 class StoryFilterSchema(Schema):
     """Schema for validating story filter query params (GET /stories)."""
 
-    user_id = fields.Integer(strict=True)
+    user_id = fields.Integer()
     origin_country = fields.String(validate=validate.Length(min=1, max=100))
     profession = fields.String(validate=validate.Length(min=1, max=100))
     age_range = fields.String(validate=validate.Length(min=1, max=50))

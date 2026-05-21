@@ -34,6 +34,7 @@
         <h2 class="section-title">MIS HISTORIAS</h2>
         <span class="story-count">{{ userStories.length }} historia(s)</span>
       </div>
+      <div v-if="errorMessage" class="error-banner">{{ errorMessage }}</div>
       <div v-if="userStories.length > 0" class="user-stories-list">
         <div v-for="story in userStories" :key="story.id" class="user-story-card">
           <div class="story-card-top-bar"><div class="top-bar-inner"></div></div>
@@ -77,11 +78,13 @@ const editData = reactive({ username: '', email: '', password: '' })
 
 const userStories = ref([])
 const loading = ref(true)
+const errorMessage = ref('')
 
 onMounted(async () => {
   try {
     userStories.value = await getStories({ user_id: user.value.id })
-  } catch {
+  } catch (err) {
+    errorMessage.value = err.message || 'Error al cargar las historias'
     userStories.value = []
   } finally {
     loading.value = false
@@ -129,6 +132,7 @@ const getAgeLabel = (k) => ({ under_18:'<18', '18_25':'18-25', '26_35':'26-35', 
 .save-btn { background:var(--wf-border); color:var(--wf-bg); }
 .save-btn:hover { background:#333; }
 .story-count { font-size:0.85rem; border:1px dashed var(--wf-border); padding:4px 10px; border-radius:var(--wf-radius); }
+.error-banner { background:#ffe0e0; border:2px solid #d00; color:#a00; padding:var(--wf-spacing-md); margin-bottom:var(--wf-spacing-md); font-weight:bold; text-align:center; }
 .user-stories-list { display:flex; flex-direction:column; gap:var(--wf-spacing-md); }
 .user-story-card { border:2px solid var(--wf-border); background:var(--wf-bg); display:flex; flex-direction:column; transition:all 0.3s ease; }
 .user-story-card:hover { box-shadow:4px 4px 0px var(--wf-border); transform:translate(-2px,-2px); }
