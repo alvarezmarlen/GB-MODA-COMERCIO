@@ -66,6 +66,7 @@ import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../composables/useAuthStore'
 import { getStories } from '../api/stories'
+import { updateUser as apiUpdateUser } from '../api/users'
 import DashboardTemplate from '../components/templates/DashboardTemplate.vue'
 
 const router = useRouter()
@@ -96,14 +97,19 @@ const toggleEditMode = () => {
   isEditing.value = !isEditing.value
 }
 
-const saveChanges = () => {
-  const updates = {}
-  if (editData.username) updates.username = editData.username
-  if (editData.email) updates.email = editData.email
-  if (editData.password) updates.password = editData.password
-  updateUser(updates)
-  isEditing.value = false
-  alert('Datos actualizados con éxito')
+const saveChanges = async () => {
+  const payload = {}
+  if (editData.username) payload.nombre_usuario = editData.username
+  if (editData.email) payload.email = editData.email
+  if (editData.password) payload.password = editData.password
+  try {
+    const updated = await apiUpdateUser(user.value.id, payload)
+    updateUser({ username: updated.username, email: updated.email })
+    isEditing.value = false
+    alert('Datos actualizados con éxito')
+  } catch {
+    alert('Error al actualizar los datos')
+  }
 }
 
 const goToDetail = (id) => router.push({ name: 'story-detail', params: { id } })
