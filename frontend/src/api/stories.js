@@ -12,7 +12,7 @@ async function parseJson(res) {
 export async function getStories(filters = {}) {
   const params = new URLSearchParams()
   if (filters.profession) params.append('profession', filters.profession)
-  if (filters.age) params.append('age', filters.age)
+  if (filters.age_range) params.append('age_range', filters.age_range)
   if (filters.origin_country) params.append('origin_country', filters.origin_country)
   const query = params.toString()
   const res = await fetch(`/stories${query ? '?' + query : ''}`)
@@ -55,17 +55,6 @@ export async function uploadStoryImage(storyId, file) {
   if (!res.ok) {
     const err = await parseJson(res)
     throw new Error(err.error || 'Error al subir imagen')
-  }
-  return parseJson(res)
-}
-
-export async function deleteStory(id) {
-  const res = await fetch(`/stories/${id}`, {
-    method: 'DELETE'
-  })
-  if (!res.ok) {
-    const err = await parseJson(res)
-    throw new Error(err.error || 'Error al eliminar la historia')
   }
   return parseJson(res)
 }

@@ -6,7 +6,7 @@ VALID_DATA = {
     'content': 'Contenido de prueba para la historia.',
     'origin_country': 'Colombia',
     'profession': 'Diseñador',
-    'age': 35,
+    'age_range': '30-40',
 }
 
 
@@ -163,15 +163,15 @@ class TestStoriesRoutes:
         assert all(s['profession'] == 'Diseñador' for s in stories)
         assert len(stories) == 1
 
-    def test_get_stories_filter_by_age(self, client, test_user):
+    def test_get_stories_filter_by_age_range(self, client, test_user):
         data = {**VALID_DATA, 'user_id': test_user}
         client.post('/stories', json=data)
-        data2 = {**VALID_DATA, 'user_id': test_user, 'age': 50}
+        data2 = {**VALID_DATA, 'user_id': test_user, 'age_range': '50-60'}
         client.post('/stories', json=data2)
-        response = client.get('/stories?age=35')
+        response = client.get('/stories?age_range=30-40')
         assert response.status_code == 200
         stories = response.get_json()
-        assert all(s['age'] == 35 for s in stories)
+        assert all(s['age_range'] == '30-40' for s in stories)
         assert len(stories) == 1
 
     def test_get_stories_filter_by_multiple_params(self, client, test_user):

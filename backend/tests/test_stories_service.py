@@ -10,7 +10,7 @@ VALID_DATA = {
     'content': 'Este es el contenido de la historia para pruebas.',
     'origin_country': 'México',
     'profession': 'Ingeniero de Software',
-    'age': 30,
+    'age_range': '25-35',
 }
 
 
@@ -23,7 +23,7 @@ class TestStoriesService:
         assert result['content'] == VALID_DATA['content']
         assert result['origin_country'] == VALID_DATA['origin_country']
         assert result['profession'] == VALID_DATA['profession']
-        assert result['age'] == VALID_DATA['age']
+        assert result['age_range'] == VALID_DATA['age_range']
         assert result['user_id'] == test_user
         assert 'id' in result
         assert 'created_at' in result

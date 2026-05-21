@@ -8,26 +8,26 @@
     </FormGroup>
 
     <FormGroup label="Profesión">
-      <BaseInput
+      <BaseSelect
         v-model="formData.profession"
-        placeholder="Escribe el oficio..."
+        :options="professionOptions"
+        placeholder="▼ Seleccionar profesión"
       />
     </FormGroup>
 
     <FormGroup label="Edad">
-      <BaseInput
-        v-model="formData.age"
-        type="number"
-        min="0"
-        max="150"
-        placeholder="Escribe tu edad..."
+      <BaseSelect
+        v-model="formData.ageRange"
+        :options="ageOptions"
+        placeholder="▼ Seleccionar rango de edad"
       />
     </FormGroup>
 
     <FormGroup label="País de origen">
-      <BaseInput
+      <BaseSelect
         v-model="formData.originCountry"
-        placeholder="Escribe el país de origen..."
+        :options="countryOptions"
+        placeholder="▼ Seleccionar país"
       />
     </FormGroup>
 
@@ -80,10 +80,42 @@ const uploadedFiles = ref([])
 const isSubmitting = ref(false)
 const submitError = ref('')
 
+const professionOptions = [
+  { label: 'Casa', value: 'casa' },
+  { label: 'Campo', value: 'campo' },
+  { label: 'Industria', value: 'industria' },
+  { label: 'Limpieza', value: 'limpieza' },
+  { label: 'Otro', value: 'otro' }
+]
+
+const countryOptions = [
+  { label: 'Brasil', value: 'Brasil' },
+  { label: 'Portugal', value: 'Portugal' },
+  { label: 'España', value: 'España' },
+  { label: 'Argentina', value: 'Argentina' },
+  { label: 'México', value: 'México' },
+  { label: 'Colombia', value: 'Colombia' },
+  { label: 'Chile', value: 'Chile' },
+  { label: 'Perú', value: 'Perú' },
+  { label: 'Venezuela', value: 'Venezuela' },
+  { label: 'Uruguay', value: 'Uruguay' },
+  { label: 'Paraguay', value: 'Paraguay' },
+  { label: 'Otro', value: 'Otro' }
+]
+
+const ageOptions = [
+  { label: 'Menor de 18', value: 'under_18' },
+  { label: '18 - 25 años', value: '18_25' },
+  { label: '26 - 35 años', value: '26_35' },
+  { label: '36 - 45 años', value: '36_45' },
+  { label: '46 - 60 años', value: '46_60' },
+  { label: 'Más de 60', value: 'over_60' }
+]
+
 const { formData } = useForm({
   title: '',
   profession: '',
-  age: '',
+  ageRange: '',
   originCountry: '',
   description: '',
   acceptedTerms: false
@@ -97,7 +129,7 @@ const isFormValid = computed(() => {
   return (
     formData.title.trim().length > 0 &&
     formData.profession !== '' &&
-    formData.age !== '' && Number.isInteger(Number(formData.age)) && Number(formData.age) >= 0 &&
+    formData.ageRange !== '' &&
     formData.originCountry !== '' &&
     formData.description.trim().length > 0 &&
     formData.acceptedTerms
@@ -116,7 +148,7 @@ const onFormSubmit = async () => {
       content: data.description,
       origin_country: data.originCountry,
       profession: data.profession,
-      age: parseInt(data.age, 10)
+      age_range: data.ageRange
     }
 
     const created = await createStory(storyData)
@@ -133,7 +165,7 @@ const onFormSubmit = async () => {
       id: created.id,
       title: created.title,
       profession: created.profession,
-      age: created.age,
+      ageRange: created.age_range,
       description: created.content,
       images: imageUrls.length > 0 ? imageUrls : []
     })

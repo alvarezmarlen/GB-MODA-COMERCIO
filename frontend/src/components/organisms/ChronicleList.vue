@@ -5,15 +5,11 @@
       <div class="filters-row">
         <select v-model="filters.profession" class="wireframe-input filter-select" @change="applyFilters">
           <option value="">Oficio (todos)</option>
-          <option v-for="p in professionOptions" :key="p" :value="p">{{ p }}</option>
+          <option v-for="opt in professionOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
         </select>
-        <select v-model="filters.age" class="wireframe-input filter-select" @change="applyFilters">
+        <select v-model="filters.age_range" class="wireframe-input filter-select" @change="applyFilters">
           <option value="">Edad (todas)</option>
-          <option v-for="a in ageOptions" :key="a" :value="a">{{ a }} años</option>
-        </select>
-        <select v-model="filters.origin_country" class="wireframe-input filter-select" @change="applyFilters">
-          <option value="">País (todos)</option>
-          <option v-for="c in countryOptions" :key="c" :value="c">{{ c }}</option>
+          <option v-for="opt in ageOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
         </select>
       </div>
       <div class="elegant-divider"></div>
@@ -48,7 +44,7 @@
           <div class="card-content">
             <div class="card-meta">
               Oficio: {{ professionLabel(story.profession) }} &nbsp;|&nbsp;
-              Edad: {{ story.age }} años &nbsp;|&nbsp;
+              Edad: {{ ageLabel(story.age_range) }} &nbsp;|&nbsp;
               País: {{ story.origin_country }}
             </div>
             <p class="card-text">{{ truncate(story.content, 120) }}</p>
@@ -72,14 +68,27 @@ const router = useRouter()
 const stories = ref([])
 const loading = ref(true)
 const errorMessage = ref('')
-const professionOptions = ref([])
-const ageOptions = ref([])
-const countryOptions = ref([])
 const filters = reactive({
   profession: '',
-  age: '',
-  origin_country: ''
+  age_range: ''
 })
+
+const professionOptions = [
+  { label: 'Casa', value: 'casa' },
+  { label: 'Campo', value: 'campo' },
+  { label: 'Industria', value: 'industria' },
+  { label: 'Limpieza', value: 'limpieza' },
+  { label: 'Otro', value: 'otro' }
+]
+
+const ageOptions = [
+  { label: 'Menor de 18', value: 'under_18' },
+  { label: '18 - 25 años', value: '18_25' },
+  { label: '26 - 35 años', value: '26_35' },
+  { label: '36 - 45 años', value: '36_45' },
+  { label: '46 - 60 años', value: '46_60' },
+  { label: 'Más de 60', value: 'over_60' }
+]
 
 const professionMap = {
   casa: 'Casa',
@@ -89,7 +98,17 @@ const professionMap = {
   otro: 'Otro'
 }
 
+const ageMap = {
+  under_18: 'Menor de 18',
+  '18_25': '18 - 25 años',
+  '26_35': '26 - 35 años',
+  '36_45': '36 - 45 años',
+  '46_60': '46 - 60 años',
+  over_60: 'Más de 60'
+}
+
 const professionLabel = (val) => professionMap[val] || val
+const ageLabel = (val) => ageMap[val] || val
 
 const truncate = (text, max) => {
   if (!text) return ''
@@ -102,17 +121,10 @@ const fetchStories = async () => {
   try {
     const f = {}
     if (filters.profession) f.profession = filters.profession
-    if (filters.age) f.age = filters.age
-    if (filters.origin_country) f.origin_country = filters.origin_country
+    if (filters.age_range) f.age_range = filters.age_range
     stories.value = await getStories(f)
-    professionOptions.value = [...new Set(stories.value.map(s => s.profession).filter(Boolean))].sort()
-    ageOptions.value = [...new Set(stories.value.map(s => s.age).filter(a => a !== null && a !== undefined))].sort((a, b) => a - b)
-    countryOptions.value = [...new Set(stories.value.map(s => s.origin_country).filter(Boolean))].sort()
   } catch (err) {
     stories.value = []
-    professionOptions.value = []
-    ageOptions.value = []
-    countryOptions.value = []
     errorMessage.value = err.message
   } finally {
     loading.value = false

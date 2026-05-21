@@ -4,25 +4,20 @@ const currentStory = reactive({
   id: null,
   title: '',
   countryOrigin: '',
-  origin_country: '',
   profession: '',
-  age: null,
+  ageRange: '',
   description: '',
-  content: '',
   images: []
 })
 
 export function useStoryStore() {
   const setStory = (storyData) => {
     Object.assign(currentStory, {
-      id: storyData.id !== undefined ? storyData.id : null,
       title: storyData.title || '',
-      countryOrigin: storyData.countryOrigin || storyData.origin_country || '',
-      origin_country: storyData.origin_country || storyData.countryOrigin || '',
+      countryOrigin: storyData.countryOrigin || '',
       profession: storyData.profession || '',
-      age: storyData.age || null,
+      ageRange: storyData.ageRange || '',
       description: storyData.description || '',
-      content: storyData.content || storyData.description || '',
       images: storyData.images || []
     })
   }

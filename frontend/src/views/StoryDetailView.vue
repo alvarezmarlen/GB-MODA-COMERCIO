@@ -1,17 +1,10 @@
 <template>
   <div class="story-detail-template">
-<header class="template-header">
-  <button class="wireframe-button back-button" @click="goBack">
-    ← Volver
-  </button>
-  <button 
-    class="wireframe-button delete-button" 
-    @click="deleteStoryHandler"
-    :disabled="loading"
-  >
-    Eliminar Historia
-  </button>
-</header>
+    <header class="template-header">
+      <button class="wireframe-button back-button" @click="goBack">
+        ← Volver
+      </button>
+    </header>
 
     <main class="template-content">
       <div v-if="loading" class="loading-text">Cargando historia...</div>
@@ -46,9 +39,9 @@
         <div class="story-meta">
           <span class="meta-item"><strong>Oficio:</strong> {{ professionLabel }}</span>
           <span class="meta-separator">│</span>
-          <span class="meta-item"><strong>Edad:</strong> {{ storyToShow.age }} años</span>
+          <span class="meta-item"><strong>Edad:</strong> {{ ageRangeLabel }}</span>
           <span class="meta-separator">│</span>
-          <span class="meta-item"><strong>País:</strong> {{ storyToShow.origin_country }}</span>
+          <span class="meta-item"><strong>País:</strong> {{ storyToShow.originCountry || storyToShow.origin_country }}</span>
         </div>
 
         <hr class="wf-divider" />
@@ -67,7 +60,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useStoryStore } from '../composables/useStoryStore'
-import { getStoryById, deleteStory } from '../api/stories'
+import { getStoryById } from '../api/stories'
 
 const router = useRouter()
 const route = useRoute()
@@ -80,35 +73,33 @@ const goBack = () => {
   router.push('/')
 }
 
-const deleteStoryHandler = async () => {
-  if (!storyToShow.value) return
-  
-  if (window.confirm('¿Estás seguro de que quieres eliminar esta historia?')) {
-    try {
-      await deleteStory(storyToShow.value.id)
-      // Redirigir a la página principal después de eliminar
-      router.push('/')
-    } catch (error) {
-      alert('Error al eliminar la historia: ' + error.message)
-    }
-  }
-}
-
-const professionMap = {
-  casa: 'Casa',
-  campo: 'Campo',
-  industria: 'Industria',
-  limpieza: 'Limpieza',
-  otro: 'Otro'
-}
-
 const professionLabel = computed(() => {
-  return professionMap[storyToShow.value?.profession] || storyToShow.value?.profession || ''
+  const mapping = {
+    casa: 'Casa',
+    campo: 'Campo',
+    industria: 'Industria',
+    limpieza: 'Limpieza',
+    otro: 'Otro'
+  }
+  return mapping[storyToShow.value?.profession] || 'No especificado'
+})
+
+const ageRangeLabel = computed(() => {
+  const mapping = {
+    under_18: 'Menor de 18 años',
+    '18_25': '18 - 25 años',
+    '26_35': '26 - 35 años',
+    '36_45': '36 - 45 años',
+    '46_60': '46 - 60 años',
+    over_60: 'Más de 60 años'
+  }
+  return mapping[storyToShow.value?.ageRange || storyToShow.value?.age_range] || 'No especificada'
 })
 
 const formattedDescription = computed(() => {
-  if (!storyToShow.value?.content) return []
-  return storyToShow.value.content.split('\n\n').filter(p => p.trim() !== '')
+  if (!storyToShow.value?.description && !storyToShow.value?.content) return []
+  const text = storyToShow.value.description || storyToShow.value.content
+  return text.split('\n\n').filter(p => p.trim() !== '')
 })
 
 const loadStory = async (id) => {
@@ -122,9 +113,8 @@ const loadStory = async (id) => {
         id: data.id,
         title: data.title,
         profession: data.profession,
-        age: data.age,
-        origin_country: data.origin_country,
-        content: data.content,
+        ageRange: data.age_range,
+        description: data.content,
         images: data.images || []
       })
       storyToShow.value = currentStory
@@ -158,21 +148,6 @@ onMounted(() => {
 .back-button {
   text-decoration: none;
   font-weight: bold;
-}
-
-.delete-button {
-  background: var(--wf-error-bg);
-  color: var(--wf-text-invert);
-  margin-left: var(--wf-spacing-sm);
-}
-
-.delete-button:hover {
-  background: var(--wf-error-bg-hover);
-}
-
-.delete-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
 }
 
 .loading-text {
