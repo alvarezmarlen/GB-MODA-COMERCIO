@@ -4,6 +4,7 @@ import RegisterPage from '../views/RegisterPage.vue'
 import CreateStoryView from '../views/CreateStoryView.vue'
 import StoryDetailView from '../views/StoryDetailView.vue'
 import HomeView from '../views/HomeView.vue'
+import { useAuthStore } from '../composables/useAuthStore'
 
 const routes = [
   {
@@ -36,6 +37,17 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore()
+  
+  // Si la ruta requiere autenticación y el usuario no tiene token...
+  if (to.meta.requiresAuth && !authStore.token) {
+    next('/login') // Redirige al login
+  } else {
+    next() // Permite la navegación
+  }
 })
 
 export default router

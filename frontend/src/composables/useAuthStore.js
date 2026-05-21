@@ -1,32 +1,63 @@
-import { reactive, computed } from 'vue'
+import { ref } from 'vue'
 
-const state = reactive({
-  user: {
-    id: 1,
-    username: 'Juan Pérez',
-    email: 'juan.perez@example.com'
-  },
-  isAuthenticated: true
-})
+// Estado global (en la memoria de la app)
+const token = ref(localStorage.getItem('user_token') || null)
+const user = ref(JSON.parse(localStorage.getItem('user_data')) || null)
+const error = ref(null)
+const loading = ref(false)
 
 export function useAuthStore() {
-  const user = computed(() => state.user)
-  const isAuthenticated = computed(() => state.isAuthenticated)
+    
+    const login = async (email, password) => {
+        loading.value = true
+        error.value = null
+        
+        try {
+            // Apuntamos al puerto 5001 que configuramos en Docker Compose
+            const response = await fetch('http://127.0.0.1:5001/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            })
 
-  const login = (username) => {
-    state.user.username = username || 'Juan Pérez'
-    state.isAuthenticated = true
-  }
+            const data = await response.json()
 
-  const logout = () => {
-    state.user.username = ''
-    state.isAuthenticated = false
-  }
+            if (!response.ok) {
+                throw new Error(data.message || 'Error al iniciar sesión')
+            }
 
-  return {
-    user,
-    isAuthenticated,
-    login,
-    logout
-  }
+            // 1. Guardar en las variables reactivas de Vue
+            token.value = data.token
+            user.value = data.user
+
+            // 2. Persistir en el navegador (para que no se desloguee al refrescar)
+            localStorage.setItem('user_token', data.token)
+            localStorage.setItem('user_data', JSON.stringify(data.user))
+
+            return true // Login exitoso
+        } catch (err) {
+            error.value = err.message
+            return false // Login fallido
+        } finally {
+            loading.value = false
+        }
+    }
+
+    const logout = () => {
+        token.value = null
+        user.value = null
+        localStorage.removeItem('user_token')
+        localStorage.removeItem('user_data')
+    }
+
+    return {
+        token,
+        user,
+        error,
+        loading,
+        login,
+        logout
+    }
 }
