@@ -1,8 +1,12 @@
 from flask import Flask, send_from_directory
 from flask_cors import CORS
+from flask_jwt_extended import JWTManager
 from app import db
 from app.features.users.routes.users_routes import users_bp
 from app.features.stories.routes.stories_routes import stories_bp
+from app.features.auth.routes.auth_routes import auth_bp
+from app.features.auth.models.token_blacklist import TokenBlacklist
+from app.core.jwt_handlers import setup_jwt_handlers
 
 
 def create_app():
@@ -11,8 +15,12 @@ def create_app():
     app.config.from_object('app.core.config.Config')
     db.init_app(app)
 
+    jwt = JWTManager(app)
+    setup_jwt_handlers(jwt)
+
     app.register_blueprint(users_bp)
     app.register_blueprint(stories_bp)
+    app.register_blueprint(auth_bp)
 
     @app.route('/')
     def home():
@@ -27,3 +35,5 @@ def create_app():
         return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
     return app
+
+#
