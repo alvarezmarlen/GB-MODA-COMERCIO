@@ -1,10 +1,17 @@
 <template>
   <div class="story-detail-template">
-    <header class="template-header">
-      <button class="wireframe-button back-button" @click="goBack">
-        ← Volver
-      </button>
-    </header>
+<header class="template-header">
+  <button class="wireframe-button back-button" @click="goBack">
+    ← Volver
+  </button>
+  <button 
+    class="wireframe-button delete-button" 
+    @click="deleteStoryHandler"
+    :disabled="loading"
+  >
+    Eliminar Historia
+  </button>
+</header>
 
     <main class="template-content">
       <div v-if="loading" class="loading-text">Cargando historia...</div>
@@ -41,7 +48,7 @@
           <span class="meta-separator">│</span>
           <span class="meta-item"><strong>Edad:</strong> {{ storyToShow.age }} años</span>
           <span class="meta-separator">│</span>
-          <span class="meta-item"><strong>País:</strong> {{ storyToShow.originCountry || storyToShow.origin_country }}</span>
+          <span class="meta-item"><strong>País:</strong> {{ storyToShow.origin_country }}</span>
         </div>
 
         <hr class="wf-divider" />
@@ -60,7 +67,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useStoryStore } from '../composables/useStoryStore'
-import { getStoryById } from '../api/stories'
+import { getStoryById, deleteStory } from '../api/stories'
 
 const router = useRouter()
 const route = useRoute()
@@ -73,21 +80,35 @@ const goBack = () => {
   router.push('/')
 }
 
-const professionLabel = computed(() => {
-  const mapping = {
-    casa: 'Casa',
-    campo: 'Campo',
-    industria: 'Industria',
-    limpieza: 'Limpieza',
-    otro: 'Otro'
+const deleteStoryHandler = async () => {
+  if (!storyToShow.value) return
+  
+  if (window.confirm('¿Estás seguro de que quieres eliminar esta historia?')) {
+    try {
+      await deleteStory(storyToShow.value.id)
+      // Redirigir a la página principal después de eliminar
+      router.push('/')
+    } catch (error) {
+      alert('Error al eliminar la historia: ' + error.message)
+    }
   }
-  return mapping[storyToShow.value?.profession] || 'No especificado'
+}
+
+const professionMap = {
+  casa: 'Casa',
+  campo: 'Campo',
+  industria: 'Industria',
+  limpieza: 'Limpieza',
+  otro: 'Otro'
+}
+
+const professionLabel = computed(() => {
+  return professionMap[storyToShow.value?.profession] || storyToShow.value?.profession || ''
 })
 
 const formattedDescription = computed(() => {
-  if (!storyToShow.value?.description && !storyToShow.value?.content) return []
-  const text = storyToShow.value.description || storyToShow.value.content
-  return text.split('\n\n').filter(p => p.trim() !== '')
+  if (!storyToShow.value?.content) return []
+  return storyToShow.value.content.split('\n\n').filter(p => p.trim() !== '')
 })
 
 const loadStory = async (id) => {
@@ -102,7 +123,8 @@ const loadStory = async (id) => {
         title: data.title,
         profession: data.profession,
         age: data.age,
-        description: data.content,
+        origin_country: data.origin_country,
+        content: data.content,
         images: data.images || []
       })
       storyToShow.value = currentStory
@@ -136,6 +158,21 @@ onMounted(() => {
 .back-button {
   text-decoration: none;
   font-weight: bold;
+}
+
+.delete-button {
+  background: var(--wf-error-bg);
+  color: var(--wf-text-invert);
+  margin-left: var(--wf-spacing-sm);
+}
+
+.delete-button:hover {
+  background: var(--wf-error-bg-hover);
+}
+
+.delete-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .loading-text {

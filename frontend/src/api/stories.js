@@ -58,3 +58,14 @@ export async function uploadStoryImage(storyId, file) {
   }
   return parseJson(res)
 }
+
+export async function deleteStory(id) {
+  const res = await fetch(`/stories/${id}`, {
+    method: 'DELETE'
+  })
+  if (!res.ok) {
+    const err = await parseJson(res)
+    throw new Error(err.error || 'Error al eliminar la historia')
+  }
+  return parseJson(res)
+}
