@@ -7,27 +7,27 @@
       />
     </FormGroup>
 
-    <FormGroup label="País de origen">
+    <FormGroup label="País de origen o continente">
       <BaseSelect
         v-model="formData.countryOrigin"
         :options="countryOptions"
-        placeholder="▼ Seleccionar país"
+        placeholder="▼ Seleccionar país o continente"
       />
     </FormGroup>
 
-    <FormGroup label="Profesión">
+    <FormGroup label="Profesión u oficio">
       <BaseSelect
         v-model="formData.profession"
         :options="professionOptions"
-        placeholder="▼ Seleccionar profesión"
+        placeholder="▼ Seleccionar profesión u oficio"
       />
     </FormGroup>
 
-    <FormGroup label="Edad">
+    <FormGroup label="Año de nacimiento">
       <BaseSelect
-        v-model="formData.ageRange"
-        :options="ageOptions"
-        placeholder="▼ Seleccionar rango de edad"
+        v-model="formData.birthYearRange"
+        :options="DateOfBirthOptions"
+        placeholder="▼ Seleccionar año de nacimiento"
       />
     </FormGroup>
 
@@ -70,6 +70,7 @@ const countryOptions = [
   { label: 'España', value: 'espana' },
   { label: 'Marruecos', value: 'marruecos' },
   { label: 'África', value: 'africa' },
+  { label: 'America Latina', value: 'america_latina' },
   { label: 'Otro', value: 'otro' }
 ]
 
@@ -81,20 +82,20 @@ const professionOptions = [
   { label: 'Otro', value: 'otro' }
 ]
 
-const ageOptions = [
-  { label: 'Menor de 18', value: 'under_18' },
-  { label: '18 - 25 años', value: '18_25' },
-  { label: '26 - 35 años', value: '26_35' },
-  { label: '36 - 45 años', value: '36_45' },
-  { label: '46 - 60 años', value: '46_60' },
-  { label: 'Más de 60', value: 'over_60' }
+const DateOfBirthOptions = [
+  { label: '1930-1950', value: '1930-1950' },
+  { label: '1950-1970', value: '1950-1970' },
+  { label: '1970-1990', value: '1970-1990' },
+  { label: '1990-2000', value: '1990-2000' },
+  { label: '2000-2010', value: '2000-2010' },
+  { label: '2010-2020', value: '2010-2020' },
 ]
 
 const { formData, handleSubmit } = useForm({
   title: '',
   countryOrigin: '',
   profession: '',
-  ageRange: '',
+  birthYearRange: '',
   description: '',
   acceptedTerms: false
 })
