@@ -103,12 +103,14 @@ def get_all_stories_route():
     except ValidationError as err:
         return jsonify({'errors': err.messages}), 422
 
+    user_id = filters.get('user_id')
     origin_country = filters.get('origin_country')
     profession = filters.get('profession')
     age_range = filters.get('age_range')
 
-    if origin_country or profession or age_range:
+    if user_id or origin_country or profession or age_range:
         stories = get_stories_filtered(
+            user_id=user_id,
             origin_country=origin_country,
             profession=profession,
             age_range=age_range

@@ -14,6 +14,7 @@ export async function getStories(filters = {}) {
   if (filters.profession) params.append('profession', filters.profession)
   if (filters.age_range) params.append('age_range', filters.age_range)
   if (filters.origin_country) params.append('origin_country', filters.origin_country)
+  if (filters.user_id) params.append('user_id', filters.user_id)
   const query = params.toString()
   const res = await fetch(`/stories${query ? '?' + query : ''}`)
   if (!res.ok) {

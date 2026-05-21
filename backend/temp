@@ -2,7 +2,7 @@
 /backend$ python -m pytest
 /backend$ python -m app.init_db
 
-
+1
 
  
 Arranca el backend en una terminal:

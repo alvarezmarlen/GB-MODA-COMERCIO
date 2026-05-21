@@ -41,8 +41,9 @@
             <div class="story-card-image-box"><span>Imagen</span></div>
             <div class="story-card-content">
               <h3 class="story-card-title">{{ story.title }}</h3>
-              <div class="story-card-meta">Oficio: {{ getProfLabel(story.profession) }} &nbsp;|&nbsp; Edad: {{ getAgeLabel(story.ageRange) }}</div>
-              <p class="story-card-excerpt">{{ story.description?.substring(0, 100) }}{{ story.description?.length > 100 ? '...' : '' }}</p>
+              <div class="story-card-meta">Oficio: {{ getProfLabel(story.profession) }} &nbsp;|&nbsp; Edad: {{ getAgeLabel(story.age_range) }}</div>
+              <p class="story-card-excerpt">{{ story.content?.substring(0, 100) }}{{ story.content?.length > 100 ? '...' : '' }}</p>
+              <button class="wireframe-button" @click="goToDetail(story.id)">Ver más</button>
             </div>
           </div>
         </div>
@@ -58,17 +59,30 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { useAuthStore } from '../composables/useAuthStore'
-import { useStoryStore } from '../composables/useStoryStore'
+import { getStories } from '../api/stories'
 import DashboardTemplate from '../components/templates/DashboardTemplate.vue'
 
+const router = useRouter()
+
 const { user, updateUser } = useAuthStore()
-const { stories } = useStoryStore()
 const isEditing = ref(false)
 const editData = reactive({ username: '', email: '', password: '' })
 
-const userStories = computed(() => stories.filter(s => s.author === user.value.username))
+const userStories = ref([])
+const loading = ref(true)
+
+onMounted(async () => {
+  try {
+    userStories.value = await getStories({ user_id: user.value.id })
+  } catch {
+    userStories.value = []
+  } finally {
+    loading.value = false
+  }
+})
 
 const toggleEditMode = () => {
   if (!isEditing.value) {
@@ -88,6 +102,8 @@ const saveChanges = () => {
   isEditing.value = false
   alert('Datos actualizados con éxito')
 }
+
+const goToDetail = (id) => router.push({ name: 'story-detail', params: { id } })
 
 const getProfLabel = (k) => ({ casa:'Casa', campo:'Campo', industria:'Industria', limpieza:'Limpieza', otro:'Otro' }[k] || 'N/A')
 const getAgeLabel = (k) => ({ under_18:'<18', '18_25':'18-25', '26_35':'26-35', '36_45':'36-45', '46_60':'46-60', over_60:'>60' }[k] || 'N/A')
