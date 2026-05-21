@@ -19,10 +19,11 @@
 
     <!-- Right: Profile Indicator & Logout -->
     <div class="navbar-right">
-      <div class="profile-info">
+      <router-link :to="dashboardRoute" class="profile-info profile-link">
         <span class="user-icon"></span>
         <span class="username">{{ user.username || 'Usuario' }}</span>
-      </div>
+        <span class="role-badge">{{ isAdmin ? 'ADMIN' : 'USER' }}</span>
+      </router-link>
       <button class="navbar-btn logout-btn" @click="handleLogout">
         <span class="logout-icon">[→</span> Cerrar Sesión
       </button>
@@ -31,13 +32,17 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../../composables/useAuthStore'
 
 const router = useRouter()
-const { user, logout } = useAuthStore()
+const { user, isAdmin, logout } = useAuthStore()
 const currentLang = ref('ES')
+
+const dashboardRoute = computed(() => {
+  return isAdmin.value ? '/admin' : '/dashboard'
+})
 
 const toggleLanguage = () => {
   currentLang.value = currentLang.value === 'ES' ? 'EN' : 'ES'
@@ -131,8 +136,31 @@ const handleLogout = () => {
   font-weight: bold;
 }
 
+.profile-link {
+  text-decoration: none;
+  color: var(--wf-text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.profile-link:hover {
+  background-color: var(--wf-button-bg);
+  border-style: solid;
+  box-shadow: 2px 2px 0px var(--wf-border);
+  transform: translate(-1px, -1px);
+}
+
 .user-icon {
   font-size: 1.1rem;
+}
+
+.role-badge {
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  padding: 2px 6px;
+  border: 1px solid var(--wf-border);
+  background: var(--wf-button-bg);
+  border-radius: 2px;
 }
 
 .logout-btn {
