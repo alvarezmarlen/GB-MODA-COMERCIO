@@ -61,10 +61,6 @@
             <input v-model="editForm.title" class="wireframe-input" type="text" />
           </div>
           <div class="modal-field">
-            <label class="wireframe-label">País de origen</label>
-            <input v-model="editForm.origin_country" class="wireframe-input" type="text" />
-          </div>
-          <div class="modal-field">
             <label class="wireframe-label">Descripción</label>
             <textarea v-model="editForm.content" class="wireframe-input modal-textarea" rows="4"></textarea>
           </div>
@@ -100,7 +96,7 @@ const loading = ref(true)
 
 const editingStory = ref(null)
 const deletingStory = ref(null)
-const editForm = reactive({ title: '', origin_country: '', content: '' })
+const editForm = reactive({ title: '', content: '' })
 
 const uniqueAuthors = computed(() => new Set(stories.value.map(s => s.user_id)).size)
 
@@ -117,7 +113,6 @@ onMounted(async () => {
 const startEdit = (story) => {
   editingStory.value = story
   editForm.title = story.title
-  editForm.origin_country = story.origin_country
   editForm.content = story.content
 }
 
@@ -127,7 +122,6 @@ const saveEdit = async () => {
   try {
     const updated = await updateStory(editingStory.value.id, {
       title: editForm.title,
-      origin_country: editForm.origin_country,
       content: editForm.content,
     })
     const idx = stories.value.findIndex(s => s.id === editingStory.value.id)
