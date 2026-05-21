@@ -7,19 +7,27 @@
       />
     </FormGroup>
 
-    <FormGroup label="Profesión">
+    <FormGroup label="País de origen o continente">
       <BaseSelect
-        v-model="formData.profession"
-        :options="professionOptions"
-        placeholder="▼ Seleccionar profesión"
+        v-model="formData.countryOrigin"
+        :options="countryOptions"
+        placeholder="▼ Seleccionar país o continente"
       />
     </FormGroup>
 
-    <FormGroup label="Edad">
+    <FormGroup label="Profesión u oficio">
       <BaseSelect
-        v-model="formData.ageRange"
-        :options="ageOptions"
-        placeholder="▼ Seleccionar rango de edad"
+        v-model="formData.profession"
+        :options="professionOptions"
+        placeholder="▼ Seleccionar profesión u oficio"
+      />
+    </FormGroup>
+
+    <FormGroup label="Año de nacimiento">
+      <BaseSelect
+        v-model="formData.birthYearRange"
+        :options="DateOfBirthOptions"
+        placeholder="▼ Seleccionar año de nacimiento"
       />
     </FormGroup>
 
@@ -59,31 +67,36 @@ import BaseButton from '../atoms/BaseButton.vue'
 import { useForm } from '../../composables/useForm'
 import { useStoryStore } from '../../composables/useStoryStore'
 
-const router = useRouter()
-const { setStory } = useStoryStore()
-const uploadedFiles = ref([])
-
-const professionOptions = [
-  { label: 'Casa', value: 'casa' },
-  { label: 'Campo', value: 'campo' },
-  { label: 'Industria', value: 'industria' },
-  { label: 'Limpieza', value: 'limpieza' },
+const countryOptions = [
+  { label: 'País Vasco', value: 'pais_vasco' },
+  { label: 'Europa', value: 'europa' },
+  { label: 'Marruecos', value: 'marruecos' },
+  { label: 'África', value: 'africa' },
+  { label: 'America Latina', value: 'america_latina' },
   { label: 'Otro', value: 'otro' }
 ]
 
-const ageOptions = [
-  { label: 'Menor de 18', value: 'under_18' },
-  { label: '18 - 25 años', value: '18_25' },
-  { label: '26 - 35 años', value: '26_35' },
-  { label: '36 - 45 años', value: '36_45' },
-  { label: '46 - 60 años', value: '46_60' },
-  { label: 'Más de 60', value: 'over_60' }
+const professionOptions = [
+  { label: 'Ama de casa', value: 'ama de casa' },
+  { label: 'Cuidadora', value: 'cuidadora' },
+  { label: 'Camarera', value: 'camarera' },
+  { label: 'Servicio de Limpieza', value: 'servicio de limpieza' },
+  { label: 'Enfermera', value: 'enfermera' },
+  { label: 'Otro', value: 'otro' }
+]
+
+const DateOfBirthOptions = [
+  { label: '1930-1960', value: '1930-1960' },
+  { label: '1960-1970', value: '1960-1970' },
+  { label: '1970-1980', value: '1970-1980' },
+  { label: '1990-2000', value: '1990-2000' },
+  { label: '2000-2010', value: '2000-2010' },
 ]
 
 const { formData, handleSubmit } = useForm({
   title: '',
   profession: '',
-  ageRange: '',
+  birthYearRange: '',
   description: '',
   acceptedTerms: false
 })
