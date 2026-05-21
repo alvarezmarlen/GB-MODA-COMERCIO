@@ -25,8 +25,8 @@ class UserSchema(Schema):
     )
     
     role = fields.Str(
-        validate=validate.OneOf(['customer', 'admin']),
-        missing='customer' # Valor por defecto si no se envía
+        validate=validate.OneOf(['user', 'admin']),
+        load_default='user' # Valor por defecto si no se envía
     )
 
 class UserCreateSchema(UserSchema):
