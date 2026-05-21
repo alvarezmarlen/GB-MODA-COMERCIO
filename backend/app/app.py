@@ -1,13 +1,14 @@
 import os
 from flask import Flask 
 from flask_cors import CORS
-from app.core.extensions import db
+from flask_jwt_extended import JWTManager
+from app import db
 from flask import send_from_directory
-
-
-# Importaciones de los Blueprints (Rutas)
 from app.features.users.routes.users_routes import users_bp
 from app.features.stories.routes.stories_routes import stories_bp
+from app.features.auth.routes.auth_routes import auth_bp
+from app.features.auth.models.token_blacklist import TokenBlacklist
+from app.core.jwt_handlers import setup_jwt_handlers
 
 
 
@@ -23,16 +24,12 @@ def create_app():
 
     db.init_app(app)
 
-    # 2. CREAR LAS TABLAS AUTOMÁTICAMENTE SI NO EXISTEN
-    with app.app_context():
-        from app.features.users.models.users import User
-        from app.features.stories.models.stories import Story
-        
-        db.create_all()
-        print("Tablas creadas o ya existían.")
-        
+    jwt = JWTManager(app)
+    setup_jwt_handlers(jwt)
+
     app.register_blueprint(users_bp)
     app.register_blueprint(stories_bp)
+    app.register_blueprint(auth_bp)
 
 
     @app.route('/')
@@ -48,3 +45,5 @@ def create_app():
         return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
     return app
+
+#

@@ -14,6 +14,7 @@ export async function getStories(filters = {}) {
   if (filters.profession) params.append('profession', filters.profession)
   if (filters.age_range) params.append('age_range', filters.age_range)
   if (filters.origin_country) params.append('origin_country', filters.origin_country)
+  if (filters.user_id) params.append('user_id', filters.user_id)
   const query = params.toString()
   const res = await fetch(`/stories${query ? '?' + query : ''}`)
   if (!res.ok) {
@@ -41,6 +42,28 @@ export async function createStory(data) {
   if (!res.ok) {
     const err = await parseJson(res)
     throw new Error(err.errors?._schema || JSON.stringify(err.errors || err))
+  }
+  return parseJson(res)
+}
+
+export async function updateStory(id, data) {
+  const res = await fetch(`/stories/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  })
+  if (!res.ok) {
+    const err = await parseJson(res)
+    throw new Error(JSON.stringify(err.errors || err))
+  }
+  return parseJson(res)
+}
+
+export async function deleteStory(id) {
+  const res = await fetch(`/stories/${id}`, { method: 'DELETE' })
+  if (!res.ok) {
+    const err = await parseJson(res)
+    throw new Error(err.error || 'Error al eliminar')
   }
   return parseJson(res)
 }

@@ -8,6 +8,7 @@ export default defineConfig({
     proxy: {
       '/stories': 'http://localhost:5000',
       '/uploads': 'http://localhost:5000',
+      '/users': 'http://localhost:5000',
     }
   }
 })

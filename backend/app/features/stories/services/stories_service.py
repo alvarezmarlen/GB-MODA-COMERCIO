@@ -37,7 +37,7 @@ def get_all_stories():
     return [story.to_dict() for story in stories]
 
 
-def get_stories_filtered(origin_country=None, profession=None, age_range=None):
+def get_stories_filtered(origin_country=None, profession=None, age_range=None, user_id=None):
     """Retrieve stories filtered by optional demographic criteria.
 
     All filters are optional and combined with AND logic when multiple are provided.
@@ -46,6 +46,7 @@ def get_stories_filtered(origin_country=None, profession=None, age_range=None):
         origin_country: Filter by exact origin country match.
         profession: Filter by exact profession match.
         age_range: Filter by exact age range match.
+        user_id: Filter by exact user ID match.
 
     Returns:
         list[dict]: A list of matching stories serialized as dictionaries.
@@ -57,6 +58,8 @@ def get_stories_filtered(origin_country=None, profession=None, age_range=None):
         query = query.filter(Story.profession == profession)
     if age_range:
         query = query.filter(Story.age_range == age_range)
+    if user_id:
+        query = query.filter(Story.user_id == user_id)
     stories = query.all()
     return [story.to_dict() for story in stories]
 

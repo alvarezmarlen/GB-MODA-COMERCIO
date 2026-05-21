@@ -1,63 +1,47 @@
 import { ref } from 'vue'
 
-// Estado global (en la memoria de la app)
-const token = ref(localStorage.getItem('user_token') || null)
-const user = ref(JSON.parse(localStorage.getItem('user_data')) || null)
-const error = ref(null)
-const loading = ref(false)
+const state = reactive({
+  user: {
+    id: 1,
+    username: 'Juan Pérez',
+    email: 'juan.perez@example.com',
+    password: '********',
+    role: 'user' // 'user' | 'admin'
+  },
+  isAuthenticated: true
+})
 
 export function useAuthStore() {
-    
-    const login = async (email, password) => {
-        loading.value = true
-        error.value = null
-        
-        try {
-            // Apuntamos al puerto 5001 que configuramos en Docker Compose
-            const response = await fetch('http://127.0.0.1:5001/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email, password })
-            })
+  const user = computed(() => state.user)
+  const isAuthenticated = computed(() => state.isAuthenticated)
+  const isAdmin = computed(() => state.user.role === 'admin')
 
-            const data = await response.json()
+  const login = (username, role = 'user') => {
+    state.user.username = username || 'Juan Pérez'
+    state.user.role = role
+    state.isAuthenticated = true
+  }
 
-            if (!response.ok) {
-                throw new Error(data.message || 'Error al iniciar sesión')
-            }
+  const logout = () => {
+    state.user.username = ''
+    state.user.email = ''
+    state.user.password = ''
+    state.user.role = 'user'
+    state.isAuthenticated = false
+  }
 
-            // 1. Guardar en las variables reactivas de Vue
-            token.value = data.token
-            user.value = data.user
+  const updateUser = (data) => {
+    if (data.username !== undefined) state.user.username = data.username
+    if (data.email !== undefined) state.user.email = data.email
+    if (data.password !== undefined) state.user.password = data.password
+  }
 
-            // 2. Persistir en el navegador (para que no se desloguee al refrescar)
-            localStorage.setItem('user_token', data.token)
-            localStorage.setItem('user_data', JSON.stringify(data.user))
-
-            return true // Login exitoso
-        } catch (err) {
-            error.value = err.message
-            return false // Login fallido
-        } finally {
-            loading.value = false
-        }
-    }
-
-    const logout = () => {
-        token.value = null
-        user.value = null
-        localStorage.removeItem('user_token')
-        localStorage.removeItem('user_data')
-    }
-
-    return {
-        token,
-        user,
-        error,
-        loading,
-        login,
-        logout
-    }
+  return {
+    user,
+    isAuthenticated,
+    isAdmin,
+    login,
+    logout,
+    updateUser
+  }
 }
