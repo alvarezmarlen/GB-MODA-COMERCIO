@@ -16,6 +16,7 @@ def app():
         'TESTING': True,
         'PROPAGATE_EXCEPTIONS': False,
         'UPLOAD_FOLDER': tmp_upload,
+        'JWT_SECRET_KEY': 'test-jwt-secret-key',
     })
     with app.app_context():
         _db.create_all()
