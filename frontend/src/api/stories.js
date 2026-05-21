@@ -46,6 +46,28 @@ export async function createStory(data) {
   return parseJson(res)
 }
 
+export async function updateStory(id, data) {
+  const res = await fetch(`/stories/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  })
+  if (!res.ok) {
+    const err = await parseJson(res)
+    throw new Error(JSON.stringify(err.errors || err))
+  }
+  return parseJson(res)
+}
+
+export async function deleteStory(id) {
+  const res = await fetch(`/stories/${id}`, { method: 'DELETE' })
+  if (!res.ok) {
+    const err = await parseJson(res)
+    throw new Error(err.error || 'Error al eliminar')
+  }
+  return parseJson(res)
+}
+
 export async function uploadStoryImage(storyId, file) {
   const formData = new FormData()
   formData.append('image', file)

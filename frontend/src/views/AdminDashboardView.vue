@@ -23,7 +23,6 @@
         <div v-for="story in stories" :key="story.id" class="admin-story-card">
           <div class="admin-card-top-bar">
             <span class="admin-card-id">#{{ story.id }}</span>
-            <span class="admin-card-author">por {{ story.author }}</span>
           </div>
           <div class="admin-card-body">
             <div class="admin-card-image-box"><span>Imagen</span></div>
@@ -31,10 +30,10 @@
               <h3 class="admin-card-title">{{ story.title }}</h3>
               <div class="admin-card-meta">
                 Oficio: {{ getProfLabel(story.profession) }} &nbsp;|&nbsp;
-                Edad: {{ getAgeLabel(story.ageRange) }} &nbsp;|&nbsp;
-                País: {{ story.countryOrigin }}
+                Edad: {{ getAgeLabel(story.age_range) }} &nbsp;|&nbsp;
+                País: {{ story.origin_country }}
               </div>
-              <p class="admin-card-desc">{{ story.description?.substring(0, 120) }}{{ story.description?.length > 120 ? '...' : '' }}</p>
+              <p class="admin-card-desc">{{ story.content?.substring(0, 120) }}{{ story.content?.length > 120 ? '...' : '' }}</p>
             </div>
           </div>
           <div class="admin-card-actions">
@@ -63,11 +62,11 @@
           </div>
           <div class="modal-field">
             <label class="wireframe-label">País de origen</label>
-            <input v-model="editForm.countryOrigin" class="wireframe-input" type="text" />
+            <input v-model="editForm.origin_country" class="wireframe-input" type="text" />
           </div>
           <div class="modal-field">
             <label class="wireframe-label">Descripción</label>
-            <textarea v-model="editForm.description" class="wireframe-input modal-textarea" rows="4"></textarea>
+            <textarea v-model="editForm.content" class="wireframe-input modal-textarea" rows="4"></textarea>
           </div>
         </div>
         <div class="modal-actions">
@@ -92,37 +91,66 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from 'vue'
-import { useStoryStore } from '../composables/useStoryStore'
+import { ref, reactive, computed, onMounted } from 'vue'
+import { getStories, updateStory, deleteStory } from '../api/stories'
 import DashboardTemplate from '../components/templates/DashboardTemplate.vue'
 
-const { stories, deleteStory, updateStory } = useStoryStore()
+const stories = ref([])
+const loading = ref(true)
 
 const editingStory = ref(null)
 const deletingStory = ref(null)
-const editForm = reactive({ title: '', countryOrigin: '', description: '' })
+const editForm = reactive({ title: '', origin_country: '', content: '' })
 
-const uniqueAuthors = computed(() => new Set(stories.map(s => s.author)).size)
+const uniqueAuthors = computed(() => new Set(stories.value.map(s => s.user_id)).size)
+
+onMounted(async () => {
+  try {
+    stories.value = await getStories()
+  } catch {
+    stories.value = []
+  } finally {
+    loading.value = false
+  }
+})
 
 const startEdit = (story) => {
   editingStory.value = story
   editForm.title = story.title
-  editForm.countryOrigin = story.countryOrigin
-  editForm.description = story.description
+  editForm.origin_country = story.origin_country
+  editForm.content = story.content
 }
+
 const cancelEdit = () => { editingStory.value = null }
-const saveEdit = () => {
-  updateStory(editingStory.value.id, { title: editForm.title, countryOrigin: editForm.countryOrigin, description: editForm.description })
-  editingStory.value = null
-  alert('Historia actualizada con éxito')
+
+const saveEdit = async () => {
+  try {
+    const updated = await updateStory(editingStory.value.id, {
+      title: editForm.title,
+      origin_country: editForm.origin_country,
+      content: editForm.content,
+    })
+    const idx = stories.value.findIndex(s => s.id === editingStory.value.id)
+    if (idx !== -1) stories.value[idx] = updated
+    editingStory.value = null
+    alert('Historia actualizada con éxito')
+  } catch {
+    alert('Error al actualizar la historia')
+  }
 }
 
 const confirmDelete = (story) => { deletingStory.value = story }
 const cancelDelete = () => { deletingStory.value = null }
-const executeDelete = () => {
-  deleteStory(deletingStory.value.id)
-  deletingStory.value = null
-  alert('Historia eliminada con éxito')
+
+const executeDelete = async () => {
+  try {
+    await deleteStory(deletingStory.value.id)
+    stories.value = stories.value.filter(s => s.id !== deletingStory.value.id)
+    deletingStory.value = null
+    alert('Historia eliminada con éxito')
+  } catch {
+    alert('Error al eliminar la historia')
+  }
 }
 
 const getProfLabel = (k) => ({ casa:'Casa', campo:'Campo', industria:'Industria', limpieza:'Limpieza', otro:'Otro' }[k] || 'N/A')
