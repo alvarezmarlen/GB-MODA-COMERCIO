@@ -3,7 +3,7 @@
     <div class="map-grid">
       <!-- Left: 70% Premium Map Visuals -->
       <div class="map-visual-box">
-        <svg viewBox="0 0 800 400" class="world-svg" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 800 500" class="world-svg" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="wf-grid" width="20" height="20" patternUnits="userSpaceOnUse">
               <path d="M 20 0 L 0 0 0 20" fill="none" stroke="var(--wf-placeholder)" stroke-width="0.5"/>
@@ -15,7 +15,7 @@
           <rect width="100%" height="100%" fill="url(#wf-grid)" />
 
           <!-- Centered Map Group -->
-          <g transform="translate(85, 0)">
+          <g transform="translate(40, -110) scale(1.7)">
             <!-- Base Continents Silhouette (Subtle context) -->
             <g class="base-continents">
             <!-- Europa-Africa -->
@@ -158,7 +158,7 @@ const locations = [
     id: 'otro',
     name: 'Otro',
     x: 300,
-    y: 350,
+    y: 340,
     description: 'Desde la delicadeza impecable de la seda en el Lejano Oriente hasta la imponente talla ritual en madera de Oceanía, exploramos otras latitudes donde la genialidad humana sigue tejiendo historia en tiempo real.'
   }
 ]
