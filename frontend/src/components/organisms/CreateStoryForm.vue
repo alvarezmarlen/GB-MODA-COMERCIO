@@ -94,8 +94,8 @@ const countryOptions = [
   { label: 'África', value: 'África' },
   { label: 'Norte de África', value: 'Norte de África' },
   { label: 'América Central', value: 'América Central' },
-  { label: 'Ámerica del sur', value: 'Ámerica del sur' },
-  { label: 'Ámerica del norte', value: 'Ámerica del norte' },
+  { label: 'América del sur', value: 'América del sur' },
+  { label: 'América del norte', value: 'América del norte' },
   { label: 'Otro', value: 'Otro' }
 ]
 

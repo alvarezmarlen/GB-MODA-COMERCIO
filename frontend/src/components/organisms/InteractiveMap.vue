@@ -128,14 +128,14 @@ const locations = [
   },
   {
     id: 'america_sur',
-    name: 'Ámerica del sur',
+    name: 'América del sur',
     x: 120,
     y: 300,
     description: 'Región vibrante que preserva intacto el milenario arte del telar de cintura maya, la cerámica policromada viva y oficios sagrados en perfecta armonía con un entorno de selvas profundas y volcanes majestuosos.'
   },
   {
     id: 'america_norte',
-    name: 'Ámerica del norte',
+    name: 'América del norte',
     x: 60,
     y: 160,
     description: 'Región vibrante que preserva intacto el milenario arte del telar de cintura maya, la cerámica policromada viva y oficios sagrados en perfecta armonía con un entorno de selvas profundas y volcanes majestuosos.'
