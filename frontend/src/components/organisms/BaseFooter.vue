@@ -3,20 +3,22 @@
     <div class="footer-divider"></div>
     <div class="footer-content">
       <div class="copyright">
-        © 2026 GB-MODA-COMERCIO. Todos los derechos reservados.
+        {{ t('footer.copyright') }}
       </div>
       <div class="footer-links">
-        <a href="#" class="footer-link">Términos</a>
+        <a href="#" class="footer-link">{{ t('footer.terms') }}</a>
         <span class="divider">│</span>
-        <a href="#" class="footer-link">Privacidad</a>
+        <a href="#" class="footer-link">{{ t('footer.privacy') }}</a>
         <span class="divider">│</span>
-        <a href="#" class="footer-link">Contacto</a>
+        <a href="#" class="footer-link">{{ t('footer.contact') }}</a>
       </div>
     </div>
   </footer>
 </template>
 
 <script setup>
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 </script>
 
 <style scoped>
@@ -63,7 +65,6 @@
   font-size: 0.8rem;
 }
 
-/* Responsive design */
 @media (max-width: 600px) {
   .footer-content {
     flex-direction: column;

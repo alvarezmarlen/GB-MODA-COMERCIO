@@ -1,44 +1,45 @@
 <template>
   <form @submit.prevent="onFormSubmit" class="register-form">
     <FormField
-      label="Nombre de usuario"
+      :label="t('auth.usernameLabel')"
       v-model="formData.username"
-      placeholder="Mínimo 3 caracteres"
+      :placeholder="t('auth.usernameMinPlaceholder')"
     />
     
     <FormField
-      label="Email"
+      :label="t('auth.emailLabel')"
       type="email"
       v-model="formData.email"
-      placeholder="ejemplo@correo.com"
+      :placeholder="t('auth.emailPlaceholder')"
     />
     
     <FormField
-      label="Contraseña"
+      :label="t('auth.passwordLabel')"
       type="password"
       v-model="formData.password"
-      placeholder="Mínimo 6 caracteres"
+      :placeholder="t('auth.passwordMinPlaceholder')"
     />
 
     <div class="checkbox-container">
       <BaseCheckbox v-model="formData.terms" />
-      <BaseLabel>Acepto los términos y condiciones</BaseLabel>
+      <BaseLabel>{{ t('auth.termsLabel') }}</BaseLabel>
     </div>
 
-    <!-- The button remains disabled until all data is "clean" -->
-    <BaseButton type="submit" :disabled="!isFormValid">Registrarse</BaseButton>
+    <BaseButton type="submit" :disabled="!isFormValid">{{ t('auth.registerButton') }}</BaseButton>
   </form>
 </template>
 
 <script setup>
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import FormField from '../molecules/FormField.vue'
 import BaseButton from '../atoms/BaseButton.vue'
 import BaseCheckbox from '../atoms/BaseCheckbox.vue'
 import BaseLabel from '../atoms/BaseLabel.vue'
 import { useForm } from '../../composables/useForm'
 
+const { t } = useI18n()
 const router = useRouter()
 const { formData, handleSubmit, isValidEmail } = useForm({
   username: '',
@@ -47,7 +48,6 @@ const { formData, handleSubmit, isValidEmail } = useForm({
   terms: false
 })
 
-// Validation logic to ensure clean data for the backend
 const isFormValid = computed(() => {
   const hasValidUsername = formData.username.trim().length >= 3
   const hasValidEmail = isValidEmail(formData.email)
@@ -59,19 +59,15 @@ const isFormValid = computed(() => {
 
 const onFormSubmit = () => {
   handleSubmit((data) => {
-    // Trim data before sending to backend for extra cleanliness
     const cleanData = {
       ...data,
       username: data.username.trim(),
       email: data.email.trim()
     }
-    console.log('Sending clean data to backend:', cleanData)
-    alert('Usuario registrado con éxito')
     router.push('/login')
   })
 }
 </script>
-
 
 <style scoped>
 .checkbox-container {

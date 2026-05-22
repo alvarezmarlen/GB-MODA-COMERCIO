@@ -1,38 +1,38 @@
 <template>
-  <DashboardTemplate title="Mi Perfil">
+  <DashboardTemplate :title="t('dashboard.title')">
     <section class="wireframe-container profile-section">
       <div class="section-header">
-        <h2 class="section-title">DATOS PERSONALES</h2>
+        <h2 class="section-title">{{ t('dashboard.personalData') }}</h2>
         <button class="wireframe-button" @click="toggleEditMode">
-          {{ isEditing ? '✕ Cancelar' : '✎ Editar' }}
+          {{ isEditing ? t('dashboard.cancel') : t('dashboard.edit') }}
         </button>
       </div>
       <div class="profile-fields">
         <div class="profile-field">
-          <label class="wireframe-label">Nombre de usuario</label>
+          <label class="wireframe-label">{{ t('dashboard.usernameLabel') }}</label>
           <input v-if="isEditing" v-model="editData.username" class="wireframe-input" type="text" />
           <div v-else class="field-value">{{ user.username }}</div>
         </div>
         <div class="profile-field">
-          <label class="wireframe-label">Correo electrónico</label>
+          <label class="wireframe-label">{{ t('dashboard.emailLabel') }}</label>
           <input v-if="isEditing" v-model="editData.email" class="wireframe-input" type="email" />
           <div v-else class="field-value">{{ user.email }}</div>
         </div>
         <div class="profile-field">
-          <label class="wireframe-label">Contraseña</label>
-          <input v-if="isEditing" v-model="editData.password" class="wireframe-input" type="password" placeholder="Nueva contraseña" />
+          <label class="wireframe-label">{{ t('dashboard.passwordLabel') }}</label>
+          <input v-if="isEditing" v-model="editData.password" class="wireframe-input" type="password" :placeholder="t('auth.passwordNewPlaceholder')" />
           <div v-else class="field-value">••••••••</div>
         </div>
       </div>
       <div v-if="isEditing" class="save-actions">
-        <button class="wireframe-button save-btn" @click="saveChanges">✓ Guardar Cambios</button>
+        <button class="wireframe-button save-btn" @click="saveChanges">{{ t('dashboard.saveChanges') }}</button>
       </div>
     </section>
 
     <section class="wireframe-container stories-section">
       <div class="section-header">
-        <h2 class="section-title">MIS HISTORIAS</h2>
-        <span class="story-count">{{ userStories.length }} historia(s)</span>
+        <h2 class="section-title">{{ t('dashboard.myStories') }}</h2>
+        <span class="story-count">{{ userStories.length }} {{ t('dashboard.storyCount') }}</span>
       </div>
       <div v-if="errorMessage" class="error-banner">{{ errorMessage }}</div>
       <div v-if="userStories.length > 0" class="user-stories-list">
@@ -42,21 +42,21 @@
             <div v-if="story.images && story.images.length > 0" class="story-card-image-box">
               <img :src="story.images[0].url" :alt="story.title" class="story-card-image" />
             </div>
-            <div v-else class="story-card-image-box"><span>Sin imagen</span></div>
+            <div v-else class="story-card-image-box"><span>{{ t('dashboard.noImage') }}</span></div>
             <div class="story-card-content">
               <h3 class="story-card-title">{{ story.title }}</h3>
-              <div class="story-card-meta">Oficio: {{ getProfLabel(story.profession) }} &nbsp;|&nbsp; Edad: {{ getAgeLabel(story.age_range) }}</div>
+              <div class="story-card-meta">{{ t('dashboard.trade') }}: {{ getProfLabel(story.profession) }} &nbsp;|&nbsp; {{ t('dashboard.age') }}: {{ getAgeLabel(story.age_range) }}</div>
               <p class="story-card-excerpt">{{ story.content?.substring(0, 100) }}{{ story.content?.length > 100 ? '...' : '' }}</p>
-              <button class="wireframe-button" @click="goToDetail(story.id)">Ver más</button>
+              <button class="wireframe-button" @click="goToDetail(story.id)">{{ t('dashboard.viewMore') }}</button>
             </div>
           </div>
         </div>
       </div>
       <div v-else class="empty-state">
         <div class="empty-icon-box"><span class="empty-icon">☐</span></div>
-        <p class="empty-text">Aún no has subido ninguna historia.</p>
-        <p class="empty-subtext">Comparte tu primera crónica con la comunidad.</p>
-        <button class="wireframe-button" @click="$router.push('/create-story')">+ Crear Historia</button>
+        <p class="empty-text">{{ t('dashboard.emptyTitle') }}</p>
+        <p class="empty-subtext">{{ t('dashboard.emptySubtext') }}</p>
+        <button class="wireframe-button" @click="$router.push('/create-story')">{{ t('dashboard.createFirstStory') }}</button>
       </div>
     </section>
   </DashboardTemplate>
@@ -65,11 +65,13 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { useAuthStore } from '../composables/useAuthStore'
 import { getStories } from '../api/stories'
 import { updateUser as apiUpdateUser } from '../api/users'
 import DashboardTemplate from '../components/templates/DashboardTemplate.vue'
 
+const { t } = useI18n()
 const router = useRouter()
 
 const { user, updateUser } = useAuthStore()
@@ -84,7 +86,7 @@ onMounted(async () => {
   try {
     userStories.value = await getStories({ user_id: user.value.id })
   } catch (err) {
-    errorMessage.value = err.message || 'Error al cargar las historias'
+    errorMessage.value = err.message || t('dashboard.loadError')
     userStories.value = []
   } finally {
     loading.value = false
@@ -109,16 +111,14 @@ const saveChanges = async () => {
     const updated = await apiUpdateUser(user.value.id, payload)
     updateUser({ username: updated.username, email: updated.email })
     isEditing.value = false
-    alert('Datos actualizados con éxito')
   } catch {
-    alert('Error al actualizar los datos')
   }
 }
 
 const goToDetail = (id) => router.push({ name: 'story-detail', params: { id } })
 
-const getProfLabel = (k) => ({ casa:'Casa', campo:'Campo', industria:'Industria', limpieza:'Limpieza', otro:'Otro' }[k] || 'N/A')
-const getAgeLabel = (k) => ({ under_18:'<18', '18_25':'18-25', '26_35':'26-35', '36_45':'36-45', '46_60':'46-60', over_60:'>60' }[k] || 'N/A')
+const getProfLabel = (k) => k ? t(`professions.${k}`) : 'N/A'
+const getAgeLabel = (k) => k ? t(`ages.${k}`) : 'N/A'
 </script>
 
 <style scoped>

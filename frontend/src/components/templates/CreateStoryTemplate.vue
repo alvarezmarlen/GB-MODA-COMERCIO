@@ -1,7 +1,7 @@
 <template>
   <div class="create-story-template">
     <header class="template-header">
-      <h1>CREAR HISTORIA</h1>
+      <h1>{{ t('createStory.pageTitle') }}</h1>
     </header>
     <main class="template-content">
       <div class="wireframe-container">
@@ -12,6 +12,8 @@
 </template>
 
 <script setup>
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 </script>
 
 <style scoped>

@@ -1,26 +1,26 @@
 <template>
   <div class="chronicles-section">
     <div class="filters-header">
-      <h3 class="filter-title">FILTRAR POR</h3>
+      <h3 class="filter-title">{{ t('chronicles.filterBy') }}</h3>
       <div class="filters-row">
         <select v-model="filters.profession" class="wireframe-input filter-select" @change="applyFilters">
-          <option value="">Oficio (todos)</option>
+          <option value="">{{ t('chronicles.allTrades') }}</option>
           <option v-for="opt in professionOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
         </select>
         <select v-model="filters.age_range" class="wireframe-input filter-select" @change="applyFilters">
-          <option value="">Edad (todas)</option>
+          <option value="">{{ t('chronicles.allAges') }}</option>
           <option v-for="opt in ageOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
         </select>
       </div>
       <div class="elegant-divider"></div>
     </div>
 
-    <div v-if="loading" class="loading-text">Cargando historias...</div>
+    <div v-if="loading" class="loading-text">{{ t('chronicles.loading') }}</div>
 
     <div v-else-if="errorMessage" class="error-message">{{ errorMessage }}</div>
 
     <div v-else-if="stories.length === 0" class="loading-text">
-      No hay historias disponibles.
+      {{ t('chronicles.noStories') }}
     </div>
 
     <div v-else class="chronicles-list">
@@ -38,18 +38,18 @@
             <img :src="story.images[0].url" :alt="story.title" class="card-image" />
           </div>
           <div v-else class="card-image-box">
-            <span>Sin imagen</span>
+            <span>{{ t('chronicles.noImage') }}</span>
           </div>
 
           <div class="card-content">
             <div class="card-meta">
-              Oficio: {{ professionLabel(story.profession) }} &nbsp;|&nbsp;
-              Edad: {{ ageLabel(story.age_range) }} &nbsp;|&nbsp;
-              País: {{ story.origin_country }}
+              {{ t('chronicles.trade') }}: {{ professionLabel(story.profession) }} &nbsp;|&nbsp;
+              {{ t('chronicles.age') }}: {{ ageLabel(story.age_range) }} &nbsp;|&nbsp;
+              {{ t('chronicles.country') }}: {{ story.origin_country }}
             </div>
             <p class="card-text">{{ truncate(story.content, 120) }}</p>
             <div class="card-actions">
-              <button class="wireframe-button" @click="goToStoryDetail(story.id)">Ver más</button>
+              <button class="wireframe-button" @click="goToStoryDetail(story.id)">{{ t('chronicles.viewMore') }}</button>
             </div>
           </div>
         </div>
@@ -61,8 +61,10 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { getStories } from '../../api/stories'
 
+const { t } = useI18n()
 const router = useRouter()
 
 const stories = ref([])
@@ -74,41 +76,41 @@ const filters = reactive({
 })
 
 const professionOptions = [
-  { label: 'Casa', value: 'casa' },
-  { label: 'Campo', value: 'campo' },
-  { label: 'Industria', value: 'industria' },
-  { label: 'Limpieza', value: 'limpieza' },
-  { label: 'Otro', value: 'otro' }
+  { label: t('professions.casa'), value: 'casa' },
+  { label: t('professions.campo'), value: 'campo' },
+  { label: t('professions.industria'), value: 'industria' },
+  { label: t('professions.limpieza'), value: 'limpieza' },
+  { label: t('professions.otro'), value: 'otro' }
 ]
 
 const ageOptions = [
-  { label: 'Menor de 18', value: 'under_18' },
-  { label: '18 - 25 años', value: '18_25' },
-  { label: '26 - 35 años', value: '26_35' },
-  { label: '36 - 45 años', value: '36_45' },
-  { label: '46 - 60 años', value: '46_60' },
-  { label: 'Más de 60', value: 'over_60' }
+  { label: t('ages.under_18'), value: 'under_18' },
+  { label: t('ages.18_25'), value: '18_25' },
+  { label: t('ages.26_35'), value: '26_35' },
+  { label: t('ages.36_45'), value: '36_45' },
+  { label: t('ages.46_60'), value: '46_60' },
+  { label: t('ages.over_60'), value: 'over_60' }
 ]
 
 const professionMap = {
-  casa: 'Casa',
-  campo: 'Campo',
-  industria: 'Industria',
-  limpieza: 'Limpieza',
-  otro: 'Otro'
+  casa: 'casa',
+  campo: 'campo',
+  industria: 'industria',
+  limpieza: 'limpieza',
+  otro: 'otro'
 }
 
 const ageMap = {
-  under_18: 'Menor de 18',
-  '18_25': '18 - 25 años',
-  '26_35': '26 - 35 años',
-  '36_45': '36 - 45 años',
-  '46_60': '46 - 60 años',
-  over_60: 'Más de 60'
+  under_18: 'under_18',
+  '18_25': '18_25',
+  '26_35': '26_35',
+  '36_45': '36_45',
+  '46_60': '46_60',
+  over_60: 'over_60'
 }
 
-const professionLabel = (val) => professionMap[val] || val
-const ageLabel = (val) => ageMap[val] || val
+const professionLabel = (val) => val ? t(`professions.${val}`) : val
+const ageLabel = (val) => val ? t(`ages.${val}`) : val
 
 const truncate = (text, max) => {
   if (!text) return ''

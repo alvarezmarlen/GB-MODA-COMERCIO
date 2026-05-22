@@ -2,18 +2,20 @@
   <nav class="base-navbar">
     <!-- Left: Language selector -->
     <div class="navbar-left">
-      <button class="navbar-btn lang-btn" @click="toggleLanguage">
-         {{ currentLang }}
-      </button>
+      <select class="lang-select" v-model="locale" @change="onLocaleChange">
+        <option v-for="opt in languageOptions" :key="opt.value" :value="opt.value">
+          {{ opt.label }}
+        </option>
+      </select>
     </div>
 
     <!-- Center: Navigation Tabs -->
     <div class="navbar-center">
       <router-link to="/" class="navbar-tab" active-class="active-tab">
-        Inicio
+        {{ t('nav.home') }}
       </router-link>
       <router-link to="/create-story" class="navbar-tab" active-class="active-tab">
-        + Crear Historia
+        {{ t('nav.createStory') }}
       </router-link>
     </div>
 
@@ -21,11 +23,11 @@
     <div class="navbar-right">
       <router-link :to="dashboardRoute" class="profile-info profile-link">
         <span class="user-icon"></span>
-        <span class="username">{{ user.username || 'Usuario' }}</span>
-        <span class="role-badge">{{ isAdmin ? 'ADMIN' : 'USER' }}</span>
+        <span class="username">{{ user.username || t('nav.profile') }}</span>
+        <span class="role-badge">{{ isAdmin ? t('nav.admin') : t('nav.user') }}</span>
       </router-link>
       <button class="navbar-btn logout-btn" @click="handleLogout">
-        <span class="logout-icon">[→</span> Cerrar Sesión
+        <span class="logout-icon">[→</span> {{ t('nav.logout') }}
       </button>
     </div>
   </nav>
@@ -34,24 +36,31 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { useAuthStore } from '../../composables/useAuthStore'
 
+const { t, locale } = useI18n()
 const router = useRouter()
 const { user, isAdmin, logout } = useAuthStore()
-const currentLang = ref('ES')
 
 const dashboardRoute = computed(() => {
   return isAdmin.value ? '/admin' : '/dashboard'
 })
 
-const toggleLanguage = () => {
-  currentLang.value = currentLang.value === 'ES' ? 'EN' : 'ES'
-  alert(`Idioma cambiado a: ${currentLang.value}`)
+const languageOptions = [
+  { label: 'Español', value: 'es' },
+  { label: 'English', value: 'en' },
+  { label: 'Euskera', value: 'eu' },
+  { label: 'Français', value: 'fr' },
+  { label: 'Română', value: 'ro' }
+]
+
+const onLocaleChange = () => {
+  localStorage.setItem('locale', locale.value)
 }
 
 const handleLogout = () => {
   logout()
-  alert('Sesión cerrada con éxito')
   router.push('/login')
 }
 </script>
@@ -79,6 +88,30 @@ const handleLogout = () => {
   gap: var(--wf-spacing-sm);
 }
 
+/* Language selector */
+.lang-select {
+  padding: 6px 12px;
+  border: 1px solid var(--wf-border);
+  background-color: var(--wf-button-bg);
+  color: var(--wf-text);
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-radius: var(--wf-radius);
+  letter-spacing: 1px;
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position-x: 95%;
+  background-position-y: 50%;
+  padding-right: 30px;
+}
+
+.lang-select:hover {
+  background-color: var(--wf-button-hover);
+}
+
 /* Common button styling */
 .navbar-btn {
   padding: 6px 12px;
@@ -95,10 +128,6 @@ const handleLogout = () => {
 
 .navbar-btn:hover {
   background-color: var(--wf-button-hover);
-}
-
-.lang-btn {
-  letter-spacing: 1px;
 }
 
 /* Tabs styling */

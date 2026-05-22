@@ -1,49 +1,49 @@
 <template>
   <form @submit.prevent="onFormSubmit" class="create-story-form">
-    <FormGroup label="Título de la historia">
+    <FormGroup :label="t('createStory.titleLabel')">
       <BaseInput
         v-model="formData.title"
-        placeholder="Escribe el título aquí..."
+        :placeholder="t('createStory.titlePlaceholder')"
       />
     </FormGroup>
 
-    <FormGroup label="Profesión">
+    <FormGroup :label="t('createStory.professionLabel')">
       <BaseSelect
         v-model="formData.profession"
         :options="professionOptions"
-        placeholder="▼ Seleccionar profesión"
+        :placeholder="t('createStory.professionPlaceholder')"
       />
     </FormGroup>
 
-    <FormGroup label="Edad">
+    <FormGroup :label="t('createStory.ageLabel')">
       <BaseSelect
         v-model="formData.ageRange"
         :options="ageOptions"
-        placeholder="▼ Seleccionar rango de edad"
+        :placeholder="t('createStory.agePlaceholder')"
       />
     </FormGroup>
 
-    <FormGroup label="País de origen">
+    <FormGroup :label="t('createStory.countryLabel')">
       <BaseSelect
         v-model="formData.originCountry"
         :options="countryOptions"
-        placeholder="▼ Seleccionar país"
+        :placeholder="t('createStory.countryPlaceholder')"
       />
     </FormGroup>
 
-    <FormGroup label="Descripción de la historia">
+    <FormGroup :label="t('createStory.descriptionLabel')">
       <BaseTextarea
         v-model="formData.description"
-        placeholder="Escribe aquí la historia o descripción completa..."
+        :placeholder="t('createStory.descriptionPlaceholder')"
       />
     </FormGroup>
 
     <div class="checkbox-container">
       <BaseCheckbox v-model="formData.acceptedTerms" />
-      <BaseLabel>Acepto los términos y permisos para publicar imágenes y contenido.</BaseLabel>
+      <BaseLabel>{{ t('createStory.termsLabel') }}</BaseLabel>
     </div>
 
-    <FormGroup label="Subir fotografía">
+    <FormGroup :label="t('createStory.uploadLabel')">
       <BaseFileUpload :disabled="!formData.acceptedTerms" :max-files="2" @update:files="handleFilesUpdate" />
     </FormGroup>
 
@@ -51,7 +51,7 @@
 
     <div class="actions">
       <BaseButton type="submit" :disabled="!isFormValid || isSubmitting">
-        {{ isSubmitting ? 'PUBLICANDO...' : 'PUBLICAR' }}
+        {{ isSubmitting ? t('createStory.publishing') : t('createStory.publish') }}
       </BaseButton>
     </div>
   </form>
@@ -60,6 +60,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import FormGroup from '../molecules/FormGroup.vue'
 import BaseInput from '../atoms/BaseInput.vue'
 import BaseSelect from '../atoms/BaseSelect.vue'
@@ -73,6 +74,7 @@ import { useStoryStore } from '../../composables/useStoryStore'
 import { useAuthStore } from '../../composables/useAuthStore'
 import { createStory, uploadStoryImage } from '../../api/stories'
 
+const { t } = useI18n()
 const router = useRouter()
 const { setStory } = useStoryStore()
 const { user } = useAuthStore()
@@ -81,35 +83,35 @@ const isSubmitting = ref(false)
 const submitError = ref('')
 
 const professionOptions = [
-  { label: 'Casa', value: 'casa' },
-  { label: 'Campo', value: 'campo' },
-  { label: 'Industria', value: 'industria' },
-  { label: 'Limpieza', value: 'limpieza' },
-  { label: 'Otro', value: 'otro' }
+  { label: t('professions.casa'), value: 'casa' },
+  { label: t('professions.campo'), value: 'campo' },
+  { label: t('professions.industria'), value: 'industria' },
+  { label: t('professions.limpieza'), value: 'limpieza' },
+  { label: t('professions.otro'), value: 'otro' }
 ]
 
 const countryOptions = [
-  { label: 'Brasil', value: 'Brasil' },
-  { label: 'Portugal', value: 'Portugal' },
-  { label: 'España', value: 'España' },
-  { label: 'Argentina', value: 'Argentina' },
-  { label: 'México', value: 'México' },
-  { label: 'Colombia', value: 'Colombia' },
-  { label: 'Chile', value: 'Chile' },
-  { label: 'Perú', value: 'Perú' },
-  { label: 'Venezuela', value: 'Venezuela' },
-  { label: 'Uruguay', value: 'Uruguay' },
-  { label: 'Paraguay', value: 'Paraguay' },
-  { label: 'Otro', value: 'Otro' }
+  { label: t('countries.Brasil'), value: 'Brasil' },
+  { label: t('countries.Portugal'), value: 'Portugal' },
+  { label: t('countries.España'), value: 'España' },
+  { label: t('countries.Argentina'), value: 'Argentina' },
+  { label: t('countries.México'), value: 'México' },
+  { label: t('countries.Colombia'), value: 'Colombia' },
+  { label: t('countries.Chile'), value: 'Chile' },
+  { label: t('countries.Perú'), value: 'Perú' },
+  { label: t('countries.Venezuela'), value: 'Venezuela' },
+  { label: t('countries.Uruguay'), value: 'Uruguay' },
+  { label: t('countries.Paraguay'), value: 'Paraguay' },
+  { label: t('countries.Otro'), value: 'Otro' }
 ]
 
 const ageOptions = [
-  { label: 'Menor de 18', value: 'under_18' },
-  { label: '18 - 25 años', value: '18_25' },
-  { label: '26 - 35 años', value: '26_35' },
-  { label: '36 - 45 años', value: '36_45' },
-  { label: '46 - 60 años', value: '46_60' },
-  { label: 'Más de 60', value: 'over_60' }
+  { label: t('ages.under_18'), value: 'under_18' },
+  { label: t('ages.18_25'), value: '18_25' },
+  { label: t('ages.26_35'), value: '26_35' },
+  { label: t('ages.36_45'), value: '36_45' },
+  { label: t('ages.46_60'), value: '46_60' },
+  { label: t('ages.over_60'), value: 'over_60' }
 ]
 
 const { formData } = useForm({

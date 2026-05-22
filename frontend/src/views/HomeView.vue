@@ -10,15 +10,15 @@
               <line x1="0" y1="0" x2="100%" y2="100%" />
               <line x1="100%" y1="0" x2="0" y2="100%" />
             </svg>
-            <div class="image-label">IMAGEN</div>
+            <div class="image-label">{{ t('home.imageLabel') }}</div>
           </div>
         </div>
 
         <!-- Right: Text Column -->
         <div class="hero-right-box">
-          <h1 class="hero-title">GB-MODA-COMERCIO</h1>
+          <h1 class="hero-title">{{ t('home.brandTitle') }}</h1>
           <p class="hero-paragraph">
-            Descubre y comparte las crónicas reales de la moda y el comercio local. Una plataforma comunitaria dedicada a documentar, preservar y honrar la rica tradición, el esfuerzo diario y el legado cultural de los oficios locales que dan identidad a nuestra sociedad.
+            {{ t('home.heroParagraph') }}
           </p>
         </div>
       </div>
@@ -33,8 +33,11 @@
 </template>
 
 <script setup>
+import { useI18n } from 'vue-i18n'
 import InteractiveMap from '../components/organisms/InteractiveMap.vue'
 import ChronicleList from '../components/organisms/ChronicleList.vue'
+
+const { t } = useI18n()
 </script>
 
 <style scoped>
@@ -50,7 +53,6 @@ import ChronicleList from '../components/organisms/ChronicleList.vue'
   border-width: 2px;
 }
 
-/* Grid layout for the split hero */
 .hero-grid {
   display: grid;
   grid-template-columns: 1.12fr 1fr;
@@ -59,7 +61,6 @@ import ChronicleList from '../components/organisms/ChronicleList.vue'
   min-height: 380px;
 }
 
-/* Left Image Column */
 .hero-left-box {
   display: flex;
   flex: 1;
@@ -115,7 +116,6 @@ import ChronicleList from '../components/organisms/ChronicleList.vue'
   color: var(--wf-bg);
 }
 
-/* Right Text Column */
 .hero-right-box {
   display: flex;
   flex-direction: column;
@@ -149,13 +149,11 @@ import ChronicleList from '../components/organisms/ChronicleList.vue'
   text-align: justify;
 }
 
-/* Animations */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive Grid styling */
 @media (max-width: 800px) {
   .hero-grid {
     grid-template-columns: 1fr;
