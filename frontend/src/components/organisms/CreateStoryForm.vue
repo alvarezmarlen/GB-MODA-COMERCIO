@@ -81,10 +81,15 @@ const isSubmitting = ref(false)
 const submitError = ref('')
 
 const professionOptions = [
-  { label: 'Casa', value: 'casa' },
-  { label: 'Campo', value: 'campo' },
+  { label: 'Servicios Domésticos', value: 'servicios_domesticos' },
+  { label: 'Trabajo Social', value: 'trabajo_social' },
+  { label: 'Educación', value: 'educacion' },
+  { label: 'cuidados', value: 'cuidados' },  
+  { label: 'Sanidad', value: 'sanidad' },
+  { label: 'Gestión Administrativa', value: 'gestion_administrativa' },
+  { label: 'Hosteleria', value: 'hosteleria' },
   { label: 'Industria', value: 'industria' },
-  { label: 'Limpieza', value: 'limpieza' },
+  { label: 'Agricultura', value: 'agricultura' },
   { label: 'Otro', value: 'otro' }
 ]
 
