@@ -102,47 +102,63 @@
 <script setup>
 import { ref } from 'vue'
 
+const emit = defineEmits(['location-selected'])
+
 const locations = [
   {
     id: 'america_central',
     name: 'América Central',
-    x: 105,
-    y: 195,
+    x: 60,
+    y: 220,
     description: 'Región vibrante que preserva intacto el milenario arte del telar de cintura maya, la cerámica policromada viva y oficios sagrados en perfecta armonía con un entorno de selvas profundas y volcanes majestuosos.'
   },
   {
-    id: 'pais_vasco',
-    name: 'País Vasco',
-    x: 335,
-    y: 105,
+    id: 'europa',
+    name: 'Europa',
+    x: 200,
+    y: 175,
     description: 'Un enclave histórico inigualable donde la rigurosa hilatura de fibras vegetales, la forja artesanal y la precisa construcción naval definieron una identidad única, celosamente preservada por maestros apasionados.'
   },
   {
-    id: 'espana',
-    name: 'España',
-    x: 310,
-    y: 135,
-    description: 'Un cruce de caminos y contrastes, inmensamente rico en tradiciones textiles ancestrales, sastrería clásica de élite y oficios de marroquinería fina que han perdurado a lo largo de los siglos en diversos rincones peninsulares.'
+    id: 'europa_este',
+    name: 'Europa Este',
+    x: 250,
+    y: 150,
+    description: 'Un enclave histórico inigualable donde la rigurosa hilatura de fibras vegetales, la forja artesanal y la precisa construcción naval definieron una identidad única, celosamente preservada por maestros apasionados.'
   },
   {
-    id: 'marruecos',
-    name: 'Marruecos',
-    x: 300,
-    y: 175,
-    description: 'Hogar místico de la ancestral alfarería roja de las montañas del Rif, los magistrales curtidores de las medinas imperiales y telares de colores imposibles. Un legado vibrante, puramente manual y transmitido de madres a hijas.'
+    id: 'america_sur',
+    name: 'Ámerica del sur',
+    x: 120,
+    y: 300,
+    description: 'Región vibrante que preserva intacto el milenario arte del telar de cintura maya, la cerámica policromada viva y oficios sagrados en perfecta armonía con un entorno de selvas profundas y volcanes majestuosos.'
+  },
+  {
+    id: 'america_norte',
+    name: 'Ámerica del norte',
+    x: 60,
+    y: 160,
+    description: 'Región vibrante que preserva intacto el milenario arte del telar de cintura maya, la cerámica policromada viva y oficios sagrados en perfecta armonía con un entorno de selvas profundas y volcanes majestuosos.'
+  },
+  {
+    id: 'africa_norte',
+    name: 'Norte de África',
+    x: 200,
+    y: 230,
+    description: 'El vasto continente africano es la cuna primordial de innumerables técnicas de tejido, extracciones de tintes orgánicos terrosos y oficios vernáculos desarrollados siempre desde un profundo y vital respeto hacia la naturaleza.'
   },
   {
     id: 'africa',
     name: 'África',
-    x: 350,
-    y: 250,
+    x: 230,
+    y: 270,
     description: 'El vasto continente africano es la cuna primordial de innumerables técnicas de tejido, extracciones de tintes orgánicos terrosos y oficios vernáculos desarrollados siempre desde un profundo y vital respeto hacia la naturaleza.'
   },
   {
     id: 'otro',
     name: 'Otro',
-    x: 630,
-    y: 245,
+    x: 300,
+    y: 350,
     description: 'Desde la delicadeza impecable de la seda en el Lejano Oriente hasta la imponente talla ritual en madera de Oceanía, exploramos otras latitudes donde la genialidad humana sigue tejiendo historia en tiempo real.'
   }
 ]
@@ -151,6 +167,7 @@ const selectedLocation = ref(locations[2]) // Default: España
 
 const selectLocation = (loc) => {
   selectedLocation.value = loc
+  emit('location-selected', loc.name)
 }
 </script>
 

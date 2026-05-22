@@ -15,6 +15,11 @@
       <div class="elegant-divider"></div>
     </div>
 
+    <div v-if="filterCountry" class="active-filter-bar">
+      <span class="filter-label">Mostrando historias de: <strong>{{ filterCountry }}</strong></span>
+      <button class="wireframe-button clear-filter-btn" @click="$emit('clear-filter')">Mostrar todas</button>
+    </div>
+
     <div v-if="loading" class="loading-text">Cargando historias...</div>
 
     <div v-else-if="errorMessage" class="error-message">{{ errorMessage }}</div>
@@ -59,9 +64,15 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { getStories } from '../../api/stories'
+
+const props = defineProps({
+  filterCountry: { type: String, default: '' }
+})
+
+defineEmits(['clear-filter'])
 
 const router = useRouter()
 
@@ -122,6 +133,7 @@ const fetchStories = async () => {
     const f = {}
     if (filters.profession) f.profession = filters.profession
     if (filters.age_range) f.age_range = filters.age_range
+    if (props.filterCountry) f.origin_country = props.filterCountry
     stories.value = await getStories(f)
   } catch (err) {
     stories.value = []
@@ -130,6 +142,10 @@ const fetchStories = async () => {
     loading.value = false
   }
 }
+
+watch(() => props.filterCountry, () => {
+  fetchStories()
+})
 
 const applyFilters = () => {
   fetchStories()
@@ -298,6 +314,26 @@ onMounted(fetchStories)
   display: flex;
   justify-content: flex-end;
   margin-top: auto;
+}
+
+.active-filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--wf-spacing-md);
+  margin-bottom: var(--wf-spacing-lg);
+  border: 2px solid var(--wf-border);
+  background: var(--wf-button-bg);
+}
+
+.filter-label {
+  font-size: 1rem;
+  color: var(--wf-text);
+}
+
+.clear-filter-btn {
+  font-size: 0.85rem;
+  padding: 4px 12px;
 }
 
 @media (max-width: 768px) {

@@ -25,16 +25,19 @@
     </div>
 
     <!-- Map Section -->
-    <InteractiveMap />
+    <InteractiveMap @location-selected="selectedCountry = $event" />
 
     <!-- Chronicles / Filters Section -->
-    <ChronicleList />
+    <ChronicleList :filter-country="selectedCountry" @clear-filter="selectedCountry = ''" />
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import InteractiveMap from '../components/organisms/InteractiveMap.vue'
 import ChronicleList from '../components/organisms/ChronicleList.vue'
+
+const selectedCountry = ref('')
 </script>
 
 <style scoped>

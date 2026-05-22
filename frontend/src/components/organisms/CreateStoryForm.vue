@@ -89,17 +89,13 @@ const professionOptions = [
 ]
 
 const countryOptions = [
-  { label: 'Brasil', value: 'Brasil' },
-  { label: 'Portugal', value: 'Portugal' },
-  { label: 'España', value: 'España' },
-  { label: 'Argentina', value: 'Argentina' },
-  { label: 'México', value: 'México' },
-  { label: 'Colombia', value: 'Colombia' },
-  { label: 'Chile', value: 'Chile' },
-  { label: 'Perú', value: 'Perú' },
-  { label: 'Venezuela', value: 'Venezuela' },
-  { label: 'Uruguay', value: 'Uruguay' },
-  { label: 'Paraguay', value: 'Paraguay' },
+  { label: 'Europa', value: 'Europa' },
+  { label: 'Europa Este', value: 'Europa Este' },
+  { label: 'África', value: 'África' },
+  { label: 'Norte de África', value: 'Norte de África' },
+  { label: 'América Central', value: 'América Central' },
+  { label: 'Ámerica del sur', value: 'Ámerica del sur' },
+  { label: 'Ámerica del norte', value: 'Ámerica del norte' },
   { label: 'Otro', value: 'Otro' }
 ]
 
