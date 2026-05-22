@@ -107,10 +107,15 @@ const ageOptions = [
 ]
 
 const professionMap = {
-  casa: 'Casa',
-  campo: 'Campo',
+  servicios_domesticos: 'Servicios Domésticos',
+  trabajo_social: 'Trabajo Social',
+  educacion: 'Educación',
+  cuidados: 'Cuidados',
+  sanidad: 'Sanidad',
+  gestion_administrativa: 'Gestión Administrativa',
+  hosteleria: 'Hostelería',
   industria: 'Industria',
-  limpieza: 'Limpieza',
+  agricultura: 'Agricultura',
   otro: 'Otro'
 }
 
