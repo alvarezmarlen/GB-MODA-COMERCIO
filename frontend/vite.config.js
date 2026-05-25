@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
@@ -10,5 +11,9 @@ export default defineConfig({
       '/uploads': 'http://localhost:5000',
       '/users': 'http://localhost:5000',
     }
+  },
+  test: {
+    environment: 'happy-dom',
+    globals: true,
   }
 })
