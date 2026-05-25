@@ -155,10 +155,12 @@ const goToStoryDetail = () => {
   display: flex;
   flex-direction: column;
   gap: var(--wf-spacing-lg);
+  align-items: center;
 }
 
 /* Card */
 .chronicle-card {
+  width: min(100%, 9900px);
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -183,7 +185,7 @@ const goToStoryDetail = () => {
 }
 
 .card-top-bar-inner {
-  width: 150px;
+  width: 180px;
   height: 16px;
   background: rgba(255, 255, 255, 0.35);
 }
@@ -191,13 +193,13 @@ const goToStoryDetail = () => {
 /* Body of the card */
 .card-body {
   display: flex;
-  gap: var(--wf-spacing-lg);
+  gap: calc(var(--wf-spacing-lg) * 1.2);
   padding: var(--wf-spacing-lg);
 }
 
 .card-image-box {
-  width: 200px;
-  height: 200px;
+  width: 240px;
+  height: 240px;
   background: rgba(255, 255, 255, 0.12);
   display: flex;
   justify-content: center;
