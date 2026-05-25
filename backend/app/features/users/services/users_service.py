@@ -5,24 +5,30 @@ from .... import db
 
 def create_user(data):
     new_user = User(
-        username=data['nombre_usuario'],
+        username=data['username'],  
         email=data['email'],
-        password_hash=generate_password_hash(data['password']),
-        role=data.get('role', 'customer')
+        password_hash=data['password_hash'], 
+        role=data.get('role', 'customer')  
     )
     db.session.add(new_user)
     db.session.commit()
-    return new_user.to_dict()
-
-
+    
+    # En lugar de usar to_dict(), devolvemos un diccionario manual para probar
+    return {
+        "id": new_user.id,
+        "nombre_usuario": new_user.username,
+        "email": new_user.email,
+        "role": new_user.role
+    }
 def update_user(user_id, data):
     user = User.query.get(user_id)
     if not user:
         return None
-    user.username = data.get('nombre_usuario', user.username)
+    
+    user.username = data.get('username', user.username)
     user.email = data.get('email', user.email)
-    if 'password' in data:
-        user.password_hash = generate_password_hash(data['password'])
+    if 'password_hash' in data:
+        user.password_hash = data['password_hash']  # Asegúrate de hashear la contraseña antes de guardarla
     user.role = data.get('role', user.role)
     db.session.commit()
     return user.to_dict()

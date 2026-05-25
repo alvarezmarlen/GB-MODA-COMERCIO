@@ -1,4 +1,4 @@
-import { reactive, computed } from 'vue'
+import { ref } from 'vue'
 
 const state = reactive({
   user: {

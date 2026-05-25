@@ -50,4 +50,15 @@ const router = createRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore()
+  
+  // Si la ruta requiere autenticación y el usuario no tiene token...
+  if (to.meta.requiresAuth && !authStore.token) {
+    next('/login') // Redirige al login
+  } else {
+    next() // Permite la navegación
+  }
+})
+
 export default router

@@ -1,27 +1,12 @@
 <template>
   <div class="home-view-container">
     <!-- Hero Section -->
-    <div class="wireframe-container hero-container">
-      <div class="hero-grid">
-        <!-- Left: Image Column -->
-        <div class="hero-left-box">
-          <div class="image-placeholder-box">
-            <svg class="crossed-lines" xmlns="http://www.w3.org/2000/svg">
-              <line x1="0" y1="0" x2="100%" y2="100%" />
-              <line x1="100%" y1="0" x2="0" y2="100%" />
-            </svg>
-            <div class="image-label">IMAGEN</div>
-          </div>
-        </div>
-
-        <!-- Right: Text Column -->
-        <div class="hero-right-box">
-          <h1 class="hero-title">GB-MODA-COMERCIO</h1>
-          <p class="hero-paragraph">
-            Descubre y comparte las crónicas reales de la moda y el comercio local. Una plataforma comunitaria dedicada a documentar, preservar y honrar la rica tradición, el esfuerzo diario y el legado cultural de los oficios locales que dan identidad a nuestra sociedad.
-          </p>
-        </div>
-      </div>
+    <div class="hero-section">
+      <img src="../assets/Logo.jpg" alt="Logo Mujeres Trabajadoras" class="hero-logo-centered" />
+      <h1 class="hero-title-centered">GB-MODA-COMERCIO</h1>
+      <p class="hero-paragraph-centered">
+        “Mujeres trabajadoras de nuestras vidas” son un conjunto de relatos biográficos que pretenden realzar y poner en valor el trabajo diario que desempeñan las mujeres de nuestro entorno. Dar a conocer sus historias de vida y agradecer el trabajo que han realizado tanto fuera como dentro del hogar.
+      </p>
     </div>
 
     <!-- Map Section -->
@@ -39,114 +24,59 @@ import ChronicleList from '../components/organisms/ChronicleList.vue'
 
 <style scoped>
 .home-view-container {
-  padding: var(--wf-spacing-md) 0;
+  /* Color Palette */
+  --color-principal: #2D6A8B; /* Azul Pizarra */
+  --color-rojo: #E93C44;
+  --color-amarillo: #FCD015;
+  --color-verde: #48C5B6;
+  --color-blanco: #FFFFFF;
+
+  padding: var(--wf-spacing-md);
   animation: fadeIn 0.4s ease-out;
+  
+  /* Solid background color */
+  background-color: var(--color-principal);
+  min-height: 100vh;
 }
 
-.hero-container {
-  margin: 0;
-  padding: var(--wf-spacing-lg) !important;
-  background: var(--wf-bg);
-  border-width: 2px;
-}
-
-/* Grid layout for the split hero */
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.12fr 1fr;
-  gap: var(--wf-spacing-lg);
-  align-items: stretch;
-  min-height: 380px;
-}
-
-/* Left Image Column */
-.hero-left-box {
-  display: flex;
-  flex: 1;
-}
-
-.image-placeholder-box {
-  flex: 1;
-  border: 2px solid var(--wf-border);
-  background: #fdfdfd;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 340px;
-  transition: all 0.3s ease;
-}
-
-.crossed-lines {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.crossed-lines line {
-  stroke: var(--wf-placeholder);
-  stroke-width: 1.5;
-}
-
-.image-label {
-  position: relative;
-  background: var(--wf-bg);
-  padding: 6px 16px;
-  border: 2px solid var(--wf-border);
-  font-family: monospace;
-  font-weight: bold;
-  font-size: 1rem;
-  letter-spacing: 2px;
-  z-index: 2;
-  text-transform: uppercase;
-}
-
-.image-placeholder-box:hover {
-  background: #f9f9f9;
-  box-shadow: 4px 4px 0px var(--wf-border);
-  transform: translate(-2px, -2px);
-}
-
-.image-placeholder-box:hover .image-label {
-  background: var(--wf-border);
-  color: var(--wf-bg);
-}
-
-/* Right Text Column */
-.hero-right-box {
+.hero-section {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: var(--wf-spacing-lg);
-  border: 2px solid var(--wf-border);
-  background: var(--wf-bg);
-  transition: all 0.3s ease;
+  align-items: center;
+  text-align: center;
+  padding: 40px 20px 60px 20px;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.hero-right-box:hover {
-  box-shadow: 4px 4px 0px var(--wf-border);
-  transform: translate(-2px, -2px);
+.hero-logo-centered {
+  max-width: 350px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 30px;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.2));
+  border-radius: 8px; /* Opcional, por si la imagen se ve mejor con bordes redondeados */
 }
 
-.hero-title {
-  font-size: 2rem;
+.hero-title-centered {
+  font-size: 2.5rem;
   font-weight: bold;
   letter-spacing: 2px;
-  margin-bottom: var(--wf-spacing-md);
+  margin-bottom: 24px;
   text-transform: uppercase;
-  border-bottom: 2px solid var(--wf-border);
-  padding-bottom: var(--wf-spacing-xs);
+  color: var(--color-amarillo); /* El amarillo resalta excelente sobre el fondo azul oscuro */
+  border-bottom: 4px solid var(--color-rojo);
+  padding-bottom: 12px;
+  display: inline-block;
 }
 
-.hero-paragraph {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--wf-text);
+.hero-paragraph-centered {
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: var(--color-blanco); /* Texto blanco para máxima legibilidad sobre azul */
   margin: 0;
-  text-align: justify;
+  font-weight: 500;
 }
 
 /* Animations */
@@ -155,23 +85,18 @@ import ChronicleList from '../components/organisms/ChronicleList.vue'
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive Grid styling */
+/* Responsive */
 @media (max-width: 800px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-    gap: var(--wf-spacing-md);
+  .hero-logo-centered {
+    max-width: 250px;
   }
   
-  .image-placeholder-box {
-    min-height: 260px;
+  .hero-title-centered {
+    font-size: 1.8rem;
   }
   
-  .hero-right-box {
-    padding: var(--wf-spacing-md);
-  }
-  
-  .hero-title {
-    font-size: 1.6rem;
+  .hero-paragraph-centered {
+    font-size: 1.05rem;
   }
 }
 </style>

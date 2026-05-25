@@ -1,7 +1,9 @@
-from flask import Flask, send_from_directory
+import os
+from flask import Flask 
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from app import db
+from flask import send_from_directory
 from app.features.users.routes.users_routes import users_bp
 from app.features.stories.routes.stories_routes import stories_bp
 from app.features.auth.routes.auth_routes import auth_bp
@@ -9,10 +11,17 @@ from app.features.auth.models.token_blacklist import TokenBlacklist
 from app.core.jwt_handlers import setup_jwt_handlers
 
 
+
 def create_app():
     app = Flask(__name__)
     CORS(app)
     app.config.from_object('app.core.config.Config')
+    
+
+    BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(BASE_DIR, 'moda_comercio.db')
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
     db.init_app(app)
 
     jwt = JWTManager(app)
@@ -21,6 +30,7 @@ def create_app():
     app.register_blueprint(users_bp)
     app.register_blueprint(stories_bp)
     app.register_blueprint(auth_bp)
+
 
     @app.route('/')
     def home():
