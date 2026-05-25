@@ -42,11 +42,47 @@ import ChronicleList from '../components/organisms/ChronicleList.vue'
   --color-amarillo:  #FCD015;
   --color-blanco:    #FFFFFF;
 
-  background-color: var(--color-principal);
+  position: relative;
+  overflow: hidden;
+  background: var(--color-principal);
   min-height: 100vh;
-  /* Sin padding lateral para que el azul llegue a los bordes */
-  padding: 0;
+  padding: 0 80px;
   animation: fadeIn 0.45s ease-out;
+}
+
+.home-view-container::before,
+.home-view-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 70px;
+  background-repeat: repeat-y;
+  background-position: top center;
+  background-size: 70px auto;
+  opacity: 0.96;
+  pointer-events: none;
+}
+
+.home-view-container::before {
+  left: 0;
+  background-image: url('../assets/1.png');
+}
+
+.home-view-container::after {
+  right: 0;
+  background-image: url('../assets/2.png');
+}
+
+@media (max-width: 900px) {
+  .home-view-container {
+    padding: 0 24px;
+  }
+
+  .home-view-container::before,
+  .home-view-container::after {
+    display: none;
+  }
 }
 
 /* ── HERO layout: dos columnas ── */
