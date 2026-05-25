@@ -97,3 +97,40 @@ class TestAuthRoutes:
             headers={'Authorization': f'Bearer {access_token}'}
         )
         assert response.status_code == 401
+
+    def test_full_auth_flow(self, client, app):
+        with app.app_context():
+            create_user(USER_DATA)
+            login_result = login_user(USER_DATA['email'], USER_DATA['password'])
+            access_token = login_result['access_token']
+            refresh_token = login_result['refresh_token']
+
+        resp1 = client.post(
+            '/auth/logout',
+            headers={'Authorization': f'Bearer {access_token}'}
+        )
+        assert resp1.status_code == 200
+
+        resp2 = client.post(
+            '/auth/refresh',
+            headers={'Authorization': f'Bearer {refresh_token}'}
+        )
+        assert resp2.status_code == 200
+        new_access_token = resp2.get_json()['access_token']
+
+        resp3 = client.post(
+            '/auth/logout',
+            headers={'Authorization': f'Bearer {new_access_token}'}
+        )
+        assert resp3.status_code == 200
+        from app.features.auth.services.auth_service import is_token_revoked
+        from flask_jwt_extended import decode_token
+        with app.app_context():
+            decoded = decode_token(new_access_token)
+            assert is_token_revoked(decoded['jti'])
+
+        resp4 = client.post(
+            '/auth/logout',
+            headers={'Authorization': f'Bearer {new_access_token}'}
+        )
+        assert resp4.status_code == 401
