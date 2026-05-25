@@ -54,7 +54,7 @@
 
       <!-- Right text section -->
       <div class="map-text-box">
-        <h2 class="map-quote">"Nuestras historias cruzan muchas fronteras"</h2>
+        <h2 class="map-quote">"Historias que cruzan muchas fronteras"</h2>
       </div>
     </div>
   </div>
