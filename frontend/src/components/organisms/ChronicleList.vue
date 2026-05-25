@@ -5,10 +5,13 @@
       <h3 class="filter-title">Filtrado</h3>
       <div class="filters-row">
         <select class="wireframe-input filter-select">
-          <option value="">Oficio</option>
+          <option value="">Profesion u oficio</option>
         </select>
         <select class="wireframe-input filter-select">
-          <option value="">Edad</option>
+          <option value="">Fecha de nacimiento</option>
+        </select>
+        <select class="wireframe-input filter-select">
+          <option value="">Continente</option>
         </select>
       </div>
       <div class="elegant-divider"></div>
@@ -117,15 +120,12 @@ const goToStoryDetail = () => {
 }
 
 .filter-select {
-  width: 220px;
+  width: 300px;
   cursor: pointer;
   background: var(--wf-bg);
   color: var(--wf-text);
   appearance: none;
-  background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
   background-repeat: no-repeat;
-  background-position-x: 95%;
-  background-position-y: 50%;
   padding-right: 30px;
   border: 2px solid var(--wf-border);
   border-radius: 0;
