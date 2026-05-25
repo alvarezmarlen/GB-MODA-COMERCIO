@@ -34,10 +34,11 @@ const showNavAndFooter = computed(() => {
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
-  padding: var(--wf-spacing-md) var(--wf-spacing-lg);
+  /* sin padding para que el fondo llegue a los bordes */
 }
 
 .app-main-content {
   flex: 1 0 auto;
+  padding-top: 80px; /* espacio para el nav fijo flotante */
 }
 </style>
