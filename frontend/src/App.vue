@@ -34,6 +34,7 @@ const showNavAndFooter = computed(() => {
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
+  background-color: #2D6A8B;
   /* sin padding para que el fondo llegue a los bordes */
 }
 

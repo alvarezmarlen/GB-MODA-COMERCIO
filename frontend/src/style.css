@@ -1,4 +1,4 @@
-/* Wireframe Design System */
+/* Design System */
 :root {
   --wf-bg: #ffffff;
   --wf-border: #000000;
@@ -10,6 +10,10 @@
   --wf-spacing-sm: 8px;
   --wf-spacing-md: 16px;
   --wf-spacing-lg: 24px;
+
+  /* Tipografía */
+  --font-body:  Arial, Helvetica, sans-serif;
+  --font-title: 'Pacifico', cursive, sans-serif;
 }
 
 * {
@@ -19,10 +23,15 @@
 }
 
 body {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: var(--font-body);
   background-color: var(--wf-bg);
   color: var(--wf-text);
   line-height: 1.5;
+}
+
+/* Títulos y subtítulos → Ubuntu Light (300) */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-title);
 }
 
 .wireframe-container {
