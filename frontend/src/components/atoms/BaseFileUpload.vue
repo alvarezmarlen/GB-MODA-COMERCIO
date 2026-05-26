@@ -11,17 +11,19 @@
     />
     <div class="upload-content">
       <span class="upload-icon">＋</span>
-      <p v-if="files.length === 0">Arrastra una foto aquí o haz click</p>
+      <p v-if="files.length === 0">{{ t('fileUpload.dragDrop') }}</p>
       <div v-else class="file-names">
         <p v-for="(file, index) in files" :key="index">{{ file.name }}</p>
       </div>
-      <p v-if="files.length > 0" class="file-count">{{ files.length }} / {{ maxFiles }} seleccionados</p>
+      <p v-if="files.length > 0" class="file-count">{{ t('fileUpload.selectedCount', { count: files.length, max: maxFiles }) }}</p>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 const props = defineProps({
   disabled: {
@@ -51,7 +53,7 @@ const handleFileChange = (event) => {
   const selectedFiles = Array.from(event.target.files)
   
   if (selectedFiles.length > props.maxFiles) {
-    alert(`Solo puedes subir un máximo de ${props.maxFiles} fotos.`)
+    alert(t('fileUpload.maxFilesAlert', { max: props.maxFiles }))
     files.value = selectedFiles.slice(0, props.maxFiles)
   } else {
     files.value = selectedFiles

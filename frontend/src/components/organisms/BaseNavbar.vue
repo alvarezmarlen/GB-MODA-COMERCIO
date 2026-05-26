@@ -3,7 +3,7 @@
 
     <!-- Left: Language selector -->
     <div class="navbar-left">
-      <select class="lang-select" v-model="locale" @change="onLocaleChange">
+      <select class="lang-select" v-model="locale">
         <option v-for="opt in languageOptions" :key="opt.value" :value="opt.value">
           {{ opt.label }}
         </option>
@@ -13,18 +13,18 @@
     <!-- Center: Navigation Tabs -->
     <div class="navbar-center">
       <router-link to="/" class="nav-link" active-class="nav-link--active">
-        Inicio
+        {{ t('nav.home') }}
       </router-link>
       <router-link to="/create-story" class="nav-link" active-class="nav-link--active">
-        + Crear Historia
+        {{ t('nav.createStory') }}
       </router-link>
     </div>
 
     <!-- Right: Profile & Logout -->
     <div class="navbar-right">
-      <span class="username">👤 {{ user.username || 'Usuario' }}</span>
+      <span class="username">👤 {{ user.username || t('nav.profile') }}</span>
       <button class="pill-btn logout-btn" @click="handleLogout">
-        Salir →
+        {{ t('nav.logout') }} →
       </button>
     </div>
 
@@ -32,12 +32,20 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useAuthStore } from '../../composables/useAuthStore'
 
 const { t, locale } = useI18n()
+
+const languageOptions = computed(() => [
+  { value: 'es', label: t('lang.es') },
+  { value: 'en', label: t('lang.en') },
+  { value: 'eu', label: t('lang.eu') },
+  { value: 'fr', label: t('lang.fr') },
+  { value: 'ro', label: t('lang.ro') },
+])
 const router = useRouter()
 const { user, isAdmin, logout } = useAuthStore()
 

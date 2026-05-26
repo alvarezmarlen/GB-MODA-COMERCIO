@@ -15,9 +15,9 @@
     "contact": "Contacto"
   },
   "home": {
-    "brandTitle": "GB-MODA-COMERCIO",
+    "brandTitle": "GB MODA Y COMERCIO",
     "imageLabel": "IMAGEN",
-    "heroParagraph": "Descubre y comparte las crónicas reales de la moda y el comercio local. Una plataforma comunitaria dedicada a documentar, preservar y honrar la rica tradición, el esfuerzo diario y el legado cultural de los oficios locales que dan identidad a nuestra sociedad."
+    "heroParagraph": "\"Mujeres trabajadoras de nuestras vidas\" son un conjunto de relatos biográficos que pretenden realzar y poner en valor el trabajo diario que desempeñan las mujeres de nuestro entorno. Dar a conocer sus historias de vida y agradecer el trabajo que han realizado tanto fuera como dentro del hogar."
   },
   "auth": {
     "loginTitle": "Iniciar Sesión",
@@ -120,6 +120,8 @@
     "filterBy": "FILTRAR POR",
     "allTrades": "Oficio (todos)",
     "allAges": "Edad (todas)",
+    "birthDate": "Fecha de nacimiento",
+    "allContinents": "Continente (todos)",
     "loading": "Cargando historias...",
     "noStories": "No hay historias disponibles.",
     "noImage": "Sin imagen",
@@ -129,6 +131,7 @@
     "country": "País"
   },
   "map": {
+    "quote": "\"Historias que cruzan muchas fronteras\"",
     "locations": {
       "america_central": "América Central",
       "pais_vasco": "País Vasco",
@@ -182,6 +185,15 @@
     "Uruguay": "Uruguay",
     "Paraguay": "Paraguay",
     "Otro": "Otro"
+  },
+  "fileUpload": {
+    "dragDrop": "Arrastra una foto aquí o haz click",
+    "selectedCount": "{count} / {max} seleccionados",
+    "maxFilesAlert": "Solo puedes subir un máximo de {max} fotos."
+  },
+  "common": {
+    "selectOption": "Seleccionar opción",
+    "notAvailable": "N/A"
   },
   "lang": {
     "es": "Español",

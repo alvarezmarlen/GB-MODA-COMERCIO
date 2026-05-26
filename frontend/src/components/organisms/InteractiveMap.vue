@@ -54,14 +54,15 @@
 
       <!-- Right text section -->
       <div class="map-text-box">
-        <h2 class="map-quote">"Historias que cruzan muchas fronteras"</h2>
+        <h2 class="map-quote">{{ t('map.quote') }}</h2>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-// Map logic component
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 </script>
 
 <style scoped>

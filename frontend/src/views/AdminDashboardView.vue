@@ -148,9 +148,9 @@ const executeDelete = async () => {
   } catch {
   }
 }
+const getProfLabel = (k) => k ? t(`professions.${k}`) : t('common.notAvailable')
 
-const getProfLabel = (k) => k ? t(`professions.${k}`) : 'N/A'
-const getAgeLabel = (k) => k ? t(`ages.${k}`) : 'N/A'
+const getAgeLabel = (k) => k ? t(`ages.${k}`) : t('common.notAvailable')
 </script>
 
 <style scoped>

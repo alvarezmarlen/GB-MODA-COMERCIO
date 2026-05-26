@@ -15,9 +15,9 @@
     "contact": "Contact"
   },
   "home": {
-    "brandTitle": "GB-COMERȚ-DE-MODĂ",
+    "brandTitle": "GB MODĂ ȘI COMERȚ",
     "imageLabel": "IMAGINE",
-    "heroParagraph": "Descoperiți și împărtășiți adevăratele cronici ale modei și comerțului local. O platformă comunitară dedicată documentării, păstrării și onorării tradiției bogate, efortului zilnic și moștenirii culturale a meseriilor locale care dau identitate societății noastre."
+    "heroParagraph": "\"Femei muncitoare ale vieților noastre\" este o colecție de relatări biografice care au scopul de a evidenția și valorifica munca zilnică depusă de femeile din jurul nostru. Să le facem cunoscute poveștile de viață și să le mulțumim pentru munca pe care au realizat-o atât în afara, cât și în interiorul căminului."
   },
   "auth": {
     "loginTitle": "Autentificare",
@@ -120,6 +120,8 @@
     "filterBy": "FILTREAZĂ DUPĂ",
     "allTrades": "Toate meseriile",
     "allAges": "Toate vârstele",
+    "birthDate": "Data nașterii",
+    "allContinents": "Toate continentele",
     "loading": "Se încarcă poveștile...",
     "noStories": "Nicio poveste disponibilă.",
     "noImage": "Fără imagine",
@@ -129,6 +131,7 @@
     "country": "Țară"
   },
   "map": {
+    "quote": "\"Povești care traversează multe frontiere\"",
     "locations": {
       "america_central": "America Centrală",
       "pais_vasco": "Țara Bascilor",
@@ -138,7 +141,7 @@
       "otro": "Altele"
     },
     "descriptions": {
-      "america_central": "O regiune vibrantă care păstrează intactă arta milenară a războiului de țesut mayaș, ceramica policromă vie și meseriile sacre în armonie perfectă cu pădurile dese și vulcanii maiestuoși.",
+      "america_central": "O regiune vibrantă care păstrează intactă arta milenară a războiului de țesut mayaș, ceramica policromă vie și meseriile sacre în armonie perfectă cu pădurile dese și vulcanii maiestoși.",
       "pais_vasco": "Un enclav istoric de neegalat unde filarea riguroasă a fibrelor vegetale, forjarea artizanală și construcția navală de precizie au definit o identitate unică, gelos păstrată de maeștri pasionați.",
       "espana": "O răscruce de drumuri și contraste, imens de bogată în tradiții textile străvechi, croitorie clasică de elită și marochinărie fină care au dăinuit de-a lungul secolelor în diverse colțuri peninsulare.",
       "marruecos": "Casă mistică a străvechii olării roșii din munții Rif, a tăbăcarilor magistrali din medinele imperiale și a războaielor de țesut cu culori imposibile. Un patrimoniu vibrant, pur manual și transmis de la mame la fiice.",
@@ -182,6 +185,15 @@
     "Uruguay": "Uruguay",
     "Paraguay": "Paraguay",
     "Otro": "Altele"
+  },
+  "fileUpload": {
+    "dragDrop": "Trage o fotografie aici sau dă clic",
+    "selectedCount": "{count} / {max} selectate",
+    "maxFilesAlert": "Poți încărca maximum {max} fotografii."
+  },
+  "common": {
+    "selectOption": "Selectează opțiunea",
+    "notAvailable": "N/D"
   },
   "lang": {
     "es": "Español",

@@ -7,27 +7,19 @@
       />
     </FormGroup>
 
-    <FormGroup label="País de origen o continente">
-      <BaseSelect
-        v-model="formData.countryOrigin"
-        :options="countryOptions"
-        placeholder="▼ Seleccionar país o continente"
-      />
-    </FormGroup>
-
-    <FormGroup label="Profesión u oficio">
+    <FormGroup :label="t('createStory.professionLabel')">
       <BaseSelect
         v-model="formData.profession"
         :options="professionOptions"
-        placeholder="▼ Seleccionar profesión u oficio"
+        :placeholder="t('createStory.professionPlaceholder')"
       />
     </FormGroup>
 
-    <FormGroup label="Año de nacimiento">
+    <FormGroup :label="t('createStory.ageLabel')">
       <BaseSelect
-        v-model="formData.birthYearRange"
+        v-model="formData.ageRange"
         :options="DateOfBirthOptions"
-        placeholder="▼ Seleccionar año de nacimiento"
+        :placeholder="t('createStory.agePlaceholder')"
       />
     </FormGroup>
 
@@ -82,6 +74,14 @@ import { useStoryStore } from '../../composables/useStoryStore'
 import { useAuthStore } from '../../composables/useAuthStore'
 import { createStory, uploadStoryImage } from '../../api/stories'
 
+const router = useRouter()
+const { t } = useI18n()
+const { user } = useAuthStore()
+const { setStory } = useStoryStore()
+const isSubmitting = ref(false)
+const submitError = ref('')
+const uploadedFiles = ref([])
+
 const countryOptions = [
   { label: 'País Vasco', value: 'pais_vasco' },
   { label: 'Europa', value: 'europa' },
@@ -111,7 +111,8 @@ const DateOfBirthOptions = [
 const { formData } = useForm({
   title: '',
   profession: '',
-  birthYearRange: '',
+  ageRange: '',
+  originCountry: '',
   description: '',
   acceptedTerms: false
 })

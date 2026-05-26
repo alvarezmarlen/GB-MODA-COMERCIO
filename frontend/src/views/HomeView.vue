@@ -10,13 +10,8 @@
 
       <!-- Texto -->
       <div class="hero-text-col">
-        <h1 class="hero-title">GB MODA Y COMERCIO</h1>
-        <p class="hero-paragraph">
-          "Mujeres trabajadoras de nuestras vidas" son un conjunto de relatos biográficos
-          que pretenden realzar y poner en valor el trabajo diario que desempeñan las
-          mujeres de nuestro entorno. Dar a conocer sus historias de vida y agradecer el
-          trabajo que han realizado tanto fuera como dentro del hogar.
-        </p>
+        <h1 class="hero-title">{{ t('home.brandTitle') }}</h1>
+        <p class="hero-paragraph">{{ t('home.heroParagraph') }}</p>
       </div>
     </div>
 

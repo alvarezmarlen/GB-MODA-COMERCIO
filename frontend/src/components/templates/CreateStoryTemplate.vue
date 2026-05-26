@@ -1,7 +1,7 @@
 <template>
   <div class="create-story-template">
     <header class="template-header">
-      <h1 class="template-title">CREAR HISTORIA</h1>
+      <h1 class="template-title">{{ t('createStory.pageTitle') }}</h1>
     </header>
     <main class="template-content">
       <slot name="form"></slot>

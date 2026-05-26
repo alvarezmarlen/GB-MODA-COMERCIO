@@ -1,16 +1,16 @@
 <template>
   <div class="chronicles-section">
     <div class="filters-header">
-      <h3 class="filter-title">Filtrado</h3>
+      <h3 class="filter-title">{{ t('chronicles.filterBy') }}</h3>
       <div class="filters-row">
         <select class="wireframe-input filter-select">
-          <option value="">Profesion u oficio</option>
+          <option value="">{{ t('chronicles.allTrades') }}</option>
         </select>
         <select class="wireframe-input filter-select">
-          <option value="">Fecha de nacimiento</option>
+          <option value="">{{ t('chronicles.birthDate') }}</option>
         </select>
         <select class="wireframe-input filter-select">
-          <option value="">Continente</option>
+          <option value="">{{ t('chronicles.allContinents') }}</option>
         </select>
       </div>
       <div class="elegant-divider"></div>
@@ -110,8 +110,20 @@ const ageMap = {
   over_60: 'over_60'
 }
 
-const professionLabel = (val) => val ? t(`professions.${val}`) : val
-const ageLabel = (val) => val ? t(`ages.${val}`) : val
+const KNOWN_PROFESSIONS = ['casa', 'campo', 'industria', 'limpieza', 'otro']
+const KNOWN_AGES = ['under_18', '18_25', '26_35', '36_45', '46_60', 'over_60']
+
+const professionLabel = (val) => {
+  if (!val) return val
+  const key = val.toLowerCase().replace(/\s+/g, '_')
+  return KNOWN_PROFESSIONS.includes(key) ? t(`professions.${key}`) : val
+}
+
+const ageLabel = (val) => {
+  if (!val) return val
+  const key = val.toLowerCase()
+  return KNOWN_AGES.includes(key) ? t(`ages.${key}`) : val
+}
 
 const truncate = (text, max) => {
   if (!text) return ''

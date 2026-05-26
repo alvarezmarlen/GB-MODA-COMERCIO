@@ -15,9 +15,9 @@
     "contact": "Contact"
   },
   "home": {
-    "brandTitle": "GB-MODE-COMMERCE",    
+    "brandTitle": "GB MODE ET COMMERCE",
     "imageLabel": "IMAGE",
-    "heroParagraph": "Découvrez et partagez les chroniques réelles de la mode et du commerce local. Une plateforme communautaire dédiée à documenter, préserver et honorer la riche tradition, l'effort quotidien et l'héritage culturel des métiers locaux qui donnent leur identité à notre société."
+    "heroParagraph": "\"Femmes travailleuses de nos vies\" est un ensemble de récits biographiques qui visent à mettre en valeur le travail quotidien accompli par les femmes de notre entourage. Faire connaître leurs histoires de vie et les remercier pour le travail qu'elles ont réalisé tant à l'extérieur qu'au sein du foyer."
   },
   "auth": {
     "loginTitle": "Connexion",
@@ -120,6 +120,8 @@
     "filterBy": "FILTRER PAR",
     "allTrades": "Tous les métiers",
     "allAges": "Tous les âges",
+    "birthDate": "Date de naissance",
+    "allContinents": "Tous les continents",
     "loading": "Chargement des histoires...",
     "noStories": "Aucune histoire disponible.",
     "noImage": "Aucune image",
@@ -129,6 +131,7 @@
     "country": "Pays"
   },
   "map": {
+    "quote": "\"Des histoires qui traversent de nombreuses frontières\"",
     "locations": {
       "america_central": "Amérique Centrale",
       "pais_vasco": "Pays Basque",
@@ -182,6 +185,15 @@
     "Uruguay": "Uruguay",
     "Paraguay": "Paraguay",
     "Otro": "Autre"
+  },
+  "fileUpload": {
+    "dragDrop": "Glissez une photo ici ou cliquez",
+    "selectedCount": "{count} / {max} sélectionnés",
+    "maxFilesAlert": "Vous ne pouvez télécharger qu'un maximum de {max} photos."
+  },
+  "common": {
+    "selectOption": "Sélectionner une option",
+    "notAvailable": "N/D"
   },
   "lang": {
     "es": "Español",

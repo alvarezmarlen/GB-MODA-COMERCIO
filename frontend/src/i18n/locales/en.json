@@ -15,9 +15,9 @@
     "contact": "Contact"
   },
   "home": {
-    "brandTitle": "GB-FASHION-TRADE",
+    "brandTitle": "GB FASHION AND TRADE",
     "imageLabel": "IMAGE",
-    "heroParagraph": "Discover and share the real chronicles of fashion and local commerce. A community platform dedicated to documenting, preserving, and honoring the rich tradition, daily effort, and cultural legacy of local trades that give identity to our society."
+    "heroParagraph": "\"Working women of our lives\" is a collection of biographical stories that aim to highlight and value the daily work carried out by the women around us. To make known their life stories and to thank them for the work they have done both outside and inside the home."
   },
   "auth": {
     "loginTitle": "Log In",
@@ -120,6 +120,8 @@
     "filterBy": "FILTER BY",
     "allTrades": "All trades",
     "allAges": "All ages",
+    "birthDate": "Birth date",
+    "allContinents": "All continents",
     "loading": "Loading stories...",
     "noStories": "No stories available.",
     "noImage": "No image",
@@ -129,6 +131,7 @@
     "country": "Country"
   },
   "map": {
+    "quote": "\"Stories that cross many borders\"",
     "locations": {
       "america_central": "Central America",
       "pais_vasco": "Basque Country",
@@ -182,6 +185,15 @@
     "Uruguay": "Uruguay",
     "Paraguay": "Paraguay",
     "Otro": "Other"
+  },
+  "fileUpload": {
+    "dragDrop": "Drag a photo here or click",
+    "selectedCount": "{count} / {max} selected",
+    "maxFilesAlert": "You can only upload a maximum of {max} photos."
+  },
+  "common": {
+    "selectOption": "Select option",
+    "notAvailable": "N/A"
   },
   "lang": {
     "es": "Español",

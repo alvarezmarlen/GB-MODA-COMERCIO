@@ -25,7 +25,7 @@
               :key="idx"
               class="story-image-wrapper"
             >
-              <img :src="img.url || img" alt="Imagen de la historia" class="story-image" />
+              <img :src="img.url || img" :alt="t('storyDetail.imageLabel')" class="story-image" />
             </div>
           </template>
           <template v-else>

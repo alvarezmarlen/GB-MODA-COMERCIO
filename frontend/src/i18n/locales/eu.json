@@ -15,9 +15,9 @@
     "contact": "Kontaktua"
   },
   "home": {
-    "brandTitle": "GB-MODA-MERKATARITZA", 
+    "brandTitle": "GB MODA ETA MERKATARITZA",
     "imageLabel": "IRUDIA",
-    "heroParagraph": "Ezagutu eta partekatu moda eta tokiko merkataritzaren kronika errealak. Gure gizarteari identitatea ematen dioten tokiko ofizioen tradizio aberatsa, eguneroko ahalegina eta ondare kulturala dokumentatzeko, gordetzeko eta omentzeko plataforma komunitarioa."
+    "heroParagraph": "\"Gure bizitzetako emakume langileak\" gure inguruko emakumeek egiten duten eguneroko lana nabarmentzeko eta balioesteko helburua duten errelato biografikoen bilduma bat da. Haien bizitza istorioak ezagutarazi eta etxetik kanpo zein barruan egin duten lana eskertzea."
   },
   "auth": {
     "loginTitle": "Saioa Hasi",
@@ -120,6 +120,8 @@
     "filterBy": "IRAGAZI",
     "allTrades": "Ofizio guztiak",
     "allAges": "Adin guztiak",
+    "birthDate": "Jaiotze data",
+    "allContinents": "Kontinente guztiak",
     "loading": "Istorioak kargatzen...",
     "noStories": "Ez dago istorio erabilgarririk.",
     "noImage": "Irudirik ez",
@@ -129,6 +131,7 @@
     "country": "Herrialdea"
   },
   "map": {
+    "quote": "\"Muga asko zeharkatzen dituzten istorioak\"",
     "locations": {
       "america_central": "Erdialdeko Amerika",
       "pais_vasco": "Euskal Herria",
@@ -182,6 +185,15 @@
     "Uruguay": "Uruguai",
     "Paraguay": "Paraguai",
     "Otro": "Bestea"
+  },
+  "fileUpload": {
+    "dragDrop": "Arrastatu argazki bat hona edo sakatu",
+    "selectedCount": "{count} / {max} hautatuta",
+    "maxFilesAlert": "Gehienez {max} argazki igo ditzakezu."
+  },
+  "common": {
+    "selectOption": "Hautatu aukera",
+    "notAvailable": "E/E"
   },
   "lang": {
     "es": "Español",
