@@ -22,7 +22,9 @@
 
     <!-- Right: Profile & Logout -->
     <div class="navbar-right">
-      <span class="username">👤 {{ user.username || t('nav.profile') }}</span>
+      <router-link :to="isAdmin ? '/admin' : '/dashboard'" class="username">
+        👤 {{ user.username || t('nav.profile') }}
+      </router-link>
       <button class="pill-btn logout-btn" @click="handleLogout">
         {{ t('nav.logout') }} →
       </button>
@@ -215,6 +217,11 @@ const handleLogout = () => {
   font-weight: 500;
   color: #555;
   white-space: nowrap;
+  text-decoration: none;
+}
+
+.username:hover {
+  color: #111;
 }
 
 /* ── Responsive ── */
