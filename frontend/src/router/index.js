@@ -6,7 +6,7 @@ import StoryDetailView from '../views/StoryDetailView.vue'
 import HomeView from '../views/HomeView.vue'
 import UserDashboardView from '../views/UserDashboardView.vue'
 import AdminDashboardView from '../views/AdminDashboardView.vue'
-
+import { useAuthStore } from '../composables/useAuthStore'
 const routes = [
   {
     path: '/',
