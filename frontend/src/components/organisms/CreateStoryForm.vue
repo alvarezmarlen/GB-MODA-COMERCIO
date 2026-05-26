@@ -7,11 +7,11 @@
       />
     </FormGroup>
 
-    <FormGroup label="País de origen o continente">
+    <FormGroup label="Continente">
       <BaseSelect
         v-model="formData.countryOrigin"
         :options="countryOptions"
-        placeholder="▼ Seleccionar país o continente"
+        placeholder="▼ Seleccionar continente"
       />
     </FormGroup>
 
@@ -68,21 +68,24 @@ import { useForm } from '../../composables/useForm'
 import { useStoryStore } from '../../composables/useStoryStore'
 
 const countryOptions = [
-  { label: 'País Vasco', value: 'pais_vasco' },
+  { label: 'America', value: 'america' },
   { label: 'Europa', value: 'europa' },
-  { label: 'Marruecos', value: 'marruecos' },
-  { label: 'África', value: 'africa' },
-  { label: 'America Latina', value: 'america_latina' },
-  { label: 'Otro', value: 'otro' }
+  { label: 'Africa', value: 'africa' },
+  { label: 'Asia', value: 'asia' },
+  { label: 'Oceania', value: 'oceania' },
 ]
 
 const professionOptions = [
-  { label: 'Ama de casa', value: 'ama de casa' },
-  { label: 'Cuidadora', value: 'cuidadora' },
-  { label: 'Camarera', value: 'camarera' },
-  { label: 'Servicio de Limpieza', value: 'servicio de limpieza' },
-  { label: 'Enfermera', value: 'enfermera' },
-  { label: 'Otro', value: 'otro' }
+  { label: 'Hosteleria y turismo', value: 'hosteleria_turismo' },
+  { label: 'Adminstracion y oficina', value: 'administracion_oficina' },
+  { label: 'Ventas y comercio', value: 'ventas_comercio' },
+  { label: 'Limpieza y mantenimiento', value: 'limpieza_mantenimiento' },
+  { label: 'Educacion y formacion', value: 'educacion_formacion' },
+  { label: 'Sanidad y cuidados', value: 'sanidad_cuidados' },
+  { label: 'Belleza y estetica', value: 'belleza_estetica' },
+  { label: 'Moda y confeccion', value: 'moda_confeccion' },
+  { label: 'Cocina y alimentacion', value: 'cocina_alimentacion' },
+  { label: 'Entre Otros', value: 'otros' }
 ]
 
 const DateOfBirthOptions = [

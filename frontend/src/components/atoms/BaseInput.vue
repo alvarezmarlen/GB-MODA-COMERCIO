@@ -22,7 +22,7 @@ defineEmits(['update:modelValue'])
 
 <style scoped>
 .wireframe-input {
-  border: 1px solid var(--color-red);
+  border: 1px solid var(--color-primary);
   border-radius: var(--wf-radius);
 }
 </style>
