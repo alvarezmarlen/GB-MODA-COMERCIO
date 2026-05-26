@@ -34,5 +34,7 @@ select.wireframe-input {
   background-position: right 8px center;
   background-size: 16px;
   padding-right: 32px;
+  border: 1px solid var(--color-red);
+  border-radius: var(--wf-radius);
 }
 </style>

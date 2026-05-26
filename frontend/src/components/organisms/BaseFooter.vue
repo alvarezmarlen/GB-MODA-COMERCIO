@@ -24,22 +24,18 @@ const { t } = useI18n()
 <style scoped>
 .base-footer {
   margin-top: var(--wf-spacing-lg);
-  padding-bottom: var(--wf-spacing-lg);
-  font-family: 'Courier New', Courier, monospace;
+  padding: calc(var(--wf-spacing-lg) * 1.2) var(--wf-spacing-lg);
+  font-family: var(--font-body);
+  background: #FCD015;
 }
 
-.footer-divider {
-  border-top: 2px solid var(--wf-border);
-  margin-bottom: var(--wf-spacing-md);
-  width: 100%;
-}
 
 .footer-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 0.85rem;
-  color: var(--wf-text);
+  color: #000000;
   gap: var(--wf-spacing-md);
 }
 
@@ -50,18 +46,18 @@ const { t } = useI18n()
 }
 
 .footer-link {
-  color: var(--wf-text);
+  color: #000000;
   text-decoration: none;
   border-bottom: 1px dashed transparent;
   transition: all 0.2s ease;
 }
 
 .footer-link:hover {
-  border-bottom: 1px dashed var(--wf-border);
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.45);
 }
 
 .divider {
-  color: var(--wf-placeholder);
+  color: rgba(0, 0, 0, 0.6);
   font-size: 0.8rem;
 }
 

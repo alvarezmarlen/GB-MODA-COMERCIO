@@ -7,19 +7,27 @@
       />
     </FormGroup>
 
-    <FormGroup :label="t('createStory.professionLabel')">
+    <FormGroup label="País de origen o continente">
       <BaseSelect
-        v-model="formData.profession"
-        :options="professionOptions"
-        :placeholder="t('createStory.professionPlaceholder')"
+        v-model="formData.countryOrigin"
+        :options="countryOptions"
+        placeholder="▼ Seleccionar país o continente"
       />
     </FormGroup>
 
-    <FormGroup :label="t('createStory.ageLabel')">
+    <FormGroup label="Profesión u oficio">
       <BaseSelect
-        v-model="formData.ageRange"
-        :options="ageOptions"
-        :placeholder="t('createStory.agePlaceholder')"
+        v-model="formData.profession"
+        :options="professionOptions"
+        placeholder="▼ Seleccionar profesión u oficio"
+      />
+    </FormGroup>
+
+    <FormGroup label="Año de nacimiento">
+      <BaseSelect
+        v-model="formData.birthYearRange"
+        :options="DateOfBirthOptions"
+        placeholder="▼ Seleccionar año de nacimiento"
       />
     </FormGroup>
 
@@ -74,51 +82,36 @@ import { useStoryStore } from '../../composables/useStoryStore'
 import { useAuthStore } from '../../composables/useAuthStore'
 import { createStory, uploadStoryImage } from '../../api/stories'
 
-const { t } = useI18n()
-const router = useRouter()
-const { setStory } = useStoryStore()
-const { user } = useAuthStore()
-const uploadedFiles = ref([])
-const isSubmitting = ref(false)
-const submitError = ref('')
+const countryOptions = [
+  { label: 'País Vasco', value: 'pais_vasco' },
+  { label: 'Europa', value: 'europa' },
+  { label: 'Marruecos', value: 'marruecos' },
+  { label: 'África', value: 'africa' },
+  { label: 'America Latina', value: 'america_latina' },
+  { label: 'Otro', value: 'otro' }
+]
 
 const professionOptions = [
-  { label: t('professions.casa'), value: 'casa' },
-  { label: t('professions.campo'), value: 'campo' },
-  { label: t('professions.industria'), value: 'industria' },
-  { label: t('professions.limpieza'), value: 'limpieza' },
-  { label: t('professions.otro'), value: 'otro' }
+  { label: 'Ama de casa', value: 'ama de casa' },
+  { label: 'Cuidadora', value: 'cuidadora' },
+  { label: 'Camarera', value: 'camarera' },
+  { label: 'Servicio de Limpieza', value: 'servicio de limpieza' },
+  { label: 'Enfermera', value: 'enfermera' },
+  { label: 'Otro', value: 'otro' }
 ]
 
-const countryOptions = [
-  { label: t('countries.Brasil'), value: 'Brasil' },
-  { label: t('countries.Portugal'), value: 'Portugal' },
-  { label: t('countries.España'), value: 'España' },
-  { label: t('countries.Argentina'), value: 'Argentina' },
-  { label: t('countries.México'), value: 'México' },
-  { label: t('countries.Colombia'), value: 'Colombia' },
-  { label: t('countries.Chile'), value: 'Chile' },
-  { label: t('countries.Perú'), value: 'Perú' },
-  { label: t('countries.Venezuela'), value: 'Venezuela' },
-  { label: t('countries.Uruguay'), value: 'Uruguay' },
-  { label: t('countries.Paraguay'), value: 'Paraguay' },
-  { label: t('countries.Otro'), value: 'Otro' }
-]
-
-const ageOptions = [
-  { label: t('ages.under_18'), value: 'under_18' },
-  { label: t('ages.18_25'), value: '18_25' },
-  { label: t('ages.26_35'), value: '26_35' },
-  { label: t('ages.36_45'), value: '36_45' },
-  { label: t('ages.46_60'), value: '46_60' },
-  { label: t('ages.over_60'), value: 'over_60' }
+const DateOfBirthOptions = [
+  { label: '1930-1960', value: '1930-1960' },
+  { label: '1960-1970', value: '1960-1970' },
+  { label: '1970-1980', value: '1970-1980' },
+  { label: '1990-2000', value: '1990-2000' },
+  { label: '2000-2010', value: '2000-2010' },
 ]
 
 const { formData } = useForm({
   title: '',
   profession: '',
-  ageRange: '',
-  originCountry: '',
+  birthYearRange: '',
   description: '',
   acceptedTerms: false
 })
@@ -182,6 +175,15 @@ const onFormSubmit = async () => {
 </script>
 
 <style scoped>
+.create-story-form {
+  border: none;
+  border-radius: var(--wf-radius);
+  padding: var(--wf-spacing-lg);
+  margin: var(--wf-spacing-lg) auto;
+  background: var(--wf-bg);
+  max-width: 800px; /* Assuming the form should match the template's max-width */
+}
+
 .checkbox-container {
   display: flex;
   align-items: flex-start;

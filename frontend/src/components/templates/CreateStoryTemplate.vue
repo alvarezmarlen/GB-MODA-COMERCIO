@@ -1,12 +1,10 @@
 <template>
   <div class="create-story-template">
     <header class="template-header">
-      <h1>{{ t('createStory.pageTitle') }}</h1>
+      <h1 class="template-title">CREAR HISTORIA</h1>
     </header>
     <main class="template-content">
-      <div class="wireframe-container">
-        <slot name="form"></slot>
-      </div>
+      <slot name="form"></slot>
     </main>
   </div>
 </template>
@@ -25,13 +23,14 @@ const { t } = useI18n()
 .template-header {
   text-align: center;
   margin-bottom: var(--wf-spacing-lg);
-  border-bottom: 2px solid var(--wf-border);
+  border-bottom: 5px solid var(--color-red);
   padding-bottom: var(--wf-spacing-sm);
 }
 
-h1 {
+h1.template-title {
   font-size: 1.5rem;
   letter-spacing: 2px;
+  color: var(--color-yellow);
 }
 
 .template-content {
