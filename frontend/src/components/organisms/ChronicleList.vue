@@ -3,14 +3,17 @@
     <div class="filters-header">
       <h3 class="filter-title">{{ t('chronicles.filterBy') }}</h3>
       <div class="filters-row">
-        <select class="wireframe-input filter-select">
+        <select class="wireframe-input filter-select" v-model="filters.profession" @change="applyFilters">
           <option value="">{{ t('chronicles.allTrades') }}</option>
+          <option v-for="opt in professionOptions" :key="opt.value" :value="opt.value">
+            {{ opt.label }}
+          </option>
         </select>
-        <select class="wireframe-input filter-select">
-          <option value="">{{ t('chronicles.birthDate') }}</option>
-        </select>
-        <select class="wireframe-input filter-select">
-          <option value="">{{ t('chronicles.allContinents') }}</option>
+        <select class="wireframe-input filter-select" v-model="filters.age_range" @change="applyFilters">
+          <option value="">{{ t('chronicles.allAges') }}</option>
+          <option v-for="opt in ageOptions" :key="opt.value" :value="opt.value">
+            {{ opt.label }}
+          </option>
         </select>
       </div>
       <div class="elegant-divider"></div>
@@ -60,7 +63,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { getStories } from '../../api/stories'
@@ -76,22 +79,22 @@ const filters = reactive({
   age_range: ''
 })
 
-const professionOptions = [
+const professionOptions = computed(() => [
   { label: t('professions.casa'), value: 'casa' },
   { label: t('professions.campo'), value: 'campo' },
   { label: t('professions.industria'), value: 'industria' },
   { label: t('professions.limpieza'), value: 'limpieza' },
   { label: t('professions.otro'), value: 'otro' }
-]
+])
 
-const ageOptions = [
+const ageOptions = computed(() => [
   { label: t('ages.under_18'), value: 'under_18' },
   { label: t('ages.18_25'), value: '18_25' },
   { label: t('ages.26_35'), value: '26_35' },
   { label: t('ages.36_45'), value: '36_45' },
   { label: t('ages.46_60'), value: '46_60' },
   { label: t('ages.over_60'), value: 'over_60' }
-]
+])
 
 const professionMap = {
   casa: 'casa',

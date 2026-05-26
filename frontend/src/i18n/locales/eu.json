@@ -103,7 +103,30 @@
     "termsLabel": "Onartzen ditut irudiak eta edukia argitaratzeko baldintzak eta baimenak.",
     "uploadLabel": "Argazkia igo",
     "publishing": "ARGITARATZEN...",
-    "publish": "ARGITARATU"
+    "publish": "ARGITARATU",
+    "countryOptions": {
+      "pais_vasco": "Euskal Herria",
+      "europa": "Europa",
+      "marruecos": "Maroko",
+      "africa": "Afrika",
+      "america_latina": "Latinoamerika",
+      "otro": "Bestea"
+    },
+    "professionOptions": {
+      "ama_de_casa": "Etxekoandrea",
+      "cuidadora": "Zaintzailea",
+      "camarera": "Zerbitzaria",
+      "servicio_de_limpieza": "Garbiketa Zerbitzua",
+      "enfermera": "Erizaina",
+      "otro": "Bestea"
+    },
+    "ageOptions": {
+      "1930_1960": "1930-1960",
+      "1960_1970": "1960-1970",
+      "1970_1980": "1970-1980",
+      "1990_2000": "1990-2000",
+      "2000_2010": "2000-2010"
+    }
   },
   "storyDetail": {
     "back": "← Atzera",

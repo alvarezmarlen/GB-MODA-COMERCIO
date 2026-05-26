@@ -103,7 +103,30 @@
     "termsLabel": "Accept termenii și permisiunile pentru publicarea imaginilor și conținutului.",
     "uploadLabel": "Încarcă fotografie",
     "publishing": "SE PUBLICĂ...",
-    "publish": "PUBLICĂ"
+    "publish": "PUBLICĂ",
+    "countryOptions": {
+      "pais_vasco": "Țara Bascilor",
+      "europa": "Europa",
+      "marruecos": "Maroc",
+      "africa": "Africa",
+      "america_latina": "America Latină",
+      "otro": "Altele"
+    },
+    "professionOptions": {
+      "ama_de_casa": "Casnică",
+      "cuidadora": "Îngrijitoare",
+      "camarera": "Chelneriță",
+      "servicio_de_limpieza": "Serviciu de curățenie",
+      "enfermera": "Asistentă medicală",
+      "otro": "Altele"
+    },
+    "ageOptions": {
+      "1930_1960": "1930-1960",
+      "1960_1970": "1960-1970",
+      "1970_1980": "1970-1980",
+      "1990_2000": "1990-2000",
+      "2000_2010": "2000-2010"
+    }
   },
   "storyDetail": {
     "back": "← Înapoi",

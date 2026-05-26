@@ -103,7 +103,30 @@
     "termsLabel": "J'accepte les termes et autorisations pour publier des images et du contenu.",
     "uploadLabel": "Télécharger une photo",
     "publishing": "PUBLICATION...",
-    "publish": "PUBLIER"
+    "publish": "PUBLIER",
+    "countryOptions": {
+      "pais_vasco": "Pays Basque",
+      "europa": "Europe",
+      "marruecos": "Maroc",
+      "africa": "Afrique",
+      "america_latina": "Amérique Latine",
+      "otro": "Autre"
+    },
+    "professionOptions": {
+      "ama_de_casa": "Femme au foyer",
+      "cuidadora": "Aide-soignante",
+      "camarera": "Serveuse",
+      "servicio_de_limpieza": "Service de nettoyage",
+      "enfermera": "Infirmière",
+      "otro": "Autre"
+    },
+    "ageOptions": {
+      "1930_1960": "1930-1960",
+      "1960_1970": "1960-1970",
+      "1970_1980": "1970-1980",
+      "1990_2000": "1990-2000",
+      "2000_2010": "2000-2010"
+    }
   },
   "storyDetail": {
     "back": "← Retour",

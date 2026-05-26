@@ -103,7 +103,30 @@
     "termsLabel": "Acepto los términos y permisos para publicar imágenes y contenido.",
     "uploadLabel": "Subir fotografía",
     "publishing": "PUBLICANDO...",
-    "publish": "PUBLICAR"
+    "publish": "PUBLICAR",
+    "countryOptions": {
+      "pais_vasco": "País Vasco",
+      "europa": "Europa",
+      "marruecos": "Marruecos",
+      "africa": "África",
+      "america_latina": "América Latina",
+      "otro": "Otro"
+    },
+    "professionOptions": {
+      "ama_de_casa": "Ama de casa",
+      "cuidadora": "Cuidadora",
+      "camarera": "Camarera",
+      "servicio_de_limpieza": "Servicio de Limpieza",
+      "enfermera": "Enfermera",
+      "otro": "Otro"
+    },
+    "ageOptions": {
+      "1930_1960": "1930-1960",
+      "1960_1970": "1960-1970",
+      "1970_1980": "1970-1980",
+      "1990_2000": "1990-2000",
+      "2000_2010": "2000-2010"
+    }
   },
   "storyDetail": {
     "back": "← Volver",

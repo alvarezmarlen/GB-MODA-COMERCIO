@@ -82,31 +82,31 @@ const isSubmitting = ref(false)
 const submitError = ref('')
 const uploadedFiles = ref([])
 
-const countryOptions = [
-  { label: 'País Vasco', value: 'pais_vasco' },
-  { label: 'Europa', value: 'europa' },
-  { label: 'Marruecos', value: 'marruecos' },
-  { label: 'África', value: 'africa' },
-  { label: 'America Latina', value: 'america_latina' },
-  { label: 'Otro', value: 'otro' }
-]
+const countryOptions = computed(() => [
+  { label: t('createStory.countryOptions.pais_vasco'), value: 'pais_vasco' },
+  { label: t('createStory.countryOptions.europa'), value: 'europa' },
+  { label: t('createStory.countryOptions.marruecos'), value: 'marruecos' },
+  { label: t('createStory.countryOptions.africa'), value: 'africa' },
+  { label: t('createStory.countryOptions.america_latina'), value: 'america_latina' },
+  { label: t('createStory.countryOptions.otro'), value: 'otro' }
+])
 
-const professionOptions = [
-  { label: 'Ama de casa', value: 'ama de casa' },
-  { label: 'Cuidadora', value: 'cuidadora' },
-  { label: 'Camarera', value: 'camarera' },
-  { label: 'Servicio de Limpieza', value: 'servicio de limpieza' },
-  { label: 'Enfermera', value: 'enfermera' },
-  { label: 'Otro', value: 'otro' }
-]
+const professionOptions = computed(() => [
+  { label: t('createStory.professionOptions.ama_de_casa'), value: 'ama de casa' },
+  { label: t('createStory.professionOptions.cuidadora'), value: 'cuidadora' },
+  { label: t('createStory.professionOptions.camarera'), value: 'camarera' },
+  { label: t('createStory.professionOptions.servicio_de_limpieza'), value: 'servicio de limpieza' },
+  { label: t('createStory.professionOptions.enfermera'), value: 'enfermera' },
+  { label: t('createStory.professionOptions.otro'), value: 'otro' }
+])
 
-const DateOfBirthOptions = [
-  { label: '1930-1960', value: '1930-1960' },
-  { label: '1960-1970', value: '1960-1970' },
-  { label: '1970-1980', value: '1970-1980' },
-  { label: '1990-2000', value: '1990-2000' },
-  { label: '2000-2010', value: '2000-2010' },
-]
+const DateOfBirthOptions = computed(() => [
+  { label: t('createStory.ageOptions.1930_1960'), value: '1930-1960' },
+  { label: t('createStory.ageOptions.1960_1970'), value: '1960-1970' },
+  { label: t('createStory.ageOptions.1970_1980'), value: '1970-1980' },
+  { label: t('createStory.ageOptions.1990_2000'), value: '1990-2000' },
+  { label: t('createStory.ageOptions.2000_2010'), value: '2000-2010' },
+])
 
 const { formData } = useForm({
   title: '',
