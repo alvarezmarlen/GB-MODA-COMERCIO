@@ -260,6 +260,12 @@ onMounted(fetchStories)
   padding: var(--wf-spacing-lg);
 }
 
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .card-image-box {
   width: 240px;
   height: 240px;
@@ -267,6 +273,7 @@ onMounted(fetchStories)
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
   color: var(--color-white);
   font-weight: bold;
   border: none;
