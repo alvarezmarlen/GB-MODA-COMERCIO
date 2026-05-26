@@ -19,7 +19,6 @@
   position: relative;
   min-height: 100vh;
   width: 100%;
-  padding-top: 100px; /* Padding moved here to push the title down */
   overflow: hidden; /* Prevent horizontal scroll from absolute elements if any */
 }
 
@@ -27,6 +26,7 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 0 20px;
+  padding-top: 100px; /* Adjusted padding for desktop */
 }
 
 /* Side images */
@@ -39,7 +39,7 @@
   width: 120px; /* Made it slightly wider to show more of the image */
   background-repeat: repeat-y;
   background-position: top center;
-  background-size: 100% auto;
+  background-size: cover; /* Changed to cover */
   opacity: 0.96;
   pointer-events: none;
   z-index: 0; /* Changed from -1 so they are visible over body background, but still behind content */
