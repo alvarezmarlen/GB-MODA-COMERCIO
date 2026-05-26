@@ -140,6 +140,7 @@ h1.template-title {
   border-radius: var(--wf-radius);
   padding: 8px 16px;
   cursor: pointer;
+  font-weight: bold;
 }
 
 .story-card {

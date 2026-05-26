@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard-template">
     <header class="dashboard-header">
-      <button class="wireframe-button back-button" @click="goBack">
+      <button class="custom-button back-button" @click="goBack">
         ← Volver
       </button>
       <h1 class="dashboard-title">{{ title }}</h1>
@@ -32,6 +32,16 @@ const goBack = () => {
 </script>
 
 <style scoped>
+.custom-button {
+  background: var(--color-red);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--wf-radius);
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
 .dashboard-template {
   max-width: 900px;
   margin: 0 auto;
@@ -44,7 +54,7 @@ const goBack = () => {
   align-items: center;
   gap: var(--wf-spacing-md);
   margin-bottom: var(--wf-spacing-lg);
-  border-bottom: 2px solid var(--wf-border);
+  border-bottom: 5px solid var(--color-red);
   padding-bottom: var(--wf-spacing-md);
 }
 
@@ -55,6 +65,7 @@ const goBack = () => {
   letter-spacing: 2px;
   text-transform: uppercase;
   margin: 0;
+  color: var(--color-yellow);
 }
 
 .header-spacer {
