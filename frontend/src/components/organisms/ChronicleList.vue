@@ -191,25 +191,6 @@ onMounted(fetchStories)
   margin-bottom: var(--wf-spacing-lg);
 }
 
-<<<<<<< HEAD
-.loading-text {
-  text-align: center;
-  padding: var(--wf-spacing-lg);
-  font-weight: bold;
-  color: var(--wf-text);
-  border: 2px dashed var(--wf-border);
-}
-
-.error-message {
-  text-align: center;
-  padding: var(--wf-spacing-lg);
-  font-weight: bold;
-  color: #d32f2f;
-  background: #fce4ec;
-  border: 1px solid #d32f2f;
-}
-
-=======
 .chronicle-card {
   padding: 0;
   display: flex;
@@ -222,7 +203,6 @@ onMounted(fetchStories)
 }
 
 /* Chronicles List */
->>>>>>> 6ed8127b298c299995bd9f118e8e76e019848375
 .chronicles-list {
   display: flex;
   flex-direction: column;
@@ -255,19 +235,9 @@ onMounted(fetchStories)
 }
 
 .card-top-bar-inner {
-<<<<<<< HEAD
-  font-weight: bold;
-  font-size: 0.95rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-=======
   width: 180px;
   height: 16px;
   background: rgba(255, 255, 255, 0.35);
->>>>>>> 6ed8127b298c299995bd9f118e8e76e019848375
 }
 
 .card-body {
@@ -287,20 +257,8 @@ onMounted(fetchStories)
   font-weight: bold;
   border: none;
   flex-shrink: 0;
-<<<<<<< HEAD
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  overflow: hidden;
-}
-
-.card-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-=======
   text-transform: none;
   letter-spacing: 0;
->>>>>>> 6ed8127b298c299995bd9f118e8e76e019848375
 }
 
 .card-content {
@@ -311,13 +269,8 @@ onMounted(fetchStories)
 
 .card-meta {
   font-weight: bold;
-<<<<<<< HEAD
-  color: var(--wf-text);
-  margin-bottom: var(--wf-spacing-md);
-=======
   color: var(--color-blanco);
   margin-bottom: var(--wf-spacing-lg);
->>>>>>> 6ed8127b298c299995bd9f118e8e76e019848375
   font-size: 1.1rem;
 }
 
