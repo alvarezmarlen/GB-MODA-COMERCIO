@@ -2,7 +2,7 @@
   <div class="dashboard-template">
     <header class="dashboard-header">
       <button class="wireframe-button back-button" @click="goBack">
-        ← {{ t('storyDetail.back') }}
+        {{ t('storyDetail.back') }}
       </button>
       <h1 class="dashboard-title">{{ title }}</h1>
       <div class="header-spacer"></div>

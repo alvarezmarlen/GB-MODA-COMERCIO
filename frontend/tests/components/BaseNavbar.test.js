@@ -1,11 +1,13 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { mount, RouterLinkStub } from '@vue/test-utils'
 import { createI18n } from 'vue-i18n'
+import { watch } from 'vue'
 import es from '../../src/i18n/locales/es.json'
 import en from '../../src/i18n/locales/en.json'
 import eu from '../../src/i18n/locales/eu.json'
 import fr from '../../src/i18n/locales/fr.json'
 import ro from '../../src/i18n/locales/ro.json'
+import ar from '../../src/i18n/locales/ar.json'
 import BaseNavbar from '../../src/components/organisms/BaseNavbar.vue'
 
 vi.mock('vue-router', () => ({
@@ -18,12 +20,21 @@ vi.mock('vue-router', () => ({
 }))
 
 function createTestI18n(locale = 'es') {
-  return createI18n({
+  const i18n = createI18n({
     legacy: false,
     locale,
     fallbackLocale: 'es',
-    messages: { es, en, eu, fr, ro }
+    messages: { es, en, eu, fr, ro, ar }
   })
+  
+  vi.spyOn(localStorage, 'setItem') // Mock/spy helper
+  
+  // Watch locale changes to mimic the production behavior of persisting to localStorage
+  watch(i18n.global.locale, (newLocale) => {
+    localStorage.setItem('locale', newLocale)
+  })
+  
+  return i18n
 }
 
 function mountNavbar(locale = 'es') {
@@ -43,14 +54,14 @@ describe('BaseNavbar language selector', () => {
     localStorage.clear()
   })
 
-  it('should render a select with 5 language options', () => {
+  it('should render a select with 6 language options', () => {
     const wrapper = mountNavbar()
     const select = wrapper.find('select.lang-select')
     expect(select.exists()).toBe(true)
     const options = select.findAll('option')
-    expect(options).toHaveLength(5)
+    expect(options).toHaveLength(6)
     const values = options.map(o => o.attributes('value'))
-    expect(values).toEqual(['es', 'en', 'eu', 'fr', 'ro'])
+    expect(values).toEqual(['es', 'en', 'eu', 'fr', 'ro', 'ar'])
   })
 
   it('should show correct option labels for each language', () => {
@@ -62,6 +73,7 @@ describe('BaseNavbar language selector', () => {
     expect(labels).toContain('Euskera')
     expect(labels).toContain('Français')
     expect(labels).toContain('Română')
+    expect(labels).toContain('العربية')
   })
 
   it('should have the correct initial locale selected', () => {

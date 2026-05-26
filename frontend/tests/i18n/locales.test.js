@@ -4,8 +4,9 @@ import en from '../../src/i18n/locales/en.json'
 import eu from '../../src/i18n/locales/eu.json'
 import fr from '../../src/i18n/locales/fr.json'
 import ro from '../../src/i18n/locales/ro.json'
+import ar from '../../src/i18n/locales/ar.json'
 
-const locales = { es, en, eu, fr, ro }
+const locales = { es, en, eu, fr, ro, ar }
 const localeNames = Object.keys(locales)
 const ES_KEYS = getLeafKeys(es)
 
@@ -43,7 +44,7 @@ describe('Locale files structure', () => {
   })
 
   it('es.json should have all required top-level keys', () => {
-    const topKeys = ['nav', 'footer', 'home', 'auth', 'dashboard', 'admin', 'createStory', 'storyDetail', 'chronicles', 'map', 'professions', 'ages', 'ages_full', 'countries', 'lang']
+    const topKeys = ['nav', 'footer', 'home', 'auth', 'dashboard', 'admin', 'createStory', 'storyDetail', 'chronicles', 'map', 'professions', 'ages', 'ages_full', 'countries', 'lang', 'common', 'fileUpload']
     expect(Object.keys(es).sort()).toEqual(topKeys.sort())
   })
 

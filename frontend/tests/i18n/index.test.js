@@ -21,7 +21,7 @@ describe('i18n instance', () => {
     expect(i18n.global.fallbackLocale.value).toBe('es')
   })
 
-  it('should have messages for all 5 locales', async () => {
+  it('should have messages for all 6 locales', async () => {
     const i18n = (await import('../../src/i18n/index.js?version=3')).default
     const messages = i18n.global.messages.value
     expect(messages).toHaveProperty('es')
@@ -29,6 +29,7 @@ describe('i18n instance', () => {
     expect(messages).toHaveProperty('eu')
     expect(messages).toHaveProperty('fr')
     expect(messages).toHaveProperty('ro')
+    expect(messages).toHaveProperty('ar')
   })
 
   it('should translate a known key in Spanish', async () => {

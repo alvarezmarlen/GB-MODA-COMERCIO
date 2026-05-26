@@ -47,6 +47,7 @@ const languageOptions = computed(() => [
   { value: 'eu', label: t('lang.eu') },
   { value: 'fr', label: t('lang.fr') },
   { value: 'ro', label: t('lang.ro') },
+  { value: 'ar', label: t('lang.ar') },
 ])
 const router = useRouter()
 const { user, isAdmin, logout } = useAuthStore()
