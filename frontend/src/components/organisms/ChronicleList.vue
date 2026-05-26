@@ -259,6 +259,14 @@ onMounted(fetchStories)
   flex-shrink: 0;
   text-transform: none;
   letter-spacing: 0;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .card-content {
