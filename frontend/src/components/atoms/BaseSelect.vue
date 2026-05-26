@@ -36,5 +36,11 @@ select.wireframe-input {
   padding-right: 32px;
   border: 1px solid var(--color-primary);
   border-radius: var(--wf-radius);
+  transition: border-color 0.2s ease;
+}
+
+select.wireframe-input:focus {
+  border-color: var(--color-red);
+  outline: none;
 }
 </style>

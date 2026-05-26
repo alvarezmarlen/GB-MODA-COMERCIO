@@ -22,5 +22,11 @@ textarea.wireframe-input {
   min-height: 120px;
   border: 1px solid var(--color-primary);
   border-radius: var(--wf-radius);
+  transition: border-color 0.2s ease;
+}
+
+textarea.wireframe-input:focus {
+  border-color: var(--color-red);
+  outline: none;
 }
 </style>

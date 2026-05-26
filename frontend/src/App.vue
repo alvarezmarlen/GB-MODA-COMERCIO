@@ -4,7 +4,7 @@
     <BaseNavbar v-if="showNavAndFooter" />
     
     <!-- Main router view -->
-    <main class="app-main-content">
+    <main class="app-main-content" :class="{ 'no-padding': !showNavAndFooter }">
       <router-view />
     </main>
 
@@ -41,5 +41,9 @@ const showNavAndFooter = computed(() => {
 .app-main-content {
   flex: 1 0 auto;
   padding-top: 80px; /* espacio para el nav fijo flotante */
+}
+
+.app-main-content.no-padding {
+  padding-top: 0;
 }
 </style>

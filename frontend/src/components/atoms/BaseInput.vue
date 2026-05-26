@@ -24,5 +24,11 @@ defineEmits(['update:modelValue'])
 .wireframe-input {
   border: 1px solid var(--color-primary);
   border-radius: var(--wf-radius);
+  transition: border-color 0.2s ease;
+}
+
+.wireframe-input:focus {
+  border-color: var(--color-red);
+  outline: none;
 }
 </style>
