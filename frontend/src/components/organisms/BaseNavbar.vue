@@ -20,7 +20,11 @@
 
     <!-- Right: Profile & Logout -->
     <div class="navbar-right">
-      <span class="username">👤 {{ user.username || 'Usuario' }}</span>
+      <router-link :to="dashboardRoute" class="profile-info profile-link">
+        <span class="user-icon">👤</span>
+        <span class="username">{{ user.username || 'Usuario' }}</span>
+        <span class="role-badge" v-if="user.role">{{ isAdmin ? 'ADMIN' : 'USER' }}</span>
+      </router-link>
       <button class="pill-btn logout-btn" @click="handleLogout">
         Salir →
       </button>
@@ -30,13 +34,17 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../../composables/useAuthStore'
 
 const router = useRouter()
-const { user, logout } = useAuthStore()
+const { user, isAdmin, logout } = useAuthStore()
 const currentLang = ref('ES')
+
+const dashboardRoute = computed(() => {
+  return isAdmin.value ? '/admin' : '/dashboard'
+})
 
 // ── Smart hide/show on scroll ──────────────────────────────
 const isHidden = ref(false)
@@ -190,12 +198,42 @@ const handleLogout = () => {
   border-color: #e0a8a6;
 }
 
-/* ── Username ── */
+/* ── Username & Profile Link ── */
+.profile-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: inherit;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.profile-link:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.user-icon {
+  font-size: 1rem;
+}
+
 .username {
   font-size: 0.85rem;
   font-weight: 500;
   color: #555;
   white-space: nowrap;
+}
+
+.role-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 2px 6px;
+  background: #c0392b;
+  color: #fff;
+  border-radius: 4px;
+  text-transform: uppercase;
 }
 
 /* ── Responsive ── */

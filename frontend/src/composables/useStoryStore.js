@@ -9,6 +9,9 @@ const currentStory = reactive({
   images: []
 })
 
+// All stories (prepared for backend connection)
+const stories = reactive([])
+
 export function useStoryStore() {
   const setStory = (storyData) => {
     Object.assign(currentStory, {
@@ -21,8 +24,32 @@ export function useStoryStore() {
     })
   }
 
+  const addStory = (storyData) => {
+    stories.push({
+      ...storyData
+    })
+  }
+
+  const deleteStory = (storyId) => {
+    const index = stories.findIndex(s => s.id === storyId)
+    if (index !== -1) {
+      stories.splice(index, 1)
+    }
+  }
+
+  const updateStory = (storyId, updatedData) => {
+    const index = stories.findIndex(s => s.id === storyId)
+    if (index !== -1) {
+      Object.assign(stories[index], updatedData)
+    }
+  }
+
   return {
     currentStory,
-    setStory
+    stories,
+    setStory,
+    addStory,
+    deleteStory,
+    updateStory
   }
 }
