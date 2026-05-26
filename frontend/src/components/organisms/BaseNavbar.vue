@@ -20,7 +20,7 @@
 
     <!-- Right: Profile & Logout -->
     <div class="navbar-right">
-      <span class="username">👤 {{ user.username || 'Usuario' }}</span>
+      <span class="username">👤 {{ user?.username || 'Usuario' }}</span>
       <button class="pill-btn logout-btn" @click="handleLogout">
         Salir →
       </button>

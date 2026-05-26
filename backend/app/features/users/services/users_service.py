@@ -4,10 +4,14 @@ from .... import db
 
 
 def create_user(data):
+    existing_user = User.query.filter_by(email=data['email']).first()
+    if existing_user:
+        raise ValueError("El email ya está registrado")
+
     new_user = User(
         username=data['username'],  
         email=data['email'],
-        password_hash=data['password_hash'], 
+        password_hash=generate_password_hash(data['password_hash']), 
         role=data.get('role', 'customer')  
     )
     db.session.add(new_user)
@@ -28,7 +32,7 @@ def update_user(user_id, data):
     user.username = data.get('username', user.username)
     user.email = data.get('email', user.email)
     if 'password_hash' in data:
-        user.password_hash = data['password_hash']  # Asegúrate de hashear la contraseña antes de guardarla
+        user.password_hash = generate_password_hash(data['password_hash'])  # Asegúrate de hashear la contraseña antes de guardarla
     user.role = data.get('role', user.role)
     db.session.commit()
     return user.to_dict()

@@ -38,6 +38,7 @@ import BaseButton from '../atoms/BaseButton.vue'
 import BaseCheckbox from '../atoms/BaseCheckbox.vue'
 import BaseLabel from '../atoms/BaseLabel.vue'
 import { useForm } from '../../composables/useForm'
+import { useAuthStore } from '../../composables/useAuthStore'
 
 const router = useRouter()
 const { formData, handleSubmit, isValidEmail } = useForm({
@@ -58,16 +59,24 @@ const isFormValid = computed(() => {
 })
 
 const onFormSubmit = () => {
-  handleSubmit((data) => {
+  handleSubmit(async (data) => {
     // Trim data before sending to backend for extra cleanliness
     const cleanData = {
-      ...data,
-      username: data.username.trim(),
-      email: data.email.trim()
+      nombre_usuario: data.username.trim(),
+      email: data.email.trim(),
+      password: data.password
     }
     console.log('Sending clean data to backend:', cleanData)
-    alert('Usuario registrado con éxito')
-    router.push('/login')
+    
+    const authStore = useAuthStore()
+    const success = await authStore.register(cleanData)
+    
+    if (success) {
+      alert('Usuario registrado con éxito')
+      router.push('/login')
+    } else {
+      alert('Error en el registro: ' + JSON.stringify(authStore.error))
+    }
   })
 }
 </script>

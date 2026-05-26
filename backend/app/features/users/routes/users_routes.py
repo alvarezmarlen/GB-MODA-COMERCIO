@@ -17,8 +17,11 @@ def create_user_route():
     except ValidationError as err:
         return jsonify({'errors': err.messages}), 400
 
-    new_user = svc_create_user(data)
-    return jsonify(new_user), 201
+    try:
+        new_user = svc_create_user(data)
+        return jsonify(new_user), 201
+    except ValueError as e:
+        return jsonify({'errors': str(e)}), 400
 
 @users_bp.route('/users/<int:user_id>', methods=['PUT'])
 def update_user_route(user_id):

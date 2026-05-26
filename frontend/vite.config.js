@@ -6,9 +6,10 @@ export default defineConfig({
   plugins: [vue()],
   server: {
     proxy: {
-      '/stories': 'http://localhost:5000',
-      '/uploads': 'http://localhost:5000',
-      '/users': 'http://localhost:5000',
+      '/stories': 'http://localhost:5002',
+      '/uploads': 'http://localhost:5002',
+      '/users': 'http://localhost:5002',
+      '/auth': 'http://localhost:5002',
     }
   }
 })
