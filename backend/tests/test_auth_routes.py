@@ -25,6 +25,19 @@ class TestAuthRoutes:
         assert 'refresh_token' in body
         assert 'user' in body
 
+    def test_login_with_username_returns_200_and_tokens(self, client, app):
+        with app.app_context():
+            create_user(USER_DATA)
+        response = client.post('/auth/login', json={
+            'email': USER_DATA['nombre_usuario'],
+            'password': USER_DATA['password'],
+        })
+        assert response.status_code == 200
+        body = response.get_json()
+        assert 'access_token' in body
+        assert 'refresh_token' in body
+        assert 'user' in body
+
     def test_login_invalid_credentials_returns_401(self, client, app):
         with app.app_context():
             create_user(USER_DATA)

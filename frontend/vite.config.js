@@ -10,6 +10,7 @@ export default defineConfig({
       '/stories': 'http://localhost:5000',
       '/uploads': 'http://localhost:5000',
       '/users': 'http://localhost:5000',
+      '/auth': 'http://localhost:5000',
     }
   },
   test: {

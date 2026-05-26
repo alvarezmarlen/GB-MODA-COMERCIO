@@ -5,8 +5,12 @@ from ..models.token_blacklist import TokenBlacklist
 from .... import db
 
 
-def login_user(email, password):
-    user = User.query.filter_by(email=email).first()
+def login_user(email_or_username, password):
+    # Try querying by email first. If not found, try username.
+    user = User.query.filter_by(email=email_or_username).first()
+    if not user:
+        user = User.query.filter_by(username=email_or_username).first()
+        
     if not user or not verify_password(user, password):
         return None
 

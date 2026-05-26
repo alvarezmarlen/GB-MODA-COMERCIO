@@ -50,4 +50,20 @@ const router = createRouter({
   routes
 })
 
+import { useAuthStore } from '../composables/useAuthStore'
+
+router.beforeEach((to, from, next) => {
+  const { isAuthenticated, isAdmin } = useAuthStore()
+
+  if (!isAuthenticated.value && to.name !== 'login' && to.name !== 'register') {
+    next({ name: 'login' })
+  } else if (isAuthenticated.value && (to.name === 'login' || to.name === 'register')) {
+    next({ name: 'home' })
+  } else if (to.name === 'admin-dashboard' && !isAdmin.value) {
+    next({ name: 'home' })
+  } else {
+    next()
+  }
+})
+
 export default router

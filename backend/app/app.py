@@ -1,7 +1,7 @@
 from flask import Flask, send_from_directory
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
-from app import db
+from . import db
 from app.features.users.routes.users_routes import users_bp
 from app.features.stories.routes.stories_routes import stories_bp
 from app.features.auth.routes.auth_routes import auth_bp
