@@ -62,7 +62,8 @@ const handleFileChange = (event) => {
 
 <style scoped>
 .file-upload {
-  border: 1px dashed var(--wf-border);
+  border: 1px dashed var(--color-red);
+  border-radius: var(--wf-radius);
   padding: var(--wf-spacing-lg);
   text-align: center;
   cursor: pointer;

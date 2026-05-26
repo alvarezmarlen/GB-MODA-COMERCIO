@@ -20,5 +20,7 @@ defineEmits(['update:modelValue'])
 textarea.wireframe-input {
   resize: vertical;
   min-height: 120px;
+  border: 1px solid var(--color-red);
+  border-radius: var(--wf-radius);
 }
 </style>

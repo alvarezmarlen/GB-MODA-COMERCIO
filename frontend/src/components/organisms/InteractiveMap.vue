@@ -119,7 +119,7 @@
 
 .map-text-box {
   flex: 0 0 35%;
-  color: var(--color-blanco);
+  color: var(--color-white);
 }
 
 .map-quote {

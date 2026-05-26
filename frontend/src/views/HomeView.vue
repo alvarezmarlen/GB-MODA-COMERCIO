@@ -37,14 +37,9 @@ import ChronicleList from '../components/organisms/ChronicleList.vue'
 <style scoped>
 /* ── Variables ── */
 .home-view-container {
-  --color-principal: #2D6A8B;
-  --color-rojo:      #E93C44;
-  --color-amarillo:  #FCD015;
-  --color-blanco:    #FFFFFF;
-
   position: relative;
   overflow: hidden;
-  background: var(--color-principal);
+  background: var(--color-primary);
   min-height: 100vh;
   padding: 0 80px;
   animation: fadeIn 0.45s ease-out;
@@ -122,8 +117,8 @@ import ChronicleList from '../components/organisms/ChronicleList.vue'
   font-weight: 800;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--color-amarillo);
-  border-bottom: 4px solid var(--color-rojo);
+  color: var(--color-yellow);
+  border-bottom: 4px solid var(--color-red);
   padding-bottom: 14px;
   margin-bottom: 24px;
   display: inline-block;
@@ -134,7 +129,7 @@ import ChronicleList from '../components/organisms/ChronicleList.vue'
 .hero-paragraph {
   font-size: clamp(1rem, 1.6vw, 1.2rem);
   line-height: 1.75;
-  color: var(--color-blanco);
+  color: var(--color-white);
   font-weight: 400;
   max-width: 560px;
   margin: 0;

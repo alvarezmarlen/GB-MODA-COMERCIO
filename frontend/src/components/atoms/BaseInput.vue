@@ -19,3 +19,10 @@ defineProps({
 })
 defineEmits(['update:modelValue'])
 </script>
+
+<style scoped>
+.wireframe-input {
+  border: 1px solid var(--color-red);
+  border-radius: var(--wf-radius);
+}
+</style>

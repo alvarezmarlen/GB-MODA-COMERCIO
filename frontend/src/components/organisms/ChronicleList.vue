@@ -107,7 +107,7 @@ const goToStoryDetail = () => {
 
 .filter-title {
   font-size: 1.8rem;
-  color: var(--color-amarillo);
+  color: var(--color-yellow);
   margin-bottom: var(--wf-spacing-sm);
   text-transform: none;
   letter-spacing: 0.5px;
@@ -135,7 +135,7 @@ const goToStoryDetail = () => {
 .elegant-divider {
   width: 100%;
   height: 2px;
-  background: var(--color-amarillo);
+  background: var(--color-yellow);
   margin-bottom: var(--wf-spacing-lg);
 }
 
@@ -145,9 +145,9 @@ const goToStoryDetail = () => {
   flex-direction: column;
   border: none;
   border-radius: 12px;
-  background: var(--color-rojo);
+  background: var(--color-red);
   transition: all 0.3s ease;
-  color: var(--color-blanco);
+  color: var(--color-white);
 }
 
 /* Chronicles List */
@@ -166,9 +166,9 @@ const goToStoryDetail = () => {
   flex-direction: column;
   border: none;
   border-radius: 12px;
-  background: var(--color-rojo);
+  background: var(--color-red);
   transition: all 0.3s ease;
-  color: var(--color-blanco);
+  color: var(--color-white);
 }
 
 .chronicle-card:hover {
@@ -204,7 +204,7 @@ const goToStoryDetail = () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--color-blanco);
+  color: var(--color-white);
   font-weight: bold;
   border: none;
   flex-shrink: 0;
@@ -220,7 +220,7 @@ const goToStoryDetail = () => {
 
 .card-meta {
   font-weight: bold;
-  color: var(--color-blanco);
+  color: var(--color-white);
   margin-bottom: var(--wf-spacing-lg);
   font-size: 1.1rem;
 }

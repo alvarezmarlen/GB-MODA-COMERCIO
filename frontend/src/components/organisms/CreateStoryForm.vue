@@ -136,6 +136,15 @@ const onFormSubmit = () => {
 </script>
 
 <style scoped>
+.create-story-form {
+  border: none;
+  border-radius: var(--wf-radius);
+  padding: var(--wf-spacing-lg);
+  margin: var(--wf-spacing-lg) auto;
+  background: var(--wf-bg);
+  max-width: 800px; /* Assuming the form should match the template's max-width */
+}
+
 .checkbox-container {
   display: flex;
   align-items: flex-start;
