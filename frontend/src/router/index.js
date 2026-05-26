@@ -53,12 +53,16 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
+  const publicPages = ['/', '/login', '/register']
+  const guestOnlyPages = ['/login', '/register']
+  const authRequired = !publicPages.includes(to.path)
   
-  // Si la ruta requiere autenticación y el usuario no tiene token...
-  if (to.meta.requiresAuth && !authStore.token) {
-    next('/login') // Redirige al login
+  if (authRequired && !authStore.token) {
+    next('/login')
+  } else if (guestOnlyPages.includes(to.path) && authStore.token) {
+    next('/')
   } else {
-    next() // Permite la navegación
+    next()
   }
 })
 

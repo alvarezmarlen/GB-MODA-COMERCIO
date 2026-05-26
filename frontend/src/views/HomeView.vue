@@ -24,7 +24,15 @@
     <InteractiveMap />
 
     <!-- Chronicles / Filters Section -->
-    <ChronicleList />
+    <ChronicleList v-if="authStore.isAuthenticated" />
+    <div v-else class="login-prompt">
+      <h2>Descubre sus historias</h2>
+      <p>Regístrate o inicia sesión para leer las historias completas y contribuir a la comunidad.</p>
+      <div class="login-prompt-actions">
+        <router-link to="/login" class="prompt-btn primary">Iniciar Sesión</router-link>
+        <router-link to="/register" class="prompt-btn secondary">Registrarse</router-link>
+      </div>
+    </div>
 
   </div>
 </template>
@@ -32,6 +40,9 @@
 <script setup>
 import InteractiveMap from '../components/organisms/InteractiveMap.vue'
 import ChronicleList from '../components/organisms/ChronicleList.vue'
+import { useAuthStore } from '../composables/useAuthStore'
+
+const authStore = useAuthStore()
 </script>
 
 <style scoped>
@@ -159,5 +170,67 @@ import ChronicleList from '../components/organisms/ChronicleList.vue'
   .hero-paragraph {
     max-width: 100%;
   }
+}
+
+/* ── Login Prompt (No Authenticated) ── */
+.login-prompt {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 40px;
+  border-radius: 12px;
+  max-width: 600px;
+  margin: 40px auto;
+  color: var(--color-blanco);
+}
+
+.login-prompt h2 {
+  color: var(--color-amarillo);
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 1.8rem;
+}
+
+.login-prompt p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.login-prompt-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.prompt-btn {
+  text-decoration: none;
+  padding: 10px 24px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.prompt-btn.primary {
+  background: var(--color-amarillo);
+  color: #333;
+}
+
+.prompt-btn.primary:hover {
+  background: #e6bd13;
+  transform: translateY(-2px);
+}
+
+.prompt-btn.secondary {
+  background: transparent;
+  color: var(--color-blanco);
+  border: 2px solid var(--color-blanco);
+}
+
+.prompt-btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
 }
 </style>

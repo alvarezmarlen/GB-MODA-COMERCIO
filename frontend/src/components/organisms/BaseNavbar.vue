@@ -13,17 +13,23 @@
       <router-link to="/" class="nav-link" active-class="nav-link--active">
         Inicio
       </router-link>
-      <router-link to="/create-story" class="nav-link" active-class="nav-link--active">
+      <router-link v-if="authStore.isAuthenticated" to="/create-story" class="nav-link" active-class="nav-link--active">
         + Crear Historia
       </router-link>
     </div>
 
     <!-- Right: Profile & Logout -->
     <div class="navbar-right">
-      <span class="username">👤 {{ user?.username || 'Usuario' }}</span>
-      <button class="pill-btn logout-btn" @click="handleLogout">
-        Salir →
-      </button>
+      <template v-if="authStore.isAuthenticated">
+        <span class="username">👤 {{ authStore.user?.username || 'Usuario' }}</span>
+        <button class="pill-btn logout-btn" @click="handleLogout">
+          Salir →
+        </button>
+      </template>
+      <template v-else>
+        <router-link to="/login" class="nav-link">Iniciar sesión</router-link>
+        <router-link to="/register" class="pill-btn">Regístrate</router-link>
+      </template>
     </div>
 
   </nav>
@@ -35,7 +41,7 @@ import { useRouter } from 'vue-router'
 import { useAuthStore } from '../../composables/useAuthStore'
 
 const router = useRouter()
-const { user, isAdmin, logout } = useAuthStore()
+const authStore = useAuthStore()
 const currentLang = ref('ES')
 
 // ── Smart hide/show on scroll ──────────────────────────────
@@ -68,7 +74,7 @@ const toggleLanguage = () => {
 }
 
 const handleLogout = () => {
-  logout()
+  authStore.logout()
   alert('Sesión cerrada con éxito')
   router.push('/login')
 }
