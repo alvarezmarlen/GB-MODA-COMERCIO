@@ -2,6 +2,8 @@
   <input
     :type="type"
     :placeholder="placeholder"
+    :name="name"
+    :autocomplete="autocomplete"
     class="wireframe-input"
     :value="modelValue"
     @input="$emit('update:modelValue', $event.target.value)"
@@ -15,7 +17,9 @@ defineProps({
     type: String,
     default: 'text'
   },
-  placeholder: String
+  placeholder: String,
+  name: String,
+  autocomplete: String
 })
 defineEmits(['update:modelValue'])
 </script>

@@ -2,15 +2,20 @@
   <form @submit.prevent="onFormSubmit" class="login-form">
     <div v-if="errorMessage" class="error-banner">{{ errorMessage }}</div>
     <FormField
-      :label="t('auth.usernameLabel')"
-      v-model="formData.username"
-      :placeholder="t('auth.usernamePlaceholder')"
+      :label="t('auth.emailLabel')"
+      v-model="formData.email"
+      type="email"
+      name="email"
+      autocomplete="username"
+      :placeholder="t('auth.emailPlaceholder')"
       :disabled="isLoading"
     />
     <FormField
       :label="t('auth.passwordLabel')"
       type="password"
       v-model="formData.password"
+      name="password"
+      autocomplete="current-password"
       :placeholder="t('auth.passwordPlaceholder')"
       :disabled="isLoading"
     />
@@ -21,7 +26,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import FormField from '../molecules/FormField.vue'
@@ -32,16 +37,18 @@ import { useAuthStore } from '../../composables/useAuthStore'
 const { t } = useI18n()
 const router = useRouter()
 const { login } = useAuthStore()
-const { formData, handleSubmit } = useForm({
-  username: '',
+const { formData, resetForm, handleSubmit } = useForm({
+  email: '',
   password: ''
 })
+
+onMounted(resetForm)
 
 const errorMessage = ref('')
 const isLoading = ref(false)
 
 const isFormValid = computed(() => {
-  return formData.username.trim().length > 0 && 
+  return formData.email.trim().length > 0 && 
          formData.password.length > 0
 })
 
@@ -50,8 +57,8 @@ const onFormSubmit = () => {
     errorMessage.value = ''
     isLoading.value = true
     try {
-      const cleanUsername = data.username.trim()
-      await login(cleanUsername, data.password)
+      const cleanEmail = data.email.trim()
+      await login(cleanEmail, data.password)
       router.push('/')
     } catch (err) {
       errorMessage.value = err.message || 'Error al iniciar sesión'

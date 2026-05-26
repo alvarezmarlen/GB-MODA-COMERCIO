@@ -4,6 +4,8 @@
     <BaseInput
       :type="type"
       :placeholder="placeholder"
+      :name="name"
+      :autocomplete="autocomplete"
       :modelValue="modelValue"
       @update:modelValue="$emit('update:modelValue', $event)"
     />
@@ -18,7 +20,9 @@ defineProps({
   label: String,
   modelValue: String,
   type: String,
-  placeholder: String
+  placeholder: String,
+  name: String,
+  autocomplete: String
 })
 
 defineEmits(['update:modelValue'])
