@@ -21,7 +21,7 @@
     <!-- Right: Profile & Logout -->
     <div class="navbar-right">
       <template v-if="authStore.isAuthenticated">
-        <span class="username">👤 {{ authStore.user?.username || 'Usuario' }}</span>
+        <router-link to="/dashboard" class="username">👤 {{ authStore.user?.username || 'Usuario' }}</router-link>
         <button class="pill-btn logout-btn" @click="handleLogout">
           Salir →
         </button>
@@ -211,6 +211,12 @@ const handleLogout = () => {
   font-weight: 500;
   color: #555;
   white-space: nowrap;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.username:hover {
+  color: #111;
 }
 
 /* ── Responsive ── */

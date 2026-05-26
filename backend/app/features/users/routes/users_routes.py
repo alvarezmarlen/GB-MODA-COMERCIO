@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from ..services.users_service import create_user as svc_create_user, update_user as svc_update_user, delete_user as svc_delete_user, get_all_users as svc_get_all_users, get_user_by_id as svc_get_user_by_id
 from ..schemas.users_schema import UserCreateSchema, UserUpdateSchema
+# pyrefly: ignore [missing-import]
 from marshmallow import ValidationError
 
 users_bp = Blueprint('users', __name__)
