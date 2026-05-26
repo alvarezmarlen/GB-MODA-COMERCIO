@@ -1,15 +1,16 @@
 <template>
   <div class="chronicles-section">
     <div class="filters-header">
-      <h3 class="filter-title">FILTRAR POR</h3>
+      <h3 class="filter-title">Filtrado</h3>
       <div class="filters-row">
-        <select v-model="filters.profession" class="wireframe-input filter-select" @change="applyFilters">
-          <option value="">Oficio (todos)</option>
-          <option v-for="opt in professionOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
+        <select class="wireframe-input filter-select">
+          <option value="">Profesion u oficio</option>
         </select>
-        <select v-model="filters.age_range" class="wireframe-input filter-select" @change="applyFilters">
-          <option value="">Edad (todas)</option>
-          <option v-for="opt in ageOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
+        <select class="wireframe-input filter-select">
+          <option value="">Fecha de nacimiento</option>
+        </select>
+        <select class="wireframe-input filter-select">
+          <option value="">Continente</option>
         </select>
       </div>
       <div class="elegant-divider"></div>
@@ -145,21 +146,23 @@ onMounted(fetchStories)
 <style scoped>
 .chronicles-section {
   width: 100%;
-  margin-top: var(--wf-spacing-lg);
-  padding: 0;
+  max-width: 1100px;
+  margin: var(--wf-spacing-lg) auto 0;
+  padding: 0 32px;
+  box-sizing: border-box;
 }
 
 .filters-header {
   margin-bottom: var(--wf-spacing-lg);
+  padding: 0 0 0 0;
 }
 
 .filter-title {
-  font-size: 1rem;
-  font-weight: bold;
-  color: var(--wf-text);
+  font-size: 1.8rem;
+  color: var(--color-amarillo);
   margin-bottom: var(--wf-spacing-sm);
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  text-transform: none;
+  letter-spacing: 0.5px;
 }
 
 .filters-row {
@@ -169,15 +172,12 @@ onMounted(fetchStories)
 }
 
 .filter-select {
-  width: 220px;
+  width: 300px;
   cursor: pointer;
   background: var(--wf-bg);
   color: var(--wf-text);
   appearance: none;
-  background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
   background-repeat: no-repeat;
-  background-position-x: 95%;
-  background-position-y: 50%;
   padding-right: 30px;
   border: 2px solid var(--wf-border);
   border-radius: 0;
@@ -187,10 +187,11 @@ onMounted(fetchStories)
 .elegant-divider {
   width: 100%;
   height: 2px;
-  background: var(--wf-border);
+  background: var(--color-amarillo);
   margin-bottom: var(--wf-spacing-lg);
 }
 
+<<<<<<< HEAD
 .loading-text {
   text-align: center;
   padding: var(--wf-spacing-lg);
@@ -208,34 +209,53 @@ onMounted(fetchStories)
   border: 1px solid #d32f2f;
 }
 
-.chronicles-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--wf-spacing-lg);
-}
-
+=======
 .chronicle-card {
   padding: 0;
   display: flex;
   flex-direction: column;
-  border: 2px solid var(--wf-border);
-  background: var(--wf-bg);
+  border: none;
+  border-radius: 12px;
+  background: var(--color-rojo);
   transition: all 0.3s ease;
+  color: var(--color-blanco);
+}
+
+/* Chronicles List */
+>>>>>>> 6ed8127b298c299995bd9f118e8e76e019848375
+.chronicles-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wf-spacing-lg);
+  align-items: center;
+}
+
+.chronicle-card {
+  width: min(100%, 9900px);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  border: none;
+  border-radius: 12px;
+  background: var(--color-rojo);
+  transition: all 0.3s ease;
+  color: var(--color-blanco);
 }
 
 .chronicle-card:hover {
-  box-shadow: 4px 4px 0px var(--wf-border);
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.15);
   transform: translate(-2px, -2px);
 }
 
 .card-top-bar {
-  background: var(--wf-button-bg);
-  border-bottom: 2px solid var(--wf-border);
+  background: rgba(255, 255, 255, 0.14);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.4);
   padding: 8px 16px;
   display: flex;
 }
 
 .card-top-bar-inner {
+<<<<<<< HEAD
   font-weight: bold;
   font-size: 0.95rem;
   letter-spacing: 1px;
@@ -243,25 +263,31 @@ onMounted(fetchStories)
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+=======
+  width: 180px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.35);
+>>>>>>> 6ed8127b298c299995bd9f118e8e76e019848375
 }
 
 .card-body {
   display: flex;
-  gap: var(--wf-spacing-lg);
+  gap: calc(var(--wf-spacing-lg) * 1.2);
   padding: var(--wf-spacing-lg);
 }
 
 .card-image-box {
-  width: 200px;
-  height: 200px;
-  background: var(--wf-button-bg);
+  width: 240px;
+  height: 240px;
+  background: rgba(255, 255, 255, 0.12);
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--wf-text);
+  color: var(--color-blanco);
   font-weight: bold;
-  border: 2px solid var(--wf-border);
+  border: none;
   flex-shrink: 0;
+<<<<<<< HEAD
   text-transform: uppercase;
   letter-spacing: 2px;
   overflow: hidden;
@@ -271,6 +297,10 @@ onMounted(fetchStories)
   width: 100%;
   height: 100%;
   object-fit: cover;
+=======
+  text-transform: none;
+  letter-spacing: 0;
+>>>>>>> 6ed8127b298c299995bd9f118e8e76e019848375
 }
 
 .card-content {
@@ -281,8 +311,13 @@ onMounted(fetchStories)
 
 .card-meta {
   font-weight: bold;
+<<<<<<< HEAD
   color: var(--wf-text);
   margin-bottom: var(--wf-spacing-md);
+=======
+  color: var(--color-blanco);
+  margin-bottom: var(--wf-spacing-lg);
+>>>>>>> 6ed8127b298c299995bd9f118e8e76e019848375
   font-size: 1.1rem;
 }
 

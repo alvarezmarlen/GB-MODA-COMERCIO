@@ -1,328 +1,144 @@
 <template>
   <div class="interactive-map-wrapper">
-    <div class="map-grid">
-      <!-- Left: 70% Premium Map Visuals -->
+    <div class="map-content">
       <div class="map-visual-box">
         <svg viewBox="0 0 800 400" class="world-svg" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="wf-grid" width="20" height="20" patternUnits="userSpaceOnUse">
-              <path d="M 20 0 L 0 0 0 20" fill="none" stroke="var(--wf-placeholder)" stroke-width="0.5"/>
-            </pattern>
-          </defs>
-
-          <!-- Wireframe background -->
-          <rect width="100%" height="100%" fill="var(--wf-bg)" />
-          <rect width="100%" height="100%" fill="url(#wf-grid)" />
-
-          <!-- Centered Map Group -->
-          <g transform="translate(85, 0)">
-            <!-- Base Continents Silhouette (Subtle context) -->
+          <!-- Centered map group -->
+          <g transform="translate(95, 10)">
+            <!-- Continents -->
             <g class="base-continents">
-            <!-- Europa-Africa -->
-            <path d="M352.346,231.706l7.955-0.378c2.06-0.099,3.976-0.979,5.394-2.48l8.351-8.842c2.28-2.414,2.815-6.032,1.329-9.003
-            l-5.843-11.564l12.973-7.983c1.674-1.03,2.901-2.637,3.456-4.521l5.253-17.86c1.133-3.855-0.797-7.955-4.49-9.538l-7.879-3.326
-            l1.049-6.1l9.008-3.793c2.151-0.904,3.788-2.7,4.491-4.927l1.269-4.014l10.367,12.253c1.516,1.791,3.712,2.818,6.026,2.818
-            c4.398,0,7.976-3.565,7.976-7.948l-0.001-13.994l-0.322-15.146c-0.214-10.079-8.578-18.279-18.645-18.279
-            c-0.747,0-1.504,0.045-2.25,0.135l-77.435,9.292l0.531-1.442c0.876-2.378,0.558-5.056-0.852-7.161
-            c-1.409-2.106-3.763-3.422-6.294-3.519l-9.848-0.379c-2.599-0.09-5.105,1.101-6.658,3.17l-24.181,32.253l-21.325,10.69
-            l-17.579-9.057c-1.12-0.576-2.376-0.881-3.634-0.881c-2.187,0-4.3,0.915-5.794,2.51l-16.302,17.388
-            c-2.068,2.206-2.704,5.34-1.658,8.177l2.943,7.884l-10.435,9.887l-9.946,5.759c-2.84,1.645-4.361,4.805-3.873,8.051l0.831,5.539
-            c0.578,3.856,3.955,6.766,7.854,6.765c1.125,0,2.221-0.236,3.257-0.702l8.502-3.827l10.604-4.494l10.86,7.602
-            c0.921,0.646,1.948,1.081,3.047,1.292l16.603,3.165v4.104l-34.356-5.153c-1.383-0.212-2.799-0.047-4.097,0.466l-22.403,8.843
-            c-2.456,0.97-4.263,3.087-4.835,5.664l-4.38,19.712c-0.621,2.791,0.314,5.713,2.439,7.624l10.325,9.294
-            c1.665,1.498,3.893,2.222,6.122,1.996l19.936-2.109l0.574,29.839c0.014,0.731,0.129,1.455,0.34,2.151l3.636,12
-            c2.232,7.368,8.905,12.318,16.604,12.318c6.49,0,12.385-3.575,15.385-9.33l27.542-52.836c1.64-3.145,0.978-7.037-1.61-9.464
-            l-3.589-3.364l5.584-1.861c2.629-0.877,4.58-3.012,5.216-5.709c0.637-2.697-0.153-5.479-2.113-7.438l-8.196-8.117l0.544-0.688
-            l17.154,11.061l13.818,19.96c1.483,2.143,3.921,3.421,6.523,3.421c2.989,0,5.696-1.649,7.064-4.304l6.159-12.105l13.825,9.823
-            c1.362,0.968,2.948,1.48,4.585,1.48c2.357-0.001,4.585-1.043,6.114-2.861c1.498-1.781,2.126-4.133,1.723-6.452L352.346,231.706z"/>
-            <!-- Oceania -->
-            <path d="M422.31,296.3l-9.319-17.706c-1.377-2.616-4.071-4.241-7.03-4.241c-2.629,0-5.073,1.293-6.558,3.468l-2.432-3.04
-            c-1.515-1.894-3.775-2.979-6.202-2.979c-1.437,0-2.849,0.391-4.083,1.132l-22.045,13.227c-2.104,1.261-3.526,3.47-3.805,5.907
-            l-1.877,16.424c-0.256,2.246,0.459,4.5,1.962,6.185c1.726,1.935,4.28,2.921,6.912,2.594l18.67-2.377l2.958,7.025
-            c1.242,2.952,4.114,4.859,7.316,4.859c0,0,0,0,0.001,0c0.455,0,0.913-0.04,1.362-0.118l10.25-1.782
-            c2.514-0.435,4.678-2.068,5.79-4.365l8.253-17.056C423.524,301.198,423.479,298.522,422.31,296.3z"/>
-            <!-- America -->
-            <path d="M153.469,265.01l-37.698-24.424c-2.067-1.339-4.459-2.047-6.916-2.047c-3.966,0-7.648,1.844-10.051,4.947l-8.455-4.733
-            l-15.1-21.496h7.702c1.836,0,3.627-0.642,5.043-1.807l28.637-23.547l15.938-9.032c1.94-1.1,3.336-2.977,3.829-5.151
-            c0.494-2.175,0.045-4.471-1.231-6.301l-14.111-20.227c-1.531-2.193-4.057-3.468-6.713-3.395
-            c-2.673,0.067-5.115,1.462-6.532,3.729l-7.273,11.782l-8.339-9.378l16.573-12.187c3.068-2.257,4.102-6.388,2.459-9.822
-            l-4.086-8.545c-0.953-1.992-2.709-3.509-4.818-4.161c-2.11-0.653-4.415-0.391-6.323,0.715l-7.224,4.21l-32.646-13.813
-            L32.686,97.102c-2.844-1.604-6.443-1.283-8.957,0.795L11.31,108.156c-1.091,0.901-1.923,2.08-2.405,3.408l-8.429,23.181
-            c-0.871,2.393-0.534,5.079,0.9,7.185c1.435,2.105,3.811,3.4,6.358,3.467l17.89,0.422l11.355,28.074l-1.854,27.803
-            c-0.112,1.684,0.327,3.394,1.238,4.814l15.267,23.815c0.919,1.435,2.248,2.517,3.845,3.131l29.367,11.24
-            c0.266,0.254,0.562,0.465,0.876,0.633l8.586,4.807l-4.611,6.916c-1.646,2.469-1.782,5.619-0.355,8.222l9.663,17.604
-            l-1.26,42.85c-0.054,1.834,0.534,3.643,1.658,5.096l7.795,10.067c1.52,1.963,3.793,3.089,6.239,3.089
-            c2.157,0,4.255-0.882,5.756-2.419c1.485-1.521,2.274-3.552,2.222-5.719l-0.358-14.23l29.281-28.035
-            c1.052-1.008,1.806-2.283,2.18-3.689l4.311-16.166C157.713,270.388,156.365,266.888,153.469,265.01z"/>
-            <!-- Groenlandia -->
-            <path d="M136.06,107.943l4.304,3.261v39.436c0,4.382,3.567,7.947,7.951,7.947c1.535,0,3.034-0.45,4.335-1.302l27.258-17.822
-            c1.707-1.116,2.906-2.823,3.378-4.806l9.091-38.182c0.678-2.85-0.261-5.828-2.45-7.773l-8.403-7.47
-            c-2.229-1.982-5.52-2.545-8.282-1.414l-35.365,14.468c-2.666,1.09-4.485,3.446-4.865,6.301
-            C132.632,103.442,133.771,106.192,136.06,107.943z"/>
-          </g>
-
-          <!-- Interactive Points Overlay (Prioritizing the 6 specific regions) -->
-          <g v-for="loc in locations"
-             :key="loc.id"
-             class="interactive-node"
-             :class="{ 'is-active': selectedLocation.id === loc.id }"
-             @click="selectLocation(loc)">
-
-            <!-- Wireframe Selection Ring -->
-            <circle v-if="selectedLocation.id === loc.id"
-                    :cx="loc.x" :cy="loc.y" r="14" class="active-ring" />
-
-            <!-- Core dot marker -->
-            <circle :cx="loc.x" :cy="loc.y" r="5" class="core-dot" />
-
-            <!-- Clean, floating label directly on map -->
-            <text :x="loc.x" :y="loc.y - 15" class="node-label" text-anchor="middle">
-              {{ loc.name }}
-            </text>
-          </g>
+              <path class="continent hover-red" d="M352.346,231.706l7.955-0.378c2.06-0.099,3.976-0.979,5.394-2.48l8.351-8.842c2.28-2.414,2.815-6.032,1.329-9.003
+              l-5.843-11.564l12.973-7.983c1.674-1.03,2.901-2.637,3.456-4.521l5.253-17.86c1.133-3.855-0.797-7.955-4.49-9.538l-7.879-3.326
+              l1.049-6.1l9.008-3.793c2.151-0.904,3.788-2.7,4.491-4.927l1.269-4.014l10.367,12.253c1.516,1.791,3.712,2.818,6.026,2.818
+              c4.398,0,7.976-3.565,7.976-7.948l-0.001-13.994l-0.322-15.146c-0.214-10.079-8.578-18.279-18.645-18.279
+              c-0.747,0-1.504,0.045-2.25,0.135l-77.435,9.292l0.531-1.442c0.876-2.378,0.558-5.056-0.852-7.161
+              c-1.409-2.106-3.763-3.422-6.294-3.519l-9.848-0.379c-2.599-0.09-5.105,1.101-6.658,3.17l-24.181,32.253l-21.325,10.69
+              l-17.579-9.057c-1.12-0.576-2.376-0.881-3.634-0.881c-2.187,0-4.3,0.915-5.794,2.51l-16.302,17.388
+              c-2.068,2.206-2.704,5.34-1.658,8.177l2.943,7.884l-10.435,9.887l-9.946,5.759c-2.84,1.645-4.361,4.805-3.873,8.051l0.831,5.539
+              c0.578,3.856,3.955,6.766,7.854,6.765c1.125,0,2.221-0.236,3.257-0.702l8.502-3.827l10.604-4.494l10.86,7.602
+              c0.921,0.646,1.948,1.081,3.047,1.292l16.603,3.165v4.104l-34.356-5.153c-1.383-0.212-2.799-0.047-4.097,0.466l-22.403,8.843
+              c-2.456,0.97-4.263,3.087-4.835,5.664l-4.38,19.712c-0.621,2.791,0.314,5.713,2.439,7.624l10.325,9.294
+              c1.665,1.498,3.893,2.222,6.122,1.996l19.936-2.109l0.574,29.839c0.014,0.731,0.129,1.455,0.34,2.151l3.636,12
+              c2.232,7.368,8.905,12.318,16.604,12.318c6.49,0,12.385-3.575,15.385-9.33l27.542-52.836c1.64-3.145,0.978-7.037-1.61-9.464
+              l-3.589-3.364l5.584-1.861c2.629-0.877,4.58-3.012,5.216-5.709c0.637-2.697-0.153-5.479-2.113-7.438l-8.196-8.117l0.544-0.688
+              l17.154,11.061l13.818,19.96c1.483,2.143,3.921,3.421,6.523,3.421c2.989,0,5.696-1.649,7.064-4.304l6.159-12.105l13.825,9.823
+              c1.362,0.968,2.948,1.48,4.585,1.48c2.357-0.001,4.585-1.043,6.114-2.861c1.498-1.781,2.126-4.133,1.723-6.452L352.346,231.706z"/>
+              
+              <path class="continent hover-yellow" d="M422.31,296.3l-9.319-17.706c-1.377-2.616-4.071-4.241-7.03-4.241c-2.629,0-5.073,1.293-6.558,3.468l-2.432-3.04
+              c-1.515-1.894-3.775-2.979-6.202-2.979c-1.437,0-2.849,0.391-4.083,1.132l-22.045,13.227c-2.104,1.261-3.526,3.47-3.805,5.907
+              l-1.877,16.424c-0.256,2.246,0.459,4.5,1.962,6.185c1.726,1.935,4.28,2.921,6.912,2.594l18.67-2.377l2.958,7.025
+              c1.242,2.952,4.114,4.859,7.316,4.859c0,0,0,0,0.001,0c0.455,0,0.913-0.04,1.362-0.118l10.25-1.782
+              c2.514-0.435,4.678-2.068,5.79-4.365l8.253-17.056C423.524,301.198,423.479,298.522,422.31,296.3z"/>
+              
+              <path class="continent hover-yellow" d="M153.469,265.01l-37.698-24.424c-2.067-1.339-4.459-2.047-6.916-2.047c-3.966,0-7.648,1.844-10.051,4.947l-8.455-4.733
+              l-15.1-21.496h7.702c1.836,0,3.627-0.642,5.043-1.807l28.637-23.547l15.938-9.032c1.94-1.1,3.336-2.977,3.829-5.151
+              c0.494-2.175,0.045-4.471-1.231-6.301l-14.111-20.227c-1.531-2.193-4.057-3.468-6.713-3.395
+              c-2.673,0.067-5.115,1.462-6.532,3.729l-7.273,11.782l-8.339-9.378l16.573-12.187c3.068-2.257,4.102-6.388,2.459-9.822
+              l-4.086-8.545c-0.953-1.992-2.709-3.509-4.818-4.161c-2.11-0.653-4.415-0.391-6.323,0.715l-7.224,4.21l-32.646-13.813
+              L32.686,97.102c-2.844-1.604-6.443-1.283-8.957,0.795L11.31,108.156c-1.091,0.901-1.923,2.08-2.405,3.408l-8.429,23.181
+              c-0.871,2.393-0.534,5.079,0.9,7.185c1.435,2.105,3.811,3.4,6.358,3.467l17.89,0.422l11.355,28.074l-1.854,27.803
+              c-0.112,1.684,0.327,3.394,1.238,4.814l15.267,23.815c0.919,1.435,2.248,2.517,3.845,3.131l29.367,11.24
+              c0.266,0.254,0.562,0.465,0.876,0.633l8.586,4.807l-4.611,6.916c-1.646,2.469-1.782,5.619-0.355,8.222l9.663,17.604
+              l-1.26,42.85c-0.054,1.834,0.534,3.643,1.658,5.096l7.795,10.067c1.52,1.963,3.793,3.089,6.239,3.089
+              c2.157,0,4.255-0.882,5.756-2.419c1.485-1.521,2.274-3.552,2.222-5.719l-0.358-14.23l29.281-28.035
+              c1.052-1.008,1.806-2.283,2.18-3.689l4.311-16.166C157.713,270.388,156.365,266.888,153.469,265.01z"/>
+              
+              <path class="continent hover-red" d="M136.06,107.943l4.304,3.261v39.436c0,4.382,3.567,7.947,7.951,7.947c1.535,0,3.034-0.45,4.335-1.302l27.258-17.822
+              c1.707-1.116,2.906-2.823,3.378-4.806l9.091-38.182c0.678-2.85-0.261-5.828-2.45-7.773l-8.403-7.47
+              c-2.229-1.982-5.52-2.545-8.282-1.414l-35.365,14.468c-2.666,1.09-4.485,3.446-4.865,6.301
+              C132.632,103.442,133.771,106.192,136.06,107.943z"/>
+            </g>
           </g>
         </svg>
       </div>
 
-      <!-- Right: 30% Wireframe Detail Panel -->
-      <div class="map-details-box wireframe-container">
-        <!-- Using the key forces the div to re-render, triggering the CSS fade animation each time -->
-        <div class="details-inner" :key="selectedLocation.id">
-          <h2 class="dynamic-title">[{{ selectedLocation.name }}]</h2>
-          <div class="elegant-divider"></div>
-          <p class="dynamic-description">
-            {{ selectedLocation.description }}
-          </p>
-        </div>
+      <!-- Right text section -->
+      <div class="map-text-box">
+        <h2 class="map-quote">"Historias que cruzan muchas fronteras"</h2>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
-const locations = [
-  {
-    id: 'america_central',
-    name: 'América Central',
-    x: 105,
-    y: 195,
-    description: 'Región vibrante que preserva intacto el milenario arte del telar de cintura maya, la cerámica policromada viva y oficios sagrados en perfecta armonía con un entorno de selvas profundas y volcanes majestuosos.'
-  },
-  {
-    id: 'pais_vasco',
-    name: 'País Vasco',
-    x: 335,
-    y: 105,
-    description: 'Un enclave histórico inigualable donde la rigurosa hilatura de fibras vegetales, la forja artesanal y la precisa construcción naval definieron una identidad única, celosamente preservada por maestros apasionados.'
-  },
-  {
-    id: 'espana',
-    name: 'España',
-    x: 310,
-    y: 135,
-    description: 'Un cruce de caminos y contrastes, inmensamente rico en tradiciones textiles ancestrales, sastrería clásica de élite y oficios de marroquinería fina que han perdurado a lo largo de los siglos en diversos rincones peninsulares.'
-  },
-  {
-    id: 'marruecos',
-    name: 'Marruecos',
-    x: 300,
-    y: 175,
-    description: 'Hogar místico de la ancestral alfarería roja de las montañas del Rif, los magistrales curtidores de las medinas imperiales y telares de colores imposibles. Un legado vibrante, puramente manual y transmitido de madres a hijas.'
-  },
-  {
-    id: 'africa',
-    name: 'África',
-    x: 350,
-    y: 250,
-    description: 'El vasto continente africano es la cuna primordial de innumerables técnicas de tejido, extracciones de tintes orgánicos terrosos y oficios vernáculos desarrollados siempre desde un profundo y vital respeto hacia la naturaleza.'
-  },
-  {
-    id: 'otro',
-    name: 'Otro',
-    x: 630,
-    y: 245,
-    description: 'Desde la delicadeza impecable de la seda en el Lejano Oriente hasta la imponente talla ritual en madera de Oceanía, exploramos otras latitudes donde la genialidad humana sigue tejiendo historia en tiempo real.'
-  }
-]
-
-const selectedLocation = ref(locations[2]) // Default: España
-
-const selectLocation = (loc) => {
-  selectedLocation.value = loc
-}
+// Map logic component
 </script>
 
 <style scoped>
 .interactive-map-wrapper {
-  padding: 0;
-  background: transparent;
+  background-color: #48C5B6;
   width: 100%;
+  padding: 5px 0;
 }
 
-.map-grid {
-  display: grid;
-  grid-template-columns: 7fr 3fr;
-  gap: var(--wf-spacing-lg);
-  align-items: stretch;
-  min-height: 480px;
+.map-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 40px;
+  padding: 0 40px;
 }
 
-/* 70% MAP VISUAL BOX */
 .map-visual-box {
-  background: var(--wf-bg);
-  border: 2px solid var(--wf-border);
-  position: relative;
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-.map-visual-box:hover {
-  box-shadow: 4px 4px 0px var(--wf-border);
-  transform: translate(-2px, -2px);
 }
 
 .world-svg {
   width: 100%;
-  height: 100%;
-  min-height: 450px;
+  height: auto;
+  max-width: 800px;
+  min-height: 300px;
 }
 
-.base-continents path {
-  fill: #f5f5f5;
-  stroke: var(--wf-placeholder);
-  stroke-width: 1.5;
-  transition: all 0.3s ease;
-}
-
-/* INTERACTIVE NODES (POINTS) */
-.interactive-node {
+.continent {
+  fill: #ffffff;
+  stroke: transparent;
+  transition: fill 0.3s ease, transform 0.3s ease;
   cursor: pointer;
-}
-
-.core-dot {
-  fill: var(--wf-bg);
-  stroke: var(--wf-border);
-  stroke-width: 2;
-  transition: all 0.3s ease;
-}
-
-.active-ring {
-  fill: transparent;
-  stroke: var(--wf-text);
-  stroke-width: 1.5;
-  stroke-dasharray: 5, 5;
-  animation: rotateRing 20s linear infinite;
   transform-origin: center;
-  transform-box: fill-box;
 }
 
-@keyframes rotateRing {
-  100% {
-    transform: rotate(360deg);
-  }
+/* Hover effects */
+.continent.hover-red:hover {
+  fill: #E93C44;
 }
 
-.node-label {
-  fill: var(--wf-text);
-  font-size: 0.8rem;
-  font-weight: bold;
-  font-family: inherit;
-  pointer-events: none;
-  transition: all 0.3s;
+.continent.hover-yellow:hover {
+  fill: #FCD015;
 }
 
-/* Hover Behavior */
-.interactive-node:hover .core-dot {
-  fill: var(--wf-border);
-  r: 7;
+.continent:hover {
+  transform: scale(1.01);
 }
 
-.interactive-node:hover .node-label {
-  font-size: 0.9rem;
-  transform: translateY(-2px);
+.map-text-box {
+  flex: 0 0 35%;
+  color: var(--color-blanco);
 }
 
-/* Active Behavior */
-.is-active .core-dot {
-  fill: var(--wf-border);
-  r: 8;
+.map-quote {
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 3vw, 3.5rem);
+  line-height: 1.3;
+  font-weight: 400;
 }
 
-.is-active .node-label {
-  font-size: 16px;
-  text-decoration: underline;
-  transform: translateY(-4px);
-}
-
-/* 30% WIREFRAME DETAILS PANEL */
-.map-details-box {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: var(--wf-spacing-lg) !important;
-  transition: all 0.3s ease;
-}
-
-.map-details-box:hover {
-  box-shadow: 4px 4px 0px var(--wf-border);
-  transform: translate(-2px, -2px);
-}
-
-.details-inner {
-  animation: fadeIn 0.3s ease-out forwards;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateX(10px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-.dynamic-title {
-  font-size: 2rem;
-  font-weight: bold;
-  color: var(--wf-text);
-  line-height: 1.2;
-  margin-bottom: var(--wf-spacing-md);
-  text-transform: uppercase;
-}
-
-.elegant-divider {
-  width: 100%;
-  height: 2px;
-  background: var(--wf-border);
-  margin-bottom: var(--wf-spacing-md);
-}
-
-.dynamic-description {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--wf-text);
-  text-align: justify;
-}
-
-/* Responsive adjustments */
-@media (max-width: 1024px) {
-  .dynamic-title {
-    font-size: 1.6rem;
-  }
-}
-
+/* Responsive */
 @media (max-width: 900px) {
-  .map-grid {
-    grid-template-columns: 1fr;
-    gap: var(--wf-spacing-md);
+  .map-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
   }
-  .map-visual-box {
-    min-height: 350px;
-  }
-  .map-details-box {
-    min-height: 250px;
+  
+  .map-text-box {
+    margin-bottom: 40px;
   }
 }
 </style>

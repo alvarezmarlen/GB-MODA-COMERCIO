@@ -91,7 +91,7 @@ const handleLogout = () => {
   width: calc(100% - 48px);
   max-width: 820px;
 
-  background: rgba(255, 255, 255, 0.97);
+  background: #FCD015;
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 
