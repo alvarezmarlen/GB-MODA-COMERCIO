@@ -25,8 +25,10 @@
       <BaseLabel>Acepto los términos y condiciones</BaseLabel>
     </div>
 
-    <!-- The button remains disabled until all data is "clean" -->
-    <BaseButton type="submit" :disabled="!isFormValid">Registrarse</BaseButton>
+    <p v-if="authStore.error" class="error-text">{{ authStore.error }}</p>
+    <BaseButton type="submit" :disabled="!isFormValid || authStore.loading">
+      {{ authStore.loading ? 'Registrando...' : 'Registrarse' }}
+    </BaseButton>
   </form>
 </template>
 
@@ -41,6 +43,8 @@ import { useForm } from '../../composables/useForm'
 import { useAuthStore } from '../../composables/useAuthStore'
 
 const router = useRouter()
+const authStore = useAuthStore()
+const { register } = authStore
 const { formData, handleSubmit, isValidEmail } = useForm({
   username: '',
   email: '',
@@ -48,7 +52,6 @@ const { formData, handleSubmit, isValidEmail } = useForm({
   terms: false
 })
 
-// Validation logic to ensure clean data for the backend
 const isFormValid = computed(() => {
   const hasValidUsername = formData.username.trim().length >= 3
   const hasValidEmail = isValidEmail(formData.email)
@@ -60,27 +63,18 @@ const isFormValid = computed(() => {
 
 const onFormSubmit = () => {
   handleSubmit(async (data) => {
-    // Trim data before sending to backend for extra cleanliness
     const cleanData = {
       nombre_usuario: data.username.trim(),
       email: data.email.trim(),
       password: data.password
     }
-    console.log('Sending clean data to backend:', cleanData)
-    
-    const authStore = useAuthStore()
-    const success = await authStore.register(cleanData)
-    
+    const success = await register(cleanData)
     if (success) {
-      alert('Usuario registrado con éxito')
       router.push('/login')
-    } else {
-      alert('Error en el registro: ' + JSON.stringify(authStore.error))
     }
   })
 }
 </script>
-
 
 <style scoped>
 .checkbox-container {
@@ -88,5 +82,11 @@ const onFormSubmit = () => {
   align-items: center;
   gap: 8px;
   margin-bottom: 20px;
+}
+
+.error-text {
+  color: #ff4d4d;
+  font-size: 0.85rem;
+  margin: 10px 0;
 }
 </style>

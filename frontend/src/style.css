@@ -1,5 +1,11 @@
 /* Design System */
 :root {
+  /* Colors */
+  --color-primary: #2D6A8B;
+  --color-red:      #E93C44;
+  --color-yellow:  #FCD015;
+  --color-white:    #FFFFFF;
+
   --wf-bg: #ffffff;
   --wf-border: #000000;
   --wf-text: #000000;
