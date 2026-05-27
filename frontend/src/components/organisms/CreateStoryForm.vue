@@ -7,11 +7,11 @@
       />
     </FormGroup>
 
-    <FormGroup label="País de origen o continente">
+    <FormGroup label="Continente">
       <BaseSelect
-        v-model="formData.countryOrigin"
+        v-model="formData.originCountry"
         :options="countryOptions"
-        placeholder="▼ Seleccionar país o continente"
+        placeholder="▼ Seleccionar continente"
       />
     </FormGroup>
 
@@ -25,17 +25,9 @@
 
     <FormGroup label="Año de nacimiento">
       <BaseSelect
-        v-model="formData.birthYearRange"
+        v-model="formData.ageRange"
         :options="DateOfBirthOptions"
         placeholder="▼ Seleccionar año de nacimiento"
-      />
-    </FormGroup>
-
-    <FormGroup label="País de origen">
-      <BaseSelect
-        v-model="formData.originCountry"
-        :options="countryOptions"
-        placeholder="▼ Seleccionar país"
       />
     </FormGroup>
 
@@ -82,21 +74,24 @@ import { useAuthStore } from '../../composables/useAuthStore'
 import { createStory, uploadStoryImage } from '../../api/stories'
 
 const countryOptions = [
-  { label: 'País Vasco', value: 'pais_vasco' },
+  { label: 'America', value: 'america' },
   { label: 'Europa', value: 'europa' },
-  { label: 'Marruecos', value: 'marruecos' },
-  { label: 'África', value: 'africa' },
-  { label: 'America Latina', value: 'america_latina' },
-  { label: 'Otro', value: 'otro' }
+  { label: 'Africa', value: 'africa' },
+  { label: 'Asia', value: 'asia' },
+  { label: 'Oceania', value: 'oceania' }
 ]
 
 const professionOptions = [
-  { label: 'Ama de casa', value: 'ama de casa' },
-  { label: 'Cuidadora', value: 'cuidadora' },
-  { label: 'Camarera', value: 'camarera' },
-  { label: 'Servicio de Limpieza', value: 'servicio de limpieza' },
-  { label: 'Enfermera', value: 'enfermera' },
-  { label: 'Otro', value: 'otro' }
+  { label: 'Hosteleria y turismo', value: 'hosteleria_turismo' },
+  { label: 'Administracion y oficina', value: 'administracion_oficina' },
+  { label: 'Ventas y comercio', value: 'ventas_comercio' },
+  { label: 'Limpieza y mantenimiento', value: 'limpieza_mantenimiento' },
+  { label: 'Educacion y formacion', value: 'educacion_formacion' },
+  { label: 'Sanidad y cuidados', value: 'sanidad_cuidados' },
+  { label: 'Belleza y estetica', value: 'belleza_estetica' },
+  { label: 'Moda y confeccion', value: 'moda_confeccion' },
+  { label: 'Cocina y alimentacion', value: 'cocina_alimentacion' },
+  { label: 'Entre Otros', value: 'otros' }
 ]
 
 const DateOfBirthOptions = [
@@ -104,13 +99,21 @@ const DateOfBirthOptions = [
   { label: '1960-1970', value: '1960-1970' },
   { label: '1970-1980', value: '1970-1980' },
   { label: '1990-2000', value: '1990-2000' },
-  { label: '2000-2010', value: '2000-2010' },
+  { label: '2000-2010', value: '2000-2010' }
 ]
 
-const { formData } = useForm({
+const router = useRouter()
+const authStore = useAuthStore()
+const { user } = authStore
+const { setStory } = useStoryStore()
+const uploadedFiles = ref([])
+const isSubmitting = ref(false)
+const submitError = ref('')
+const { formData, handleSubmit } = useForm({
   title: '',
+  originCountry: '',
   profession: '',
-  birthYearRange: '',
+  ageRange: '',
   description: '',
   acceptedTerms: false
 })
@@ -135,14 +138,13 @@ const onFormSubmit = async () => {
   submitError.value = ''
 
   try {
-    const data = { ...formData }
     const storyData = {
       user_id: user.value?.id || 1,
-      title: data.title,
-      content: data.description,
-      origin_country: data.originCountry,
-      profession: data.profession,
-      age_range: data.ageRange
+      title: formData.title,
+      content: formData.description,
+      origin_country: formData.originCountry,
+      profession: formData.profession,
+      age_range: formData.ageRange
     }
 
     const created = await createStory(storyData)
@@ -166,7 +168,7 @@ const onFormSubmit = async () => {
 
     router.push({ name: 'story-detail', params: { id: created.id } })
   } catch (err) {
-    submitError.value = err.message
+    submitError.value = err.message || 'Error al publicar la historia'
   } finally {
     isSubmitting.value = false
   }
@@ -174,6 +176,15 @@ const onFormSubmit = async () => {
 </script>
 
 <style scoped>
+.create-story-form {
+  border: none;
+  border-radius: var(--wf-radius);
+  padding: var(--wf-spacing-lg);
+  margin: var(--wf-spacing-lg) auto;
+  background: var(--wf-bg);
+  max-width: 800px;
+}
+
 .checkbox-container {
   display: flex;
   align-items: flex-start;

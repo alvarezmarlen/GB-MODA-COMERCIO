@@ -1,58 +1,52 @@
 <template>
   <div class="story-detail-template">
-    <header class="template-header">
-      <button class="wireframe-button back-button" @click="goBack">
-        ← Volver
-      </button>
-    </header>
+    <div class="template-inner">
+      <header class="template-header">
+        <h1 class="template-title">DETALLE DE LA HISTORIA</h1>
+        <button class="wireframe-button back-button" @click="goBack">
+          ← Volver
+        </button>
+      </header>
 
-    <main class="template-content">
-      <div v-if="loading" class="loading-text">Cargando historia...</div>
+      <main class="template-content">
+        <div v-if="loading" class="loading-text">Cargando historia...</div>
+        <div v-else-if="!storyToShow" class="loading-text">Historia no encontrada.</div>
+        <div v-else class="story-card">
+          <div class="story-title-box">
+            <h2>{{ storyToShow.title }}</h2>
+          </div>
 
-      <div v-else-if="!storyToShow" class="loading-text">Historia no encontrada.</div>
+          <div class="story-images-container" :class="{ 'double-images': storyToShow?.images?.length === 2 }">
+            <template v-if="storyToShow?.images?.length > 0">
+              <div
+                v-for="(img, idx) in storyToShow.images"
+                :key="idx"
+                class="story-image-wrapper"
+              >
+                <img :src="img.url || img" alt="Imagen de la historia" class="story-image" />
+              </div>
+            </template>
+            <template v-else>
+              <div class="story-image-placeholder">
+                <p>IMAGEN DE LA HISTORIA</p>
+              </div>
+            </template>
+          </div>
 
-      <div v-else class="wireframe-container story-card">
-        <div class="story-title-box">
-          <h2>{{ storyToShow.title }}</h2>
+          <div class="story-meta">
+            <span class="meta-item"><strong>Oficio:</strong> {{ professionLabel }}</span>
+            <span class="meta-item"><strong>Edad:</strong> {{ ageRangeLabel }}</span>
+            <span class="meta-item"><strong>País:</strong> {{ storyToShow.originCountry || storyToShow.origin_country || 'No especificado' }}</span>
+          </div>
+
+          <div class="story-description">
+            <p v-for="(paragraph, index) in formattedDescription" :key="index">
+              {{ paragraph }}
+            </p>
+          </div>
         </div>
-
-        <hr class="wf-divider" />
-
-        <div class="story-images-container" :class="{ 'double-images': storyToShow.images.length === 2 }">
-          <template v-if="storyToShow.images.length > 0">
-            <div
-              v-for="(img, idx) in storyToShow.images"
-              :key="idx"
-              class="story-image-wrapper"
-            >
-              <img :src="img.url || img" :alt="'Imagen de la historia'" class="story-image" />
-            </div>
-          </template>
-          <template v-else>
-            <div class="story-image-placeholder">
-              <span class="placeholder-icon"></span>
-              <p>IMAGEN DE LA HISTORIA</p>
-            </div>
-          </template>
-        </div>
-
-        <div class="story-meta">
-          <span class="meta-item"><strong>Oficio:</strong> {{ professionLabel }}</span>
-          <span class="meta-separator">│</span>
-          <span class="meta-item"><strong>Edad:</strong> {{ ageRangeLabel }}</span>
-          <span class="meta-separator">│</span>
-          <span class="meta-item"><strong>País:</strong> {{ storyToShow.originCountry || storyToShow.origin_country }}</span>
-        </div>
-
-        <hr class="wf-divider" />
-
-        <div class="story-description">
-          <p v-for="(paragraph, index) in formattedDescription" :key="index">
-            {{ paragraph }}
-          </p>
-        </div>
-      </div>
-    </main>
+      </main>
+    </div>
   </div>
 </template>
 
@@ -90,7 +84,7 @@ const ageRangeLabel = computed(() => {
     '18_25': '18 - 25 años',
     '26_35': '26 - 35 años',
     '36_45': '36 - 45 años',
-    '46_60': '46 - 60 años',
+    '46_60': 'Más de 60 años',
     over_60: 'Más de 60 años'
   }
   return mapping[storyToShow.value?.ageRange || storyToShow.value?.age_range] || 'No especificada'
@@ -134,55 +128,90 @@ onMounted(() => {
 
 <style scoped>
 .story-detail-template {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.template-inner {
   max-width: 800px;
   margin: 0 auto;
-  padding: var(--wf-spacing-md);
+  padding: 0 20px 100px;
+  padding-top: 100px;
+}
+
+.story-detail-template::before,
+.story-detail-template::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  background-repeat: repeat-y;
+  background-position: top center;
+  background-size: cover;
+  opacity: 0.96;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.story-detail-template::before {
+  left: 0;
+  background-image: url('../assets/1.png');
+}
+
+.story-detail-template::after {
+  right: 0;
+  background-image: url('../assets/2.png');
+}
+
+.template-inner {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 900px) {
+  .story-detail-template::before,
+  .story-detail-template::after {
+    display: none;
+  }
 }
 
 .template-header {
-  margin-bottom: var(--wf-spacing-md);
-  border-bottom: 2px solid var(--wf-border);
+  text-align: center;
+  margin-bottom: var(--wf-spacing-lg);
+  border-bottom: 5px solid var(--color-red);
   padding-bottom: var(--wf-spacing-sm);
 }
 
-.back-button {
-  text-decoration: none;
-  font-weight: bold;
+h1.template-title {
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  color: var(--color-yellow);
+  margin-bottom: 20px;
 }
 
-.loading-text {
-  text-align: center;
-  padding: var(--wf-spacing-lg);
+.back-button {
+  background: var(--color-red);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--wf-radius);
+  padding: 8px 16px;
+  cursor: pointer;
   font-weight: bold;
-  color: var(--wf-text);
-  border: 2px dashed var(--wf-border);
 }
 
 .story-card {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--wf-spacing-md);
-}
-
-.story-title-box {
-  border: 1px solid var(--wf-border);
-  padding: var(--wf-spacing-md);
-  text-align: center;
-  background: var(--wf-button-bg);
+  padding: var(--wf-spacing-lg);
+  background: var(--wf-bg);
+  border-radius: var(--wf-radius);
 }
 
 .story-title-box h2 {
-  margin: 0;
   font-size: 1.5rem;
-  letter-spacing: 2px;
   text-transform: uppercase;
-}
-
-.wf-divider {
-  border: none;
-  border-top: 2px solid var(--wf-border);
-  margin: var(--wf-spacing-sm) 0;
+  margin-bottom: 20px;
 }
 
 .story-images-container {
@@ -197,70 +226,51 @@ onMounted(() => {
 }
 
 .story-image-wrapper {
-  border: 1px solid var(--wf-border);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-bottom: 20px;
+  border: 1px solid var(--color-primary);
+  border-radius: var(--wf-radius);
   overflow: hidden;
-  background: #fdfdfd;
 }
 
 .story-image {
   width: 100%;
   height: auto;
-  max-height: 400px;
-  object-fit: cover;
   display: block;
 }
 
 .story-image-placeholder {
-  border: 1px dashed var(--wf-border);
+  border: 1px dashed var(--color-primary);
   padding: 4rem 2rem;
   text-align: center;
   background: #fafafa;
 }
 
-.placeholder-icon {
-  font-size: 3rem;
-  display: block;
-  margin-bottom: var(--wf-spacing-sm);
-}
-
 .story-meta {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: var(--wf-spacing-lg);
-  font-size: 1.1rem;
-  padding: var(--wf-spacing-sm) 0;
-}
-
-.meta-separator {
-  color: var(--wf-border);
+  gap: 20px;
+  margin: 20px 0;
   font-weight: bold;
-}
-
-.story-description {
-  font-size: 1rem;
-  line-height: 1.7;
+  flex-wrap: wrap;
 }
 
 .story-description p {
-  margin-bottom: var(--wf-spacing-md);
-  text-align: justify;
+  line-height: 1.7;
+  margin-bottom: 15px;
 }
 
-@media (max-width: 600px) {
-  .story-images-container.double-images {
-    grid-template-columns: 1fr;
-  }
-  .story-meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--wf-spacing-sm);
-  }
-  .meta-separator {
-    display: none;
+.loading-text {
+  text-align: center;
+  padding: var(--wf-spacing-lg);
+  font-weight: bold;
+  color: var(--wf-text);
+  border: 2px dashed var(--wf-border);
+  background: var(--wf-bg);
+  border-radius: var(--wf-radius);
+}
+
+@media (max-width: 680px) {
+  .story-detail-template {
+    padding-top: 140px;
   }
 }
 </style>
