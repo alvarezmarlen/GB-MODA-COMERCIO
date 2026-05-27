@@ -10,9 +10,13 @@ async function parseJson(res) {
 }
 
 export async function updateUser(userId, data) {
+  const token = localStorage.getItem('token')
   const res = await fetch(`/users/${userId}`, {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
+    },
     body: JSON.stringify(data),
   })
   if (!res.ok) {
