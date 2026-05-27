@@ -1,7 +1,7 @@
 import { reactive, computed } from 'vue'
 
 const state = reactive({
-  user: null,
+  user: JSON.parse(localStorage.getItem('user')) || null,
   isAuthenticated: !!localStorage.getItem('token'),
   token: localStorage.getItem('token') || null,
   loading: false,
@@ -37,6 +37,7 @@ export function useAuthStore() {
       state.token = data.access_token
       state.isAuthenticated = true
       localStorage.setItem('token', data.access_token)
+      localStorage.setItem('user', JSON.stringify(data.user))
       alert('Inicio de sesión exitoso')
       return true
     } catch (err) {
@@ -77,6 +78,7 @@ export function useAuthStore() {
     state.token = null
     state.isAuthenticated = false
     localStorage.removeItem('token')
+    localStorage.removeItem('user')
   }
 
   const updateUser = (data) => {
@@ -84,6 +86,7 @@ export function useAuthStore() {
       if (data.username !== undefined) state.user.username = data.username
       if (data.email !== undefined) state.user.email = data.email
       if (data.password !== undefined) state.user.password = data.password
+      localStorage.setItem('user', JSON.stringify(state.user))
     }
   }
 

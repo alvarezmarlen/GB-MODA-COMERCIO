@@ -75,7 +75,7 @@ const professionLabel = computed(() => {
     limpieza: 'Limpieza',
     otro: 'Otro'
   }
-  return mapping[storyToShow.value?.profession] || 'No especificado'
+  return mapping[storyToShow.value?.profession] || storyToShow.value?.profession || 'No especificado'
 })
 
 const ageRangeLabel = computed(() => {
@@ -84,10 +84,10 @@ const ageRangeLabel = computed(() => {
     '18_25': '18 - 25 años',
     '26_35': '26 - 35 años',
     '36_45': '36 - 45 años',
-    '46_60': 'Más de 60 años',
+    '46_60': '46 - 60 años',
     over_60: 'Más de 60 años'
   }
-  return mapping[storyToShow.value?.ageRange || storyToShow.value?.age_range] || 'No especificada'
+  return mapping[storyToShow.value?.ageRange || storyToShow.value?.age_range] || storyToShow.value?.ageRange || storyToShow.value?.age_range || 'No especificada'
 })
 
 const formattedDescription = computed(() => {
@@ -256,6 +256,11 @@ h1.template-title {
 .story-description p {
   line-height: 1.7;
   margin-bottom: 15px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: pre-wrap;
+  hyphens: auto;
 }
 
 .loading-text {

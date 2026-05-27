@@ -288,6 +288,9 @@ onMounted(fetchStories)
   color: var(--wf-text);
   margin: 0 0 var(--wf-spacing-md);
   text-align: justify;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .card-actions {

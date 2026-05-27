@@ -7,11 +7,11 @@
       />
     </FormGroup>
 
-    <FormGroup label="Continente">
+    <FormGroup label="País de origen">
       <BaseSelect
         v-model="formData.originCountry"
         :options="countryOptions"
-        placeholder="▼ Seleccionar continente"
+        placeholder="▼ Seleccionar país"
       />
     </FormGroup>
 
@@ -23,11 +23,11 @@
       />
     </FormGroup>
 
-    <FormGroup label="Año de nacimiento">
+    <FormGroup label="Rango de edad">
       <BaseSelect
         v-model="formData.ageRange"
-        :options="DateOfBirthOptions"
-        placeholder="▼ Seleccionar año de nacimiento"
+        :options="ageRangeOptions"
+        placeholder="▼ Seleccionar rango de edad"
       />
     </FormGroup>
 
@@ -94,7 +94,7 @@ const professionOptions = [
   { label: 'Entre Otros', value: 'otros' }
 ]
 
-const DateOfBirthOptions = [
+const ageRangeOptions = [
   { label: '1930-1960', value: '1930-1960' },
   { label: '1960-1970', value: '1960-1970' },
   { label: '1970-1980', value: '1970-1980' },
@@ -102,9 +102,38 @@ const DateOfBirthOptions = [
   { label: '2000-2010', value: '2000-2010' }
 ]
 
+// Mapeos para convertir valores frontend a valores backend
+const continentToCountry = {
+  america: 'Colombia',
+  europa: 'España',
+  africa: 'Marruecos',
+  asia: 'Tailandia',
+  oceania: 'Australia'
+}
+
+const professionMap = {
+  hosteleria_turismo: 'Hostelería y Turismo',
+  administracion_oficina: 'Administración y Oficina',
+  ventas_comercio: 'Ventas y Comercio',
+  limpieza_mantenimiento: 'Limpieza y Mantenimiento',
+  educacion_formacion: 'Educación y Formación',
+  sanidad_cuidados: 'Sanidad y Cuidados',
+  belleza_estetica: 'Belleza y Estética',
+  moda_confeccion: 'Moda y Confección',
+  cocina_alimentacion: 'Cocina y Alimentación',
+  otros: 'Otros'
+}
+
+const yearRangeToAgeRange = {
+  '1930-1960': '60+',
+  '1960-1970': '50-60',
+  '1970-1980': '40-50',
+  '1990-2000': '25-35',
+  '2000-2010': '18-25'
+}
+
 const router = useRouter()
 const authStore = useAuthStore()
-const { user } = authStore
 const { setStory } = useStoryStore()
 const uploadedFiles = ref([])
 const isSubmitting = ref(false)
@@ -134,17 +163,30 @@ const isFormValid = computed(() => {
 })
 
 const onFormSubmit = async () => {
+  if (!isFormValid.value) {
+    submitError.value = 'Por favor, completa todos los campos requeridos'
+    return
+  }
+
   isSubmitting.value = true
   submitError.value = ''
 
   try {
+    // Obtener user ID de forma segura
+    let userId = 1
+    if (authStore.user && authStore.user.value) {
+      userId = authStore.user.value.id || 1
+    } else if (authStore.user && authStore.user.id) {
+      userId = authStore.user.id || 1
+    }
+
     const storyData = {
-      user_id: user.value?.id || 1,
+      user_id: userId,
       title: formData.title,
       content: formData.description,
-      origin_country: formData.originCountry,
-      profession: formData.profession,
-      age_range: formData.ageRange
+      origin_country: continentToCountry[formData.originCountry] || formData.originCountry,
+      profession: professionMap[formData.profession] || formData.profession,
+      age_range: yearRangeToAgeRange[formData.ageRange] || formData.ageRange
     }
 
     const created = await createStory(storyData)
