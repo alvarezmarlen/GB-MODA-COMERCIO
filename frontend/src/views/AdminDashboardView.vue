@@ -1,22 +1,22 @@
 <template>
-  <DashboardTemplate title="Panel Admin">
+  <DashboardTemplate :title="t('admin.title')">
     <!-- Stats bar -->
     <div class="stats-bar">
       <div class="stat-item">
         <span class="stat-number">{{ stories.length }}</span>
-        <span class="stat-label">Total Historias</span>
+        <span class="stat-label">{{ t('admin.totalStories') }}</span>
       </div>
       <div class="stat-divider"></div>
       <div class="stat-item">
         <span class="stat-number">{{ uniqueAuthors }}</span>
-        <span class="stat-label">Autores</span>
+        <span class="stat-label">{{ t('admin.authors') }}</span>
       </div>
     </div>
 
     <!-- All Stories Management -->
     <section class="admin-stories-section">
       <div class="section-header">
-        <h2 class="section-title">GESTIÓN DE HISTORIAS</h2>
+        <h2 class="section-title">{{ t('admin.management') }}</h2>
       </div>
 
       <div v-if="stories.length > 0" class="admin-stories-list">
@@ -28,26 +28,26 @@
             <div v-if="story.images && story.images.length > 0" class="admin-card-image-box">
               <img :src="story.images[0].url" :alt="story.title" class="admin-card-image" />
             </div>
-            <div v-else class="admin-card-image-box"><span>Sin imagen</span></div>
+            <div v-else class="admin-card-image-box"><span>{{ t('admin.noImage') }}</span></div>
             <div class="admin-card-content">
               <h3 class="admin-card-title">{{ story.title }}</h3>
               <div class="admin-card-meta">
-                Oficio: {{ getProfLabel(story.profession) }} &nbsp;|&nbsp;
-                Edad: {{ getAgeLabel(story.age_range) }} &nbsp;|&nbsp;
-                País: {{ story.origin_country }}
+                {{ t('admin.trade') }}: {{ getProfLabel(story.profession) }} &nbsp;|&nbsp;
+                {{ t('admin.age') }}: {{ getAgeLabel(story.age_range) }} &nbsp;|&nbsp;
+                {{ t('admin.country') }}: {{ story.origin_country }}
               </div>
               <p class="admin-card-desc">{{ story.content?.substring(0, 120) }}{{ story.content?.length > 120 ? '...' : '' }}</p>
             </div>
           </div>
           <div class="admin-card-actions">
-            <button class="custom-button edit-btn" @click="startEdit(story)">✎ Modificar</button>
-            <button class="custom-button delete-btn" @click="confirmDelete(story)">✕ Borrar</button>
+            <button class="custom-button edit-btn" @click="startEdit(story)">{{ t('admin.modify') }}</button>
+            <button class="custom-button delete-btn" @click="confirmDelete(story)">{{ t('admin.delete') }}</button>
           </div>
         </div>
       </div>
 
       <div v-else class="empty-state">
-        <p class="empty-text">No hay historias registradas.</p>
+        <p class="empty-text">{{ t('admin.noStories') }}</p>
       </div>
     </section>
 
@@ -55,22 +55,22 @@
     <div v-if="editingStory" class="modal-overlay" @click.self="cancelEdit">
       <div class="modal-content">
         <div class="section-header">
-          <h2 class="section-title">MODIFICAR HISTORIA</h2>
+          <h2 class="section-title">{{ t('admin.editTitle') }}</h2>
           <button class="custom-button" @click="cancelEdit">✕</button>
         </div>
         <div class="modal-fields">
           <div class="modal-field">
-            <label class="custom-label">Título</label>
+            <label class="custom-label">{{ t('admin.titleLabel') }}</label>
             <input v-model="editForm.title" class="wireframe-input" type="text" />
           </div>
           <div class="modal-field">
-            <label class="custom-label">Descripción</label>
+            <label class="custom-label">{{ t('admin.descriptionLabel') }}</label>
             <textarea v-model="editForm.content" class="wireframe-input modal-textarea" rows="4"></textarea>
           </div>
         </div>
         <div class="modal-actions">
-          <button class="custom-button" @click="cancelEdit">Cancelar</button>
-          <button class="custom-button save-btn" @click="saveEdit">✓ Guardar</button>
+          <button class="custom-button" @click="cancelEdit">{{ t('admin.cancel') }}</button>
+          <button class="custom-button save-btn" @click="saveEdit">{{ t('admin.save') }}</button>
         </div>
       </div>
     </div>
@@ -78,11 +78,11 @@
     <!-- Delete Confirmation -->
     <div v-if="deletingStory" class="modal-overlay" @click.self="cancelDelete">
       <div class="modal-content modal-small">
-        <h2 class="section-title" style="margin-bottom: var(--wf-spacing-md);">CONFIRMAR ELIMINACIÓN</h2>
-        <p>¿Estás seguro de que deseas borrar la historia <strong>"{{ deletingStory.title }}"</strong>?</p>
+        <h2 class="section-title" style="margin-bottom: var(--wf-spacing-md);">{{ t('admin.confirmDelete') }}</h2>
+        <p>{{ t('admin.confirmDeleteMsg', { title: deletingStory.title }) }}</p>
         <div class="modal-actions">
-          <button class="custom-button" @click="cancelDelete">Cancelar</button>
-          <button class="custom-button delete-btn" @click="executeDelete">✕ Borrar</button>
+          <button class="custom-button" @click="cancelDelete">{{ t('admin.cancel') }}</button>
+          <button class="custom-button delete-btn" @click="executeDelete">{{ t('admin.delete') }}</button>
         </div>
       </div>
     </div>
@@ -91,8 +91,11 @@
 
 <script setup>
 import { ref, reactive, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { getStories, updateStory, deleteStory } from '../api/stories'
 import DashboardTemplate from '../components/templates/DashboardTemplate.vue'
+
+const { t } = useI18n()
 
 const stories = ref([])
 const loading = ref(true)
@@ -130,9 +133,7 @@ const saveEdit = async () => {
     const idx = stories.value.findIndex(s => s.id === editingStory.value.id)
     if (idx !== -1) stories.value[idx] = updated
     editingStory.value = null
-    alert('Historia actualizada con éxito')
   } catch {
-    alert('Error al actualizar la historia')
   }
 }
 
@@ -144,14 +145,12 @@ const executeDelete = async () => {
     await deleteStory(deletingStory.value.id)
     stories.value = stories.value.filter(s => s.id !== deletingStory.value.id)
     deletingStory.value = null
-    alert('Historia eliminada con éxito')
   } catch {
-    alert('Error al eliminar la historia')
   }
 }
 
-const getProfLabel = (k) => ({ casa:'Casa', campo:'Campo', industria:'Industria', limpieza:'Limpieza', otro:'Otro' }[k] || 'N/A')
-const getAgeLabel = (k) => ({ under_18:'<18', '18_25':'18-25', '26_35':'26-35', '36_45':'36-45', '46_60':'46-60', over_60:'>60' }[k] || 'N/A')
+const getProfLabel = (k) => k ? t(`professions.${k}`) : 'N/A'
+const getAgeLabel = (k) => k ? t(`ages.${k}`) : 'N/A'
 </script>
 
 <style scoped>

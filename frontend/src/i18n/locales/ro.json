@@ -1,0 +1,196 @@
+{
+  "nav": {
+    "home": "Acasă",
+    "createStory": "+ Creează Povestea",
+    "currentLang": "RO",
+    "logout": "Deconectare",
+    "profile": "Utilizator",
+    "admin": "ADMIN",
+    "user": "UTILIZATOR"
+  },
+  "footer": {
+    "copyright": "© 2026 GB-MODA-COMERCIO. Toate drepturile rezervate.",
+    "terms": "Termeni",
+    "privacy": "Confidențialitate",
+    "contact": "Contact"
+  },
+  "home": {
+    "brandTitle": "GB-COMERȚ-DE-MODĂ",
+    "imageLabel": "IMAGINE",
+    "heroParagraph": "Descoperiți și împărtășiți adevăratele cronici ale modei și comerțului local. O platformă comunitară dedicată documentării, păstrării și onorării tradiției bogate, efortului zilnic și moștenirii culturale a meseriilor locale care dau identitate societății noastre."
+  },
+  "auth": {
+    "loginTitle": "Autentificare",
+    "registerTitle": "Creează Cont",
+    "noAccount": "Nu ai cont?",
+    "registerLink": "Înregistrează-te",
+    "hasAccount": "Ai deja un cont?",
+    "loginLink": "Autentifică-te",
+    "usernameLabel": "Nume de utilizator",
+    "usernamePlaceholder": "Numele tău de utilizator",
+    "emailLabel": "Email",
+    "emailPlaceholder": "exemplu@email.com",
+    "passwordLabel": "Parolă",
+    "passwordPlaceholder": "********",
+    "passwordNewPlaceholder": "Parolă nouă",
+    "usernameMinPlaceholder": "Minim 3 caractere",
+    "passwordMinPlaceholder": "Minim 6 caractere",
+    "termsLabel": "Accept termenii și condițiile",
+    "loginButton": "Autentificare",
+    "registerButton": "Înregistrare",
+    "loginSuccess": "Autentificare reușită",
+    "registerSuccess": "Cont creat cu succes"
+  },
+  "dashboard": {
+    "title": "Profilul Meu",
+    "personalData": "DATE PERSONALE",
+    "edit": "✎ Editează",
+    "cancel": "✕ Anulează",
+    "usernameLabel": "Nume de utilizator",
+    "emailLabel": "Adresă email",
+    "passwordLabel": "Parolă",
+    "saveChanges": "✓ Salvează Modificările",
+    "myStories": "POVEȘTILE MELE",
+    "storyCount": "poveste(i)",
+    "noImage": "Fără imagine",
+    "trade": "Meserie",
+    "age": "Vârstă",
+    "viewMore": "Vezi mai mult",
+    "emptyTitle": "Nu ai încărcat încă nicio poveste.",
+    "emptySubtext": "Împărtășește prima ta cronică cu comunitatea.",
+    "createFirstStory": "+ Creează Povestea",
+    "loadError": "Eroare la încărcarea poveștilor",
+    "saveSuccess": "Date actualizate cu succes",
+    "saveError": "Eroare la actualizarea datelor",
+    "country": "Țară"
+  },
+  "admin": {
+    "title": "Panou Admin",
+    "totalStories": "Total Povești",
+    "authors": "Autori",
+    "management": "GESTIONAREA POVEȘTILOR",
+    "noImage": "Fără imagine",
+    "trade": "Meserie",
+    "age": "Vârstă",
+    "country": "Țară",
+    "modify": "✎ Modifică",
+    "delete": "✕ Șterge",
+    "noStories": "Nicio poveste înregistrată.",
+    "editTitle": "MODIFICĂ POVESTEA",
+    "titleLabel": "Titlu",
+    "descriptionLabel": "Descriere",
+    "cancel": "Anulează",
+    "save": "✓ Salvează",
+    "confirmDelete": "CONFIRMĂ ȘTERGEREA",
+    "confirmDeleteMsg": "Ești sigur că vrei să ștergi povestea \"{title}\"?",
+    "updateSuccess": "Poveste actualizată cu succes",
+    "updateError": "Eroare la actualizarea poveștii",
+    "deleteSuccess": "Poveste ștearsă cu succes",
+    "deleteError": "Eroare la ștergerea poveștii"
+  },
+  "createStory": {
+    "pageTitle": "CREEAZĂ POVESTEA",
+    "titleLabel": "Titlul poveștii",
+    "titlePlaceholder": "Scrie titlul aici...",
+    "professionLabel": "Meserie",
+    "professionPlaceholder": "▼ Selectează meseria",
+    "ageLabel": "Vârstă",
+    "agePlaceholder": "▼ Selectează grupa de vârstă",
+    "countryLabel": "Țara de origine",
+    "countryPlaceholder": "▼ Selectează țara",
+    "descriptionLabel": "Descrierea poveștii",
+    "descriptionPlaceholder": "Scrie povestea sau descrierea completă aici...",
+    "termsLabel": "Accept termenii și permisiunile pentru publicarea imaginilor și conținutului.",
+    "uploadLabel": "Încarcă fotografie",
+    "publishing": "SE PUBLICĂ...",
+    "publish": "PUBLICĂ"
+  },
+  "storyDetail": {
+    "back": "← Înapoi",
+    "loading": "Se încarcă povestea...",
+    "notFound": "Povestea nu a fost găsită.",
+    "imageLabel": "IMAGINEA POVEȘTII",
+    "trade": "Meserie",
+    "age": "Vârstă",
+    "country": "Țară",
+    "notSpecified": "Nespecificat",
+    "notSpecifiedF": "Nespecificată"
+  },
+  "chronicles": {
+    "filterBy": "FILTREAZĂ DUPĂ",
+    "allTrades": "Toate meseriile",
+    "allAges": "Toate vârstele",
+    "loading": "Se încarcă poveștile...",
+    "noStories": "Nicio poveste disponibilă.",
+    "noImage": "Fără imagine",
+    "viewMore": "Vezi mai mult",
+    "trade": "Meserie",
+    "age": "Vârstă",
+    "country": "Țară"
+  },
+  "map": {
+    "locations": {
+      "america_central": "America Centrală",
+      "pais_vasco": "Țara Bascilor",
+      "espana": "Spania",
+      "marruecos": "Maroc",
+      "africa": "Africa",
+      "otro": "Altele"
+    },
+    "descriptions": {
+      "america_central": "O regiune vibrantă care păstrează intactă arta milenară a războiului de țesut mayaș, ceramica policromă vie și meseriile sacre în armonie perfectă cu pădurile dese și vulcanii maiestuoși.",
+      "pais_vasco": "Un enclav istoric de neegalat unde filarea riguroasă a fibrelor vegetale, forjarea artizanală și construcția navală de precizie au definit o identitate unică, gelos păstrată de maeștri pasionați.",
+      "espana": "O răscruce de drumuri și contraste, imens de bogată în tradiții textile străvechi, croitorie clasică de elită și marochinărie fină care au dăinuit de-a lungul secolelor în diverse colțuri peninsulare.",
+      "marruecos": "Casă mistică a străvechii olării roșii din munții Rif, a tăbăcarilor magistrali din medinele imperiale și a războaielor de țesut cu culori imposibile. Un patrimoniu vibrant, pur manual și transmis de la mame la fiice.",
+      "africa": "Vastul continent african este leagănul primordial al nenumăratelor tehnici de țesut, extracții de coloranți organici pământii și meserii vernaculare dezvoltate întotdeauna dintr-un profund și vital respect față de natură.",
+      "otro": "De la delicatețea impecabilă a mătăsii din Orientul Îndepărtat până la impunătoarea sculptură rituală în lemn a Oceaniei, explorăm alte latitudini unde geniul uman continuă să țeasă istorie în timp real."
+    }
+  },
+  "professions": {
+    "casa": "Casnic",
+    "campo": "Câmp",
+    "industria": "Industrie",
+    "limpieza": "Curățenie",
+    "otro": "Altele"
+  },
+  "ages": {
+    "under_18": "Sub 18 ani",
+    "18_25": "18 - 25 ani",
+    "26_35": "26 - 35 ani",
+    "36_45": "36 - 45 ani",
+    "46_60": "46 - 60 ani",
+    "over_60": "Peste 60 ani"
+  },
+  "ages_full": {
+    "under_18": "Sub 18 ani",
+    "18_25": "18 - 25 ani",
+    "26_35": "26 - 35 ani",
+    "36_45": "36 - 45 ani",
+    "46_60": "46 - 60 ani",
+    "over_60": "Peste 60 ani"
+  },
+  "countries": {
+    "Brasil": "Brazilia",
+    "Portugal": "Portugalia",
+    "España": "Spania",
+    "Argentina": "Argentina",
+    "México": "Mexic",
+    "Colombia": "Columbia",
+    "Chile": "Chile",
+    "Perú": "Peru",
+    "Venezuela": "Venezuela",
+    "Uruguay": "Uruguay",
+    "Paraguay": "Paraguay",
+    "Otro": "Altele"
+  },
+  "lang": {
+    "es": "Español",
+    "en": "English",
+    "eu": "Euskera",
+    "fr": "Français",
+    "ro": "Română"
+  },
+  "map": {
+    "quote": "Povești care traversează multe frontiere"
+  }
+}

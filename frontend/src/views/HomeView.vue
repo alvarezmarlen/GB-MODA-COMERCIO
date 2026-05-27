@@ -5,17 +5,14 @@
     <div class="hero-section">
       <!-- Logo sin ningún estilo decorativo, se camufla con el fondo azul -->
       <div class="hero-logo-col">
-        <img src="../assets/Logo.jpg" alt="Logo GB-Moda-Comercio" class="hero-logo" />
+        <img src="../assets/Logo.jpg" alt="{{ t('home.imageLabel') }}" class="hero-logo" />
       </div>
 
       <!-- Texto -->
       <div class="hero-text-col">
-        <h1 class="hero-title">GB MODA Y COMERCIO</h1>
+        <h1 class="hero-title">{{ t('home.brandTitle') }}</h1>
         <p class="hero-paragraph">
-          "Mujeres trabajadoras de nuestras vidas" son un conjunto de relatos biográficos
-          que pretenden realzar y poner en valor el trabajo diario que desempeñan las
-          mujeres de nuestro entorno. Dar a conocer sus historias de vida y agradecer el
-          trabajo que han realizado tanto fuera como dentro del hogar.
+           {{ t('home.heroParagraph') }}
         </p>
       </div>
     </div>
@@ -38,9 +35,11 @@
 </template>
 
 <script setup>
+import { useI18n } from 'vue-i18n'
 import InteractiveMap from '../components/organisms/InteractiveMap.vue'
 import ChronicleList from '../components/organisms/ChronicleList.vue'
 import { useAuthStore } from '../composables/useAuthStore'
+const { t } = useI18n()
 
 const authStore = useAuthStore()
 </script>

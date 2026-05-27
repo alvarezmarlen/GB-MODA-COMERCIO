@@ -1,0 +1,196 @@
+{
+  "nav": {
+    "home": "Hasiera",
+    "createStory": "+ Istorioa Sortu",
+    "currentLang": "EU",
+    "logout": "Saioa Itxi",
+    "profile": "Erabiltzailea",
+    "admin": "ADMIN",
+    "user": "ERABILTZAILEA"
+  },
+  "footer": {
+    "copyright": "© 2026 GB-MODA-COMERCIO. Eskubide guztiak erreserbatuta.",
+    "terms": "Baldintzak",
+    "privacy": "Pribatutasuna",
+    "contact": "Kontaktua"
+  },
+  "home": {
+    "brandTitle": "GB-MODA-MERKATARITZA", 
+    "imageLabel": "IRUDIA",
+    "heroParagraph": "Ezagutu eta partekatu moda eta tokiko merkataritzaren kronika errealak. Gure gizarteari identitatea ematen dioten tokiko ofizioen tradizio aberatsa, eguneroko ahalegina eta ondare kulturala dokumentatzeko, gordetzeko eta omentzeko plataforma komunitarioa."
+  },
+  "auth": {
+    "loginTitle": "Saioa Hasi",
+    "registerTitle": "Kontua Sortu",
+    "noAccount": "Ez duzu konturik?",
+    "registerLink": "Erregistratu",
+    "hasAccount": "Baduzu kontua?",
+    "loginLink": "Hasi saioa",
+    "usernameLabel": "Erabiltzaile izena",
+    "usernamePlaceholder": "Zure erabiltzaile izena",
+    "emailLabel": "Helbide elektronikoa",
+    "emailPlaceholder": "adibidea@posta.com",
+    "passwordLabel": "Pasahitza",
+    "passwordPlaceholder": "********",
+    "passwordNewPlaceholder": "Pasahitz berria",
+    "usernameMinPlaceholder": "Gutxienez 3 karaktere",
+    "passwordMinPlaceholder": "Gutxienez 6 karaktere",
+    "termsLabel": "Baldintzak eta hitzarmenak onartzen ditut",
+    "loginButton": "Hasi saioa",
+    "registerButton": "Erregistratu",
+    "loginSuccess": "Saioa behar bezala hasi da",
+    "registerSuccess": "Erabiltzailea behar bezala erregistratu da"
+  },
+  "dashboard": {
+    "title": "Nire Profila",
+    "personalData": "DATU PERTSONALAK",
+    "edit": "✎ Editatu",
+    "cancel": "✕ Utzi",
+    "usernameLabel": "Erabiltzaile izena",
+    "emailLabel": "Helbide elektronikoa",
+    "passwordLabel": "Pasahitza",
+    "saveChanges": "✓ Aldaketak Gorde",
+    "myStories": "NIRE ISTORIOAK",
+    "storyCount": "istorio",
+    "noImage": "Irudirik ez",
+    "trade": "Ofizioa",
+    "age": "Adina",
+    "viewMore": "Gehiago ikusi",
+    "emptyTitle": "Oraindik ez duzu istoriorik igo.",
+    "emptySubtext": "Partekatu zure lehen kronika komunitatearekin.",
+    "createFirstStory": "+ Istorioa Sortu",
+    "loadError": "Errorea istorioak kargatzean",
+    "saveSuccess": "Datuak behar bezala eguneratu dira",
+    "saveError": "Errorea datuak eguneratzean",
+    "country": "Herrialdea"
+  },
+  "admin": {
+    "title": "Admin Panela",
+    "totalStories": "Istorio Guztira",
+    "authors": "Egileak",
+    "management": "ISTORIOEN KUDEAKETA",
+    "noImage": "Irudirik ez",
+    "trade": "Ofizioa",
+    "age": "Adina",
+    "country": "Herrialdea",
+    "modify": "✎ Aldatu",
+    "delete": "✕ Ezabatu",
+    "noStories": "Ez dago istorio erregistraturik.",
+    "editTitle": "ISTORIOA ALDATU",
+    "titleLabel": "Izenburua",
+    "descriptionLabel": "Deskribapena",
+    "cancel": "Utzi",
+    "save": "✓ Gorde",
+    "confirmDelete": "EZABATZEA KONFIRMATU",
+    "confirmDeleteMsg": "Ziur zaude \"{title}\" istorioa ezabatu nahi duzula?",
+    "updateSuccess": "Istorioa behar bezala eguneratu da",
+    "updateError": "Errorea istorioa eguneratzean",
+    "deleteSuccess": "Istorioa behar bezala ezabatu da",
+    "deleteError": "Errorea istorioa ezabatzean"
+  },
+  "createStory": {
+    "pageTitle": "ISTORIOA SORTU",
+    "titleLabel": "Istorioaren izenburua",
+    "titlePlaceholder": "Idatzi izenburua hemen...",
+    "professionLabel": "Ofizioa",
+    "professionPlaceholder": "▼ Hautatu ofizioa",
+    "ageLabel": "Adina",
+    "agePlaceholder": "▼ Hautatu adin tartea",
+    "countryLabel": "Jatorrizko herrialdea",
+    "countryPlaceholder": "▼ Hautatu herrialdea",
+    "descriptionLabel": "Istorioaren deskribapena",
+    "descriptionPlaceholder": "Idatzi istorio edo deskribapen osoa hemen...",
+    "termsLabel": "Onartzen ditut irudiak eta edukia argitaratzeko baldintzak eta baimenak.",
+    "uploadLabel": "Argazkia igo",
+    "publishing": "ARGITARATZEN...",
+    "publish": "ARGITARATU"
+  },
+  "storyDetail": {
+    "back": "← Atzera",
+    "loading": "Istorioa kargatzen...",
+    "notFound": "Istorioa ez da aurkitu.",
+    "imageLabel": "ISTORIOAREN IRUDIA",
+    "trade": "Ofizioa",
+    "age": "Adina",
+    "country": "Herrialdea",
+    "notSpecified": "Zehaztu gabea",
+    "notSpecifiedF": "Zehaztu gabea"
+  },
+  "chronicles": {
+    "filterBy": "IRAGAZI",
+    "allTrades": "Ofizio guztiak",
+    "allAges": "Adin guztiak",
+    "loading": "Istorioak kargatzen...",
+    "noStories": "Ez dago istorio erabilgarririk.",
+    "noImage": "Irudirik ez",
+    "viewMore": "Gehiago ikusi",
+    "trade": "Ofizioa",
+    "age": "Adina",
+    "country": "Herrialdea"
+  },
+  "map": {
+    "locations": {
+      "america_central": "Erdialdeko Amerika",
+      "pais_vasco": "Euskal Herria",
+      "espana": "Espainia",
+      "marruecos": "Maroko",
+      "africa": "Afrika",
+      "otro": "Bestea"
+    },
+    "descriptions": {
+      "america_central": "Eskualde bizia, maia gerriko ehungintzaren arte milenarioa, zeramika polikromatu bizia eta ofizio sakratuak osorik gordetzen dituena, oihan sakonen eta sumendi handien ingurunearekin harmonia perfektuan.",
+      "pais_vasco": "Aparteko enklabe historikoa, non landare-zuntzen irute zorrotzak, forja artisauak eta itsasontzigintza zehatzak identitate paregabea definitu zuten, maisu grinatsuek jeloskor gordea.",
+      "espana": "Bide eta kontraste gurutzaketa, izugarri aberatsa ehungintza tradizio zaharretan, joskintza klasiko noblean eta larru-ekintza finetan, mendeetan zehar penintsulako txoko ezberdinetan iraun dutenak.",
+      "marruecos": "Rif mendietako buztin gorriko ontzigintza zaharraren, medina inperialetako larru-ongailu maisuen eta kolore ezinezko ehungailuen etxe mistikoa. Ondare bizia, eskuz egina eta amengatik alabengatik transmititua.",
+      "africa": "Afrikako kontinente zabala ehuntza-teknika ugarien, koloratzaile organiko lurtarren erauzketaren eta naturarekiko errespetu sakon eta bitaletik garatutako ofizio herrikoien sorlekua da.",
+      "otro": "Ekialde Urruneko zetaren delikadeziatik Ozeaniako zur-taila erritual ikusgarriraino, giza jenioak denbora errealean historia ehuntzen jarraitzen duen beste latitudeak aztertzen ditugu."
+    }
+  },
+  "professions": {
+    "casa": "Etxekoa",
+    "campo": "Landa",
+    "industria": "Industria",
+    "limpieza": "Garbiketa",
+    "otro": "Bestea"
+  },
+  "ages": {
+    "under_18": "18 urtez azpikoa",
+    "18_25": "18 - 25 urte",
+    "26_35": "26 - 35 urte",
+    "36_45": "36 - 45 urte",
+    "46_60": "46 - 60 urte",
+    "over_60": "60 urtez gorakoa"
+  },
+  "ages_full": {
+    "under_18": "18 urtez azpikoa",
+    "18_25": "18 - 25 urte",
+    "26_35": "26 - 35 urte",
+    "36_45": "36 - 45 urte",
+    "46_60": "46 - 60 urte",
+    "over_60": "60 urte baino gehiago"
+  },
+  "countries": {
+    "Brasil": "Brasil",
+    "Portugal": "Portugal",
+    "España": "Espainia",
+    "Argentina": "Argentina",
+    "México": "Mexiko",
+    "Colombia": "Kolonbia",
+    "Chile": "Txile",
+    "Perú": "Peru",
+    "Venezuela": "Venezuela",
+    "Uruguay": "Uruguai",
+    "Paraguay": "Paraguai",
+    "Otro": "Bestea"
+  },
+  "lang": {
+    "es": "Español",
+    "en": "English",
+    "eu": "Euskera",
+    "fr": "Français",
+    "ro": "Română"
+  },
+  "map": {
+    "quote": "Muga asko zeharkatzen dituzten istorioak"
+  }
+}

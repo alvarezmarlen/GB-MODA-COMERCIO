@@ -1,0 +1,196 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "createStory": "+ Créer une Histoire",
+    "currentLang": "FR",
+    "logout": "Déconnexion",
+    "profile": "Utilisateur",
+    "admin": "ADMIN",
+    "user": "UTILISATEUR"
+  },
+  "footer": {
+    "copyright": "© 2026 GB-MODA-COMERCIO. Tous droits réservés.",
+    "terms": "Conditions",
+    "privacy": "Confidentialité",
+    "contact": "Contact"
+  },
+  "home": {
+    "brandTitle": "GB-MODE-COMMERCE",    
+    "imageLabel": "IMAGE",
+    "heroParagraph": "Découvrez et partagez les chroniques réelles de la mode et du commerce local. Une plateforme communautaire dédiée à documenter, préserver et honorer la riche tradition, l'effort quotidien et l'héritage culturel des métiers locaux qui donnent leur identité à notre société."
+  },
+  "auth": {
+    "loginTitle": "Connexion",
+    "registerTitle": "Créer un Compte",
+    "noAccount": "Vous n'avez pas de compte ?",
+    "registerLink": "S'inscrire",
+    "hasAccount": "Vous avez déjà un compte ?",
+    "loginLink": "Se connecter",
+    "usernameLabel": "Nom d'utilisateur",
+    "usernamePlaceholder": "Votre nom d'utilisateur",
+    "emailLabel": "Email",
+    "emailPlaceholder": "exemple@courriel.com",
+    "passwordLabel": "Mot de passe",
+    "passwordPlaceholder": "********",
+    "passwordNewPlaceholder": "Nouveau mot de passe",
+    "usernameMinPlaceholder": "Minimum 3 caractères",
+    "passwordMinPlaceholder": "Minimum 6 caractères",
+    "termsLabel": "J'accepte les termes et conditions",
+    "loginButton": "Se connecter",
+    "registerButton": "S'inscrire",
+    "loginSuccess": "Connexion réussie",
+    "registerSuccess": "Compte créé avec succès"
+  },
+  "dashboard": {
+    "title": "Mon Profil",
+    "personalData": "DONNÉES PERSONNELLES",
+    "edit": "✎ Modifier",
+    "cancel": "✕ Annuler",
+    "usernameLabel": "Nom d'utilisateur",
+    "emailLabel": "Adresse email",
+    "passwordLabel": "Mot de passe",
+    "saveChanges": "✓ Enregistrer",
+    "myStories": "MES HISTOIRES",
+    "storyCount": "histoire(s)",
+    "noImage": "Aucune image",
+    "trade": "Métier",
+    "age": "Âge",
+    "viewMore": "Voir plus",
+    "emptyTitle": "Vous n'avez encore téléchargé aucune histoire.",
+    "emptySubtext": "Partagez votre première chronique avec la communauté.",
+    "createFirstStory": "+ Créer une Histoire",
+    "loadError": "Erreur lors du chargement des histoires",
+    "saveSuccess": "Données mises à jour avec succès",
+    "saveError": "Erreur lors de la mise à jour des données",
+    "country": "Pays"
+  },
+  "admin": {
+    "title": "Panneau Admin",
+    "totalStories": "Total Histoires",
+    "authors": "Auteurs",
+    "management": "GESTION DES HISTOIRES",
+    "noImage": "Aucune image",
+    "trade": "Métier",
+    "age": "Âge",
+    "country": "Pays",
+    "modify": "✎ Modifier",
+    "delete": "✕ Supprimer",
+    "noStories": "Aucune histoire enregistrée.",
+    "editTitle": "MODIFIER L'HISTOIRE",
+    "titleLabel": "Titre",
+    "descriptionLabel": "Description",
+    "cancel": "Annuler",
+    "save": "✓ Enregistrer",
+    "confirmDelete": "CONFIRMER LA SUPPRESSION",
+    "confirmDeleteMsg": "Êtes-vous sûr de vouloir supprimer l'histoire \"{title}\" ?",
+    "updateSuccess": "Histoire mise à jour avec succès",
+    "updateError": "Erreur lors de la mise à jour de l'histoire",
+    "deleteSuccess": "Histoire supprimée avec succès",
+    "deleteError": "Erreur lors de la suppression de l'histoire"
+  },
+  "createStory": {
+    "pageTitle": "CRÉER UNE HISTOIRE",
+    "titleLabel": "Titre de l'histoire",
+    "titlePlaceholder": "Écrivez le titre ici...",
+    "professionLabel": "Métier",
+    "professionPlaceholder": "▼ Sélectionner un métier",
+    "ageLabel": "Âge",
+    "agePlaceholder": "▼ Sélectionner la tranche d'âge",
+    "countryLabel": "Pays d'origine",
+    "countryPlaceholder": "▼ Sélectionner un pays",
+    "descriptionLabel": "Description de l'histoire",
+    "descriptionPlaceholder": "Écrivez l'histoire ou la description complète ici...",
+    "termsLabel": "J'accepte les termes et autorisations pour publier des images et du contenu.",
+    "uploadLabel": "Télécharger une photo",
+    "publishing": "PUBLICATION...",
+    "publish": "PUBLIER"
+  },
+  "storyDetail": {
+    "back": "← Retour",
+    "loading": "Chargement de l'histoire...",
+    "notFound": "Histoire non trouvée.",
+    "imageLabel": "IMAGE DE L'HISTOIRE",
+    "trade": "Métier",
+    "age": "Âge",
+    "country": "Pays",
+    "notSpecified": "Non spécifié",
+    "notSpecifiedF": "Non spécifiée"
+  },
+  "chronicles": {
+    "filterBy": "FILTRER PAR",
+    "allTrades": "Tous les métiers",
+    "allAges": "Tous les âges",
+    "loading": "Chargement des histoires...",
+    "noStories": "Aucune histoire disponible.",
+    "noImage": "Aucune image",
+    "viewMore": "Voir plus",
+    "trade": "Métier",
+    "age": "Âge",
+    "country": "Pays"
+  },
+  "map": {
+    "locations": {
+      "america_central": "Amérique Centrale",
+      "pais_vasco": "Pays Basque",
+      "espana": "Espagne",
+      "marruecos": "Maroc",
+      "africa": "Afrique",
+      "otro": "Autre"
+    },
+    "descriptions": {
+      "america_central": "Une région vibrante qui préserve intact l'art millénaire du métier à tisser maya, la céramique polychrome vivante et les métiers sacrés en parfaite harmonie avec des jungles profondes et des volcans majestueux.",
+      "pais_vasco": "Un enclave historique inégalable où le filage rigoureux des fibres végétales, la forge artisanale et la construction navale de précision ont défini une identité unique, jalousement préservée par des maîtres passionnés.",
+      "espana": "Un carrefour de chemins et de contrastes, immensément riche en traditions textiles ancestrales, en couture classique d'élite et en métiers de maroquinerie fine qui ont perduré au fil des siècles dans divers coins péninsulaires.",
+      "marruecos": "Foyer mystique de l'ancienne poterie rouge des montagnes du Rif, des tanneurs magistraux des médinas impériales et des métiers à tisser aux couleurs impossibles. Un héritage vibrant, purement artisanal et transmis de mères en filles.",
+      "africa": "Le vaste continent africain est le berceau primordial d'innombrables techniques de tissage, d'extractions de teintures organiques terreuses et de métiers vernaculaires toujours développés dans un profond et vital respect de la nature.",
+      "otro": "De la délicatesse impeccable de la soie en Extrême-Orient jusqu'à l'imposante sculpture rituelle sur bois d'Océanie, nous explorons d'autres latitudes où le génie humain continue de tisser l'histoire en temps réel."
+    }
+  },
+  "professions": {
+    "casa": "Domestique",
+    "campo": "Champs",
+    "industria": "Industrie",
+    "limpieza": "Nettoyage",
+    "otro": "Autre"
+  },
+  "ages": {
+    "under_18": "Moins de 18 ans",
+    "18_25": "18 - 25 ans",
+    "26_35": "26 - 35 ans",
+    "36_45": "36 - 45 ans",
+    "46_60": "46 - 60 ans",
+    "over_60": "Plus de 60 ans"
+  },
+  "ages_full": {
+    "under_18": "Moins de 18 ans",
+    "18_25": "18 - 25 ans",
+    "26_35": "26 - 35 ans",
+    "36_45": "36 - 45 ans",
+    "46_60": "46 - 60 ans",
+    "over_60": "Plus de 60 ans"
+  },
+  "countries": {
+    "Brasil": "Brésil",
+    "Portugal": "Portugal",
+    "España": "Espagne",
+    "Argentina": "Argentine",
+    "México": "Mexique",
+    "Colombia": "Colombie",
+    "Chile": "Chili",
+    "Perú": "Pérou",
+    "Venezuela": "Venezuela",
+    "Uruguay": "Uruguay",
+    "Paraguay": "Paraguay",
+    "Otro": "Autre"
+  },
+  "lang": {
+    "es": "Español",
+    "en": "English",
+    "eu": "Euskera",
+    "fr": "Français",
+    "ro": "Română"
+  },
+  "map": {
+    "quote": "Des histoires qui traversent plusieurs frontières"
+  }
+}

@@ -1,0 +1,196 @@
+{
+  "nav": {
+    "home": "Home",
+    "createStory": "+ Create Story",
+    "currentLang": "EN",
+    "logout": "Log Out",
+    "profile": "User",
+    "admin": "ADMIN",
+    "user": "USER"
+  },
+  "footer": {
+    "copyright": "© 2026 GB-MODA-COMERCIO. All rights reserved.",
+    "terms": "Terms",
+    "privacy": "Privacy",
+    "contact": "Contact"
+  },
+  "home": {
+    "brandTitle": "GB-FASHION-TRADE",
+    "imageLabel": "IMAGE",
+    "heroParagraph": "Discover and share the real chronicles of fashion and local commerce. A community platform dedicated to documenting, preserving, and honoring the rich tradition, daily effort, and cultural legacy of local trades that give identity to our society."
+  },
+  "auth": {
+    "loginTitle": "Log In",
+    "registerTitle": "Create Account",
+    "noAccount": "Don't have an account?",
+    "registerLink": "Sign up",
+    "hasAccount": "Already have an account?",
+    "loginLink": "Log in",
+    "usernameLabel": "Username",
+    "usernamePlaceholder": "Your username",
+    "emailLabel": "Email",
+    "emailPlaceholder": "example@email.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "********",
+    "passwordNewPlaceholder": "New password",
+    "usernameMinPlaceholder": "Minimum 3 characters",
+    "passwordMinPlaceholder": "Minimum 6 characters",
+    "termsLabel": "I accept the terms and conditions",
+    "loginButton": "Log In",
+    "registerButton": "Sign Up",
+    "loginSuccess": "Logged in successfully",
+    "registerSuccess": "Account created successfully"
+  },
+  "dashboard": {
+    "title": "My Profile",
+    "personalData": "PERSONAL DATA",
+    "edit": "✎ Edit",
+    "cancel": "✕ Cancel",
+    "usernameLabel": "Username",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "saveChanges": "✓ Save Changes",
+    "myStories": "MY STORIES",
+    "storyCount": "story(ies)",
+    "noImage": "No image",
+    "trade": "Trade",
+    "age": "Age",
+    "viewMore": "View more",
+    "emptyTitle": "You haven't uploaded any stories yet.",
+    "emptySubtext": "Share your first chronicle with the community.",
+    "createFirstStory": "+ Create Story",
+    "loadError": "Error loading stories",
+    "saveSuccess": "Data updated successfully",
+    "saveError": "Error updating data",
+    "country": "Country"
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "totalStories": "Total Stories",
+    "authors": "Authors",
+    "management": "STORY MANAGEMENT",
+    "noImage": "No image",
+    "trade": "Trade",
+    "age": "Age",
+    "country": "Country",
+    "modify": "✎ Edit",
+    "delete": "✕ Delete",
+    "noStories": "No stories registered.",
+    "editTitle": "EDIT STORY",
+    "titleLabel": "Title",
+    "descriptionLabel": "Description",
+    "cancel": "Cancel",
+    "save": "✓ Save",
+    "confirmDelete": "CONFIRM DELETION",
+    "confirmDeleteMsg": "Are you sure you want to delete the story \"{title}\"?",
+    "updateSuccess": "Story updated successfully",
+    "updateError": "Error updating story",
+    "deleteSuccess": "Story deleted successfully",
+    "deleteError": "Error deleting story"
+  },
+  "createStory": {
+    "pageTitle": "CREATE STORY",
+    "titleLabel": "Story title",
+    "titlePlaceholder": "Write the title here...",
+    "professionLabel": "Profession",
+    "professionPlaceholder": "▼ Select profession",
+    "ageLabel": "Age",
+    "agePlaceholder": "▼ Select age range",
+    "countryLabel": "Country of origin",
+    "countryPlaceholder": "▼ Select country",
+    "descriptionLabel": "Story description",
+    "descriptionPlaceholder": "Write the full story or description here...",
+    "termsLabel": "I accept the terms and permissions to publish images and content.",
+    "uploadLabel": "Upload photo",
+    "publishing": "PUBLISHING...",
+    "publish": "PUBLISH"
+  },
+  "storyDetail": {
+    "back": "← Go back",
+    "loading": "Loading story...",
+    "notFound": "Story not found.",
+    "imageLabel": "STORY IMAGE",
+    "trade": "Trade",
+    "age": "Age",
+    "country": "Country",
+    "notSpecified": "Not specified",
+    "notSpecifiedF": "Not specified"
+  },
+  "chronicles": {
+    "filterBy": "FILTER BY",
+    "allTrades": "All trades",
+    "allAges": "All ages",
+    "loading": "Loading stories...",
+    "noStories": "No stories available.",
+    "noImage": "No image",
+    "viewMore": "View more",
+    "trade": "Trade",
+    "age": "Age",
+    "country": "Country"
+  },
+  "map": {
+    "locations": {
+      "america_central": "Central America",
+      "pais_vasco": "Basque Country",
+      "espana": "Spain",
+      "marruecos": "Morocco",
+      "africa": "Africa",
+      "otro": "Other"
+    },
+    "descriptions": {
+      "america_central": "A vibrant region that keeps intact the ancient Maya backstrap loom art, living polychrome pottery, and sacred trades in perfect harmony with deep jungles and majestic volcanoes.",
+      "pais_vasco": "An unparalleled historical enclave where rigorous vegetable fiber spinning, artisanal forging, and precise shipbuilding defined a unique identity, jealously preserved by passionate masters.",
+      "espana": "A crossroads of contrasts, immensely rich in ancestral textile traditions, elite classic tailoring, and fine leather craftsmanship that have endured over centuries across diverse peninsular corners.",
+      "marruecos": "Mystical home of the ancient red pottery from the Rif mountains, masterful tanners of the imperial medinas, and looms of impossible colors. A vibrant legacy, purely handmade and passed from mothers to daughters.",
+      "africa": "The vast African continent is the primordial cradle of countless weaving techniques, extraction of earthy organic dyes, and vernacular trades always developed from a deep and vital respect for nature.",
+      "otro": "From the impeccable delicacy of silk in the Far East to the imposing ritual wood carving of Oceania, we explore other latitudes where human genius continues to weave history in real time."
+    }
+  },
+  "professions": {
+    "casa": "Household",
+    "campo": "Field",
+    "industria": "Industry",
+    "limpieza": "Cleaning",
+    "otro": "Other"
+  },
+  "ages": {
+    "under_18": "Under 18",
+    "18_25": "18 - 25 years",
+    "26_35": "26 - 35 years",
+    "36_45": "36 - 45 years",
+    "46_60": "46 - 60 years",
+    "over_60": "Over 60"
+  },
+  "ages_full": {
+    "under_18": "Under 18 years",
+    "18_25": "18 - 25 years",
+    "26_35": "26 - 35 years",
+    "36_45": "36 - 45 years",
+    "46_60": "46 - 60 years",
+    "over_60": "Over 60 years"
+  },
+  "countries": {
+    "Brasil": "Brazil",
+    "Portugal": "Portugal",
+    "España": "Spain",
+    "Argentina": "Argentina",
+    "México": "Mexico",
+    "Colombia": "Colombia",
+    "Chile": "Chile",
+    "Perú": "Peru",
+    "Venezuela": "Venezuela",
+    "Uruguay": "Uruguay",
+    "Paraguay": "Paraguay",
+    "Otro": "Other"
+  },
+  "lang": {
+    "es": "Español",
+    "en": "English",
+    "eu": "Euskera",
+    "fr": "Français",
+    "ro": "Română"
+  },
+  "map": {
+    "quote": "Stories that cross many borders"
+  }
+}
