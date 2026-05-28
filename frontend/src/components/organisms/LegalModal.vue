@@ -34,7 +34,7 @@
         <p>Las historias compartidas representan vivencias personales de sus autoras. GB-MODA-COMERCIO no se hace responsable de la veracidad de los relatos. Asimismo, el contenido es meramente narrativo; no sustituye la ayuda ni el asesoramiento de profesionales (psicológicos, legales o médicos).</p>
         
         <h2 id="contacto">6. Contacto</h2>
-        <p>Si deseas ejercer tus derechos de privacidad, retirar una historia o tienes dudas, escríbenos a: <a href="mail to:[info@grupopenascal.com]">info@grupopenascal.com</a>.</p>
+        <p>Si deseas ejercer tus derechos de privacidad, retirar una historia o tienes dudas, escríbenos a: <a href="mailto:info@grupopenascal.com">info@grupopenascal.com</a>.</p>
       </div>
     </div>
   </div>
