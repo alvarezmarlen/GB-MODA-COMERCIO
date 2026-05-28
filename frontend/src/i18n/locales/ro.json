@@ -4,6 +4,7 @@
     "createStory": "+ Creează Povestea",
     "currentLang": "RO",
     "logout": "Deconectare",
+    "logoutSuccess": "Sesiune închisă cu succes",
     "profile": "Utilizator",
     "admin": "ADMIN",
     "user": "UTILIZATOR"

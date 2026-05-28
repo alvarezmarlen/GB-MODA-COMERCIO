@@ -4,6 +4,7 @@
     "createStory": "+ إنشاء قصة",
     "currentLang": "AR",
     "logout": "تسجيل الخروج",
+    "logoutSuccess": "تم إغلاق الجلسة بنجاح",
     "profile": "المستخدم",
     "admin": "المدير",
     "user": "مستخدم"

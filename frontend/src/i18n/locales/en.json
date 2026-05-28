@@ -4,6 +4,7 @@
     "createStory": "+ Create Story",
     "currentLang": "EN",
     "logout": "Log Out",
+    "logoutSuccess": "Session closed successfully",
     "profile": "User",
     "admin": "ADMIN",
     "user": "USER"

@@ -86,7 +86,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 // ── Actions ───────────────────────────────────────────────
 const handleLogout = () => {
   authStore.logout()
-  alert('Sesión cerrada con éxito')
+  alert(t('nav.logoutSuccess'))
   router.push('/login')
 }
 </script>

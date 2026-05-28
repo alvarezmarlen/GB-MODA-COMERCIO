@@ -4,6 +4,7 @@
     "createStory": "+ Crear Historia",
     "currentLang": "ES",
     "logout": "Cerrar Sesión",
+    "logoutSuccess": "Sesión cerrada con éxito",
     "profile": "Usuario",
     "admin": "ADMIN",
     "user": "USER"

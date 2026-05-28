@@ -4,6 +4,7 @@
     "createStory": "+ Créer une Histoire",
     "currentLang": "FR",
     "logout": "Déconnexion",
+    "logoutSuccess": "Session fermée avec succès",
     "profile": "Utilisateur",
     "admin": "ADMIN",
     "user": "UTILISATEUR"
