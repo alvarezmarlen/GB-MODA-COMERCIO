@@ -6,17 +6,33 @@
         © 2026 GB-MODA-COMERCIO. Todos los derechos reservados.
       </div>
       <div class="footer-links">
-        <a href="#" class="footer-link">Términos</a>
+        <a href="#" class="footer-link" @click.prevent="openLegalModal('terminos')">Términos y Condiciones</a>
         <span class="divider">│</span>
-        <a href="#" class="footer-link">Privacidad</a>
+        <a href="#" class="footer-link" @click.prevent="openLegalModal('privacidad')">Politicas de Privacidad</a>
         <span class="divider">│</span>
-        <a href="#" class="footer-link">Contacto</a>
+        <a href="#" class="footer-link" @click.prevent="openLegalModal('contacto')">Contacto</a>
       </div>
     </div>
+    
+    <LegalModal 
+      :isOpen="isLegalModalOpen" 
+      :section="currentSection"
+      @close="isLegalModalOpen = false"
+    />
   </footer>
 </template>
 
 <script setup>
+import { ref } from 'vue'
+import LegalModal from './LegalModal.vue'
+
+const isLegalModalOpen = ref(false)
+const currentSection = ref('')
+
+const openLegalModal = (section) => {
+  currentSection.value = section
+  isLegalModalOpen.value = true
+}
 </script>
 
 <style scoped>
