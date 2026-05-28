@@ -48,6 +48,7 @@ const router = useRouter()
 const authStore = useAuthStore()
 
 const languageOptions = computed(() => [
+  { value: 'ar', label: t('lang.ar') },
   { value: 'es', label: t('lang.es') },
   { value: 'en', label: t('lang.en') },
   { value: 'eu', label: t('lang.eu') },

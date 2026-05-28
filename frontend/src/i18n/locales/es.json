@@ -17,7 +17,11 @@
   "home": {
     "brandTitle": "GB-MODA-COMERCIO",
     "imageLabel": "IMAGEN",
-    "heroParagraph": "Descubre y comparte las crónicas reales de la moda y el comercio local. Una plataforma comunitaria dedicada a documentar, preservar y honrar la rica tradición, el esfuerzo diario y el legado cultural de los oficios locales que dan identidad a nuestra sociedad."
+    "heroParagraph": "Descubre y comparte las crónicas reales de la moda y el comercio local. Una plataforma comunitaria dedicada a documentar, preservar y honrar la rica tradición, el esfuerzo diario y el legado cultural de los oficios locales que dan identidad a nuestra sociedad.",
+    "loginPromptTitle": "Descubre sus historias",
+    "loginPromptText": "Regístrate o inicia sesión para leer las historias completas y contribuir a la comunidad.",
+    "loginPromptLogin": "Iniciar Sesión",
+    "loginPromptRegister": "Registrarse"
   },
   "auth": {
     "loginTitle": "Iniciar Sesión",
@@ -37,7 +41,9 @@
     "passwordMinPlaceholder": "Mínimo 6 caracteres",
     "termsLabel": "Acepto los términos y condiciones",
     "loginButton": "Iniciar sesión",
+    "verifying": "Verificando...",
     "registerButton": "Registrarse",
+    "registering": "Registrando...",
     "loginSuccess": "Sesión iniciada con éxito",
     "registerSuccess": "Usuario registrado con éxito"
   },
@@ -135,7 +141,6 @@
       "espana": "España",
       "marruecos": "Marruecos",
       "africa": "África",
-      "quote": "Historias que cruzan muchas fronteras",
       "otro": "Otro"
     },
     "descriptions": {
@@ -145,7 +150,8 @@
       "marruecos": "Hogar místico de la ancestral alfarería roja de las montañas del Rif, los magistrales curtidores de las medinas imperiales y telares de colores imposibles. Un legado vibrante, puramente manual y transmitido de madres a hijas.",
       "africa": "El vasto continente africano es la cuna primordial de innumerables técnicas de tejido, extracciones de tintes orgánicos terrosos y oficios vernáculos desarrollados siempre desde un profundo y vital respeto hacia la naturaleza.",
       "otro": "Desde la delicadeza impecable de la seda en el Lejano Oriente hasta la imponente talla ritual en madera de Oceanía, exploramos otras latitudes donde la genialidad humana sigue tejiendo historia en tiempo real."
-    }
+    },
+    "quote": "Historias que cruzan muchas fronteras"
   },
   "professions": {
     "casa": "Casa",
@@ -185,6 +191,7 @@
     "Otro": "Otro"
   },
   "lang": {
+    "ar": "العربية",  
     "es": "Español",
     "en": "English",
     "eu": "Euskera",

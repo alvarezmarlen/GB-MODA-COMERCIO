@@ -14,7 +14,7 @@
     />
     <p v-if="authStore.error" class="error-text">{{ authStore.error }}</p>
     <BaseButton type="submit" :disabled="!isFormValid || authStore.loading">
-      {{ authStore.loading ? 'Verificando...' : t('auth.loginButton')}}
+      {{ authStore.loading ? t('auth.verifying') : t('auth.loginButton')}}
     </BaseButton>
   </form>
 </template>

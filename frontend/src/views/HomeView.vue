@@ -20,14 +20,14 @@
     <!-- Map Section -->
     <InteractiveMap />
 
-    <!-- Chronicles / Filters Section -->
+     <!-- Chronicles / Filters Section -->
     <ChronicleList v-if="authStore.isAuthenticated" />
     <div v-else class="login-prompt">
-      <h2>Descubre sus historias</h2>
-      <p>Regístrate o inicia sesión para leer las historias completas y contribuir a la comunidad.</p>
+      <h2>{{ t('home.loginPromptTitle') }}</h2>
+      <p>{{ t('home.loginPromptText') }}</p>
       <div class="login-prompt-actions">
-        <router-link to="/login" class="prompt-btn primary">Iniciar Sesión</router-link>
-        <router-link to="/register" class="prompt-btn secondary">Registrarse</router-link>
+        <router-link to="/login" class="prompt-btn primary">{{ t('home.loginPromptLogin') }}</router-link>
+        <router-link to="/register" class="prompt-btn secondary">{{ t('home.loginPromptRegister') }}</router-link>
       </div>
     </div>
 

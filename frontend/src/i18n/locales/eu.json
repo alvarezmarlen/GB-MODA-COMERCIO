@@ -17,7 +17,11 @@
   "home": {
     "brandTitle": "GB-MODA-MERKATARITZA", 
     "imageLabel": "IRUDIA",
-    "heroParagraph": "Ezagutu eta partekatu moda eta tokiko merkataritzaren kronika errealak. Gure gizarteari identitatea ematen dioten tokiko ofizioen tradizio aberatsa, eguneroko ahalegina eta ondare kulturala dokumentatzeko, gordetzeko eta omentzeko plataforma komunitarioa."
+    "heroParagraph": "Ezagutu eta partekatu moda eta tokiko merkataritzaren kronika errealak. Gure gizarteari identitatea ematen dioten tokiko ofizioen tradizio aberatsa, eguneroko ahalegina eta ondare kulturala dokumentatzeko, gordetzeko eta omentzeko plataforma komunitarioa.",
+    "loginPromptTitle": "Ezagutu haien istorioak",
+    "loginPromptText": "Erregistratu edo hasi saioa istorio osoak irakurtzeko eta komunitatean laguntzeko.",
+    "loginPromptLogin": "Hasi saioa",
+    "loginPromptRegister": "Erregistratu"
   },
   "auth": {
     "loginTitle": "Saioa Hasi",
@@ -37,7 +41,9 @@
     "passwordMinPlaceholder": "Gutxienez 6 karaktere",
     "termsLabel": "Baldintzak eta hitzarmenak onartzen ditut",
     "loginButton": "Hasi saioa",
+    "verifying": "Egiaztatzen...",
     "registerButton": "Erregistratu",
+    "registering": "Erregistratzen...",
     "loginSuccess": "Saioa behar bezala hasi da",
     "registerSuccess": "Erabiltzailea behar bezala erregistratu da"
   },
@@ -144,7 +150,8 @@
       "marruecos": "Rif mendietako buztin gorriko ontzigintza zaharraren, medina inperialetako larru-ongailu maisuen eta kolore ezinezko ehungailuen etxe mistikoa. Ondare bizia, eskuz egina eta amengatik alabengatik transmititua.",
       "africa": "Afrikako kontinente zabala ehuntza-teknika ugarien, koloratzaile organiko lurtarren erauzketaren eta naturarekiko errespetu sakon eta bitaletik garatutako ofizio herrikoien sorlekua da.",
       "otro": "Ekialde Urruneko zetaren delikadeziatik Ozeaniako zur-taila erritual ikusgarriraino, giza jenioak denbora errealean historia ehuntzen jarraitzen duen beste latitudeak aztertzen ditugu."
-    }
+    },
+    "quote": "Muga asko zeharkatzen dituzten istorioak"
   },
   "professions": {
     "casa": "Etxekoa",
@@ -184,13 +191,11 @@
     "Otro": "Bestea"
   },
   "lang": {
+    "ar": "العربية",  
     "es": "Español",
     "en": "English",
     "eu": "Euskera",
     "fr": "Français",
     "ro": "Română"
-  },
-  "map": {
-    "quote": "Muga asko zeharkatzen dituzten istorioak"
   }
 }

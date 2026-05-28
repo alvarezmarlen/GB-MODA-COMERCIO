@@ -17,7 +17,11 @@
   "home": {
     "brandTitle": "GB-COMERȚ-DE-MODĂ",
     "imageLabel": "IMAGINE",
-    "heroParagraph": "Descoperiți și împărtășiți adevăratele cronici ale modei și comerțului local. O platformă comunitară dedicată documentării, păstrării și onorării tradiției bogate, efortului zilnic și moștenirii culturale a meseriilor locale care dau identitate societății noastre."
+    "heroParagraph": "Descoperiți și împărtășiți adevăratele cronici ale modei și comerțului local. O platformă comunitară dedicată documentării, păstrării și onorării tradiției bogate, efortului zilnic și moștenirii culturale a meseriilor locale care dau identitate societății noastre.",
+    "loginPromptTitle": "Descoperă poveștile lor",
+    "loginPromptText": "Înregistrează-te sau autentifică-te pentru a citi poveștile complete și a contribui la comunitate.",
+    "loginPromptLogin": "Autentificare",
+    "loginPromptRegister": "Înregistrare"
   },
   "auth": {
     "loginTitle": "Autentificare",
@@ -37,7 +41,9 @@
     "passwordMinPlaceholder": "Minim 6 caractere",
     "termsLabel": "Accept termenii și condițiile",
     "loginButton": "Autentificare",
+    "verifying": "Se verifică...",
     "registerButton": "Înregistrare",
+    "registering": "Se înregistrează...",
     "loginSuccess": "Autentificare reușită",
     "registerSuccess": "Cont creat cu succes"
   },
@@ -144,7 +150,8 @@
       "marruecos": "Casă mistică a străvechii olării roșii din munții Rif, a tăbăcarilor magistrali din medinele imperiale și a războaielor de țesut cu culori imposibile. Un patrimoniu vibrant, pur manual și transmis de la mame la fiice.",
       "africa": "Vastul continent african este leagănul primordial al nenumăratelor tehnici de țesut, extracții de coloranți organici pământii și meserii vernaculare dezvoltate întotdeauna dintr-un profund și vital respect față de natură.",
       "otro": "De la delicatețea impecabilă a mătăsii din Orientul Îndepărtat până la impunătoarea sculptură rituală în lemn a Oceaniei, explorăm alte latitudini unde geniul uman continuă să țeasă istorie în timp real."
-    }
+    },
+    "quote": "Povești care traversează multe frontiere"
   },
   "professions": {
     "casa": "Casnic",
@@ -184,13 +191,11 @@
     "Otro": "Altele"
   },
   "lang": {
+    "ar": "العربية",  
     "es": "Español",
     "en": "English",
     "eu": "Euskera",
     "fr": "Français",
     "ro": "Română"
-  },
-  "map": {
-    "quote": "Povești care traversează multe frontiere"
   }
 }

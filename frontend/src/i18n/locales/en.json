@@ -17,7 +17,11 @@
   "home": {
     "brandTitle": "GB-FASHION-TRADE",
     "imageLabel": "IMAGE",
-    "heroParagraph": "Discover and share the real chronicles of fashion and local commerce. A community platform dedicated to documenting, preserving, and honoring the rich tradition, daily effort, and cultural legacy of local trades that give identity to our society."
+    "heroParagraph": "Discover and share the real chronicles of fashion and local commerce. A community platform dedicated to documenting, preserving, and honoring the rich tradition, daily effort, and cultural legacy of local trades that give identity to our society.",
+    "loginPromptTitle": "Discover their stories",
+    "loginPromptText": "Sign up or log in to read the full stories and contribute to the community.",
+    "loginPromptLogin": "Log In",
+    "loginPromptRegister": "Sign Up"
   },
   "auth": {
     "loginTitle": "Log In",
@@ -37,7 +41,9 @@
     "passwordMinPlaceholder": "Minimum 6 characters",
     "termsLabel": "I accept the terms and conditions",
     "loginButton": "Log In",
+    "verifying": "Verifying...",
     "registerButton": "Sign Up",
+    "registering": "Registering...",
     "loginSuccess": "Logged in successfully",
     "registerSuccess": "Account created successfully"
   },
@@ -144,7 +150,8 @@
       "marruecos": "Mystical home of the ancient red pottery from the Rif mountains, masterful tanners of the imperial medinas, and looms of impossible colors. A vibrant legacy, purely handmade and passed from mothers to daughters.",
       "africa": "The vast African continent is the primordial cradle of countless weaving techniques, extraction of earthy organic dyes, and vernacular trades always developed from a deep and vital respect for nature.",
       "otro": "From the impeccable delicacy of silk in the Far East to the imposing ritual wood carving of Oceania, we explore other latitudes where human genius continues to weave history in real time."
-    }
+    },
+    "quote": "Stories that cross many borders"
   },
   "professions": {
     "casa": "Household",
@@ -184,13 +191,11 @@
     "Otro": "Other"
   },
   "lang": {
+    "ar": "العربية",  
     "es": "Español",
     "en": "English",
     "eu": "Euskera",
     "fr": "Français",
     "ro": "Română"
-  },
-  "map": {
-    "quote": "Stories that cross many borders"
   }
 }

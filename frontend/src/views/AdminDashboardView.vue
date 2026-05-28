@@ -32,8 +32,8 @@
             <div class="admin-card-content">
               <h3 class="admin-card-title">{{ story.title }}</h3>
               <div class="admin-card-meta">
-                {{ t('admin.trade') }}: {{ getProfLabel(story.profession) }} &nbsp;|&nbsp;
-                {{ t('admin.age') }}: {{ getAgeLabel(story.age_range) }} &nbsp;|&nbsp;
+                {{ t('admin.trade') }}: {{ story.profession }} &nbsp;|&nbsp;
+                {{ t('admin.age') }}: {{ story.age_range }} &nbsp;|&nbsp;
                 {{ t('admin.country') }}: {{ story.origin_country }}
               </div>
               <p class="admin-card-desc">{{ story.content?.substring(0, 120) }}{{ story.content?.length > 120 ? '...' : '' }}</p>

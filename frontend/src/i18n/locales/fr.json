@@ -17,7 +17,11 @@
   "home": {
     "brandTitle": "GB-MODE-COMMERCE",    
     "imageLabel": "IMAGE",
-    "heroParagraph": "Découvrez et partagez les chroniques réelles de la mode et du commerce local. Une plateforme communautaire dédiée à documenter, préserver et honorer la riche tradition, l'effort quotidien et l'héritage culturel des métiers locaux qui donnent leur identité à notre société."
+    "heroParagraph": "Découvrez et partagez les chroniques réelles de la mode et du commerce local. Une plateforme communautaire dédiée à documenter, préserver et honorer la riche tradition, l'effort quotidien et l'héritage culturel des métiers locaux qui donnent leur identité à notre société.",
+    "loginPromptTitle": "Découvrez leurs histoires",
+    "loginPromptText": "Inscrivez-vous ou connectez-vous pour lire les histoires complètes et contribuer à la communauté.",
+    "loginPromptLogin": "Connexion",
+    "loginPromptRegister": "S'inscrire"
   },
   "auth": {
     "loginTitle": "Connexion",
@@ -37,7 +41,9 @@
     "passwordMinPlaceholder": "Minimum 6 caractères",
     "termsLabel": "J'accepte les termes et conditions",
     "loginButton": "Se connecter",
+    "verifying": "Vérification...",
     "registerButton": "S'inscrire",
+    "registering": "Inscription...",
     "loginSuccess": "Connexion réussie",
     "registerSuccess": "Compte créé avec succès"
   },
@@ -144,7 +150,8 @@
       "marruecos": "Foyer mystique de l'ancienne poterie rouge des montagnes du Rif, des tanneurs magistraux des médinas impériales et des métiers à tisser aux couleurs impossibles. Un héritage vibrant, purement artisanal et transmis de mères en filles.",
       "africa": "Le vaste continent africain est le berceau primordial d'innombrables techniques de tissage, d'extractions de teintures organiques terreuses et de métiers vernaculaires toujours développés dans un profond et vital respect de la nature.",
       "otro": "De la délicatesse impeccable de la soie en Extrême-Orient jusqu'à l'imposante sculpture rituelle sur bois d'Océanie, nous explorons d'autres latitudes où le génie humain continue de tisser l'histoire en temps réel."
-    }
+    },
+    "quote": "Des histoires qui traversent plusieurs frontières"
   },
   "professions": {
     "casa": "Domestique",
@@ -183,14 +190,12 @@
     "Paraguay": "Paraguay",
     "Otro": "Autre"
   },
-  "lang": {
+   "lang": {
+    "ar": "العربية",  
     "es": "Español",
     "en": "English",
     "eu": "Euskera",
     "fr": "Français",
     "ro": "Română"
-  },
-  "map": {
-    "quote": "Des histoires qui traversent plusieurs frontières"
   }
 }

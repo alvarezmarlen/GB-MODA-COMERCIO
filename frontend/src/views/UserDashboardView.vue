@@ -56,7 +56,7 @@
         <div class="empty-icon-box"><span class="empty-icon">☐</span></div>
         <p class="empty-text">{{ t('dashboard.emptyTitle') }}</p>
         <p class="empty-subtext">{{ t('dashboard.emptySubtext') }}</p>
-        <button class="custom-button" @click="$router.push('/create-story')">+ Crear Historia{{ t('dashboard.createFirstStory') }}</button>
+        <button class="custom-button" @click="$router.push('/create-story')">{{ t('dashboard.createFirstStory') }}</button>
       </div>
     </section>
   </DashboardTemplate>
