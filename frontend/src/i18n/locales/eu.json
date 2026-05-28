@@ -191,6 +191,10 @@
     "Paraguay": "Paraguai",
     "Otro": "Bestea"
   },
+  "fileUpload": {
+    "dragDrop": "Arrastratu argazki bat hemen edo egin klik",
+    "selected": "{count} / {max} hautatuta"
+  },
   "lang": {
     "ar": "العربية",  
     "es": "Español",

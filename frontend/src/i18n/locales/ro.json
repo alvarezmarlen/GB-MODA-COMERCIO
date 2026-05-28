@@ -191,6 +191,10 @@
     "Paraguay": "Paraguay",
     "Otro": "Altele"
   },
+  "fileUpload": {
+    "dragDrop": "Trage o fotografie aici sau faceți clic",
+    "selected": "{count} / {max} selectate"
+  },
   "lang": {
     "ar": "العربية",  
     "es": "Español",

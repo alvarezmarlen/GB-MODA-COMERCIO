@@ -191,6 +191,10 @@
     "Paraguay": "باراغواي",
     "Otro": "أخرى"
   },
+  "fileUpload": {
+    "dragDrop": "اسحب صورة هنا أو انقر",
+    "selected": "{count} / {max} تم الاختيار"
+  },
   "lang": {
     "ar": "العربية",  
     "es": "Español",

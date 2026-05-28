@@ -191,7 +191,11 @@
     "Paraguay": "Paraguay",
     "Otro": "Autre"
   },
-   "lang": {
+  "fileUpload": {
+    "dragDrop": "Glissez une photo ici ou cliquez",
+    "selected": "{count} / {max} sélectionnés"
+  },
+  "lang": {
     "ar": "العربية",  
     "es": "Español",
     "en": "English",
