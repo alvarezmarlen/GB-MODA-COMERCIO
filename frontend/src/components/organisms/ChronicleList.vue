@@ -46,7 +46,7 @@
             <div class="card-meta">
               Oficio: {{ professionLabel(story.profession) }} &nbsp;|&nbsp;
               Edad: {{ ageLabel(story.age_range) }} &nbsp;|&nbsp;
-              País: {{ story.origin_country }}
+              Continente: {{ story.origin_country }}
             </div>
             <p class="card-text">{{ truncate(story.content, 120) }}</p>
             <div class="card-actions">
