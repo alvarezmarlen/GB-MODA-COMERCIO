@@ -3,14 +3,17 @@
     <div class="filters-header">
       <h3 class="filter-title">Filtrado</h3>
       <div class="filters-row">
-        <select class="wireframe-input filter-select">
+        <select v-model="filters.profession" class="wireframe-input filter-select" @change="applyFilters">
           <option value="">Profesion u oficio</option>
+          <option v-for="opt in professionOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
         </select>
-        <select class="wireframe-input filter-select">
+        <select v-model="filters.age_range" class="wireframe-input filter-select" @change="applyFilters">
           <option value="">Fecha de nacimiento</option>
+          <option v-for="opt in ageOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
         </select>
-        <select class="wireframe-input filter-select">
+        <select v-model="filters.origin_country" class="wireframe-input filter-select" @change="applyFilters">
           <option value="">Continente</option>
+          <option v-for="opt in originCountryOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
         </select>
       </div>
       <div class="elegant-divider"></div>
@@ -71,45 +74,41 @@ const loading = ref(true)
 const errorMessage = ref('')
 const filters = reactive({
   profession: '',
-  age_range: ''
+  age_range: '',
+  origin_country: ''
 })
 
 const professionOptions = [
-  { label: 'Casa', value: 'casa' },
-  { label: 'Campo', value: 'campo' },
-  { label: 'Industria', value: 'industria' },
-  { label: 'Limpieza', value: 'limpieza' },
-  { label: 'Otro', value: 'otro' }
+  { label: 'Hostelería y turismo', value: 'Hostelería y Turismo' },
+  { label: 'Administración y oficina', value: 'Administración y Oficina' },
+  { label: 'Ventas y comercio', value: 'Ventas y Comercio' },
+  { label: 'Limpieza y mantenimiento', value: 'Limpieza y Mantenimiento' },
+  { label: 'Educación y formación', value: 'Educación y Formación' },
+  { label: 'Sanidad y cuidados', value: 'Sanidad y Cuidados' },
+  { label: 'Belleza y estética', value: 'Belleza y Estética' },
+  { label: 'Moda y confección', value: 'Moda y Confección' },
+  { label: 'Cocina y alimentación', value: 'Cocina y Alimentación' },
+  { label: 'Otros', value: 'Otros' }
 ]
 
 const ageOptions = [
-  { label: 'Menor de 18', value: 'under_18' },
-  { label: '18 - 25 años', value: '18_25' },
-  { label: '26 - 35 años', value: '26_35' },
-  { label: '36 - 45 años', value: '36_45' },
-  { label: '46 - 60 años', value: '46_60' },
-  { label: 'Más de 60', value: 'over_60' }
+  { label: '1930-1960', value: '60+' },
+  { label: '1960-1970', value: '50-60' },
+  { label: '1970-1980', value: '40-50' },
+  { label: '1990-2000', value: '25-35' },
+  { label: '2000-2010', value: '18-25' }
 ]
 
-const professionMap = {
-  casa: 'Casa',
-  campo: 'Campo',
-  industria: 'Industria',
-  limpieza: 'Limpieza',
-  otro: 'Otro'
-}
+const originCountryOptions = [
+  { label: 'America', value: 'America' },
+  { label: 'Europa', value: 'Europa' },
+  { label: 'Africa', value: 'Africa' },
+  { label: 'Asia', value: 'Asia' },
+  { label: 'Oceania', value: 'Oceania' }
+]
 
-const ageMap = {
-  under_18: 'Menor de 18',
-  '18_25': '18 - 25 años',
-  '26_35': '26 - 35 años',
-  '36_45': '36 - 45 años',
-  '46_60': '46 - 60 años',
-  over_60: 'Más de 60'
-}
-
-const professionLabel = (val) => professionMap[val] || val
-const ageLabel = (val) => ageMap[val] || val
+const professionLabel = (val) => val || val
+const ageLabel = (val) => val || val
 
 const truncate = (text, max) => {
   if (!text) return ''
@@ -123,6 +122,7 @@ const fetchStories = async () => {
     const f = {}
     if (filters.profession) f.profession = filters.profession
     if (filters.age_range) f.age_range = filters.age_range
+    if (filters.origin_country) f.origin_country = filters.origin_country
     stories.value = await getStories(f)
   } catch (err) {
     stories.value = []
