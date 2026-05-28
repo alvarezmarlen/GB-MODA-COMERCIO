@@ -20,7 +20,7 @@
         </div>
         <div class="profile-field">
           <label class="custom-label">{{ t('dashboard.passwordLabel') }}</label>
-          <input v-if="isEditing" v-model="editData.password" class="wireframe-input" type="password" placeholder="t('auth.passwordNewPlaceholder')" />
+          <input v-if="isEditing" v-model="editData.password" class="wireframe-input" type="password" :placeholder="t('auth.passwordNewPlaceholder')" />
           <div v-else class="field-value">••••••••</div>
         </div>
       </div>
