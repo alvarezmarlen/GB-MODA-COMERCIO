@@ -3,6 +3,7 @@ import LoginPage from '../views/LoginPage.vue'
 import RegisterPage from '../views/RegisterPage.vue'
 import CreateStoryView from '../views/CreateStoryView.vue'
 import StoryDetailView from '../views/StoryDetailView.vue'
+import EditStoryView from '../views/EditStoryView.vue'
 import HomeView from '../views/HomeView.vue'
 import UserDashboardView from '../views/UserDashboardView.vue'
 import AdminDashboardView from '../views/AdminDashboardView.vue'
@@ -33,6 +34,11 @@ const routes = [
     path: '/story-detail/:id',
     name: 'story-detail',
     component: StoryDetailView
+  },
+  {
+    path: '/edit-story/:id',
+    name: 'edit-story',
+    component: EditStoryView
   },
   {
     path: '/dashboard',

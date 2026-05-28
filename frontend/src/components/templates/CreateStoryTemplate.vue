@@ -2,7 +2,7 @@
   <div class="create-story-template">
     <div class="template-inner">
       <header class="template-header">
-        <h1 class="template-title">CREAR HISTORIA</h1>
+        <h1 class="template-title">{{ title }}</h1>
       </header>
       <main class="template-content">
         <slot name="form"></slot>
@@ -12,6 +12,12 @@
 </template>
 
 <script setup>
+defineProps({
+  title: {
+    type: String,
+    default: 'CREAR HISTORIA'
+  }
+})
 </script>
 
 <style scoped>

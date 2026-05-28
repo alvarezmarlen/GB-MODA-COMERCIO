@@ -46,7 +46,11 @@
               <h3 class="story-card-title">{{ story.title }}</h3>
               <div class="story-card-meta">Oficio: {{ getProfLabel(story.profession) }} &nbsp;|&nbsp; Edad: {{ getAgeLabel(story.age_range) }}</div>
               <p class="story-card-excerpt">{{ story.content?.substring(0, 100) }}{{ story.content?.length > 100 ? '...' : '' }}</p>
-              <button class="custom-button" @click="goToDetail(story.id)">Ver más</button>
+              <div class="story-actions">
+                <button class="custom-button" @click="goToDetail(story.id)">Ver más</button>
+                <button class="custom-button edit-btn" @click="editStory(story.id)">Editar</button>
+                <button class="custom-button delete-btn" @click="handleDelete(story.id)">Eliminar</button>
+              </div>
             </div>
           </div>
         </div>
@@ -65,7 +69,7 @@
 import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../composables/useAuthStore'
-import { getStories } from '../api/stories'
+import { getStories, deleteStory } from '../api/stories'
 import { updateUser as apiUpdateUser } from '../api/users'
 import DashboardTemplate from '../components/templates/DashboardTemplate.vue'
 
@@ -113,6 +117,19 @@ const saveChanges = async () => {
 }
 
 const goToDetail = (id) => router.push({ name: 'story-detail', params: { id } })
+const editStory = (id) => router.push({ name: 'edit-story', params: { id } })
+
+const handleDelete = async (id) => {
+  if (confirm('¿Estás seguro de que deseas eliminar esta historia?')) {
+    try {
+      await deleteStory(id)
+      userStories.value = userStories.value.filter(s => s.id !== id)
+      alert('Historia eliminada con éxito')
+    } catch (err) {
+      alert('Error al eliminar la historia: ' + err.message)
+    }
+  }
+}
 
 const getProfLabel = (k) => ({ casa:'Casa', campo:'Campo', industria:'Industria', limpieza:'Limpieza', otro:'Otro' }[k] || 'N/A')
 const getAgeLabel = (k) => ({ under_18:'<18', '18_25':'18-25', '26_35':'26-35', '36_45':'36-45', '46_60':'46-60', over_60:'>60' }[k] || 'N/A')
@@ -142,6 +159,9 @@ const getAgeLabel = (k) => ({ under_18:'<18', '18_25':'18-25', '26_35':'26-35', 
 .story-card-title { font-size:1rem; text-transform:uppercase; letter-spacing:1px; margin:0; }
 .story-card-meta { font-size:0.85rem; font-weight:bold; }
 .story-card-excerpt { font-size:0.85rem; line-height:1.5; margin:0; }
+.story-actions { display: flex; gap: 8px; margin-top: 8px; }
+.edit-btn { background: #f39c12; }
+.delete-btn { background: #c0392b; }
 .empty-state { display:flex; flex-direction:column; align-items:center; padding:var(--wf-spacing-lg) 0; gap:var(--wf-spacing-sm); }
 .empty-icon-box { width:80px; height:80px; border:1px dashed var(--color-primary); display:flex; justify-content:center; align-items:center; margin-bottom:var(--wf-spacing-sm); }
 .empty-icon { font-size:2rem; color:var(--color-primary); }
