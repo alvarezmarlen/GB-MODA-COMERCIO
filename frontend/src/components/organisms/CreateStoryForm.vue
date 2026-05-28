@@ -195,7 +195,7 @@ const onFormSubmit = async () => {
       id: created.id,
       title: created.title,
       profession: created.profession,
-      originCountry: created.origin_country,
+      originCountry: formData.originCountry,
       ageRange: created.age_range,
       description: created.content,
       images: imageUrls.length > 0 ? imageUrls : []

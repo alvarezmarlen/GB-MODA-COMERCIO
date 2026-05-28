@@ -36,7 +36,7 @@
           <div class="story-meta">
             <span class="meta-item"><strong>Oficio:</strong> {{ professionLabel }}</span>
             <span class="meta-item"><strong>Edad:</strong> {{ ageRangeLabel }}</span>
-            <span class="meta-item"><strong>Continente:</strong> {{ storyToShow.originCountry || storyToShow.origin_country || 'No especificado' }}</span>
+            <span class="meta-item"><strong>Continente:</strong> {{ storyToShow.originCountry || 'No especificado' }}</span>
           </div>
 
           <div class="story-description">
