@@ -2,7 +2,7 @@
   <div class="create-story-template">
     <div class="template-inner">
       <header class="template-header">
-        <h1 class="template-title">{{ title }}</h1>
+        <h1 class="template-title">{{ t('createStory.pageTitle') }}</h1>
       </header>
       <main class="template-content">
         <slot name="form"></slot>
@@ -12,12 +12,8 @@
 </template>
 
 <script setup>
-defineProps({
-  title: {
-    type: String,
-    default: 'CREAR HISTORIA'
-  }
-})
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 </script>
 
 <style scoped>

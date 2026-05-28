@@ -1,33 +1,33 @@
 <template>
   <form @submit.prevent="onFormSubmit" class="register-form">
     <FormField
-      label="Nombre de usuario"
+      :label="t('auth.usernameLabel')"
       v-model="formData.username"
-      placeholder="Mínimo 3 caracteres"
+      :placeholder="t('auth.usernameMinPlaceholder')"
     />
     
     <FormField
-      label="Email"
+      :label="t('auth.emailLabel')"
       type="email"
       v-model="formData.email"
-      placeholder="ejemplo@correo.com"
+      :placeholder="t('auth.emailPlaceholder')"
     />
     
     <FormField
-      label="Contraseña"
+      :label="t('auth.passwordLabel')"
       type="password"
       v-model="formData.password"
-      placeholder="Mínimo 6 caracteres"
+      :placeholder="t('auth.passwordMinPlaceholder')"
     />
 
     <div class="checkbox-container">
       <BaseCheckbox v-model="formData.terms" />
-      <BaseLabel>Acepto los términos y condiciones</BaseLabel>
+      <BaseLabel>{{ t('auth.termsLabel') }}</BaseLabel>
     </div>
 
     <p v-if="authStore.error" class="error-text">{{ authStore.error }}</p>
     <BaseButton type="submit" :disabled="!isFormValid || authStore.loading">
-      {{ authStore.loading ? 'Registrando...' : 'Registrarse' }}
+      {{ authStore.loading ? t('auth.registering') : t('auth.registerButton') }}
     </BaseButton>
   </form>
 </template>
@@ -35,6 +35,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import FormField from '../molecules/FormField.vue'
 import BaseButton from '../atoms/BaseButton.vue'
 import BaseCheckbox from '../atoms/BaseCheckbox.vue'
@@ -42,6 +43,7 @@ import BaseLabel from '../atoms/BaseLabel.vue'
 import { useForm } from '../../composables/useForm'
 import { useAuthStore } from '../../composables/useAuthStore'
 
+const { t } = useI18n()
 const router = useRouter()
 const authStore = useAuthStore()
 const { register } = authStore

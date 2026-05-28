@@ -1,39 +1,40 @@
 <template>
-  <DashboardTemplate title="Mi Perfil">
+  <DashboardTemplate :title= "t('dashboard.title')" >
     <section class="profile-section">
       <div class="section-header">
-        <h2 class="section-title">DATOS PERSONALES</h2>
+        <h2 class="section-title">{{ t('dashboard.personalData') }}</h2>
         <button class="custom-button" @click="toggleEditMode">
-          {{ isEditing ? '✕ Cancelar' : '✎ Editar' }}
+          {{ isEditing ? t('dashboard.cancel') :  t('dashboard.edit') }}
         </button>
       </div>
       <div class="profile-fields">
         <div class="profile-field">
-          <label class="custom-label">Nombre de usuario</label>
+          <label class="custom-label">{{ t('dashboard.usernameLabel') }}</label>
           <input v-if="isEditing" v-model="editData.username" class="wireframe-input" type="text" />
           <div v-else class="field-value">{{ user.username }}</div>
         </div>
         <div class="profile-field">
-          <label class="custom-label">Correo electrónico</label>
+          <label class="custom-label">{{ t('dashboard.emailLabel') }}</label>
           <input v-if="isEditing" v-model="editData.email" class="wireframe-input" type="email" />
           <div v-else class="field-value">{{ user.email }}</div>
         </div>
         <div class="profile-field">
-          <label class="custom-label">Contraseña</label>
-          <input v-if="isEditing" v-model="editData.password" class="wireframe-input" type="password" placeholder="Nueva contraseña" />
+          <label class="custom-label">{{ t('dashboard.passwordLabel') }}</label>
+          <input v-if="isEditing" v-model="editData.password" class="wireframe-input" type="password" :placeholder="t('auth.passwordNewPlaceholder')" />
           <div v-else class="field-value">••••••••</div>
         </div>
       </div>
       <div v-if="isEditing" class="save-actions">
-        <button class="custom-button save-btn" @click="saveChanges">✓ Guardar Cambios</button>
+        <button class="custom-button save-btn" @click="saveChanges">{{ t('dashboard.saveChanges') }}</button>
       </div>
     </section>
 
     <section class="stories-section">
       <div class="section-header">
-        <h2 class="section-title">MIS HISTORIAS</h2>
-        <span class="story-count">{{ userStories.length }} historia(s)</span>
+        <h2 class="section-title">{{ t('dashboard.myStories') }}</h2>
+        <span class="story-count">{{ userStories.length }} {{ t('dashboard.storyCount') }}</span>
       </div>
+      <div v-if="errorMessage" class="error-banner">{{ errorMessage }}</div>
       <div v-if="userStories.length > 0" class="user-stories-list">
         <div v-for="story in userStories" :key="story.id" class="user-story-card">
           <div class="story-card-top-bar"><div class="top-bar-inner"></div></div>
@@ -41,25 +42,21 @@
             <div v-if="story.images && story.images.length > 0" class="story-card-image-box">
               <img :src="story.images[0].url" :alt="story.title" class="story-card-image" />
             </div>
-            <div v-else class="story-card-image-box"><span>Sin imagen</span></div>
+            <div v-else class="story-card-image-box"><span>{{ t('dashboard.noImage') }}</span></div>
             <div class="story-card-content">
               <h3 class="story-card-title">{{ story.title }}</h3>
-              <div class="story-card-meta">Oficio: {{ getProfLabel(story.profession) }} &nbsp;|&nbsp; Edad: {{ getAgeLabel(story.age_range) }}</div>
+              <div class="story-card-meta">{{ t('dashboard.trade') }}: {{ t(story.profession) }} &nbsp;|&nbsp; {{ t('dashboard.age') }}: {{ getAgeLabel(story.age_range) }}</div>
               <p class="story-card-excerpt">{{ story.content?.substring(0, 100) }}{{ story.content?.length > 100 ? '...' : '' }}</p>
-              <div class="story-actions">
-                <button class="custom-button" @click="goToDetail(story.id)">Ver más</button>
-                <button class="custom-button edit-btn" @click="editStory(story.id)">Editar</button>
-                <button class="custom-button delete-btn" @click="handleDelete(story.id)">Eliminar</button>
-              </div>
+              <button class="custom-button" @click="goToDetail(story.id)">{{ t('dashboard.viewMore') }}</button>
             </div>
           </div>
         </div>
       </div>
       <div v-else class="empty-state">
         <div class="empty-icon-box"><span class="empty-icon">☐</span></div>
-        <p class="empty-text">Aún no has subido ninguna historia.</p>
-        <p class="empty-subtext">Comparte tu primera crónica con la comunidad.</p>
-        <button class="custom-button" @click="$router.push('/create-story')">+ Crear Historia</button>
+        <p class="empty-text">{{ t('dashboard.emptyTitle') }}</p>
+        <p class="empty-subtext">{{ t('dashboard.emptySubtext') }}</p>
+        <button class="custom-button" @click="$router.push('/create-story')">{{ t('dashboard.createFirstStory') }}</button>
       </div>
     </section>
   </DashboardTemplate>
@@ -68,11 +65,13 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { useAuthStore } from '../composables/useAuthStore'
-import { getStories, deleteStory } from '../api/stories'
+import { getStories } from '../api/stories'
 import { updateUser as apiUpdateUser } from '../api/users'
 import DashboardTemplate from '../components/templates/DashboardTemplate.vue'
 
+const { t } = useI18n()
 const router = useRouter()
 
 const { user, updateUser } = useAuthStore()
@@ -81,6 +80,7 @@ const editData = reactive({ username: '', email: '', password: '' })
 
 const userStories = ref([])
 const loading = ref(true)
+const errorMessage = ref('')
 
 onMounted(async () => {
   try {
@@ -117,22 +117,9 @@ const saveChanges = async () => {
 }
 
 const goToDetail = (id) => router.push({ name: 'story-detail', params: { id } })
-const editStory = (id) => router.push({ name: 'edit-story', params: { id } })
 
-const handleDelete = async (id) => {
-  if (confirm('¿Estás seguro de que deseas eliminar esta historia?')) {
-    try {
-      await deleteStory(id)
-      userStories.value = userStories.value.filter(s => s.id !== id)
-      alert('Historia eliminada con éxito')
-    } catch (err) {
-      alert('Error al eliminar la historia: ' + err.message)
-    }
-  }
-}
-
-const getProfLabel = (k) => ({ casa:'Casa', campo:'Campo', industria:'Industria', limpieza:'Limpieza', otro:'Otro' }[k] || 'N/A')
-const getAgeLabel = (k) => ({ under_18:'<18', '18_25':'18-25', '26_35':'26-35', '36_45':'36-45', '46_60':'46-60', over_60:'>60' }[k] || 'N/A')
+const getProfLabel = (k) => k ? t(`professions.${k}`) : 'N/A'
+const getAgeLabel = (k) => k ? t(`ages.${k}`) : 'N/A'
 </script>
 
 <style scoped>
@@ -159,9 +146,6 @@ const getAgeLabel = (k) => ({ under_18:'<18', '18_25':'18-25', '26_35':'26-35', 
 .story-card-title { font-size:1rem; text-transform:uppercase; letter-spacing:1px; margin:0; }
 .story-card-meta { font-size:0.85rem; font-weight:bold; }
 .story-card-excerpt { font-size:0.85rem; line-height:1.5; margin:0; }
-.story-actions { display: flex; gap: 8px; margin-top: 8px; }
-.edit-btn { background: #f39c12; }
-.delete-btn { background: #c0392b; }
 .empty-state { display:flex; flex-direction:column; align-items:center; padding:var(--wf-spacing-lg) 0; gap:var(--wf-spacing-sm); }
 .empty-icon-box { width:80px; height:80px; border:1px dashed var(--color-primary); display:flex; justify-content:center; align-items:center; margin-bottom:var(--wf-spacing-sm); }
 .empty-icon { font-size:2rem; color:var(--color-primary); }

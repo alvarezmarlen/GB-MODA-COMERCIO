@@ -1,49 +1,49 @@
 <template>
   <form @submit.prevent="onFormSubmit" class="create-story-form">
-    <FormGroup label="Título de la historia">
+    <FormGroup :label="t('createStory.titleLabel')">
       <BaseInput
         v-model="formData.title"
-        placeholder="Escribe el título aquí..."
+        :placeholder="t('createStory.titlePlaceholder')"
       />
     </FormGroup>
 
-    <FormGroup label="País de origen">
+    <FormGroup :label="t('createStory.countryLabel')">
       <BaseSelect
         v-model="formData.originCountry"
         :options="countryOptions"
-        placeholder="▼ Seleccionar país"
+        :placeholder="t('createStory.countryPlaceholder')"
       />
     </FormGroup>
 
-    <FormGroup label="Profesión u oficio">
+    <FormGroup :label="t('createStory.professionLabel')">
       <BaseSelect
         v-model="formData.profession"
         :options="professionOptions"
-        placeholder="▼ Seleccionar profesión u oficio"
+        :placeholder="t('createStory.professionPlaceholder')"
       />
     </FormGroup>
 
-    <FormGroup label="Rango de edad">
+    <FormGroup :label="t('createStory.ageLabel')">
       <BaseSelect
         v-model="formData.ageRange"
         :options="ageRangeOptions"
-        placeholder="▼ Seleccionar rango de edad"
+        :placeholder="t('createStory.agePlaceholder')"
       />
     </FormGroup>
 
-    <FormGroup label="Descripción de la historia">
+    <FormGroup :label="t('createStory.descriptionLabel')">
       <BaseTextarea
         v-model="formData.description"
-        placeholder="Escribe aquí la historia o descripción completa..."
+        :placeholder="t('createStory.descriptionPlaceholder')"
       />
     </FormGroup>
 
     <div class="checkbox-container">
       <BaseCheckbox v-model="formData.acceptedTerms" />
-      <BaseLabel>Acepto los términos y permisos para publicar imágenes y contenido.</BaseLabel>
+      <BaseLabel>{{ t('createStory.termsLabel') }}</BaseLabel>
     </div>
 
-    <FormGroup label="Subir fotografía">
+    <FormGroup :label="t('createStory.uploadLabel')">
       <BaseFileUpload :disabled="!formData.acceptedTerms" :max-files="2" @update:files="handleFilesUpdate" />
     </FormGroup>
 
@@ -51,7 +51,7 @@
 
     <div class="actions">
       <BaseButton type="submit" :disabled="!isFormValid || isSubmitting">
-        {{ isSubmitting ? 'PUBLICANDO...' : 'PUBLICAR' }}
+        {{ isSubmitting ? t('createStory.publishing') : t('createStory.publish') }}
       </BaseButton>
     </div>
   </form>
@@ -60,6 +60,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import FormGroup from '../molecules/FormGroup.vue'
 import BaseInput from '../atoms/BaseInput.vue'
 import BaseSelect from '../atoms/BaseSelect.vue'
@@ -72,6 +73,8 @@ import { useForm } from '../../composables/useForm'
 import { useStoryStore } from '../../composables/useStoryStore'
 import { useAuthStore } from '../../composables/useAuthStore'
 import { createStory, uploadStoryImage } from '../../api/stories'
+
+const { t } = useI18n()
 
 const countryOptions = [
   { label: 'America', value: 'america' },

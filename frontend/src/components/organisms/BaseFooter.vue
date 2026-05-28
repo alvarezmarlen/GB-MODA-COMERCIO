@@ -3,36 +3,22 @@
     <div class="footer-divider"></div>
     <div class="footer-content">
       <div class="copyright">
-        © 2026 GB-MODA-COMERCIO. Todos los derechos reservados.
+        {{ t('footer.copyright') }}
       </div>
       <div class="footer-links">
-        <a href="#" class="footer-link" @click.prevent="openLegalModal('terminos')">Términos y Condiciones</a>
+        <a href="#" class="footer-link">{{ t('footer.terms') }}</a>
         <span class="divider">│</span>
-        <a href="#" class="footer-link" @click.prevent="openLegalModal('privacidad')">Politicas de Privacidad</a>
+        <a href="#" class="footer-link">{{ t('footer.privacy') }}</a>
         <span class="divider">│</span>
-        <a href="#" class="footer-link" @click.prevent="openLegalModal('contacto')">Contacto</a>
+        <a href="#" class="footer-link">{{ t('footer.contact') }}</a>
       </div>
     </div>
-    
-    <LegalModal 
-      :isOpen="isLegalModalOpen" 
-      :section="currentSection"
-      @close="isLegalModalOpen = false"
-    />
   </footer>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import LegalModal from './LegalModal.vue'
-
-const isLegalModalOpen = ref(false)
-const currentSection = ref('')
-
-const openLegalModal = (section) => {
-  currentSection.value = section
-  isLegalModalOpen.value = true
-}
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 </script>
 
 <style scoped>
@@ -75,7 +61,6 @@ const openLegalModal = (section) => {
   font-size: 0.8rem;
 }
 
-/* Responsive design */
 @media (max-width: 600px) {
   .footer-content {
     flex-direction: column;

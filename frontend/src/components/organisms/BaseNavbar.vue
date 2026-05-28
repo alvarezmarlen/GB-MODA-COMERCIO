@@ -3,18 +3,20 @@
 
     <!-- Left: Language selector -->
     <div class="navbar-left">
-      <button class="pill-btn lang-btn" @click="toggleLanguage">
-        {{ currentLang }}
-      </button>
+      <select class="lang-select" v-model="locale" @change="onLocaleChange">
+        <option v-for="opt in languageOptions" :key="opt.value" :value="opt.value">
+          {{ opt.label }}
+        </option>
+      </select>
     </div>
 
     <!-- Center: Navigation Tabs -->
     <div class="navbar-center">
       <router-link to="/" class="nav-link" active-class="nav-link--active">
-        Inicio
+        {{ t('nav.home') }}
       </router-link>
       <router-link v-if="authStore.isAuthenticated" to="/create-story" class="nav-link" active-class="nav-link--active">
-        + Crear Historia
+        {{ t('nav.createStory') }}
       </router-link>
     </div>
 
@@ -23,12 +25,12 @@
       <template v-if="authStore.isAuthenticated">
         <router-link to="/dashboard" class="username">👤 {{ authStore.user?.username || 'Usuario' }}</router-link>
         <button class="pill-btn logout-btn" @click="handleLogout">
-          Salir →
+          {{ t('nav.logout') }}
         </button>
       </template>
       <template v-else>
-        <router-link to="/login" class="nav-link">Iniciar sesión</router-link>
-        <router-link to="/register" class="pill-btn">Regístrate</router-link>
+        <router-link to="/login" class="nav-link">{{ t('auth.loginLink') }}</router-link>
+        <router-link to="/register" class="pill-btn">{{ t('auth.registerLink') }}</router-link>
       </template>
     </div>
 
@@ -36,13 +38,27 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { useAuthStore } from '../../composables/useAuthStore'
 
+const { t, locale } = useI18n()
 const router = useRouter()
 const authStore = useAuthStore()
-const currentLang = ref('ES')
+
+const languageOptions = computed(() => [
+  { value: 'ar', label: t('lang.ar') },
+  { value: 'es', label: t('lang.es') },
+  { value: 'en', label: t('lang.en') },
+  { value: 'eu', label: t('lang.eu') },
+  { value: 'fr', label: t('lang.fr') },
+  { value: 'ro', label: t('lang.ro') },
+])
+
+const onLocaleChange = () => {
+  localStorage.setItem('locale', locale.value)
+}
 
 // ── Smart hide/show on scroll ──────────────────────────────
 const isHidden = ref(false)
@@ -68,15 +84,10 @@ onMounted(() => window.addEventListener('scroll', onScroll, { passive: true }))
 onUnmounted(() => window.removeEventListener('scroll', onScroll))
 
 // ── Actions ───────────────────────────────────────────────
-const toggleLanguage = () => {
-  currentLang.value = currentLang.value === 'ES' ? 'EN' : 'ES'
-  alert(`Idioma cambiado a: ${currentLang.value}`)
-}
-
 const handleLogout = () => {
   authStore.logout()
-  alert('Sesión cerrada con éxito')
-  router.push('/login')
+  alert(t('nav.logoutSuccess'))
+  router.push('/')
 }
 </script>
 

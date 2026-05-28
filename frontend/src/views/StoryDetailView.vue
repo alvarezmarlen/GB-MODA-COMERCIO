@@ -2,15 +2,15 @@
   <div class="story-detail-template">
     <div class="template-inner">
       <header class="template-header">
-        <h1 class="template-title">DETALLE DE LA HISTORIA</h1>
+        <h1 class="template-title">{{ t('storyDetail.back') }}</h1>
         <button class="wireframe-button back-button" @click="goBack">
-          ← Volver
+          {{ t('storyDetail.back') }}
         </button>
       </header>
 
       <main class="template-content">
-        <div v-if="loading" class="loading-text">Cargando historia...</div>
-        <div v-else-if="!storyToShow" class="loading-text">Historia no encontrada.</div>
+        <div v-if="loading" class="loading-text">{{ t('storyDetail.loading') }}</div>
+        <div v-else-if="!storyToShow" class="loading-text">{{ t('storyDetail.notFound') }}</div>
         <div v-else class="story-card">
           <div class="story-title-box">
             <h2>{{ storyToShow.title }}</h2>
@@ -28,15 +28,15 @@
             </template>
             <template v-else>
               <div class="story-image-placeholder">
-                <p>IMAGEN DE LA HISTORIA</p>
+                <p>{{ t('storyDetail.imageLabel') }}</p>
               </div>
             </template>
           </div>
 
           <div class="story-meta">
-            <span class="meta-item"><strong>Oficio:</strong> {{ professionLabel }}</span>
-            <span class="meta-item"><strong>Edad:</strong> {{ ageRangeLabel }}</span>
-            <span class="meta-item"><strong>País:</strong> {{ storyToShow.originCountry || storyToShow.origin_country || 'No especificado' }}</span>
+            <span class="meta-item"><strong> {{ t('chronicles.trade') }}:</strong> {{ professionLabel }}</span>
+            <span class="meta-item"><strong>{{ t('chronicles.age') }}:</strong> {{ ageRangeLabel }}</span>
+            <span class="meta-item"><strong>{{ t('chronicles.country') }}:</strong> {{ storyToShow.originCountry || storyToShow.origin_country || 'No especificado' }}</span>
           </div>
 
           <div class="story-description">
@@ -53,9 +53,11 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { useStoryStore } from '../composables/useStoryStore'
 import { getStoryById } from '../api/stories'
 
+const { t } = useI18n()
 const router = useRouter()
 const route = useRoute()
 const { currentStory, setStory } = useStoryStore()

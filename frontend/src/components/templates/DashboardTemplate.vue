@@ -2,7 +2,7 @@
   <div class="dashboard-template">
     <header class="dashboard-header">
       <button class="wireframe-button back-button" @click="goBack">
-        ← Volver
+        ← {{ t('storyDetail.back') }}
       </button>
       <h1 class="dashboard-title">{{ title }}</h1>
       <div class="header-spacer"></div>
@@ -16,6 +16,9 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 defineProps({
   title: {
