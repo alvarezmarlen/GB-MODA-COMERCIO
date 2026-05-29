@@ -6,19 +6,21 @@
         {{ t('footer.copyright') }}
       </div>
       <div class="footer-links">
-        <a href="#" class="footer-link">{{ t('footer.terms') }}</a>
+        <a href="#" @click.prevent="openLegalModal('terminos')" class="footer-link">{{ t('footer.terms') }}</a>
         <span class="divider">│</span>
-        <a href="#" class="footer-link">{{ t('footer.privacy') }}</a>
+        <a href="#" @click.prevent="openLegalModal('privacidad')" class="footer-link">{{ t('footer.privacy') }}</a>
         <span class="divider">│</span>
-        <a href="#" class="footer-link">{{ t('footer.contact') }}</a>
+        <a href="#" @click.prevent="openLegalModal('contacto')" class="footer-link">{{ t('footer.contact') }}</a>
       </div>
     </div>
   </footer>
 </template>
 
 <script setup>
+import { inject } from 'vue'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
+const openLegalModal = inject('openLegalModal')
 </script>
 
 <style scoped>

@@ -10,20 +10,32 @@
 
     <!-- Reusable Footer: only shown for authenticated screens -->
     <BaseFooter v-if="showNavAndFooter" />
+
+    <!-- Legal Modal -->
+    <LegalModal :isOpen="legalModalOpen" :section="legalModalSection" @close="legalModalOpen = false" />
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref, provide } from 'vue'
 import { useRoute } from 'vue-router'
 import BaseNavbar from './components/organisms/BaseNavbar.vue'
 import BaseFooter from './components/organisms/BaseFooter.vue'
+import LegalModal from './components/organisms/LegalModal.vue'
 
 const route = useRoute()
 const showNavAndFooter = computed(() => {
   // Nav and Footer are excluded on login and register screens
   return route.name && route.name !== 'login' && route.name !== 'register'
 })
+
+const legalModalOpen = ref(false)
+const legalModalSection = ref('')
+const openLegalModal = (section) => {
+  legalModalSection.value = section
+  legalModalOpen.value = true
+}
+provide('openLegalModal', openLegalModal)
 </script>
 
 <style>
