@@ -27,7 +27,7 @@ RUN mkdir -p /app/uploads
 VOLUME ["/app/uploads"]
 
 # 8. Exponemos el puerto 5000 (que es donde corre tu Flask)
-EXPOSE 5002
+EXPOSE 5000
 
 # 9. Comando para arrancar la aplicación usando run.py
 CMD ["python", "run.py"]

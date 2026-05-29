@@ -15,7 +15,9 @@ services:
       # Mapea la carpeta de subidas del contenedor a una carpeta local en tu PC
       - ./mis_imagenes_locales:/app/uploads
 
-     # Docker creará el archivo 'database.db' en tu PC dentro de una carpeta llamada 'mi_bd_sqlite'
+    # Mapeamos directamente los dos archivos individuales de tu computadora al contenedor.
+      # De esta forma Docker los resguarda de forma independiente sin tocar tu código.
+      - ./mi_bd_sqlite/moda_comercio.db:/app/app/moda_comercio.db
       - ./mi_bd_sqlite/database.db:/app/app/database.db
     environment:
       - FLASK_ENV=development
