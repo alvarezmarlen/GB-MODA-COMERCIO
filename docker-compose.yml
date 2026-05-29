@@ -13,7 +13,7 @@ services:
     volumes:
       # PERSISTENCIA DE IMÁGENES:
       # Mapea la carpeta de subidas del contenedor a una carpeta local en tu PC
-      - ./mis_imagenes_locales:/app/uploads
+      - ./mis_imagenes_locales:/app/app/uploads
 
     # Mapeamos directamente los dos archivos individuales de tu computadora al contenedor.
       # De esta forma Docker los resguarda de forma independiente sin tocar tu código.
