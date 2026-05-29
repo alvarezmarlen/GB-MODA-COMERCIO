@@ -44,9 +44,9 @@
 
           <div class="card-content">
             <div class="card-meta">
-              {{ t('chronicles.trade') }}: {{ story.profession }} &nbsp;|&nbsp;
-              {{ t('chronicles.age') }}: {{ story.age_range }} &nbsp;|&nbsp;
-              {{ t('chronicles.country') }}: {{ story.origin_country }}
+              Oficio: {{ professionLabel(story.profession) }} &nbsp;|&nbsp;
+              Edad: {{ ageLabel(story.age_range) }} &nbsp;|&nbsp;
+              Continente: {{ story.origin_country }}
             </div>
             <p class="card-text">{{ truncate(story.content, 120) }}</p>
             <div class="card-actions">

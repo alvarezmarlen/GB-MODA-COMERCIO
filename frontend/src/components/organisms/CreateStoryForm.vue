@@ -7,11 +7,11 @@
       />
     </FormGroup>
 
-    <FormGroup :label="t('createStory.countryLabel')">
+    <FormGroup label="Continente">
       <BaseSelect
         v-model="formData.originCountry"
         :options="countryOptions"
-        :placeholder="t('createStory.countryPlaceholder')"
+        placeholder="▼ Seleccionar continente"
       />
     </FormGroup>
 
@@ -77,11 +77,11 @@ import { createStory, uploadStoryImage } from '../../api/stories'
 const { t } = useI18n()
 
 const countryOptions = [
-  { label: 'America', value: 'america' },
-  { label: 'Europa', value: 'europa' },
-  { label: 'Africa', value: 'africa' },
-  { label: 'Asia', value: 'asia' },
-  { label: 'Oceania', value: 'oceania' }
+  { label: 'America', value: 'America' },
+  { label: 'Europa', value: 'Europa' },
+  { label: 'Africa', value: 'Africa' },
+  { label: 'Asia', value: 'Asia' },
+  { label: 'Oceania', value: 'Oceania' }
 ]
 
 const professionOptions = [
@@ -105,14 +105,6 @@ const ageRangeOptions = [
   { label: '2000-2010', value: '2000-2010' }
 ]
 
-// Mapeos para convertir valores frontend a valores backend
-const continentToCountry = {
-  america: 'Colombia',
-  europa: 'España',
-  africa: 'Marruecos',
-  asia: 'Tailandia',
-  oceania: 'Australia'
-}
 
 const professionMap = {
   hosteleria_turismo: 'Hostelería y Turismo',
@@ -187,7 +179,7 @@ const onFormSubmit = async () => {
       user_id: userId,
       title: formData.title,
       content: formData.description,
-      origin_country: continentToCountry[formData.originCountry] || formData.originCountry,
+      origin_country: formData.originCountry,
       profession: professionMap[formData.profession] || formData.profession,
       age_range: yearRangeToAgeRange[formData.ageRange] || formData.ageRange
     }
@@ -206,6 +198,7 @@ const onFormSubmit = async () => {
       id: created.id,
       title: created.title,
       profession: created.profession,
+      originCountry: formData.originCountry,
       ageRange: created.age_range,
       description: created.content,
       images: imageUrls.length > 0 ? imageUrls : []

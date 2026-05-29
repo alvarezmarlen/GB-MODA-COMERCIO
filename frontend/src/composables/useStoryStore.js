@@ -3,7 +3,7 @@ import { reactive } from 'vue'
 const currentStory = reactive({
   id: null,
   title: '',
-  countryOrigin: '',
+  originCountry: '',
   profession: '',
   ageRange: '',
   description: '',
@@ -15,7 +15,7 @@ const stories = reactive([
   {
     id: 1,
     title: 'El oficio de la costura artesanal',
-    countryOrigin: 'España',
+    originCountry: 'España',
     profession: 'casa',
     ageRange: '46_60',
     description: 'Una historia sobre el arte de la costura transmitido de generación en generación en los hogares españoles.',
@@ -25,7 +25,7 @@ const stories = reactive([
   {
     id: 2,
     title: 'Comercio local en el mercado central',
-    countryOrigin: 'México',
+    originCountry: 'México',
     profession: 'industria',
     ageRange: '36_45',
     description: 'La vida cotidiana de los comerciantes que mantienen viva la tradición del mercado central.',
@@ -35,7 +35,7 @@ const stories = reactive([
   {
     id: 3,
     title: 'Tejidos de la sierra',
-    countryOrigin: 'Perú',
+    originCountry: 'Perú',
     profession: 'campo',
     ageRange: '26_35',
     description: 'Los tejidos andinos representan siglos de tradición cultural y artesanía local.',
@@ -50,7 +50,7 @@ export function useStoryStore() {
   const setStory = (storyData) => {
     Object.assign(currentStory, {
       title: storyData.title || '',
-      countryOrigin: storyData.countryOrigin || '',
+      originCountry: storyData.originCountry || '',
       profession: storyData.profession || '',
       ageRange: storyData.ageRange || '',
       description: storyData.description || '',
