@@ -1,5 +1,11 @@
-from marshmallow import Schema, fields, validate
+from marshmallow import Schema, fields, validate, ValidationError
 
+def validate_estudioenpenascal_email(value):
+    if not value.lower().endswith('@estudioenpenascal.com'):
+        raise ValidationError(
+            'Solo se permiten correos con dominio @estudioenpenascal.com'
+        )
+        
 class UserSchema(Schema):
     # Campos que el backend devuelve al frontend (Solo lectura)
     id = fields.Int(dump_only=True)
@@ -13,7 +19,7 @@ class UserSchema(Schema):
     
     email = fields.Email(
         required=True, 
-        validate=validate.Length(max=120)
+        validate=[validate.Length(max=120), validate_estudioenpenascal_email]
     )
     
     # La contraseña solo se recibe, NUNCA se envía de vuelta en el JSON
