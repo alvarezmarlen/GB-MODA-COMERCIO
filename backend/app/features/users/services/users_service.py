@@ -7,6 +7,9 @@ def create_user(data):
     existing_user = User.query.filter_by(email=data['email']).first()
     if existing_user:
         raise ValueError("El email ya está registrado")
+    
+    if not data['email'].lower().endswith('@estudioenpenascal.com'):
+        raise ValueError("Solo se permiten correos con dominio @estudioenpenascal.com")
 
     new_user = User(
         username=data['username'],  
