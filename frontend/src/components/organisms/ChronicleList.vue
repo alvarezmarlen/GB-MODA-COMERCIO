@@ -3,14 +3,17 @@
     <div class="filters-header">
       <h3 class="filter-title">Filtrado</h3>
       <div class="filters-row">
-        <select class="wireframe-input filter-select">
-          <option value="">{{ t('chronicles.allTrades') }}</option>
+        <select v-model="filters.profession" class="wireframe-input filter-select" @change="applyFilters">
+          <option value="">Profesion u oficio</option>
+          <option v-for="opt in professionOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
         </select>
-        <select class="wireframe-input filter-select">
-          <option value="">{{ t('chronicles.allAges') }}</option>
+        <select v-model="filters.age_range" class="wireframe-input filter-select" @change="applyFilters">
+          <option value="">Fecha de nacimiento</option>
+          <option v-for="opt in ageOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
         </select>
-        <select class="wireframe-input filter-select">
+        <select v-model="filters.origin_country" class="wireframe-input filter-select" @change="applyFilters">
           <option value="">Continente</option>
+          <option v-for="opt in originCountryOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
         </select>
       </div>
       <div class="elegant-divider"></div>
@@ -73,45 +76,41 @@ const loading = ref(true)
 const errorMessage = ref('')
 const filters = reactive({
   profession: '',
-  age_range: ''
+  age_range: '',
+  origin_country: ''
 })
 
 const professionOptions = [
-  { label: t('professions.casa'), value: 'casa' },
-  { label: t('professions.campo'), value: 'campo' },
-  { label: t('professions.industria'), value: 'industria' },
-  { label: t('professions.limpieza'), value: 'limpieza' },
-  { label: t('professions.otro'), value: 'otro' }
+  { label: 'Hostelería y turismo', value: 'Hostelería y Turismo' },
+  { label: 'Administración y oficina', value: 'Administración y Oficina' },
+  { label: 'Ventas y comercio', value: 'Ventas y Comercio' },
+  { label: 'Limpieza y mantenimiento', value: 'Limpieza y Mantenimiento' },
+  { label: 'Educación y formación', value: 'Educación y Formación' },
+  { label: 'Sanidad y cuidados', value: 'Sanidad y Cuidados' },
+  { label: 'Belleza y estética', value: 'Belleza y Estética' },
+  { label: 'Moda y confección', value: 'Moda y Confección' },
+  { label: 'Cocina y alimentación', value: 'Cocina y Alimentación' },
+  { label: 'Otros', value: 'Otros' }
 ]
 
 const ageOptions = [
-  { label: t('ages.under_18'), value: 'under_18' },
-  { label: t('ages.18_25'), value: '18_25' },
-  { label: t('ages.26_35'), value: '26_35' },
-  { label: t('ages.36_45'), value: '36_45' },
-  { label: t('ages.46_60'), value: '46_60' },
-  { label: t('ages.over_60'), value: 'over_60' }
+  { label: '1930-1960', value: '60+' },
+  { label: '1960-1970', value: '50-60' },
+  { label: '1970-1980', value: '40-50' },
+  { label: '1990-2000', value: '25-35' },
+  { label: '2000-2010', value: '18-25' }
 ]
 
-const professionMap = {
-  casa: 'casa',
-  campo: 'campo',
-  industria: 'industria',
-  limpieza: 'limpieza',
-  otro: 'otro'
-}
+const originCountryOptions = [
+  { label: 'America', value: 'America' },
+  { label: 'Europa', value: 'Europa' },
+  { label: 'Africa', value: 'Africa' },
+  { label: 'Asia', value: 'Asia' },
+  { label: 'Oceania', value: 'Oceania' }
+]
 
-const ageMap = {
-  under_18: 'under_18',
-  '18_25': '18_25',
-  '26_35': '26_35',
-  '36_45': '36_45',
-  '46_60': '46_60',
-  over_60: 'over_60'
-}
-
-const professionLabel = (val) => val ? t(`professions.${val}`) : val
-const ageLabel = (val) => val ? t(`ages.${val}`) : val
+const professionLabel = (val) => val || val
+const ageLabel = (val) => val || val
 
 const truncate = (text, max) => {
   if (!text) return ''
@@ -125,6 +124,7 @@ const fetchStories = async () => {
     const f = {}
     if (filters.profession) f.profession = filters.profession
     if (filters.age_range) f.age_range = filters.age_range
+    if (filters.origin_country) f.origin_country = filters.origin_country
     stories.value = await getStories(f)
   } catch (err) {
     stories.value = []
