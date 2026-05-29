@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  # ==========================================
+  # 1. SERVICIO BACKEND (FLASK + SQLITE)
+  # ==========================================
+  backend:
+    build: ./backend # <--- Cambia esto por el nombre de tu carpeta del backend
+    container_name: contenedor_flask_back
+    restart: always
+    ports:
+      - "5000:5000"
+    volumes:
+      # PERSISTENCIA DE IMÁGENES:
+      # Mapea la carpeta de subidas del contenedor a una carpeta local en tu PC
+      - ./mis_imagenes_locales:/app/uploads
+
+     # Docker creará el archivo 'database.db' en tu PC dentro de una carpeta llamada 'mi_bd_sqlite'
+      - ./mi_bd_sqlite/database.db:/app/app/database.db
+    environment:
+      - FLASK_ENV=development
+
+  # ==========================================
+  # 2. SERVICIO FRONTEND
+  # ==========================================
+  frontend:
+    build: ./frontend # <--- Cambia esto por el nombre de tu carpeta del frontend
+    container_name: contenedor_front
+    restart: always
+    ports:
+      - "5173:5173" # Cambia el puerto si usas Angular u otro framework
+    stdin_open: true # Mantiene el contenedor del front activo en modo desarrollo
+    environment:
+      - REACT_APP_API_URL=http://localhost:5173 # O la variable que use tu front para la API
+    depends_on:
+      - backend # Asegura que el backend intente levantar antes que el frontend
