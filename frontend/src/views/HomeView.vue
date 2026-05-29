@@ -18,10 +18,16 @@
     </div>
 
     <!-- Map Section -->
-    <InteractiveMap />
+    <InteractiveMap
+      :selectedContinent="selectedContinent"
+      @continent-selected="selectedContinent = $event"
+    />
 
      <!-- Chronicles / Filters Section -->
-    <ChronicleList v-if="authStore.isAuthenticated" />
+    <ChronicleList
+      v-if="authStore.isAuthenticated"
+      :selectedContinent="selectedContinent"
+    />
     <div v-else class="login-prompt">
       <h2>{{ t('home.loginPromptTitle') }}</h2>
       <p>{{ t('home.loginPromptText') }}</p>
@@ -35,6 +41,7 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import InteractiveMap from '../components/organisms/InteractiveMap.vue'
 import ChronicleList from '../components/organisms/ChronicleList.vue'
@@ -42,6 +49,7 @@ import { useAuthStore } from '../composables/useAuthStore'
 const { t } = useI18n()
 
 const authStore = useAuthStore()
+const selectedContinent = ref('')
 </script>
 
 <style scoped>

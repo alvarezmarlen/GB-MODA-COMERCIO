@@ -11,10 +11,6 @@
           <option value="">Fecha de nacimiento</option>
           <option v-for="opt in ageOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
         </select>
-        <select v-model="filters.origin_country" class="wireframe-input filter-select" @change="applyFilters">
-          <option value="">Continente</option>
-          <option v-for="opt in originCountryOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
-        </select>
       </div>
       <div class="elegant-divider"></div>
     </div>
@@ -63,7 +59,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, watch, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { getStories } from '../../api/stories'
@@ -71,13 +67,19 @@ import { getStories } from '../../api/stories'
 const { t } = useI18n()
 const router = useRouter()
 
+const props = defineProps({
+  selectedContinent: {
+    type: String,
+    default: ''
+  }
+})
+
 const stories = ref([])
 const loading = ref(true)
 const errorMessage = ref('')
 const filters = reactive({
   profession: '',
   age_range: '',
-  origin_country: ''
 })
 
 const professionOptions = [
@@ -99,14 +101,6 @@ const ageOptions = [
   { label: '1970-1980', value: '40-50' },
   { label: '1990-2000', value: '25-35' },
   { label: '2000-2010', value: '18-25' }
-]
-
-const originCountryOptions = [
-  { label: 'America', value: 'America' },
-  { label: 'Europa', value: 'Europa' },
-  { label: 'Africa', value: 'Africa' },
-  { label: 'Asia', value: 'Asia' },
-  { label: 'Oceania', value: 'Oceania' }
 ]
 
 const professionLabel = (val) => val || val
@@ -137,6 +131,14 @@ const fetchStories = async () => {
 const applyFilters = () => {
   fetchStories()
 }
+
+watch(
+  () => props.selectedContinent,
+  (continent) => {
+    filters.origin_country = continent
+    fetchStories()
+  }
+)
 
 const goToStoryDetail = (id) => {
   router.push({ name: 'story-detail', params: { id } })
