@@ -11,5 +11,10 @@ export default defineConfig({
       '/users': 'http://backend:5000',
       '/auth': 'http://backend:5000',
     }
+  },
+  test: {
+    environment: 'happy-dom',
+    setupFiles: ['./vitest.setup.js'],
+    globals: true
   }
 })
