@@ -204,7 +204,7 @@ onMounted(fetchStories)
   color: var(--color-blanco);
 }
 
-/* Chronicles List */
+
 .chronicles-list {
   display: flex;
   flex-direction: column;
@@ -239,7 +239,6 @@ onMounted(fetchStories)
 .card-top-bar-inner {
   width: 180px;
   height: 16px;
-  background: rgba(255, 255, 255, 0.35);
 }
 
 .card-body {

@@ -12,6 +12,9 @@
       v-model="formData.email"
       :placeholder="t('auth.emailPlaceholder')"
     />
+    <p v-if="emailDomainError" class="hint-error">
+      Solo se permiten correos corporativos autorizados
+    </p>
     
     <FormField
       :label="t('auth.passwordLabel')"
@@ -54,13 +57,20 @@ const { formData, handleSubmit, isValidEmail } = useForm({
   terms: false
 })
 
+const emailDomainError = computed(() => {
+  return formData.email.length > 0 &&
+    isValidEmail(formData.email) &&
+    !formData.email.trim().toLowerCase().endsWith('@estudioenpenascal.com')
+})
+
 const isFormValid = computed(() => {
   const hasValidUsername = formData.username.trim().length >= 3
   const hasValidEmail = isValidEmail(formData.email)
+  const hasValidDomain = hasValidEmail && formData.email.trim().toLowerCase().endsWith('@estudioenpenascal.com')
   const hasValidPassword = formData.password.length >= 6
   const hasAcceptedTerms = formData.terms === true
 
-  return hasValidUsername && hasValidEmail && hasValidPassword && hasAcceptedTerms
+  return hasValidUsername && hasValidDomain && hasValidPassword && hasAcceptedTerms
 })
 
 const onFormSubmit = () => {
@@ -90,5 +100,11 @@ const onFormSubmit = () => {
   color: #ff4d4d;
   font-size: 0.85rem;
   margin: 10px 0;
+}
+
+.hint-error{
+  color: #ff4d4f;
+  font-size: 0.8rem;
+  margin: -10px 0 10px 0;
 }
 </style>
