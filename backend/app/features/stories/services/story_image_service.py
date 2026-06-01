@@ -9,8 +9,10 @@ def upload_story_image(story_id, file_storage):
     if not story:
         return None
 
+    # Save file to disk and create DB record with metadata
     unique_name, original_name, ext, size = save_file(file_storage)
 
+    # Infer MIME type from file extension
     mime_type_map = {
         'png': 'image/png',
         'jpg': 'image/jpeg',

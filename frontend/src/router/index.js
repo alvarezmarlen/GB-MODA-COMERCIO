@@ -56,11 +56,14 @@ router.beforeEach((to, from, next) => {
   const publicPages = ['/', '/login', '/register']
   const guestOnlyPages = ['/login', '/register']
   const authRequired = !publicPages.includes(to.path)
-  
+
+  // Auth guard: redirect unauthenticated users to login
   if (authRequired && !authStore.token) {
     next('/login')
+  // Admin guard: non-admin users redirected from /admin to /dashboard
   } else if (to.path.startsWith('/admin') && authStore.user?.role !== 'admin') {
     next('/dashboard')
+  // Guest guard: redirect logged-in users away from login/register
   } else if (guestOnlyPages.includes(to.path) && authStore.token) {
     next('/')
   } else {

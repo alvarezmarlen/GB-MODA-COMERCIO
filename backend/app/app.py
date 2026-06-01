@@ -18,7 +18,7 @@ def create_app():
     app.config.from_object('app.core.config.Config')
     
 
-    BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+    BASE_DIR = os.path.abspath(os.path.dirname(__file__))  # Directory of this file (app/)
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(BASE_DIR, 'moda_comercio.db')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 

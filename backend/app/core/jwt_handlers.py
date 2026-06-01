@@ -1,6 +1,7 @@
 from flask import jsonify
 
 
+# Register JWT lifecycle callbacks: revocation, expiration, and error handlers
 def setup_jwt_handlers(jwt):
     from app.features.auth.services.auth_service import is_token_revoked
 

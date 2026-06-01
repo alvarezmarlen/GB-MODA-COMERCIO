@@ -20,7 +20,7 @@ def create_user(data):
     db.session.add(new_user)
     db.session.commit()
     
-    # En lugar de usar to_dict(), devolvemos un diccionario manual para probar
+    # Return a plain dict instead of to_dict() for test compatibility
     return {
         "id": new_user.id,
         "nombre_usuario": new_user.username,
@@ -35,7 +35,7 @@ def update_user(user_id, data):
     user.username = data.get('username', user.username)
     user.email = data.get('email', user.email)
     if 'password_hash' in data:
-        user.password_hash = generate_password_hash(data['password_hash'])  # Asegúrate de hashear la contraseña antes de guardarla
+        user.password_hash = generate_password_hash(data['password_hash'])  # Hash before saving
     user.role = data.get('role', user.role)
     db.session.commit()
     return user.to_dict()

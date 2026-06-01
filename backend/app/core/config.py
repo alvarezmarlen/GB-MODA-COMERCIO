@@ -17,6 +17,7 @@ class Config:
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, '../moda_comercio.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    # Path relative to this config file: backend/app/../.. = project root /uploads/stories
     UPLOAD_FOLDER = os.path.join(BASE_DIR, '..', 'uploads', 'stories')
     MAX_CONTENT_LENGTH = 5 * 1024 * 1024
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
