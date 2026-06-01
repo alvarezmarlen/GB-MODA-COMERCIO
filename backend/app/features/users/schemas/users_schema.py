@@ -7,43 +7,43 @@ def validate_estudioenpenascal_email(value):
         )
         
 class UserSchema(Schema):
-    # Campos que el backend devuelve al frontend (Solo lectura)
+    # Read-only fields returned by the backend
     id = fields.Int(dump_only=True)
-    
-    # Mapeamos 'nombre_usuario' (API) con el atributo de tu servicio/modelo
+
+    # Maps API field 'nombre_usuario' to model attribute 'username'
     nombre_usuario = fields.Str(
-        required=True, 
+        required=True,
         validate=validate.Length(min=3, max=80),
-        attribute="username" # Esto hace la magia de traducir username <-> nombre_usuario
+        attribute="username" # Translates username <-> nombre_usuario
     )
-    
+
     email = fields.Email(
-        required=True, 
+        required=True,
         validate=[validate.Length(max=120), validate_estudioenpenascal_email]
     )
-    
-    # La contraseña solo se recibe, NUNCA se envía de vuelta en el JSON
+
+    # Password is received from client but never included in API responses
     password = fields.Str(
-        required=True, 
-        load_only=True, 
+        required=True,
+        load_only=True,
         validate=validate.Length(min=6, max=128),
         attribute="password_hash"
     )
-    
+
     role = fields.Str(
         validate=validate.OneOf(['user', 'admin']),
-        load_default='user' # Valor por defecto si no se envía
+        load_default='user' # Default role if not provided
     )
 
 class UserCreateSchema(UserSchema):
-    """Esquema específico para la creación de usuarios (usa las reglas base)"""
+    """Schema for user creation (inherits base validation rules)."""
     pass
 
 class UserUpdateSchema(UserSchema):
-    """Esquema específico para actualizar. Los campos se vuelven opcionales."""
+    """Schema for user updates. All fields become optional."""
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Al actualizar, el cliente puede mandar solo un campo si quiere
+        # Client may send only the fields they want to update
         self.fields['nombre_usuario'].required = False
         self.fields['email'].required = False
         self.fields['password'].required = False

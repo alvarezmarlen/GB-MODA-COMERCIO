@@ -19,6 +19,7 @@ class Story(db.Model, BaseMixin, TimestampMixin):
     images = db.relationship('StoryImage', back_populates='story', cascade='all, delete-orphan')
 
     def to_dict(self):
+        # Include associated images in the serialized output
         data = super().to_dict()
         data['images'] = [img.to_dict() for img in self.images]
         return data

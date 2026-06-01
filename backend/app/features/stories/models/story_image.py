@@ -15,6 +15,7 @@ class StoryImage(db.Model, BaseMixin, TimestampMixin):
     story = db.relationship('Story', back_populates='images')
 
     def to_dict(self):
+        # Append the public URL to the serialized output
         data = super().to_dict()
         data['url'] = f'/uploads/stories/{self.filename}'
         return data

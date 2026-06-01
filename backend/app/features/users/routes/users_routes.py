@@ -6,7 +6,7 @@ from marshmallow import ValidationError
 
 users_bp = Blueprint('users', __name__)
 
-# Instanciamos los schemas
+# Instantiate schemas for request validation
 user_create_schema = UserCreateSchema()
 user_update_schema = UserUpdateSchema()
 

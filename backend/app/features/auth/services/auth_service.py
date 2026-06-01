@@ -5,6 +5,7 @@ from ..models.token_blacklist import TokenBlacklist
 from .... import db
 
 
+# Returns access + refresh tokens on valid credentials, None otherwise
 def login_user(email, password):
     user = User.query.filter_by(email=email).first()
     if not user or not verify_password(user, password):
@@ -20,6 +21,7 @@ def login_user(email, password):
     }
 
 
+# Blacklist token JTI on logout to prevent reuse
 def logout_user(jti, token_type):
     blacklisted = TokenBlacklist.query.filter_by(jti=jti).first()
     if blacklisted:

@@ -6,7 +6,7 @@ auth_bp = Blueprint('auth', __name__)
 
 
 @auth_bp.route('/auth/login', methods=['POST'])
-def login():
+def login():                              # Public: authenticate user, returns tokens
     data = request.get_json(silent=True)
     if not data:
         return jsonify({'error': 'No input data provided'}), 422
@@ -26,7 +26,7 @@ def login():
 
 @auth_bp.route('/auth/logout', methods=['POST'])
 @jwt_required()
-def logout():
+def logout():                             # Protected: revoke current token
     jti = get_jwt()['jti']
     token_type = get_jwt()['type']
     logout_user(jti, token_type)
@@ -35,7 +35,7 @@ def logout():
 
 @auth_bp.route('/auth/refresh', methods=['POST'])
 @jwt_required(refresh=True)
-def refresh():
+def refresh():                            # Protected (refresh token): get new access token
     identity = get_jwt_identity()
     result = refresh_access_token(identity)
     return jsonify(result), 200

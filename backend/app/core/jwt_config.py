@@ -1,3 +1,4 @@
+# JWT lifetime and token location settings
 from datetime import timedelta
 
 class JWTConfig:

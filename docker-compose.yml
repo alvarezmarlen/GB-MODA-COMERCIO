@@ -2,28 +2,26 @@ version: '3.8'
 
 services:
   # ==========================================
-  # 1. SERVICIO BACKEND (FLASK + SQLITE)
+  # 1. BACKEND SERVICE (FLASK + SQLITE)
   # ==========================================
   backend:
-    build: ./backend # <--- Cambia esto por el nombre de tu carpeta del backend
+    build: ./backend
     container_name: contenedor_flask_back
     restart: always
     ports:
       - "5000:5000"
     volumes:
-      # PERSISTENCIA DE IMÁGENES:
-      # Mapea la carpeta de subidas del contenedor a una carpeta local en tu PC
+      # Persist uploaded images to a local directory
       - ./mis_imagenes_locales:/app/app/uploads
 
-    # Mapeamos directamente los dos archivos individuales de tu computadora al contenedor.
-      # De esta forma Docker los resguarda de forma independiente sin tocar tu código.
+      # Bind-mount SQLite DB files for data persistence
       - ./mi_bd_sqlite/moda_comercio.db:/app/app/moda_comercio.db
       - ./mi_bd_sqlite/database.db:/app/app/database.db
     environment:
       - FLASK_ENV=development
 
   # ==========================================
-  # 2. SERVICIO FRONTEND
+  # 2. FRONTEND SERVICE
   # ==========================================
   frontend:
     build: ./frontend
@@ -32,11 +30,11 @@ services:
     ports:
       - "5173:5173"
     stdin_open: true
-    tty: true # Se recomienda junto a stdin_open para asegurar que Vite no se quede colgado
+    tty: true # Recommended with stdin_open to prevent Vite from hanging
     volumes:
-      # Sincroniza tu carpeta de código local con la del contenedor para el Hot-Reload
+      # Sync local source for hot-reload during development
       - ./frontend:/app
-      # "Anonymous volume": Evita que Docker sobrescriba o borre tus node_modules internos
+      # Anonymous volume prevents host node_modules from overriding container's
       - /app/node_modules
     environment:
       - VITE_API_URL=http://localhost:5000

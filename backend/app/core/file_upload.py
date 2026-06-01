@@ -9,6 +9,7 @@ def allowed_file(filename):
 
 
 def save_file(file_storage):
+    # Save uploaded file to disk with a UUID-based name to avoid collisions
     ext = file_storage.filename.rsplit('.', 1)[1].lower()
     unique_name = f"{uuid.uuid4().hex}.{ext}"
     upload_dir = current_app.config['UPLOAD_FOLDER']

@@ -1,5 +1,7 @@
 import { reactive, computed } from 'vue'
 
+// Reactive singleton: state persists across all component instances
+// Token and user data are persisted in localStorage for session continuity
 const state = reactive({
   user: JSON.parse(localStorage.getItem('user')) || null,
   isAuthenticated: !!localStorage.getItem('token'),
