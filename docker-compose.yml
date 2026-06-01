@@ -18,7 +18,6 @@ services:
     # Mapeamos directamente los dos archivos individuales de tu computadora al contenedor.
       # De esta forma Docker los resguarda de forma independiente sin tocar tu código.
       - ./mi_bd_sqlite/moda_comercio.db:/app/app/moda_comercio.db
-      - ./mi_bd_sqlite/database.db:/app/app/database.db
     environment:
       - FLASK_ENV=development
 
