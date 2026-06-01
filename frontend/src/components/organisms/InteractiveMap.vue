@@ -2,7 +2,7 @@
   <div class="interactive-map-wrapper">
     <div class="map-content">
       <div class="map-visual-box">
-        <svg viewBox="0 0 800 400" class="world-svg" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 800 400" class="world-svg" xmlns="http://www.w3.org/2000/svg" @click.self="clearFilter">
           <!-- Centered map group -->
       <g transform="translate(95, 10)">
             <!-- Continents -->
@@ -91,6 +91,12 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['continent-selected'])
+
+const clearFilter = () => {
+  if (props.selectedContinent) {
+    emit('continent-selected', '')
+  }
+}
 
 const toggleContinent = (continent) => {
   if (props.selectedContinent === continent) {
