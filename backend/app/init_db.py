@@ -1,3 +1,4 @@
+# pyrefly: ignore [missing-import]
 from app.app import create_app
 from app import db
 
