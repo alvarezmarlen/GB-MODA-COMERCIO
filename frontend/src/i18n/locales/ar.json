@@ -109,8 +109,31 @@
     "descriptionPlaceholder": "اكتب هنا القصة أو الوصف الكامل...",
     "termsLabel": "أوافق على الشروط والأذونات الخاصة بنشر الصور والمحتوى.",
     "uploadLabel": "رفع صورة",
+        "publishing": "جارٍ النشر...",
+        "publish": "نشر",
+        "continentLabel": "القارة",
+        "continentPlaceholder": "▼ اختر القارة",
+        "submitErrorRequired": "يرجى ملء جميع الحقول المطلوبة",
+        "submitErrorPublish": "خطأ في نشر القصة"
+      },
+  "editStory": {
+    "titleLabel": "عنوان القصة",
+    "titlePlaceholder": "اكتب العنوان هنا...",
+    "continentLabel": "بلد الأصل",
+    "continentPlaceholder": "▼ اختر البلد",
+    "professionLabel": "المهنة أو الحرفة",
+    "professionPlaceholder": "▼ اختر المهنة أو الحرفة",
+    "ageLabel": "الفئة العمرية",
+    "agePlaceholder": "▼ اختر الفئة العمرية",
+    "descriptionLabel": "وصف القصة",
+    "descriptionPlaceholder": "اكتب القصة أو الوصف الكامل هنا...",
+    "termsLabel": "أوافق على الشروط والأذونات الخاصة بنشر الصور والمحتوى.",
+    "uploadLabel": "رفع صورة",
     "publishing": "جارٍ النشر...",
-    "publish": "نشر"
+    "publish": "نشر",
+    "submitErrorRequired": "يرجى ملء جميع الحقول المطلوبة",
+    "loadError": "خطأ في تحميل القصة",
+    "updateError": "خطأ في تحديث القصة"
   },
   "storyDetail": {
     "back": "← رجوع",
@@ -133,7 +156,35 @@
     "viewMore": "عرض المزيد",
     "trade": "المهنة",
     "age": "العمر",
-    "country": "البلد"
+    "country": "البلد",
+    "filterTitle": "تصفية",
+    "professionPlaceholder": "المهنة أو الحرفة",
+    "agePlaceholder": "تاريخ الميلاد",
+    "tradeLabel": "المهنة:",
+    "ageLabel": "العمر:",
+    "continentLabel": "القارة:"
+  },
+  "professionOptions": {
+    "Hostelería y Turismo": "الضيافة والسياحة",
+    "Administración y Oficina": "الإدارة والمكتب",
+    "Ventas y Comercio": "المبيعات والتجارة",
+    "Limpieza y Mantenimiento": "التنظيف والصيانة",
+    "Educación y Formación": "التعليم والتدريب",
+    "Sanidad y Cuidados": "الرعاية الصحية",
+    "Belleza y Estética": "التجميل والعناية",
+    "Moda y Confección": "الأزياء والخياطة",
+    "Cocina y Alimentación": "الطبخ والغذاء",
+    "Otros": "أخرى"
+  },
+  "continents": {
+    "Norteamerica": "أمريكا الشمالية",
+    "Suramerica": "أمريكا الجنوبية",
+    "Centroamerica": "أمريكا الوسطى",
+    "Europa": "أوروبا",
+    "Africa": "أفريقيا",
+    "Asia": "آسيا",
+    "Oceania": "أوقيانوسيا",
+    "Otros 1": "مناطق أخرى"
   },
   "map": {
     "locations": {

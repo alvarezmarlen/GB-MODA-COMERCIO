@@ -1,49 +1,49 @@
 <template>
   <form @submit.prevent="onFormSubmit" class="create-story-form">
-    <FormGroup label="Título de la historia">
+    <FormGroup :label="t('editStory.titleLabel')">
       <BaseInput
         v-model="formData.title"
-        placeholder="Escribe el título aquí..."
+        :placeholder="t('editStory.titlePlaceholder')"
       />
     </FormGroup>
 
-    <FormGroup label="País de origen">
+    <FormGroup :label="t('editStory.continentLabel')">
       <BaseSelect
         v-model="formData.originCountry"
         :options="countryOptions"
-        placeholder="▼ Seleccionar país"
+        :placeholder="t('editStory.continentPlaceholder')"
       />
     </FormGroup>
 
-    <FormGroup label="Profesión u oficio">
+    <FormGroup :label="t('editStory.professionLabel')">
       <BaseSelect
         v-model="formData.profession"
         :options="professionOptions"
-        placeholder="▼ Seleccionar profesión u oficio"
+        :placeholder="t('editStory.professionPlaceholder')"
       />
     </FormGroup>
 
-    <FormGroup label="Rango de edad">
+    <FormGroup :label="t('editStory.ageLabel')">
       <BaseSelect
         v-model="formData.ageRange"
         :options="ageRangeOptions"
-        placeholder="▼ Seleccionar rango de edad"
+        :placeholder="t('editStory.agePlaceholder')"
       />
     </FormGroup>
 
-    <FormGroup label="Descripción de la historia">
+    <FormGroup :label="t('editStory.descriptionLabel')">
       <BaseTextarea
         v-model="formData.description"
-        placeholder="Escribe aquí la historia o descripción completa..."
+        :placeholder="t('editStory.descriptionPlaceholder')"
       />
     </FormGroup>
 
     <div class="checkbox-container">
       <BaseCheckbox v-model="formData.acceptedTerms" />
-      <BaseLabel>Acepto los términos y permisos para publicar imágenes y contenido.</BaseLabel>
+      <BaseLabel>{{ t('editStory.termsLabel') }}</BaseLabel>
     </div>
 
-    <FormGroup label="Subir fotografía">
+    <FormGroup :label="t('editStory.uploadLabel')">
       <BaseFileUpload :disabled="!formData.acceptedTerms" :max-files="2" @update:files="handleFilesUpdate" />
     </FormGroup>
 
@@ -51,7 +51,7 @@
 
     <div class="actions">
       <BaseButton type="submit" :disabled="!isFormValid || isSubmitting">
-        {{ isSubmitting ? 'PUBLICANDO...' : 'PUBLICAR' }}
+        {{ isSubmitting ? t('editStory.publishing') : t('editStory.publish') }}
       </BaseButton>
     </div>
   </form>
@@ -60,6 +60,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import FormGroup from '../molecules/FormGroup.vue'
 import BaseInput from '../atoms/BaseInput.vue'
 import BaseSelect from '../atoms/BaseSelect.vue'
@@ -73,6 +74,8 @@ import { useStoryStore } from '../../composables/useStoryStore'
 import { useAuthStore } from '../../composables/useAuthStore'
 import { getStoryById, updateStory, uploadStoryImage } from '../../api/stories'
 
+const { t } = useI18n()
+
 const props = defineProps({
   storyId: {
     type: Number,
@@ -80,37 +83,37 @@ const props = defineProps({
   }
 })
 
-const countryOptions = [
-  { label: 'Norteamérica', value: 'Norteamerica' },
-  { label: 'Sudamérica', value: 'Suramerica' },
-  { label: 'Centroamérica', value: 'Centroamerica' },
-  { label: 'Europa', value: 'Europa' },
-  { label: 'África', value: 'Africa' },
-  { label: 'Asia', value: 'Asia' },
-  { label: 'Oceanía', value: 'Oceania' },
-  { label: 'Otras regiones', value: 'Otros 1' }
-]
+const countryOptions = computed(() => [
+  { label: t('continents.Norteamerica'), value: 'Norteamerica' },
+  { label: t('continents.Suramerica'), value: 'Suramerica' },
+  { label: t('continents.Centroamerica'), value: 'Centroamerica' },
+  { label: t('continents.Europa'), value: 'Europa' },
+  { label: t('continents.Africa'), value: 'Africa' },
+  { label: t('continents.Asia'), value: 'Asia' },
+  { label: t('continents.Oceania'), value: 'Oceania' },
+  { label: t('continents.Otros 1'), value: 'Otros 1' }
+])
 
-const professionOptions = [
-  { label: 'Hosteleria y turismo', value: 'hosteleria_turismo' },
-  { label: 'Administracion y oficina', value: 'administracion_oficina' },
-  { label: 'Ventas y comercio', value: 'ventas_comercio' },
-  { label: 'Limpieza y mantenimiento', value: 'limpieza_mantenimiento' },
-  { label: 'Educacion y formacion', value: 'educacion_formacion' },
-  { label: 'Sanidad y cuidados', value: 'sanidad_cuidados' },
-  { label: 'Belleza y estetica', value: 'belleza_estetica' },
-  { label: 'Moda y confeccion', value: 'moda_confeccion' },
-  { label: 'Cocina y alimentacion', value: 'cocina_alimentacion' },
-  { label: 'Entre Otros', value: 'otros' }
-]
+const professionOptions = computed(() => [
+  { label: t('professionOptions.Hostelería y Turismo'), value: 'hosteleria_turismo' },
+  { label: t('professionOptions.Administración y Oficina'), value: 'administracion_oficina' },
+  { label: t('professionOptions.Ventas y Comercio'), value: 'ventas_comercio' },
+  { label: t('professionOptions.Limpieza y Mantenimiento'), value: 'limpieza_mantenimiento' },
+  { label: t('professionOptions.Educación y Formación'), value: 'educacion_formacion' },
+  { label: t('professionOptions.Sanidad y Cuidados'), value: 'sanidad_cuidados' },
+  { label: t('professionOptions.Belleza y Estética'), value: 'belleza_estetica' },
+  { label: t('professionOptions.Moda y Confección'), value: 'moda_confeccion' },
+  { label: t('professionOptions.Cocina y Alimentación'), value: 'cocina_alimentacion' },
+  { label: t('professionOptions.Otros'), value: 'otros' }
+])
 
-const ageRangeOptions = [
+const ageRangeOptions = computed(() => [
   { label: '1930-1960', value: '1930-1960' },
   { label: '1960-1970', value: '1960-1970' },
   { label: '1970-1980', value: '1970-1980' },
   { label: '1990-2000', value: '1990-2000' },
   { label: '2000-2010', value: '2000-2010' }
-]
+])
 
 const professionMap = {
   hosteleria_turismo: 'Hostelería y Turismo',
@@ -166,7 +169,7 @@ onMounted(async () => {
     formData.profession = reverseProf
     formData.ageRange = reverseAge
   } catch (err) {
-    submitError.value = 'Error al cargar la historia'
+    submitError.value = t('editStory.loadError')
   }
 })
 
@@ -183,7 +186,7 @@ const isFormValid = computed(() => {
 
 const onFormSubmit = async () => {
   if (!isFormValid.value) {
-    submitError.value = 'Por favor, completa todos los campos requeridos'
+    submitError.value = t('editStory.submitErrorRequired')
     return
   }
 
@@ -229,7 +232,7 @@ const onFormSubmit = async () => {
 
     router.push({ name: 'story-detail', params: { id: props.storyId } })
   } catch (err) {
-    submitError.value = err.message || 'Error al actualizar la historia'
+    submitError.value = err.message || t('editStory.updateError')
   } finally {
     isSubmitting.value = false
   }
