@@ -5,7 +5,7 @@ from .... import db
 
 
 def upload_story_image(story_id, file_storage):
-    story = Story.query.get(story_id)
+    story = db.session.get(Story, story_id)
     if not story:
         return None
 

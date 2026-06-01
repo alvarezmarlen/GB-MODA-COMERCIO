@@ -73,7 +73,7 @@ def get_story_by_id(story_id):
     Returns:
         dict | None: The story serialized as a dictionary, or None if not found.
     """
-    story = Story.query.get(story_id)
+    story = db.session.get(Story, story_id)
     return story.to_dict() if story else None
 
 
@@ -89,7 +89,7 @@ def update_story(story_id, data):
     Returns:
         dict | None: The updated story serialized as a dictionary, or None if not found.
     """
-    story = Story.query.get(story_id)
+    story = db.session.get(Story, story_id)
     if not story:
         return None
 
@@ -113,7 +113,7 @@ def delete_story(story_id):
     Returns:
         bool: True if the story was deleted, False if it was not found.
     """
-    story = Story.query.get(story_id)
+    story = db.session.get(Story, story_id)
     if not story:
         return False
 

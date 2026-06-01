@@ -1,43 +1,89 @@
 import pytest
-import tempfile
-import shutil
-from pathlib import Path
-from app import db as _db
 from app.app import create_app
+from app import db
 from app.features.users.models.users import User
-
+# pyrefly: ignore [missing-import]
+from flask_jwt_extended import create_access_token
+from werkzeug.security import generate_password_hash
 
 @pytest.fixture
 def app():
     app = create_app()
-    tmp_upload = tempfile.mkdtemp()
     app.config.update({
-        'SQLALCHEMY_DATABASE_URI': 'sqlite:///:memory:',
-        'TESTING': True,
-        'PROPAGATE_EXCEPTIONS': False,
-        'UPLOAD_FOLDER': tmp_upload,
-        'JWT_SECRET_KEY': 'test-jwt-secret-key',
+        "TESTING": True,
+        "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:",
+        "WTF_CSRF_ENABLED": False,
+        "JWT_SECRET_KEY": "super-secret-key-that-is-at-least-32-bytes-long",
     })
-    with app.app_context():
-        _db.create_all()
-        yield app
-        _db.drop_all()
-    shutil.rmtree(tmp_upload, ignore_errors=True)
 
+    with app.app_context():
+        db.create_all()
+        yield app
+        db.session.remove()
+        db.drop_all()
 
 @pytest.fixture
 def client(app):
     return app.test_client()
 
-
 @pytest.fixture
 def test_user(app):
-    user = User(
-        username='testuser',
-        email='test@example.com',
-        password_hash='hashed123',
-        role='customer'
-    )
-    _db.session.add(user)
-    _db.session.commit()
-    return user.id
+    with app.app_context():
+        user = User(
+            username="testuser",
+            email="testuser@estudioenpenascal.com",
+            role="customer",
+            password_hash=generate_password_hash("testpass123")
+        )
+        db.session.add(user)
+        db.session.commit()
+        # Return a dictionary or re-query to avoid detaching issues
+        return {
+            "id": user.id,
+            "email": user.email,
+            "username": user.username,
+            "role": user.role
+        }
+
+@pytest.fixture
+def test_admin(app):
+    with app.app_context():
+        admin = User(
+            username="adminuser",
+            email="adminuser@estudioenpenascal.com",
+            role="admin",
+            password_hash=generate_password_hash("adminpass123")
+        )
+        db.session.add(admin)
+        db.session.commit()
+        return {
+            "id": admin.id,
+            "email": admin.email,
+            "username": admin.username,
+            "role": admin.role
+        }
+
+@pytest.fixture
+def user_token(app, test_user):
+    with app.app_context():
+        return create_access_token(identity=str(test_user["id"]))
+
+@pytest.fixture
+def admin_token(app, test_admin):
+    with app.app_context():
+        return create_access_token(identity=str(test_admin["id"]))
+
+from app.features.stories.services.stories_service import create_story
+
+@pytest.fixture
+def test_story(app, test_user):
+    with app.app_context():
+        story_data = {
+            "user_id": test_user["id"],
+            "title": "Test Story",
+            "content": "This is a test story.",
+            "origin_country": "Spain",
+            "profession": "Developer",
+            "age_range": "25-34"
+        }
+        return create_story(story_data)

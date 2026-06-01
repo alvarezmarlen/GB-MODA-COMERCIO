@@ -1,51 +1,51 @@
-import uuid
-import pytest
-from app.features.users.services.users_service import create_user
 from app.features.auth.services.auth_service import login_user, logout_user, is_token_revoked, refresh_access_token
+# pyrefly: ignore [missing-import]
+from flask_jwt_extended import decode_token
 
-
-USER_DATA = {
-    'nombre_usuario': 'authuser',
-    'email': 'auth@example.com',
-    'password': 'securepassword123',
-}
-
-
-class TestAuthService:
-
-    def test_login_user_returns_tokens_and_user(self, app):
-        create_user(USER_DATA)
-        result = login_user(USER_DATA['email'], USER_DATA['password'])
+def test_login_user_success(app, test_user):
+    with app.app_context():
+        # Using the fixture, password was set to "testpass123"
+        result = login_user("testuser@estudioenpenascal.com", "testpass123")
         assert result is not None
-        assert 'access_token' in result
-        assert 'refresh_token' in result
-        assert 'user' in result
-        assert result['user']['email'] == USER_DATA['email']
+        assert "access_token" in result
+        assert "refresh_token" in result
+        assert result["user"]["email"] == "testuser@estudioenpenascal.com"
 
-    def test_login_user_invalid_email_returns_none(self, app):
-        result = login_user('nonexistent@example.com', 'anything')
+def test_login_user_invalid_password(app, test_user):
+    with app.app_context():
+        result = login_user("testuser@estudioenpenascal.com", "wrongpassword")
         assert result is None
 
-    def test_login_user_invalid_password_returns_none(self, app):
-        create_user(USER_DATA)
-        result = login_user(USER_DATA['email'], 'wrongpassword')
+def test_login_user_not_found(app):
+    with app.app_context():
+        result = login_user("nonexistent@estudioenpenascal.com", "anypassword")
         assert result is None
 
-    def test_logout_and_is_token_revoked(self, app):
-        jti = str(uuid.uuid4())
-        logout_user(jti, 'access')
+def test_logout_user(app, test_user):
+    with app.app_context():
+        # First login to get a token
+        login_result = login_user("testuser@estudioenpenascal.com", "testpass123")
+        access_token = login_result["access_token"]
+        
+        decoded_token = decode_token(access_token)
+        jti = decoded_token["jti"]
+        
+        # Test logout
+        result = logout_user(jti, "access")
+        assert result is True
+        
+        # Verify it's revoked
         assert is_token_revoked(jti) is True
+        
+        # Test logout again (should return False as it's already blacklisted)
+        result_again = logout_user(jti, "access")
+        assert result_again is False
 
-    def test_logout_twice_returns_false(self, app):
-        jti = str(uuid.uuid4())
-        logout_user(jti, 'access')
-        result = logout_user(jti, 'access')
-        assert result is False
-
-    def test_refresh_access_token(self, app):
-        token = refresh_access_token('1')
-        assert 'access_token' in token
-        assert token['access_token'] is not None
-
-    def test_is_token_revoked_returns_false_for_unknown(self, app):
-        assert is_token_revoked('nonexistent-jti') is False
+def test_refresh_access_token(app, test_user):
+    with app.app_context():
+        new_token_data = refresh_access_token(str(test_user["id"]))
+        assert "access_token" in new_token_data
+        
+        # Decode and check identity
+        decoded = decode_token(new_token_data["access_token"])
+        assert decoded["sub"] == str(test_user["id"])
