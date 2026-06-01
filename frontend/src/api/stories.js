@@ -18,8 +18,8 @@ export async function getStories(filters = {}) {
   const query = params.toString()
   const res = await fetch(`/stories${query ? '?' + query : ''}`)
   if (!res.ok) {
-    await parseJson(res)
-    throw new Error('Error al cargar historias')
+    const err = await parseJson(res)
+    throw new Error(JSON.stringify(err.errors || err))
   }
   return parseJson(res)
 }

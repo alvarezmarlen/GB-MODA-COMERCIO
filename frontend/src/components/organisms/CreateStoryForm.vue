@@ -77,11 +77,14 @@ import { createStory, uploadStoryImage } from '../../api/stories'
 const { t } = useI18n()
 
 const countryOptions = [
-  { label: 'America', value: 'America' },
+  { label: 'Norteamérica', value: 'Norteamerica' },
+  { label: 'Sudamérica', value: 'Suramerica' },
+  { label: 'Centroamérica', value: 'Centroamerica' },
   { label: 'Europa', value: 'Europa' },
-  { label: 'Africa', value: 'Africa' },
+  { label: 'África', value: 'Africa' },
   { label: 'Asia', value: 'Asia' },
-  { label: 'Oceania', value: 'Oceania' }
+  { label: 'Oceanía', value: 'Oceania' },
+  { label: 'Otras regiones', value: 'Otros 1' }
 ]
 
 const professionOptions = [
