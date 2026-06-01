@@ -59,6 +59,8 @@ router.beforeEach((to, from, next) => {
   
   if (authRequired && !authStore.token) {
     next('/login')
+  } else if (to.path.startsWith('/admin') && authStore.user?.role !== 'admin') {
+    next('/dashboard')
   } else if (guestOnlyPages.includes(to.path) && authStore.token) {
     next('/')
   } else {
