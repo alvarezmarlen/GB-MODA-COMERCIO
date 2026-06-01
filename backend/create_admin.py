@@ -12,7 +12,7 @@ def setup_admin():
         # Datos del usuario administrador a crear
         admin_data = {
             "username": "admin",
-            "email": "admin@admin.com",
+            "email": "admin@estudioenpenascal.com",
             "password_hash": "Admin123!", # El password será encriptado por el servicio create_user
             "role": "admin"
         }

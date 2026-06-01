@@ -14,7 +14,7 @@ def test_setup_admin_creates_user(app, capsys):
         
     # Verificamos en el contexto de nuestra aplicación de pruebas que el usuario existe
     with app.app_context():
-        admin_user = User.query.filter_by(email="admin@admin.com").first()
+        admin_user = User.query.filter_by(email="admin@estudioenpenascal.com").first()
         
         assert admin_user is not None, "El usuario admin no fue creado"
         assert admin_user.username == "admin"

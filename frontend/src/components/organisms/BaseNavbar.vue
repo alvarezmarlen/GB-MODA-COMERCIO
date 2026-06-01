@@ -23,7 +23,7 @@
     <!-- Right: Profile & Logout -->
     <div class="navbar-right">
       <template v-if="authStore.isAuthenticated">
-        <router-link to="/dashboard" class="username">👤 {{ authStore.user?.username || 'Usuario' }}</router-link>
+        <router-link :to="authStore.user?.role === 'admin' ? '/admin' : '/dashboard'" class="username">👤 {{ authStore.user?.username || 'Usuario' }}</router-link>
         <button class="pill-btn logout-btn" @click="handleLogout">
           {{ t('nav.logout') }}
         </button>
