@@ -7,7 +7,8 @@
     "logoutSuccess": "Session fermée avec succès",
     "profile": "Utilisateur",
     "admin": "ADMIN",
-    "user": "UTILISATEUR"
+    "user": "UTILISATEUR",
+    "menu": "Menu"
   },
   "footer": {
     "copyright": "© 2026 GB-MODA-COMERCIO. Tous droits réservés.",

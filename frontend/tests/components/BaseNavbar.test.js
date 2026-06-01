@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { mount, RouterLinkStub } from '@vue/test-utils'
 import { createI18n } from 'vue-i18n'
+import ar from '../../src/i18n/locales/ar.json'
 import es from '../../src/i18n/locales/es.json'
 import en from '../../src/i18n/locales/en.json'
 import eu from '../../src/i18n/locales/eu.json'
@@ -22,7 +23,7 @@ function createTestI18n(locale = 'es') {
     legacy: false,
     locale,
     fallbackLocale: 'es',
-    messages: { es, en, eu, fr, ro }
+    messages: { ar, es, en, eu, fr, ro }
   })
 }
 
@@ -43,20 +44,21 @@ describe('BaseNavbar language selector', () => {
     localStorage.clear()
   })
 
-  it('should render a select with 5 language options', () => {
+  it('should render a select with 6 language options', () => {
     const wrapper = mountNavbar()
     const select = wrapper.find('select.lang-select')
     expect(select.exists()).toBe(true)
     const options = select.findAll('option')
-    expect(options).toHaveLength(5)
+    expect(options).toHaveLength(6)
     const values = options.map(o => o.attributes('value'))
-    expect(values).toEqual(['es', 'en', 'eu', 'fr', 'ro'])
+    expect(values).toEqual(['ar', 'es', 'en', 'eu', 'fr', 'ro'])
   })
 
   it('should show correct option labels for each language', () => {
     const wrapper = mountNavbar()
     const options = wrapper.findAll('option')
     const labels = options.map(o => o.text())
+    expect(labels).toContain('العربية')
     expect(labels).toContain('Español')
     expect(labels).toContain('English')
     expect(labels).toContain('Euskera')

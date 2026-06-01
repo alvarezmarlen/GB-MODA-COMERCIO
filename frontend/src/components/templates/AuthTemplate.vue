@@ -66,12 +66,23 @@ defineProps({
 .auth-card {
   position: relative;
   z-index: 1;
-  width: 100%;
+  width: calc(100% - 32px);
   max-width: 400px;
   padding: 40px;
   background-color: var(--color-white);
   border: 2px solid var(--color-red);
   border-radius: 20px;
+}
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 24px 20px;
+    width: calc(100% - 24px);
+  }
+
+  .auth-title {
+    font-size: 20px;
+  }
 }
 
 .auth-header {

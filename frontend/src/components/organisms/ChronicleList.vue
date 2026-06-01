@@ -300,6 +300,23 @@ onMounted(fetchStories)
 }
 
 @media (max-width: 768px) {
+  .chronicles-section {
+    padding: 0 16px;
+  }
+
+  .filters-row {
+    flex-direction: column;
+    gap: var(--wf-spacing-sm);
+  }
+
+  .filter-select {
+    width: 100%;
+  }
+
+  .filter-title {
+    font-size: 1.4rem;
+  }
+
   .card-body {
     flex-direction: column;
     align-items: center;
@@ -308,6 +325,22 @@ onMounted(fetchStories)
   .card-image-box {
     width: 100%;
     max-width: 300px;
+    height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-top-bar-inner {
+    width: 120px;
+  }
+
+  .card-body {
+    padding: var(--wf-spacing-md);
+    gap: var(--wf-spacing-md);
+  }
+
+  .card-meta {
+    font-size: 0.9rem;
   }
 }
 </style>

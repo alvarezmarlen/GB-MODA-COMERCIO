@@ -176,10 +176,25 @@ const toggleContinent = (continent) => {
     flex-direction: column;
     text-align: center;
     gap: 20px;
+    padding: 0 20px;
   }
   
   .map-text-box {
     margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .map-content {
+    padding: 0 12px;
+  }
+
+  .map-quote {
+    font-size: 1.5rem;
+  }
+
+  .world-svg {
+    min-height: 200px;
   }
 }
 </style>

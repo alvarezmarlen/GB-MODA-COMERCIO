@@ -253,4 +253,20 @@ const onFormSubmit = async () => {
   width: auto;
   min-width: 200px;
 }
+
+@media (max-width: 600px) {
+  .create-story-form {
+    padding: var(--wf-spacing-md);
+    margin: var(--wf-spacing-md) auto;
+  }
+
+  .create-story-form :deep(.wireframe-button) {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+}
 </style>

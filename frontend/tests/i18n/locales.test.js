@@ -43,7 +43,7 @@ describe('Locale files structure', () => {
   })
 
   it('es.json should have all required top-level keys', () => {
-    const topKeys = ['nav', 'footer', 'home', 'auth', 'dashboard', 'admin', 'createStory', 'storyDetail', 'chronicles', 'map', 'professions', 'ages', 'ages_full', 'countries', 'fileUpload', 'lang']
+    const topKeys = ['nav', 'footer', 'home', 'auth', 'dashboard', 'admin', 'createStory', 'editStory', 'storyDetail', 'chronicles', 'map', 'professions', 'professionOptions', 'ages', 'ages_full', 'countries', 'continents', 'fileUpload', 'lang', 'legal']
     expect(Object.keys(es).sort()).toEqual(topKeys.sort())
   })
 

@@ -136,7 +136,7 @@ const selectedContinent = ref('')
 }
 
 .hero-title {
-  font-size: clamp(1.4rem, 3.2vw, 2.8rem);
+  font-size: clamp(1.2rem, 3.2vw, 2.8rem);
   font-weight: 800;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -146,7 +146,8 @@ const selectedContinent = ref('')
   margin-bottom: 24px;
   display: inline-block;
   line-height: 1.15;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .hero-paragraph {
@@ -170,12 +171,45 @@ const selectedContinent = ref('')
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 48px 24px 56px;
-    gap: 32px;
+    padding: 40px 16px 48px;
+    gap: 24px;
   }
 
   .hero-paragraph {
     max-width: 100%;
+  }
+
+  .hero-logo {
+    width: clamp(160px, 50vw, 280px);
+  }
+}
+
+@media (max-width: 480px) {
+  .home-view-container {
+    padding: 0 12px;
+  }
+
+  .hero-section {
+    padding: 32px 12px 40px;
+    gap: 16px;
+  }
+
+  .login-prompt {
+    padding: 24px 16px;
+    margin: 24px auto;
+  }
+
+  .login-prompt h2 {
+    font-size: 1.4rem;
+  }
+
+  .login-prompt-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .prompt-btn {
+    text-align: center;
   }
 }
 

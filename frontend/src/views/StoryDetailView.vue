@@ -276,9 +276,33 @@ h1.template-title {
   border-radius: var(--wf-radius);
 }
 
+@media (max-width: 900px) {
+  .template-inner {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
 @media (max-width: 680px) {
-  .story-detail-template {
-    padding-top: 140px;
+  .template-inner {
+    padding-top: 80px;
+  }
+
+  .story-card {
+    padding: var(--wf-spacing-md);
+  }
+
+  .story-meta {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .story-images-container.double-images {
+    grid-template-columns: 1fr;
+  }
+
+  .story-title-box h2 {
+    font-size: 1.2rem;
   }
 }
 </style>
