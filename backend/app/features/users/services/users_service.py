@@ -28,7 +28,7 @@ def create_user(data):
         "role": new_user.role
     }
 def update_user(user_id, data):
-    user = User.query.get(user_id)
+    user = db.session.get(User, user_id)
     if not user:
         return None
     
@@ -42,7 +42,7 @@ def update_user(user_id, data):
 
 
 def delete_user(user_id):
-    user = User.query.get(user_id)
+    user = db.session.get(User, user_id)
     if not user:
         return False
     db.session.delete(user)
@@ -56,7 +56,7 @@ def get_all_users():
 
 
 def get_user_by_id(user_id):
-    user = User.query.get(user_id)
+    user = db.session.get(User, user_id)
     return user.to_dict() if user else None
 
 
