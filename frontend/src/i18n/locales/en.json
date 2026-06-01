@@ -109,8 +109,31 @@
     "descriptionPlaceholder": "Write the full story or description here...",
     "termsLabel": "I accept the terms and permissions to publish images and content.",
     "uploadLabel": "Upload photo",
+        "publishing": "PUBLISHING...",
+        "publish": "PUBLISH",
+        "continentLabel": "Continent",
+        "continentPlaceholder": "▼ Select continent",
+        "submitErrorRequired": "Please fill in all required fields",
+        "submitErrorPublish": "Error publishing the story"
+      },
+  "editStory": {
+    "titleLabel": "Story title",
+    "titlePlaceholder": "Write the title here...",
+    "continentLabel": "Country of origin",
+    "continentPlaceholder": "▼ Select country",
+    "professionLabel": "Profession or trade",
+    "professionPlaceholder": "▼ Select profession or trade",
+    "ageLabel": "Age range",
+    "agePlaceholder": "▼ Select age range",
+    "descriptionLabel": "Story description",
+    "descriptionPlaceholder": "Write the full story or description here...",
+    "termsLabel": "I accept the terms and permissions to publish images and content.",
+    "uploadLabel": "Upload photo",
     "publishing": "PUBLISHING...",
-    "publish": "PUBLISH"
+    "publish": "PUBLISH",
+    "submitErrorRequired": "Please fill in all required fields",
+    "loadError": "Error loading the story",
+    "updateError": "Error updating the story"
   },
   "storyDetail": {
     "back": "← Go back",
@@ -133,7 +156,35 @@
     "viewMore": "View more",
     "trade": "Trade",
     "age": "Age",
-    "country": "Country"
+    "country": "Country",
+    "filterTitle": "Filter",
+    "professionPlaceholder": "Profession or trade",
+    "agePlaceholder": "Date of birth",
+    "tradeLabel": "Trade:",
+    "ageLabel": "Age:",
+    "continentLabel": "Continent:"
+  },
+  "professionOptions": {
+    "Hostelería y Turismo": "Hospitality & Tourism",
+    "Administración y Oficina": "Administration & Office",
+    "Ventas y Comercio": "Sales & Commerce",
+    "Limpieza y Mantenimiento": "Cleaning & Maintenance",
+    "Educación y Formación": "Education & Training",
+    "Sanidad y Cuidados": "Healthcare & Care",
+    "Belleza y Estética": "Beauty & Aesthetics",
+    "Moda y Confección": "Fashion & Tailoring",
+    "Cocina y Alimentación": "Cooking & Food",
+    "Otros": "Other"
+  },
+  "continents": {
+    "Norteamerica": "North America",
+    "Suramerica": "South America",
+    "Centroamerica": "Central America",
+    "Europa": "Europe",
+    "Africa": "Africa",
+    "Asia": "Asia",
+    "Oceania": "Oceania",
+    "Otros 1": "Other regions"
   },
   "map": {
     "locations": {

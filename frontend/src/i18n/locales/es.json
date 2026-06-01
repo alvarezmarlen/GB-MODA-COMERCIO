@@ -109,8 +109,31 @@
     "descriptionPlaceholder": "Escribe aquí la historia o descripción completa...",
     "termsLabel": "Acepto los términos y permisos para publicar imágenes y contenido.",
     "uploadLabel": "Subir fotografía",
+        "publishing": "PUBLICANDO...",
+        "publish": "PUBLICAR",
+        "continentLabel": "Continente",
+        "continentPlaceholder": "▼ Seleccionar continente",
+        "submitErrorRequired": "Por favor, completa todos los campos requeridos",
+        "submitErrorPublish": "Error al publicar la historia"
+      },
+  "editStory": {
+    "titleLabel": "Título de la historia",
+    "titlePlaceholder": "Escribe el título aquí...",
+    "continentLabel": "País de origen",
+    "continentPlaceholder": "▼ Seleccionar país",
+    "professionLabel": "Profesión u oficio",
+    "professionPlaceholder": "▼ Seleccionar profesión u oficio",
+    "ageLabel": "Rango de edad",
+    "agePlaceholder": "▼ Seleccionar rango de edad",
+    "descriptionLabel": "Descripción de la historia",
+    "descriptionPlaceholder": "Escribe aquí la historia o descripción completa...",
+    "termsLabel": "Acepto los términos y permisos para publicar imágenes y contenido.",
+    "uploadLabel": "Subir fotografía",
     "publishing": "PUBLICANDO...",
-    "publish": "PUBLICAR"
+    "publish": "PUBLICAR",
+    "submitErrorRequired": "Por favor, completa todos los campos requeridos",
+    "loadError": "Error al cargar la historia",
+    "updateError": "Error al actualizar la historia"
   },
   "storyDetail": {
     "back": "← Volver",
@@ -133,7 +156,35 @@
     "viewMore": "Ver más",
     "trade": "Oficio",
     "age": "Edad",
-    "country": "País"
+    "country": "País",
+    "filterTitle": "Filtrado",
+    "professionPlaceholder": "Profesión u oficio",
+    "agePlaceholder": "Fecha de nacimiento",
+    "tradeLabel": "Oficio:",
+    "ageLabel": "Edad:",
+    "continentLabel": "Continente:"
+  },
+  "professionOptions": {
+    "Hostelería y Turismo": "Hostelería y Turismo",
+    "Administración y Oficina": "Administración y Oficina",
+    "Ventas y Comercio": "Ventas y Comercio",
+    "Limpieza y Mantenimiento": "Limpieza y Mantenimiento",
+    "Educación y Formación": "Educación y Formación",
+    "Sanidad y Cuidados": "Sanidad y Cuidados",
+    "Belleza y Estética": "Belleza y Estética",
+    "Moda y Confección": "Moda y Confección",
+    "Cocina y Alimentación": "Cocina y Alimentación",
+    "Otros": "Otros"
+  },
+  "continents": {
+    "Norteamerica": "Norteamérica",
+    "Suramerica": "Sudamérica",
+    "Centroamerica": "Centroamérica",
+    "Europa": "Europa",
+    "Africa": "África",
+    "Asia": "Asia",
+    "Oceania": "Oceanía",
+    "Otros 1": "Otras regiones"
   },
   "map": {
     "locations": {

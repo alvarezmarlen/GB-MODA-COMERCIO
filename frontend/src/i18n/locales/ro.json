@@ -109,8 +109,31 @@
     "descriptionPlaceholder": "Scrie povestea sau descrierea completă aici...",
     "termsLabel": "Accept termenii și permisiunile pentru publicarea imaginilor și conținutului.",
     "uploadLabel": "Încarcă fotografie",
+        "publishing": "SE PUBLICĂ...",
+        "publish": "PUBLICĂ",
+        "continentLabel": "Continent",
+        "continentPlaceholder": "▼ Selectați continentul",
+        "submitErrorRequired": "Vă rugăm să completați toate câmpurile obligatorii",
+        "submitErrorPublish": "Eroare la publicarea poveștii"
+      },
+  "editStory": {
+    "titleLabel": "Titlul poveștii",
+    "titlePlaceholder": "Scrieți titlul aici...",
+    "continentLabel": "Țara de origine",
+    "continentPlaceholder": "▼ Selectați țara",
+    "professionLabel": "Meserie sau ocupație",
+    "professionPlaceholder": "▼ Selectați meseria",
+    "ageLabel": "Grupă de vârstă",
+    "agePlaceholder": "▼ Selectați grupa de vârstă",
+    "descriptionLabel": "Descrierea poveștii",
+    "descriptionPlaceholder": "Scrieți povestea sau descrierea completă aici...",
+    "termsLabel": "Accept termenii și permisiunile pentru publicarea imaginilor și conținutului.",
+    "uploadLabel": "Încărcați fotografie",
     "publishing": "SE PUBLICĂ...",
-    "publish": "PUBLICĂ"
+    "publish": "PUBLICĂ",
+    "submitErrorRequired": "Vă rugăm să completați toate câmpurile obligatorii",
+    "loadError": "Eroare la încărcarea poveștii",
+    "updateError": "Eroare la actualizarea poveștii"
   },
   "storyDetail": {
     "back": "← Înapoi",
@@ -133,7 +156,35 @@
     "viewMore": "Vezi mai mult",
     "trade": "Meserie",
     "age": "Vârstă",
-    "country": "Țară"
+    "country": "Țară",
+    "filterTitle": "Filtrare",
+    "professionPlaceholder": "Meserie sau ocupație",
+    "agePlaceholder": "Data nașterii",
+    "tradeLabel": "Meseria:",
+    "ageLabel": "Vârsta:",
+    "continentLabel": "Continentul:"
+  },
+  "professionOptions": {
+    "Hostelería y Turismo": "Ospitalitate și Turism",
+    "Administración y Oficina": "Administrare și Birou",
+    "Ventas y Comercio": "Vânzări și Comerț",
+    "Limpieza y Mantenimiento": "Curățenie și Întreținere",
+    "Educación y Formación": "Educație și Formare",
+    "Sanidad y Cuidados": "Sănătate și Îngrijire",
+    "Belleza y Estética": "Frumusețe și Estetică",
+    "Moda y Confección": "Modă și Confecții",
+    "Cocina y Alimentación": "Gătit și Alimentație",
+    "Otros": "Altele"
+  },
+  "continents": {
+    "Norteamerica": "America de Nord",
+    "Suramerica": "America de Sud",
+    "Centroamerica": "America Centrală",
+    "Europa": "Europa",
+    "Africa": "Africa",
+    "Asia": "Asia",
+    "Oceania": "Oceania",
+    "Otros 1": "Alte regiuni"
   },
   "map": {
     "locations": {

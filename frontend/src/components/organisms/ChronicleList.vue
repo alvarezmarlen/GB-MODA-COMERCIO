@@ -1,14 +1,14 @@
 <template>
   <div class="chronicles-section">
     <div class="filters-header">
-      <h3 class="filter-title">Filtrado</h3>
+      <h3 class="filter-title">{{ t('chronicles.filterTitle') }}</h3>
       <div class="filters-row">
         <select v-model="filters.profession" class="wireframe-input filter-select" @change="applyFilters">
-          <option value="">Profesion u oficio</option>
-          <option v-for="opt in professionOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
+          <option value="">{{ t('chronicles.professionPlaceholder') }}</option>
+          <option v-for="opt in professionOptions" :key="opt.value" :value="opt.value">{{ t(opt.i18nKey) }}</option>
         </select>
         <select v-model="filters.age_range" class="wireframe-input filter-select" @change="applyFilters">
-          <option value="">Fecha de nacimiento</option>
+          <option value="">{{ t('chronicles.agePlaceholder') }}</option>
           <option v-for="opt in ageOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
         </select>
       </div>
@@ -43,9 +43,9 @@
 
           <div class="card-content">
             <div class="card-meta">
-              Oficio: {{ professionLabel(story.profession) }} &nbsp;|&nbsp;
-              Edad: {{ ageLabel(story.age_range) }} &nbsp;|&nbsp;
-              Continente: {{ story.origin_country }}
+              {{ t('chronicles.tradeLabel') }} {{ t('professionOptions.' + story.profession, story.profession) }} &nbsp;|&nbsp;
+              {{ t('chronicles.ageLabel') }} {{ story.age_range }} &nbsp;|&nbsp;
+              {{ t('chronicles.continentLabel') }} {{ t('continents.' + story.origin_country, story.origin_country) }}
             </div>
             <p class="card-text">{{ truncate(story.content, 120) }}</p>
             <div class="card-actions">
@@ -83,16 +83,16 @@ const filters = reactive({
 })
 
 const professionOptions = [
-  { label: 'Hostelería y turismo', value: 'Hostelería y Turismo' },
-  { label: 'Administración y oficina', value: 'Administración y Oficina' },
-  { label: 'Ventas y comercio', value: 'Ventas y Comercio' },
-  { label: 'Limpieza y mantenimiento', value: 'Limpieza y Mantenimiento' },
-  { label: 'Educación y formación', value: 'Educación y Formación' },
-  { label: 'Sanidad y cuidados', value: 'Sanidad y Cuidados' },
-  { label: 'Belleza y estética', value: 'Belleza y Estética' },
-  { label: 'Moda y confección', value: 'Moda y Confección' },
-  { label: 'Cocina y alimentación', value: 'Cocina y Alimentación' },
-  { label: 'Otros', value: 'Otros' }
+  { label: 'Hostelería y turismo', value: 'Hostelería y Turismo', i18nKey: 'professionOptions.Hostelería y Turismo' },
+  { label: 'Administración y oficina', value: 'Administración y Oficina', i18nKey: 'professionOptions.Administración y Oficina' },
+  { label: 'Ventas y comercio', value: 'Ventas y Comercio', i18nKey: 'professionOptions.Ventas y Comercio' },
+  { label: 'Limpieza y mantenimiento', value: 'Limpieza y Mantenimiento', i18nKey: 'professionOptions.Limpieza y Mantenimiento' },
+  { label: 'Educación y formación', value: 'Educación y Formación', i18nKey: 'professionOptions.Educación y Formación' },
+  { label: 'Sanidad y cuidados', value: 'Sanidad y Cuidados', i18nKey: 'professionOptions.Sanidad y Cuidados' },
+  { label: 'Belleza y estética', value: 'Belleza y Estética', i18nKey: 'professionOptions.Belleza y Estética' },
+  { label: 'Moda y confección', value: 'Moda y Confección', i18nKey: 'professionOptions.Moda y Confección' },
+  { label: 'Cocina y alimentación', value: 'Cocina y Alimentación', i18nKey: 'professionOptions.Cocina y Alimentación' },
+  { label: 'Otros', value: 'Otros', i18nKey: 'professionOptions.Otros' }
 ]
 
 const ageOptions = [
@@ -102,9 +102,6 @@ const ageOptions = [
   { label: '1990-2000', value: '25-35' },
   { label: '2000-2010', value: '18-25' }
 ]
-
-const professionLabel = (val) => val || val
-const ageLabel = (val) => val || val
 
 const truncate = (text, max) => {
   if (!text) return ''

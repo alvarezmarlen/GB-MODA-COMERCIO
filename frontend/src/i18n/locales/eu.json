@@ -109,8 +109,31 @@
     "descriptionPlaceholder": "Idatzi istorio edo deskribapen osoa hemen...",
     "termsLabel": "Onartzen ditut irudiak eta edukia argitaratzeko baldintzak eta baimenak.",
     "uploadLabel": "Argazkia igo",
+        "publishing": "ARGITARATZEN...",
+        "publish": "ARGITARATU",
+        "continentLabel": "Kontinentea",
+        "continentPlaceholder": "▼ Hautatu kontinentea",
+        "submitErrorRequired": "Bete beharrezko eremu guztiak, mesedez",
+        "submitErrorPublish": "Errorea istorioa argitaratzean"
+      },
+  "editStory": {
+    "titleLabel": "Istorioaren izenburua",
+    "titlePlaceholder": "Idatzi izenburua hemen...",
+    "continentLabel": "Jatorrizko herrialdea",
+    "continentPlaceholder": "▼ Hautatu herrialdea",
+    "professionLabel": "Ofizioa",
+    "professionPlaceholder": "▼ Hautatu ofizioa",
+    "ageLabel": "Adin tartea",
+    "agePlaceholder": "▼ Hautatu adin tartea",
+    "descriptionLabel": "Istorioaren deskribapena",
+    "descriptionPlaceholder": "Idatzi istorio edo deskribapen osoa hemen...",
+    "termsLabel": "Onartzen ditut irudiak eta edukia argitaratzeko baldintzak eta baimenak.",
+    "uploadLabel": "Argazkia igo",
     "publishing": "ARGITARATZEN...",
-    "publish": "ARGITARATU"
+    "publish": "ARGITARATU",
+    "submitErrorRequired": "Bete beharrezko eremu guztiak, mesedez",
+    "loadError": "Errorea istorioa kargatzean",
+    "updateError": "Errorea istorioa eguneratzean"
   },
   "storyDetail": {
     "back": "← Atzera",
@@ -133,7 +156,35 @@
     "viewMore": "Gehiago ikusi",
     "trade": "Ofizioa",
     "age": "Adina",
-    "country": "Herrialdea"
+    "country": "Herrialdea",
+    "filterTitle": "Iragazkia",
+    "professionPlaceholder": "Ofizioa",
+    "agePlaceholder": "Jaiotze data",
+    "tradeLabel": "Ofizioa:",
+    "ageLabel": "Adina:",
+    "continentLabel": "Kontinentea:"
+  },
+  "professionOptions": {
+    "Hostelería y Turismo": "Ostalaritza eta Turismoa",
+    "Administración y Oficina": "Administrazioa eta Bulegoa",
+    "Ventas y Comercio": "Salmentak eta Merkataritza",
+    "Limpieza y Mantenimiento": "Garbiketa eta Mantentzea",
+    "Educación y Formación": "Hezkuntza eta Prestakuntza",
+    "Sanidad y Cuidados": "Osasuna eta Zaintzak",
+    "Belleza y Estética": "Edertasuna eta Estetika",
+    "Moda y Confección": "Moda eta Jantzigintza",
+    "Cocina y Alimentación": "Sukaldaritza eta Elikadura",
+    "Otros": "Besteak"
+  },
+  "continents": {
+    "Norteamerica": "Ipar Amerika",
+    "Suramerica": "Hego Amerika",
+    "Centroamerica": "Erdialdeko Amerika",
+    "Europa": "Europa",
+    "Africa": "Afrika",
+    "Asia": "Asia",
+    "Oceania": "Ozeania",
+    "Otros 1": "Beste eskualdeak"
   },
   "map": {
     "locations": {

@@ -109,8 +109,31 @@
     "descriptionPlaceholder": "Écrivez l'histoire ou la description complète ici...",
     "termsLabel": "J'accepte les termes et autorisations pour publier des images et du contenu.",
     "uploadLabel": "Télécharger une photo",
+        "publishing": "PUBLICATION...",
+        "publish": "PUBLIER",
+        "continentLabel": "Continent",
+        "continentPlaceholder": "▼ Sélectionner un continent",
+        "submitErrorRequired": "Veuillez remplir tous les champs obligatoires",
+        "submitErrorPublish": "Erreur lors de la publication de l'histoire"
+      },
+  "editStory": {
+    "titleLabel": "Titre de l'histoire",
+    "titlePlaceholder": "Écrivez le titre ici...",
+    "continentLabel": "Pays d'origine",
+    "continentPlaceholder": "▼ Sélectionner un pays",
+    "professionLabel": "Métier",
+    "professionPlaceholder": "▼ Sélectionner un métier",
+    "ageLabel": "Tranche d'âge",
+    "agePlaceholder": "▼ Sélectionner la tranche d'âge",
+    "descriptionLabel": "Description de l'histoire",
+    "descriptionPlaceholder": "Écrivez l'histoire ou la description complète ici...",
+    "termsLabel": "J'accepte les termes et autorisations pour publier des images et du contenu.",
+    "uploadLabel": "Télécharger une photo",
     "publishing": "PUBLICATION...",
-    "publish": "PUBLIER"
+    "publish": "PUBLIER",
+    "submitErrorRequired": "Veuillez remplir tous les champs obligatoires",
+    "loadError": "Erreur lors du chargement de l'histoire",
+    "updateError": "Erreur lors de la mise à jour de l'histoire"
   },
   "storyDetail": {
     "back": "← Retour",
@@ -133,7 +156,35 @@
     "viewMore": "Voir plus",
     "trade": "Métier",
     "age": "Âge",
-    "country": "Pays"
+    "country": "Pays",
+    "filterTitle": "Filtré",
+    "professionPlaceholder": "Métier",
+    "agePlaceholder": "Date de naissance",
+    "tradeLabel": "Métier:",
+    "ageLabel": "Âge:",
+    "continentLabel": "Continent:"
+  },
+  "professionOptions": {
+    "Hostelería y Turismo": "Hôtellerie et Tourisme",
+    "Administración y Oficina": "Administration et Bureau",
+    "Ventas y Comercio": "Ventes et Commerce",
+    "Limpieza y Mantenimiento": "Nettoyage et Entretien",
+    "Educación y Formación": "Éducation et Formation",
+    "Sanidad y Cuidados": "Santé et Soins",
+    "Belleza y Estética": "Beauté et Esthétique",
+    "Moda y Confección": "Mode et Confection",
+    "Cocina y Alimentación": "Cuisine et Alimentation",
+    "Otros": "Autres"
+  },
+  "continents": {
+    "Norteamerica": "Amérique du Nord",
+    "Suramerica": "Amérique du Sud",
+    "Centroamerica": "Amérique Centrale",
+    "Europa": "Europe",
+    "Africa": "Afrique",
+    "Asia": "Asie",
+    "Oceania": "Océanie",
+    "Otros 1": "Autres régions"
   },
   "map": {
     "locations": {
