@@ -206,7 +206,7 @@ onMounted(fetchStories)
   color: var(--color-blanco);
 }
 
-/* Chronicles List */
+
 .chronicles-list {
   display: flex;
   flex-direction: column;
