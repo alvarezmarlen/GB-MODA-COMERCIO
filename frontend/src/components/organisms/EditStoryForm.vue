@@ -81,11 +81,14 @@ const props = defineProps({
 })
 
 const countryOptions = [
-  { label: 'America', value: 'america' },
-  { label: 'Europa', value: 'europa' },
-  { label: 'Africa', value: 'africa' },
-  { label: 'Asia', value: 'asia' },
-  { label: 'Oceania', value: 'oceania' }
+  { label: 'Norteamérica', value: 'Norteamerica' },
+  { label: 'Sudamérica', value: 'Suramerica' },
+  { label: 'Centroamérica', value: 'Centroamerica' },
+  { label: 'Europa', value: 'Europa' },
+  { label: 'África', value: 'Africa' },
+  { label: 'Asia', value: 'Asia' },
+  { label: 'Oceanía', value: 'Oceania' },
+  { label: 'Otras regiones', value: 'Otros 1' }
 ]
 
 const professionOptions = [
@@ -108,15 +111,6 @@ const ageRangeOptions = [
   { label: '1990-2000', value: '1990-2000' },
   { label: '2000-2010', value: '2000-2010' }
 ]
-
-// Mapeos para convertir valores frontend a valores backend
-const continentToCountry = {
-  america: 'Colombia',
-  europa: 'España',
-  africa: 'Marruecos',
-  asia: 'Tailandia',
-  oceania: 'Australia'
-}
 
 const professionMap = {
   hosteleria_turismo: 'Hostelería y Turismo',
@@ -165,11 +159,10 @@ onMounted(async () => {
     formData.description = story.content
     formData.acceptedTerms = true
     
-    const reverseContinent = Object.keys(continentToCountry).find(k => continentToCountry[k] === story.origin_country) || story.origin_country
     const reverseProf = Object.keys(professionMap).find(k => professionMap[k] === story.profession) || story.profession
     const reverseAge = Object.keys(yearRangeToAgeRange).find(k => yearRangeToAgeRange[k] === story.age_range) || story.age_range
 
-    formData.originCountry = reverseContinent
+    formData.originCountry = story.origin_country
     formData.profession = reverseProf
     formData.ageRange = reverseAge
   } catch (err) {
@@ -210,7 +203,7 @@ const onFormSubmit = async () => {
       user_id: userId,
       title: formData.title,
       content: formData.description,
-      origin_country: continentToCountry[formData.originCountry] || formData.originCountry,
+      origin_country: formData.originCountry,
       profession: professionMap[formData.profession] || formData.profession,
       age_range: yearRangeToAgeRange[formData.ageRange] || formData.ageRange
     }
