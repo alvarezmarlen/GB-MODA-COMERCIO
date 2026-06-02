@@ -20,12 +20,6 @@ RUN pip install --no-cache-dir --upgrade pip \
 # 7. Copiamos todo el resto del código del backend al contenedor
 COPY . /app/
 
-# NUEVO: Aseguramos la carpeta de imágenes y declaramos el volumen genérico
-# (Asumiendo que en tu código Flask guardas las fotos en una carpeta llamada 'uploads')
-# =====================================================================
-RUN mkdir -p /app/uploads
-VOLUME ["/app/uploads"]
-
 # 8. Exponemos el puerto 5000 (que es donde corre tu Flask)
 EXPOSE 5000
 
