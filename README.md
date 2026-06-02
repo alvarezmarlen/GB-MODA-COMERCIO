@@ -126,8 +126,14 @@ Ejecutar los test fuera de docker:
     • instalar dependencias (si faltan fallan)
     • cd backend && pytest
 
-# Tests del frontend
 
+# Tests del frontend
+Ejecutar los test dentro de docker:
+    • docker compose exec frontend npm test
+
+Ejecutar los test fuera de docker:
+    • instalar dependencias (si faltan fallan)
+    • cd frontend && npm test
 ```
 
 ## Equipo
