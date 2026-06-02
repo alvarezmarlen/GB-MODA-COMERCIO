@@ -20,11 +20,7 @@ RUN pip install --no-cache-dir --upgrade pip \
 # Copy the rest of the application code
 COPY . /app/
 
-# Ensure uploads directory exists for image storage
-RUN mkdir -p /app/uploads
-VOLUME ["/app/uploads"]
-
-# Expose Flask default port
+# 8. Exponemos el puerto 5000 (que es donde corre tu Flask)
 EXPOSE 5000
 
 # Start the application

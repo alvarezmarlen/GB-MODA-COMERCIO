@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # ==========================================
   # 1. BACKEND SERVICE (FLASK + SQLITE)
@@ -11,11 +9,13 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      # Persist uploaded images to a local directory
-      - ./mis_imagenes_locales:/app/app/uploads
+      # PERSISTENCIA DE IMÁGENES:
+      # Mapea la carpeta local mis_imagenes_locales dentro del contenedor.
+      - ./mis_imagenes_locales:/app/mis_imagenes_locales
 
-      # Bind-mount SQLite DB files for data persistence
-      - ./mi_bd_sqlite/moda_comercio.db:/app/app/moda_comercio.db
+      # Mapeamos directamente la carpeta de la base de datos al contenedor.
+      # La app usará /app/mi_bd_sqlite/moda_comercio.db.
+      - ./mi_bd_sqlite:/app/mi_bd_sqlite
     environment:
       - FLASK_ENV=development
 
