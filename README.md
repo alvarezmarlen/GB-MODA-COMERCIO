@@ -1,6 +1,8 @@
 # GB-MODA-COMERCIO
 
-Plataforma web para documentar, preservar y compartir historias de moda y comercio local. Los usuarios pueden registrar cronicas sobre oficios tradicionales, con soporte multiidioma, mapa interactivo y panel de administracion.
+Es una plataforma web diseñada para documentar, preservar y compartir el proyecto de historias **“Mujeres trabajadoras de nuestras vidas”**. 
+
+Este espacio reúne un conjunto de relatos biográficos que pretenden realzar y poner en valor el trabajo diario que desempeñan las mujeres de nuestro entorno. El objetivo principal es dar a conocer sus historias de vida y agradecer profundamente el trabajo que han realizado, tanto fuera como dentro del hogar, sirviendo como un archivo digital vivo y accesible para toda la comunidad.
 
 ## Stack tecnologico
 
@@ -117,10 +119,15 @@ JWT_SECRET_KEY=<clave-secreta-jwt>
 
 ```bash
 # Tests del backend
-cd backend && pytest
+Ejecutar los test dentro de docker:
+    • docker compose exec backend pytest -v
+
+Ejecutar los test fuera de docker:
+    • instalar dependencias (si faltan fallan)
+    • cd backend && pytest
 
 # Tests del frontend
-cd frontend && npm test
+
 ```
 
 ## Equipo
